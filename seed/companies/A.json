@@ -1,0 +1,24 @@
+{
+  "tenant_id": "A",
+  "name": "대경모빌리티(가상)",
+  "desc": "자동차 부품 · 제조 비전 AI",
+  "region": "대경권",
+  "job": "ai",
+  "job_title": "제조 비전 AI 엔지니어",
+  "requirements": {
+    "python": 2,
+    "pytorch": 2,
+    "computer_vision": 2,
+    "edge_ai": 2,
+    "docker": 1,
+    "cpp": 1,
+    "ros": 1
+  },
+  "excluded": [],
+  "posting_text": "담당업무\n- 자동차 부품 제조 라인의 영상 데이터를 활용한 불량 검출 모델 개발\n자격요건\n- Python 활용 능력\n- 컴퓨터비전 프로젝트 경험\n우대사항\n- PyTorch 사용 경험\n- SQL 활용 가능자\n- LLM 활용 경험",
+  "tracks": [
+    {"id": "A-T1", "skills": ["edge_ai"], "title": "엣지 디바이스 경량화·배포 실습", "hours": 16, "benefit": "사내 엔지니어 진행 · 이수 시 서류 우대 (가상)"},
+    {"id": "A-T2", "skills": ["computer_vision"], "title": "제조 불량 검출 데이터 실습", "hours": 12, "benefit": "공개 결함 이미지 사용"},
+    {"id": "A-T3", "skills": ["ros"], "title": "라인 로봇 연동 입문", "hours": 8, "benefit": ""}
+  ]
+}

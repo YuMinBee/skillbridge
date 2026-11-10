@@ -1,0 +1,513 @@
+<title>역량다리 데모</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: 상단 고정 탭(시장 / 취준생 / 기업) + 각 탭은 요약 → 상세 순서의 2단 그리드, 폰에서는 1단 */
+:root{
+  --bg:#f6f7f9; --surface:#ffffff; --surface-2:#eef0f4; --line:#d9dde5;
+  --fg:#1b2130; --muted:#5b6475; --accent:#2f4fd6; --accent-soft:#e3e8fb; --accent-fg:#ffffff;
+  --ok:#1f8a5b; --ok-soft:#dcf2e7; --warn:#b26b00; --warn-soft:#fbeed6; --bad:#c23b3b; --bad-soft:#f8e1e1; --idle:#7a8294; --idle-soft:#e7e9ee;
+  --corp:#7a3fb8; --corp-soft:#efe5fa;
+  --font-body:"IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  --font-data:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+}
+@media (prefers-color-scheme: dark){ :root:not([data-theme="light"]){
+  --bg:#12151c; --surface:#1a1f29; --surface-2:#222836; --line:#323a4a;
+  --fg:#e6e9f0; --muted:#9aa3b5; --accent:#7f97ff; --accent-soft:#232c4d; --accent-fg:#0f1320;
+  --ok:#4cc38a; --ok-soft:#173326; --warn:#e3a43c; --warn-soft:#3a2c13; --bad:#ef7a7a; --bad-soft:#3d1d1f; --idle:#8b93a5; --idle-soft:#262c38;
+  --corp:#c39af0; --corp-soft:#2e2340; color-scheme:dark; } }
+:root[data-theme="dark"]{
+  --bg:#12151c; --surface:#1a1f29; --surface-2:#222836; --line:#323a4a;
+  --fg:#e6e9f0; --muted:#9aa3b5; --accent:#7f97ff; --accent-soft:#232c4d; --accent-fg:#0f1320;
+  --ok:#4cc38a; --ok-soft:#173326; --warn:#e3a43c; --warn-soft:#3a2c13; --bad:#ef7a7a; --bad-soft:#3d1d1f; --idle:#8b93a5; --idle-soft:#262c38;
+  --corp:#c39af0; --corp-soft:#2e2340; color-scheme:dark; }
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.6;
+  padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:0 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1120px;margin:0 auto}
+header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:16px 0;border-bottom:1px solid var(--line)}
+.brand{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 16px}
+.brand h1{font-size:22px;margin:0;letter-spacing:-0.01em}
+.brand p{margin:0;color:var(--muted);font-size:13px}
+.sample{font-family:var(--font-data);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--warn);background:var(--warn-soft);padding:2px 8px;border-radius:4px}
+nav.tabs{display:flex;gap:4px;margin-top:12px;overflow-x:auto}
+nav.tabs button{font:inherit;font-weight:600;font-size:14px;border:0;background:none;color:var(--muted);padding:10px 14px;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap}
+nav.tabs button[aria-selected="true"]{color:var(--fg);border-bottom-color:var(--accent)}
+nav.tabs button:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+section.view{padding-top:24px;display:grid;gap:20px}
+.lead{max-width:68ch;color:var(--muted);margin:0}
+.grid2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px}
+.grid-side{display:grid;grid-template-columns:minmax(0,300px) minmax(0,1fr);gap:20px;align-items:start}
+@media (max-width:820px){.grid2,.grid-side{grid-template-columns:minmax(0,1fr)}}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:18px;display:grid;gap:14px;min-width:0}
+.panel h2{font-size:16px;margin:0;text-wrap:balance}
+.panel h3{font-size:13px;margin:0;color:var(--muted);font-weight:600;letter-spacing:.04em}
+.hint{font-size:12.5px;color:var(--muted);margin:0}
+.row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+label.fld{display:grid;gap:4px;font-size:12.5px;color:var(--muted);font-weight:600}
+select,input[type=text]{font:inherit;font-size:14px;color:var(--fg);background:var(--surface-2);border:1px solid var(--line);border-radius:6px;padding:7px 10px;min-width:0}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:7px;overflow:hidden}
+.seg button{font:inherit;font-size:13px;border:0;background:var(--surface);color:var(--muted);padding:6px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-fg)}
+.btn{font:inherit;font-weight:600;font-size:14px;border:0;border-radius:7px;padding:9px 16px;background:var(--accent);color:var(--accent-fg);cursor:pointer}
+.btn.ghost{background:var(--surface-2);color:var(--fg);border:1px solid var(--line)}
+.num{font-family:var(--font-data);font-variant-numeric:tabular-nums}
+
+/* bars */
+.bars{display:grid;gap:8px}
+.bar{display:grid;grid-template-columns:110px minmax(0,1fr) 52px;gap:10px;align-items:center;font-size:13.5px}
+.bar .track{height:12px;background:var(--surface-2);border-radius:3px;position:relative;overflow:hidden}
+.bar .fill{position:absolute;inset:0 auto 0 0;background:var(--accent);border-radius:3px}
+.bar .fill.alt{background:var(--corp)}
+.bar .fill.bad{background:var(--bad)}
+.bar .v{text-align:right;color:var(--muted);font-size:12.5px}
+.rise{display:grid;gap:6px}
+.rise div{display:flex;justify-content:space-between;gap:8px;font-size:13.5px;padding:6px 0;border-bottom:1px dashed var(--line)}
+.rise .up{color:var(--ok);font-family:var(--font-data)}
+
+/* chips & status */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;padding:2px 9px;border-radius:999px;border:1px solid var(--line);background:var(--surface-2);white-space:nowrap}
+.st-own{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.st-part{background:var(--warn-soft);color:var(--warn);border-color:transparent}
+.st-miss{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.st-verify{background:var(--idle-soft);color:var(--idle);border-color:transparent}
+.tag-corp{background:var(--corp-soft);color:var(--corp);border-color:transparent}
+.tag-pub{background:var(--accent-soft);color:var(--accent);border-color:transparent}
+
+/* matrix table */
+.tbl-wrap{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:12px;color:var(--muted);font-weight:600;letter-spacing:.03em}
+td .why{color:var(--muted);font-size:12px}
+
+/* score */
+.score{display:flex;gap:18px;align-items:center;flex-wrap:wrap}
+.ring{--p:0;width:92px;height:92px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%), var(--surface-2) 0);display:grid;place-items:center;flex:none}
+.ring span{width:72px;height:72px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-family:var(--font-data);font-size:22px;font-weight:500}
+.formula{font-family:var(--font-data);font-size:12px;color:var(--muted);background:var(--surface-2);padding:8px 10px;border-radius:6px;overflow-x:auto}
+
+/* trace */
+ol.trace{list-style:none;margin:0;padding:0;display:grid;gap:0}
+ol.trace li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:10px;padding:6px 0;font-size:13px}
+ol.trace .dot{width:10px;height:10px;border-radius:50%;background:var(--line);margin:6px auto 0}
+ol.trace li.done .dot{background:var(--accent)}
+ol.trace b{font-weight:600}
+ol.trace small{display:block;color:var(--muted);font-family:var(--font-data);font-size:11.5px}
+
+/* path */
+ol.path{margin:0;padding:0;list-style:none;display:grid;gap:10px;counter-reset:step}
+ol.path li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:12px;align-items:start;counter-increment:step}
+ol.path li::before{content:counter(step);font-family:var(--font-data);font-size:12px;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:var(--surface-2);color:var(--muted)}
+ol.path .t{font-weight:600}
+ol.path .m{font-size:12.5px;color:var(--muted)}
+
+/* compare */
+.cmp{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:560px){.cmp{grid-template-columns:minmax(0,1fr)}}
+.cmp .col{border:1px solid var(--line);border-radius:8px;padding:12px;display:grid;gap:8px;align-content:start}
+.cmp .col h4{margin:0;font-size:13px}
+.diff{display:grid;gap:4px;font-size:13px}
+.diff .plus{color:var(--ok)} .diff .minus{color:var(--bad)}
+.kpis{display:flex;flex-wrap:wrap;gap:20px}
+.kpi b{display:block;font-family:var(--font-data);font-size:20px;font-weight:500}
+.kpi span{font-size:12px;color:var(--muted)}
+
+.weights{display:grid;gap:6px}
+.weights .w{display:grid;grid-template-columns:minmax(0,1fr) 120px;gap:8px;align-items:center;font-size:13.5px}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:8px 14px;border-radius:7px;font-size:13px}
+@media (prefers-reduced-motion:no-preference){.fill{transition:width .5s ease}.ring{transition:--p .5s}}
+</style>
+
+<div class="wrap">
+<header class="top">
+  <div class="brand">
+    <h1>역량다리</h1>
+    <p>AI·클라우드 채용시장 분석 → 기업 교육 트랙 → 취준생 맞춤 학습경로 (Amazon Bedrock 에이전트)</p>
+    <span class="sample">가상 데이터 데모</span>
+  </div>
+  <nav class="tabs" role="tablist" aria-label="화면 전환">
+    <button role="tab" id="tab-market" aria-selected="true" data-view="market">① 시장 분석</button>
+    <button role="tab" id="tab-seeker" aria-selected="false" data-view="seeker">② 취준생 진단</button>
+    <button role="tab" id="tab-corp" aria-selected="false" data-view="corp">③ 기업 콘솔</button>
+  </nav>
+</header>
+
+<!-- MARKET -->
+<section class="view" id="view-market" role="tabpanel" aria-labelledby="tab-market">
+  <p class="lead">공공 채용공고에서 스킬을 추출·정규화해 AI·클라우드 직무의 요구역량과 추세를 집계합니다. 숫자는 시연용 예시입니다.</p>
+  <div class="row">
+    <div class="seg" role="group" aria-label="지역">
+      <button id="reg-dg" aria-pressed="true" data-reg="dg">대경권</button>
+      <button id="reg-all" aria-pressed="false" data-reg="all">전국</button>
+    </div>
+    <div class="seg" role="group" aria-label="직무">
+      <button id="job-ai" aria-pressed="true" data-job="ai">AI 엔지니어</button>
+      <button id="job-cloud" aria-pressed="false" data-job="cloud">클라우드 엔지니어</button>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h2>공고 요구 빈도 상위 스킬</h2>
+      <p class="hint" id="mk-n"></p>
+      <div class="bars" id="mk-bars"></div>
+    </div>
+    <div class="panel">
+      <h2>급상승 스킬 <span class="hint">(직전 6개월 대비 언급 비율 변화)</span></h2>
+      <div class="rise" id="mk-rise"></div>
+      <h3>근거 공고 예시</h3>
+      <p class="hint" id="mk-evid"></p>
+    </div>
+  </div>
+</section>
+
+<!-- SEEKER -->
+<section class="view" id="view-seeker" role="tabpanel" aria-labelledby="tab-seeker" hidden>
+  <div class="grid-side">
+    <div class="panel">
+      <h2>내 프로필</h2>
+      <label class="fld" for="persona">예시 지원자
+        <select id="persona"></select>
+      </label>
+      <div><h3>추출된 보유 스킬</h3><div class="row" id="my-skills" style="margin-top:6px"></div></div>
+      <label class="fld" for="target">목표 기업
+        <select id="target"></select>
+      </label>
+      <label class="fld" for="hours">주당 학습 가능 시간
+        <select id="hours"><option value="8">8시간</option><option value="15" selected>15시간</option><option value="30">30시간</option></select>
+      </label>
+      <button class="btn" id="run">진단 실행</button>
+      <div><h3>에이전트 실행 단계</h3><ol class="trace" id="trace" style="margin-top:6px"></ol></div>
+    </div>
+
+    <div style="display:grid;gap:20px;min-width:0">
+      <div class="panel">
+        <div class="score">
+          <div class="ring" id="ring"><span id="score">–</span></div>
+          <div style="display:grid;gap:4px;min-width:0">
+            <h2 id="score-title">준비도</h2>
+            <p class="hint">점수는 규칙으로 계산하고, LLM은 설명만 합니다. 같은 입력이면 항상 같은 점수가 나옵니다.</p>
+            <div class="formula">준비도 = Σ(가중치 × 상태값) / Σ가중치 · 필수 2, 우대 1 · 보유 1.0 / 부분 0.5 / 검증필요 0.5 / 없음 0</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h2>역량 갭 매트릭스</h2>
+        <div class="row">
+          <span class="chip st-own">보유</span><span class="chip st-part">부분</span><span class="chip st-verify">검증 필요</span><span class="chip st-miss">없음</span>
+        </div>
+        <div class="tbl-wrap"><table id="matrix"><thead><tr><th>스킬</th><th>구분</th><th>내 상태</th><th>근거</th></tr></thead><tbody></tbody></table></div>
+      </div>
+
+      <div class="panel">
+        <h2>맞춤 학습경로</h2>
+        <p class="hint" id="path-hint"></p>
+        <ol class="path" id="path"></ol>
+      </div>
+
+      <div class="panel">
+        <h2>공고만 본 추천 vs 기업 기준 추천</h2>
+        <p class="hint">일반 개인 에이전트는 공고 문구만 봅니다. 기업이 등록한 요구역량을 쓰면 갭이 이렇게 달라집니다.</p>
+        <div class="cmp">
+          <div class="col"><h4>공고 문구만 사용</h4><div class="row" id="cmp-a"></div></div>
+          <div class="col"><h4>기업 등록 기준 사용</h4><div class="row" id="cmp-b"></div></div>
+        </div>
+        <div class="diff" id="cmp-diff"></div>
+      </div>
+
+      <div class="panel">
+        <h2>다른 기업과 비교</h2>
+        <p class="hint">같은 프로필이 기업마다 다른 준비도와 첫 학습 과제를 받습니다.</p>
+        <div class="bars" id="multi"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CORP -->
+<section class="view" id="view-corp" role="tabpanel" aria-labelledby="tab-corp" hidden>
+  <div class="row">
+    <label class="fld" for="corp-sel">기업
+      <select id="corp-sel"></select>
+    </label>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h2>우리 회사 요구역량</h2>
+      <p class="hint">시장 빈도를 참고해 필수·우대를 정합니다. 바꾸면 취준생 진단에 바로 반영됩니다.</p>
+      <div class="weights" id="weights"></div>
+    </div>
+    <div class="panel">
+      <h2>우리 교육 트랙</h2>
+      <p class="hint">기업이 내놓는 교육입니다. 해당 갭이 있는 취준생에게 추천됩니다.</p>
+      <ol class="path" id="track"></ol>
+    </div>
+  </div>
+  <div class="grid2">
+    <div class="panel">
+      <h2>지원 희망자가 가장 많이 막히는 역량</h2>
+      <p class="hint" id="agg-n"></p>
+      <div class="bars" id="agg"></div>
+    </div>
+    <div class="panel">
+      <h2>우리 공고 vs 시장</h2>
+      <p class="hint">시장(대경권) 대비 우리 요구가 드문 역량은 지원자 풀을 줄입니다.</p>
+      <div class="tbl-wrap"><table id="vsmkt"><thead><tr><th>스킬</th><th>우리</th><th>시장 언급률</th><th>판단</th></tr></thead><tbody></tbody></table></div>
+      <p class="hint">개인 진단 결과는 본인에게만 보이고, 기업에는 익명 집계만 제공합니다. 채용 합불 판단에 쓰지 않습니다.</p>
+    </div>
+  </div>
+</section>
+</div>
+
+<script>
+const MARKET = {
+  dg:{ ai:{n:412, top:[["Python",88],["PyTorch",61],["SQL",47],["Docker",44],["컴퓨터비전",38],["LLM·RAG",35],["AWS",33],["Linux",29]],
+          rise:[["LLM·RAG",+14],["MLOps",+9],["엣지 AI",+7],["Bedrock",+5]],
+          evid:"예: \"제조 라인 불량 검출 모델 개발 및 엣지 배포 경험 우대\" (대구, 자동차 부품, 2026-10)"},
+       cloud:{n:286, top:[["AWS",82],["Linux",71],["Terraform",43],["Kubernetes",41],["Docker",58],["네트워크",49],["Python",37],["모니터링",28]],
+          rise:[["Terraform",+11],["Kubernetes",+8],["FinOps",+6],["Bedrock",+4]],
+          evid:"예: \"AWS 기반 3-tier 아키텍처 설계·운영, IaC 경험자 우대\" (경북, MSP, 2026-09)"} },
+  all:{ ai:{n:5821, top:[["Python",91],["PyTorch",66],["LLM·RAG",52],["SQL",45],["Docker",48],["AWS",38],["컴퓨터비전",27],["Linux",31]],
+          rise:[["LLM·RAG",+18],["AI 에이전트",+12],["MLOps",+8],["Bedrock",+6]],
+          evid:"예: \"LLM 기반 에이전트 서비스 개발, RAG 파이프라인 구축 경험\" (서울, 플랫폼, 2026-10)"},
+       cloud:{n:4170, top:[["AWS",85],["Kubernetes",56],["Linux",68],["Docker",61],["Terraform",51],["네트워크",44],["Python",40],["모니터링",33]],
+          rise:[["Kubernetes",+10],["Terraform",+9],["FinOps",+8],["AI 인프라",+7]],
+          evid:"예: \"EKS 기반 서비스 운영 및 GitOps 파이프라인 구축\" (판교, 커머스, 2026-10)"} }
+};
+const MKT_RATE = {Python:88,PyTorch:61,SQL:47,Docker:44,"컴퓨터비전":38,"LLM·RAG":35,AWS:33,Linux:29,MLOps:22,"엣지 AI":14,Terraform:20,Kubernetes:18,"ROS":6,"C++":21,"모니터링":12,"네트워크":15,"Bedrock":9};
+
+const COMPANIES = {
+  A:{name:"대경모빌리티 (가상)", desc:"자동차 부품 · 제조 비전 AI",
+     req:{"Python":2,"PyTorch":2,"컴퓨터비전":2,"엣지 AI":2,"Docker":1,"C++":1,"ROS":1},
+     postingOnly:{"Python":2,"PyTorch":1,"컴퓨터비전":2,"SQL":1,"LLM·RAG":1},
+     track:[{skill:"엣지 AI",t:"[기업 트랙] 엣지 디바이스 경량화·배포 실습",m:"16시간 · 사내 엔지니어 진행 · 이수 시 서류 우대"},
+            {skill:"컴퓨터비전",t:"[기업 트랙] 제조 불량 검출 데이터 실습",m:"12시간 · 공개 결함 이미지 사용"},
+            {skill:"ROS",t:"[기업 트랙] 라인 로봇 연동 입문",m:"8시간"}],
+     applicants:48, block:[["엣지 AI",71],["C++",54],["ROS",50],["컴퓨터비전",33],["Docker",29]]},
+  B:{name:"에이원클라우드 (가상)", desc:"MSP · 클라우드 운영",
+     req:{"AWS":2,"Linux":2,"Terraform":2,"Kubernetes":1,"Docker":1,"모니터링":2,"Python":1},
+     postingOnly:{"AWS":2,"Linux":2,"네트워크":1,"Python":1,"Docker":1},
+     track:[{skill:"Terraform",t:"[기업 트랙] 고객사 환경 IaC 템플릿 실습",m:"12시간 · 이수 시 인턴 면접 기회"},
+            {skill:"모니터링",t:"[기업 트랙] 장애 대응·관측성 실습",m:"10시간"}],
+     applicants:63, block:[["모니터링",62],["Terraform",58],["Kubernetes",44],["Linux",21],["AWS",17]]},
+  C:{name:"한빛AI랩 (가상)", desc:"LLM 서비스 스타트업",
+     req:{"Python":2,"LLM·RAG":2,"AWS":1,"Bedrock":1,"SQL":1,"Docker":1,"MLOps":1},
+     postingOnly:{"Python":2,"LLM·RAG":2,"PyTorch":1,"SQL":1},
+     track:[{skill:"Bedrock",t:"[기업 트랙] Bedrock 에이전트로 사내 문서 QA 만들기",m:"8시간"}],
+     applicants:91, block:[["Bedrock",66],["MLOps",52],["LLM·RAG",38],["AWS",30],["Docker",22]]}
+};
+
+// 공공 교육과정 카탈로그 (예시명)
+const COURSES = {
+  "Python":{t:"[공공·예시] 파이썬 데이터 처리 기초",m:"K-MOOC형 · 20시간 · 무료",h:20},
+  "PyTorch":{t:"[공공·예시] 딥러닝 프레임워크 실습",m:"KDT형 · 40시간 · 국비",h:40},
+  "컴퓨터비전":{t:"[공공·예시] 영상처리와 객체검출",m:"KDT형 · 36시간 · 국비",h:36},
+  "엣지 AI":{t:"[공공·예시] 임베디드 AI 모델 최적화",m:"내일배움카드형 · 30시간",h:30},
+  "Docker":{t:"[공공·예시] 컨테이너 입문",m:"온라인 · 12시간 · 무료",h:12},
+  "C++":{t:"[공공·예시] C++ 객체지향 실무",m:"내일배움카드형 · 24시간",h:24},
+  "ROS":{t:"[공공·예시] ROS2 로봇 SW 기초",m:"지역 혁신기관형 · 20시간",h:20},
+  "AWS":{t:"[공공·예시] AWS 클라우드 기초와 아키텍처",m:"KDT형 · 32시간 · 국비",h:32},
+  "Linux":{t:"[공공·예시] 리눅스 서버 운영",m:"온라인 · 16시간 · 무료",h:16},
+  "Terraform":{t:"[공공·예시] IaC로 인프라 자동화",m:"KDT형 · 20시간 · 국비",h:20},
+  "Kubernetes":{t:"[공공·예시] 쿠버네티스 운영 실습",m:"KDT형 · 28시간 · 국비",h:28},
+  "모니터링":{t:"[공공·예시] 관측성과 로그 분석",m:"온라인 · 10시간",h:10},
+  "LLM·RAG":{t:"[공공·예시] LLM 응용과 RAG 구축",m:"KDT형 · 30시간 · 국비",h:30},
+  "Bedrock":{t:"[공공·예시] Amazon Bedrock 입문",m:"온라인 · 8시간 · 무료",h:8},
+  "SQL":{t:"[공공·예시] SQL 데이터 분석",m:"K-MOOC형 · 15시간 · 무료",h:15},
+  "MLOps":{t:"[공공·예시] MLOps 파이프라인",m:"KDT형 · 24시간 · 국비",h:24},
+  "네트워크":{t:"[공공·예시] 네트워크 기초",m:"온라인 · 14시간",h:14}
+};
+
+const PERSONAS = {
+  p1:{name:"정보통신공학 4학년 (연구실 학부연구생)", skills:{"Python":"own","PyTorch":"own","컴퓨터비전":"own","Linux":"own","Docker":"verify","AWS":"part","SQL":"part","C++":"part","LLM·RAG":"part"},
+      ev:{"Python":"졸업작품·연구 코드","PyTorch":"객체검출 재현 실험","컴퓨터비전":"영상 프로젝트 2건","Linux":"연구실 서버 관리","Docker":"이력서에 키워드만 있음","AWS":"인턴 중 일부 사용","SQL":"수업 과제","C++":"임베디드 실습","LLM·RAG":"개인 프로젝트 1건"}},
+  p2:{name:"비전공 KDT 클라우드 과정 수료생", skills:{"AWS":"own","Linux":"part","Docker":"own","Python":"part","네트워크":"part","Terraform":"verify","SQL":"own"},
+      ev:{"AWS":"수료 프로젝트 배포","Linux":"과정 실습","Docker":"팀 프로젝트","Python":"자동화 스크립트","네트워크":"과정 이론","Terraform":"수강만 하고 결과물 없음","SQL":"과정 실습"}},
+  p3:{name:"백엔드 1년차 이직 준비", skills:{"Python":"own","SQL":"own","Docker":"own","AWS":"own","LLM·RAG":"part","Kubernetes":"part","모니터링":"part"},
+      ev:{"Python":"실무 API 개발","SQL":"실무","Docker":"실무 배포","AWS":"실무 EC2·RDS","LLM·RAG":"사내 PoC","Kubernetes":"스터디","모니터링":"운영 당번"}}
+};
+
+const VAL = {own:1, part:.5, verify:.5, miss:0};
+const LABEL = {own:"보유", part:"부분", verify:"검증 필요", miss:"없음"};
+const CLS = {own:"st-own", part:"st-part", verify:"st-verify", miss:"st-miss"};
+
+const $ = s => document.querySelector(s);
+const el = (tag, cls, txt) => { const e=document.createElement(tag); if(cls) e.className=cls; if(txt!=null) e.textContent=txt; return e; };
+
+/* tabs */
+document.querySelectorAll("nav.tabs button").forEach(b=>b.addEventListener("click",()=>show(b.dataset.view)));
+function show(v){
+  document.querySelectorAll("nav.tabs button").forEach(b=>b.setAttribute("aria-selected", String(b.dataset.view===v)));
+  ["market","seeker","corp"].forEach(id=>{ $("#view-"+id).hidden = id!==v; });
+  try{ history.replaceState(null,"","#"+v); }catch(e){}
+  if(v==="corp") renderCorp();
+}
+
+/* market */
+let reg="dg", job="ai";
+document.querySelectorAll("[data-reg]").forEach(b=>b.addEventListener("click",()=>{reg=b.dataset.reg;document.querySelectorAll("[data-reg]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderMarket();}));
+document.querySelectorAll("[data-job]").forEach(b=>b.addEventListener("click",()=>{job=b.dataset.job;document.querySelectorAll("[data-job]").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));renderMarket();}));
+function bars(target, rows, cls){
+  target.innerHTML="";
+  rows.forEach(([k,v])=>{
+    const r=el("div","bar"); r.append(el("span",null,k));
+    const t=el("div","track"); const f=el("div","fill"+(cls?" "+cls:"")); f.style.width=v+"%"; t.append(f); r.append(t);
+    r.append(el("span","v num",v+"%")); target.append(r);
+  });
+}
+function renderMarket(){
+  const d=MARKET[reg][job];
+  $("#mk-n").textContent=`분석 공고 ${d.n.toLocaleString()}건 · 언급 비율(%)`;
+  bars($("#mk-bars"), [...d.top].sort((a,b)=>b[1]-a[1]));
+  const r=$("#mk-rise"); r.innerHTML="";
+  d.rise.forEach(([k,v])=>{const x=el("div"); x.append(el("span",null,k)); x.append(el("span","up","+"+v+"%p")); r.append(x);});
+  $("#mk-evid").textContent=d.evid;
+}
+
+/* seeker */
+const pSel=$("#persona"), tSel=$("#target");
+Object.entries(PERSONAS).forEach(([k,p])=>pSel.append(new Option(p.name,k)));
+Object.entries(COMPANIES).forEach(([k,c])=>tSel.append(new Option(c.name+" · "+c.desc,k)));
+pSel.addEventListener("change",()=>{renderMySkills(); diagnose(true);});
+tSel.addEventListener("change",()=>diagnose(true));
+$("#hours").addEventListener("change",()=>diagnose(true));
+$("#run").addEventListener("click",()=>diagnose(false));
+
+function renderMySkills(){
+  const p=PERSONAS[pSel.value], w=$("#my-skills"); w.innerHTML="";
+  Object.entries(p.skills).forEach(([k,s])=>w.append(el("span","chip "+CLS[s],k+" · "+LABEL[s])));
+}
+function statusOf(p,k){ return p.skills[k]||"miss"; }
+function score(p,req){
+  let num=0,den=0; Object.entries(req).forEach(([k,w])=>{den+=w; num+=w*VAL[statusOf(p,k)];});
+  return den?Math.round(num/den*100):0;
+}
+function gaps(p,req){
+  return Object.entries(req).filter(([k])=>statusOf(p,k)!=="own")
+    .sort((a,b)=> (b[1]-a[1]) || (VAL[statusOf(p,a[0])]-VAL[statusOf(p,b[0])]));
+}
+
+const STEPS=[
+  ["프로필 정규화","extract_skills → canonical_skill_map"],
+  ["시장 기준 조회","athena: market_skill_rate(region='대경권')"],
+  ["기업 기준 조회","kb.retrieve(filter: tenantId)"],
+  ["갭 계산","rule_score(weights, status)"],
+  ["학습경로 생성","course_catalog ∪ corp_track → plan(hours)"],
+  ["설명 작성","bedrock.converse(근거 인용만 허용)"]
+];
+let timer=null;
+function diagnose(instant){
+  const trace=$("#trace"); trace.innerHTML="";
+  const lis=STEPS.map(([a,b])=>{const li=el("li"); li.append(el("span","dot")); const d=el("div"); d.append(el("b",null,a)); d.append(el("small",null,b)); li.append(d); trace.append(li); return li;});
+  clearInterval(timer);
+  const reduce = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(instant||reduce){ lis.forEach(l=>l.classList.add("done")); renderResult(); return; }
+  let i=0; timer=setInterval(()=>{ if(i<lis.length){lis[i].classList.add("done"); i++;} else {clearInterval(timer); renderResult();} },260);
+}
+function renderResult(){
+  const p=PERSONAS[pSel.value], c=COMPANIES[tSel.value], hrs=+$("#hours").value;
+  const s=score(p,c.req);
+  $("#ring").style.setProperty("--p",s); $("#score").textContent=s;
+  $("#score-title").textContent=`${c.name} 기준 준비도`;
+
+  const tb=$("#matrix tbody"); tb.innerHTML="";
+  Object.entries(c.req).sort((a,b)=>b[1]-a[1]).forEach(([k,w])=>{
+    const st=statusOf(p,k); const tr=el("tr");
+    tr.append(el("td",null,k));
+    tr.append(el("td",null,w===2?"필수":"우대"));
+    const td=el("td"); td.append(el("span","chip "+CLS[st],LABEL[st])); tr.append(td);
+    const ev=el("td"); ev.append(el("span","why", p.ev[k] || (st==="miss" ? `기업 요구 · 시장 언급률 ${MKT_RATE[k]??"-"}%` : "-"))); tr.append(ev);
+    tb.append(tr);
+  });
+
+  // path
+  const g=gaps(p,c.req); const ol=$("#path"); ol.innerHTML="";
+  let total=0;
+  g.forEach(([k,w])=>{
+    const st=statusOf(p,k);
+    const corp=c.track.find(t=>t.skill===k);
+    if(st==="verify"){
+      const li=el("li"); const d=el("div"); d.append(el("div","t",`${k} 결과물로 증명하기`)); d.append(el("div","m","이력서에 키워드만 있음 → 작은 실습 결과물(GitHub)을 남기면 '보유'로 바뀝니다")); li.append(d); ol.append(li); return;
+    }
+    const pub=COURSES[k];
+    if(pub){ total+=pub.h; const li=el("li"); const d=el("div"); const t=el("div","t"); t.append(document.createTextNode(pub.t+" ")); t.append(el("span","chip tag-pub","공공")); d.append(t); d.append(el("div","m",`${k} · ${w===2?"필수":"우대"} 갭 · ${pub.m}`)); li.append(d); ol.append(li); }
+    if(corp){ const li=el("li"); const d=el("div"); const t=el("div","t"); t.append(document.createTextNode(corp.t+" ")); t.append(el("span","chip tag-corp","기업")); d.append(t); d.append(el("div","m",corp.m)); li.append(d); ol.append(li); }
+  });
+  const weeks=Math.max(1,Math.ceil(total/hrs));
+  $("#path-hint").textContent = g.length ? `필수 갭부터, 공공 과정으로 기초를 채우고 기업 트랙으로 마무리합니다. 공공 과정 합계 약 ${total}시간 · 주 ${hrs}시간 기준 약 ${weeks}주.` : "이 기업 기준 갭이 없습니다.";
+
+  // compare
+  const ga=Object.keys(c.postingOnly).filter(k=>statusOf(p,k)!=="own");
+  const gb=g.map(x=>x[0]);
+  const fill=(id,arr)=>{const w=$(id); w.innerHTML=""; arr.forEach(k=>w.append(el("span","chip "+CLS[statusOf(p,k)],k))); if(!arr.length) w.append(el("span","hint","갭 없음"));};
+  fill("#cmp-a",ga); fill("#cmp-b",gb);
+  const onlyB=gb.filter(k=>!ga.includes(k)), onlyA=ga.filter(k=>!gb.includes(k));
+  const df=$("#cmp-diff"); df.innerHTML="";
+  if(onlyB.length) df.append(el("div","plus","공고만 봤으면 놓쳤을 갭: "+onlyB.join(", ")));
+  if(onlyA.length) df.append(el("div","minus","공고만 봤으면 불필요하게 공부했을 것: "+onlyA.join(", ")));
+  df.append(el("div","hint",`공고 기준 준비도 ${score(p,c.postingOnly)} → 기업 기준 준비도 ${s}`));
+
+  // multi
+  const m=$("#multi"); m.innerHTML="";
+  Object.values(COMPANIES).map(cc=>[cc, score(p,cc.req)]).sort((a,b)=>b[1]-a[1]).forEach(([cc,v])=>{
+    const r=el("div","bar"); r.append(el("span",null,cc.name.replace(" (가상)","")));
+    const t=el("div","track"); const f=el("div","fill"+(cc===c?"":" alt")); f.style.width=v+"%"; t.append(f); r.append(t);
+    r.append(el("span","v num",String(v))); m.append(r);
+    const first=gaps(p,cc.req)[0];
+    const n=el("div","hint", first ? `첫 과제: ${first[0]}` : "갭 없음"); n.style.marginTop="-4px"; m.append(n);
+  });
+}
+
+/* corp */
+const cSel=$("#corp-sel");
+Object.entries(COMPANIES).forEach(([k,c])=>cSel.append(new Option(c.name+" · "+c.desc,k)));
+cSel.addEventListener("change",renderCorp);
+function renderCorp(){
+  const c=COMPANIES[cSel.value];
+  const w=$("#weights"); w.innerHTML="";
+  Object.entries(c.req).forEach(([k,v])=>{
+    const row=el("div","w"); row.append(el("span",null,k));
+    const s=document.createElement("select"); s.id="w-"+cSel.value+"-"+k.replace(/\W/g,"");
+    [["2","필수"],["1","우대"],["0","제외"]].forEach(([val,lab])=>s.append(new Option(lab,val)));
+    s.value=String(v);
+    s.addEventListener("change",()=>{ const nv=+s.value; if(nv===0) delete c.req[k]; else c.req[k]=nv; renderCorp(); renderResult(); toast("요구역량을 저장했습니다. 취준생 진단에 반영됩니다."); });
+    row.append(s); w.append(row);
+  });
+  const add=el("div","row");
+  const sel=document.createElement("select"); sel.id="add-skill"; sel.append(new Option("역량 추가…",""));
+  Object.keys(MKT_RATE).filter(k=>!(k in c.req)).forEach(k=>sel.append(new Option(`${k} (시장 ${MKT_RATE[k]}%)`,k)));
+  sel.addEventListener("change",()=>{ if(sel.value){ c.req[sel.value]=1; renderCorp(); renderResult(); toast(sel.value+"을(를) 우대 역량으로 추가했습니다."); }});
+  add.append(sel); w.append(add);
+
+  const tr=$("#track"); tr.innerHTML="";
+  c.track.forEach(t=>{const li=el("li"); const d=el("div"); d.append(el("div","t",t.t)); d.append(el("div","m",`${t.skill} 갭 대상 · ${t.m}`)); li.append(d); tr.append(li);});
+
+  $("#agg-n").textContent=`최근 30일 진단한 지원 희망자 ${c.applicants}명 · 해당 역량이 부족·없음인 비율(익명 집계)`;
+  bars($("#agg"), c.block, "bad");
+
+  const tb=$("#vsmkt tbody"); tb.innerHTML="";
+  Object.entries(c.req).sort((a,b)=>b[1]-a[1]).forEach(([k,v])=>{
+    const rate=MKT_RATE[k]??0; const row=el("tr");
+    row.append(el("td",null,k)); row.append(el("td",null,v===2?"필수":"우대"));
+    row.append(el("td","num",rate+"%"));
+    let judge="일반적", cls="st-own";
+    if(v===2 && rate<15){judge="희소 · 필수로 두면 풀이 좁아짐 → 교육 트랙으로 보완 권장"; cls="st-miss";}
+    else if(v===2 && rate<30){judge="다소 희소 · 트랙 제공 고려"; cls="st-part";}
+    const td=el("td"); td.append(el("span","chip "+cls,judge)); row.append(td); tb.append(row);
+  });
+}
+
+let tt=null;
+function toast(msg){ let t=$(".toast"); if(!t){t=el("div","toast"); t.setAttribute("role","status"); document.body.append(t);} t.textContent=msg; t.hidden=false; clearTimeout(tt); tt=setTimeout(()=>t.hidden=true,2200); }
+
+/* boot */
+renderMarket(); renderMySkills(); diagnose(true); renderCorp();
+const h=(location.hash||"").slice(1); if(["market","seeker","corp"].includes(h)) show(h);
+window.addEventListener("hashchange",()=>{const v=location.hash.slice(1); if(["market","seeker","corp"].includes(v)) show(v);});
+</script>

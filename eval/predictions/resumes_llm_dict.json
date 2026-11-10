@@ -1,0 +1,263 @@
+{
+ "_meta": {
+  "at": "2026-11-10 13:20",
+  "sec": 92.6,
+  "model": "global.anthropic.claude-sonnet-4-6"
+ },
+ "syn-A01": {
+  "pytorch": "part",
+  "computer_vision": "own",
+  "ros": "part",
+  "react": "verify",
+  "python": "verify",
+  "cpp": "verify",
+  "docker": "verify"
+ },
+ "syn-A02": {
+  "pytorch": "own",
+  "edge_ai": "own",
+  "docker": "own",
+  "java": "verify",
+  "react": "verify"
+ },
+ "syn-A03": {
+  "python": "own",
+  "pytorch": "part",
+  "edge_ai": "part",
+  "ros": "part",
+  "cpp": "verify",
+  "docker": "verify"
+ },
+ "syn-A04": {
+  "pytorch": "part",
+  "computer_vision": "part",
+  "edge_ai": "own",
+  "cpp": "own",
+  "ros": "own",
+  "docker": "verify",
+  "spring": "verify",
+  "python": "verify"
+ },
+ "syn-A05": {
+  "python": "part",
+  "computer_vision": "own",
+  "edge_ai": "part",
+  "docker": "own",
+  "ros": "own",
+  "spring": "verify"
+ },
+ "syn-A06": {
+  "python": "own",
+  "pytorch": "part",
+  "computer_vision": "part",
+  "observability": "own",
+  "data_visualization": "own",
+  "cicd": "own",
+  "cpp": "part",
+  "ros": "verify"
+ },
+ "syn-A07": {
+  "pytorch": "own",
+  "edge_ai": "own",
+  "cpp": "own",
+  "ros": "own",
+  "computer_vision": "verify",
+  "react": "verify",
+  "java": "verify"
+ },
+ "syn-A08": {
+  "computer_vision": "part",
+  "edge_ai": "part",
+  "ros": "part",
+  "cpp": "verify",
+  "pytorch": "verify"
+ },
+ "syn-A09": {
+  "python": "part",
+  "pytorch": "part",
+  "docker": "own",
+  "cpp": "own",
+  "ros": "own",
+  "computer_vision": "verify",
+  "react": "verify"
+ },
+ "syn-A10": {
+  "python": "own",
+  "computer_vision": "own",
+  "docker": "own",
+  "cpp": "own",
+  "ros": "own",
+  "java": "verify"
+ },
+ "syn-B01": {
+  "linux": "own",
+  "observability": "own",
+  "kubernetes": "own",
+  "python": "verify",
+  "aws": "verify",
+  "spring": "verify"
+ },
+ "syn-B02": {
+  "linux": "part",
+  "terraform": "own",
+  "observability": "own",
+  "docker": "own",
+  "java": "verify",
+  "aws": "verify"
+ },
+ "syn-B03": {
+  "linux": "own",
+  "terraform": "part",
+  "kubernetes": "own",
+  "docker": "own",
+  "python": "verify",
+  "observability": "verify",
+  "react": "verify",
+  "spring": "verify",
+  "aws": "verify"
+ },
+ "syn-B04": {
+  "aws": "own",
+  "linux": "own",
+  "observability": "own",
+  "docker": "own",
+  "python": "verify",
+  "kubernetes": "verify",
+  "terraform": "verify",
+  "react": "verify"
+ },
+ "syn-B05": {
+  "tensorflow": "own",
+  "kubernetes": "own",
+  "docker": "own",
+  "python": "own",
+  "java": "verify",
+  "observability": "verify",
+  "aws": "verify"
+ },
+ "syn-B06": {
+  "aws": "part",
+  "linux": "own",
+  "observability": "own",
+  "data_visualization": "own",
+  "terraform": "part",
+  "python": "part",
+  "react": "verify",
+  "kubernetes": "verify"
+ },
+ "syn-B07": {
+  "aws": "part",
+  "terraform": "part",
+  "kubernetes": "part",
+  "docker": "own",
+  "python": "own"
+ },
+ "syn-B08": {
+  "aws": "own",
+  "linux": "own",
+  "terraform": "own",
+  "observability": "part",
+  "kubernetes": "part",
+  "python": "own",
+  "react": "verify"
+ },
+ "syn-B09": {
+  "aws": "own",
+  "observability": "part",
+  "kubernetes": "own",
+  "docker": "own",
+  "python": "own",
+  "spring": "verify",
+  "linux": "verify",
+  "react": "verify"
+ },
+ "syn-B10": {
+  "aws": "part",
+  "linux": "own",
+  "observability": "own",
+  "kubernetes": "part",
+  "docker": "own",
+  "python": "own",
+  "java": "verify"
+ },
+ "syn-C01": {
+  "amazon_bedrock": "own",
+  "mlops": "own",
+  "spring": "verify",
+  "llm": "verify",
+  "python": "verify"
+ },
+ "syn-C02": {
+  "aws": "own",
+  "sql": "part",
+  "docker": "part",
+  "python": "verify"
+ },
+ "syn-C03": {
+  "python": "part",
+  "rag": "own",
+  "aws": "own",
+  "docker": "own",
+  "mlops": "part"
+ },
+ "syn-C04": {
+  "python": "part",
+  "llm": "part",
+  "aws": "own",
+  "sql": "own"
+ },
+ "syn-C05": {
+  "python": "own",
+  "llm": "own",
+  "aws": "own",
+  "sql": "own",
+  "mlops": "own",
+  "spring": "verify",
+  "docker": "verify"
+ },
+ "syn-C06": {
+  "rag": "own",
+  "docker": "own",
+  "mlops": "own",
+  "spring": "verify",
+  "python": "verify",
+  "aws": "verify"
+ },
+ "syn-C07": {
+  "python": "own",
+  "llm": "own",
+  "rag": "own",
+  "aws": "own",
+  "docker": "part",
+  "java": "verify"
+ },
+ "syn-C08": {
+  "python": "part",
+  "llm": "part",
+  "rag": "part",
+  "aws": "own",
+  "sql": "own",
+  "docker": "part",
+  "mlops": "own",
+  "react": "verify"
+ },
+ "syn-C09": {
+  "python": "own",
+  "llm": "own",
+  "rag": "own",
+  "amazon_bedrock": "own",
+  "docker": "own",
+  "mlops": "part",
+  "java": "verify"
+ },
+ "syn-C10": {
+  "python": "part",
+  "llm": "part",
+  "rag": "own",
+  "sql": "part",
+  "docker": "own",
+  "mlops": "own",
+  "react": "verify",
+  "aws": "verify"
+ }
+}

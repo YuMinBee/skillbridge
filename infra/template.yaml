@@ -1,0 +1,202 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: >
+  역량다리(SkillBridge) 06팀 — FastAPI(Mangum) Lambda + 함수 URL, S3 raw/curated 데이터 레이크,
+  Glue 카탈로그 + Athena 워크그룹. 모든 리소스는 스택 태그 project=kosa06을 상속한다.
+  배포: python infra/deploy.py (버킷 생성·코드 업로드·스택 생성까지 한 번에)
+
+Parameters:
+  DataBucket:
+    Type: String
+    Description: deploy.py가 먼저 만든 버킷 (코드 zip, raw/, curated/, athena-results/)
+  CodeKey:
+    Type: String
+  ModelId:
+    Type: String
+  FastModelId:
+    Type: String
+  EmbedModelId:
+    Type: String
+    Default: amazon.titan-embed-text-v2:0
+  GuardrailId:
+    Type: String
+    Default: ""
+  GuardrailVersion:
+    Type: String
+    Default: ""
+  KbId:
+    Type: String
+    Default: ""
+    Description: infra/build_kb.py가 출력한 기업 지식베이스 ID (비우면 로컬 문서 검색)
+  BedrockMock:
+    Type: String
+    Default: "0"
+    AllowedValues: ["0", "1"]
+
+Resources:
+  ApiRole:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: Allow
+            Principal: { Service: lambda.amazonaws.com }
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole
+      Policies:
+        - PolicyName: skillbridge-runtime
+          PolicyDocument:
+            Version: "2012-10-17"
+            Statement:
+              - Sid: Bedrock
+                Effect: Allow
+                Action: [bedrock:InvokeModel, bedrock:InvokeModelWithResponseStream, bedrock:ApplyGuardrail]
+                Resource: "*"   # global. 교차 리전 추론 프로필은 호출 리전이 달라 ARN 고정이 어렵다
+              - Sid: KnowledgeBase
+                Effect: Allow
+                Action: [bedrock:Retrieve]
+                Resource: !Sub arn:aws:bedrock:${AWS::Region}:${AWS::AccountId}:knowledge-base/*
+              - Sid: Athena
+                Effect: Allow
+                Action: [athena:StartQueryExecution, athena:GetQueryExecution, athena:GetQueryResults]
+                Resource: !Sub arn:aws:athena:${AWS::Region}:${AWS::AccountId}:workgroup/${Workgroup}
+              - Sid: Glue
+                Effect: Allow
+                Action: [glue:GetDatabase, glue:GetTable, glue:GetPartitions]
+                Resource:
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:catalog
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:database/${GlueDb}
+                  - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:table/${GlueDb}/*
+              - Sid: Data
+                Effect: Allow
+                Action: [s3:GetObject, s3:PutObject, s3:ListBucket, s3:GetBucketLocation]
+                Resource:
+                  - !Sub arn:aws:s3:::${DataBucket}
+                  - !Sub arn:aws:s3:::${DataBucket}/curated/*
+                  - !Sub arn:aws:s3:::${DataBucket}/athena-results/*
+
+  ApiFunction:
+    Type: AWS::Lambda::Function
+    Properties:
+      FunctionName: kosa06-skillbridge-api
+      Runtime: python3.12
+      Architectures: [x86_64]
+      Handler: lambda_function.handler
+      Code: { S3Bucket: !Ref DataBucket, S3Key: !Ref CodeKey }
+      Role: !GetAtt ApiRole.Arn
+      MemorySize: 1536
+      Timeout: 60
+      Environment:
+        Variables:
+          BEDROCK_MOCK: !Ref BedrockMock
+          DATA_MODE: live
+          MODEL_ID: !Ref ModelId
+          FAST_MODEL_ID: !Ref FastModelId
+          EMBED_MODEL_ID: !Ref EmbedModelId
+          GUARDRAIL_ID: !Ref GuardrailId
+          GUARDRAIL_VERSION: !Ref GuardrailVersion
+          KB_ID: !Ref KbId
+          ATHENA_WORKGROUP: !Ref Workgroup
+          ATHENA_DATABASE: !Ref GlueDb
+          DATA_BUCKET: !Ref DataBucket
+
+  ApiUrl:
+    Type: AWS::Lambda::Url
+    Properties:
+      TargetFunctionArn: !Ref ApiFunction
+      AuthType: NONE   # 심사·시연용 공개 주소. 이력서 원문은 저장하지 않는다
+
+  ApiUrlPermission:
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunctionUrl
+      Principal: "*"
+      FunctionUrlAuthType: NONE
+
+  ApiUrlInvokePermission:   # 2025년 이후 함수 URL은 InvokeFunction 권한도 함께 필요하다
+    Type: AWS::Lambda::Permission
+    Properties:
+      FunctionName: !Ref ApiFunction
+      Action: lambda:InvokeFunction
+      Principal: "*"
+      InvokedViaFunctionUrl: true
+
+  ApiLogs:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/kosa06-skillbridge-api
+      RetentionInDays: 14
+
+  GlueDb:
+    Type: AWS::Glue::Database
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseInput:
+        Name: kosa06_skillbridge
+        Description: 역량다리 curated 데이터 (공고 1행 / 공고×스킬 1행)
+
+  PostingsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDb
+      TableInput:
+        Name: postings
+        TableType: EXTERNAL_TABLE
+        Parameters: { classification: json }
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/curated/postings/
+          InputFormat: org.apache.hadoop.mapred.TextInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+          SerdeInfo: { SerializationLibrary: org.openx.data.jsonserde.JsonSerDe }
+          Columns:
+            - { Name: posting_id, Type: string }
+            - { Name: source, Type: string }
+            - { Name: job, Type: string }
+            - { Name: region, Type: string }
+            - { Name: month, Type: string }
+            - { Name: ncs, Type: "array<string>" }
+            - { Name: company, Type: string }
+
+  PostingSkillsTable:
+    Type: AWS::Glue::Table
+    Properties:
+      CatalogId: !Ref AWS::AccountId
+      DatabaseName: !Ref GlueDb
+      TableInput:
+        Name: posting_skills
+        TableType: EXTERNAL_TABLE
+        Parameters: { classification: json }
+        StorageDescriptor:
+          Location: !Sub s3://${DataBucket}/curated/posting_skills/
+          InputFormat: org.apache.hadoop.mapred.TextInputFormat
+          OutputFormat: org.apache.hadoop.hive.ql.io.HiveIgnoreKeyTextOutputFormat
+          SerdeInfo: { SerializationLibrary: org.openx.data.jsonserde.JsonSerDe }
+          Columns:
+            - { Name: posting_id, Type: string }
+            - { Name: job, Type: string }
+            - { Name: region, Type: string }
+            - { Name: month, Type: string }
+            - { Name: skill_id, Type: string }
+            - { Name: requirement, Type: string }
+
+  Workgroup:
+    Type: AWS::Athena::WorkGroup
+    Properties:
+      Name: kosa06-skillbridge
+      State: ENABLED
+      RecursiveDeleteOption: true
+      WorkGroupConfiguration:
+        EnforceWorkGroupConfiguration: true
+        BytesScannedCutoffPerQuery: 1073741824   # 쿼리당 1GB 상한 (비용 보호)
+        ResultConfiguration:
+          OutputLocation: !Sub s3://${DataBucket}/athena-results/
+
+Outputs:
+  AppUrl:
+    Description: 시연 주소 (프런트 + API)
+    Value: !GetAtt ApiUrl.FunctionUrl
+  Workgroup:
+    Value: !Ref Workgroup

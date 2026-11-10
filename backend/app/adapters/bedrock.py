@@ -1,0 +1,209 @@
+"""Bedrock 어댑터.
+
+BEDROCK_MOCK=1이면 AWS를 호출하지 않고 템플릿/규칙으로 같은 형식의 결과를 낸다.
+BEDROCK_MOCK=0이면 Converse API(도구 호출로 구조화 출력), Titan 임베딩, ApplyGuardrail을 쓴다.
+호출마다 모델·토큰·소요시간을 CallLog에 남겨 trace에 표시한다.
+"""
+import json
+import re
+import time
+from functools import lru_cache
+
+from ..config import AWS_PROFILE, AWS_REGION, BEDROCK_MOCK, EMBED_MODEL_ID, EXPLAIN_MODEL_ID, FAST_MODEL_ID, GUARDRAIL_ID, \
+    GUARDRAIL_VERSION, MODEL_ID
+
+_CITE = re.compile(r"\[(E\d+)\]")
+BEDROCK_READY = True
+
+
+class BedrockError(RuntimeError):
+    """호출 실패. 파이프라인은 이 예외를 받으면 규칙 기반으로 폴백한다."""
+
+
+def mode() -> str:
+    return "bedrock" if (not BEDROCK_MOCK and BEDROCK_READY and MODEL_ID) else "mock"
+
+
+@lru_cache(maxsize=1)
+def client():
+    import boto3  # 지연 import: mock 모드에서는 AWS 자격증명이 없어도 된다
+    from botocore.config import Config
+    cfg = Config(read_timeout=90, connect_timeout=10, retries={"max_attempts": 4, "mode": "adaptive"})
+    return boto3.Session(profile_name=AWS_PROFILE or None, region_name=AWS_REGION).client("bedrock-runtime", config=cfg)
+
+
+def short_model(model_id: str) -> str:
+    """trace 표시용: 'global.anthropic.claude-sonnet-4-6' → 'claude-sonnet-4-6'"""
+    return model_id.split("anthropic.")[-1].split("amazon.")[-1]
+
+
+class CallLog:
+    """한 진단 요청 동안의 Bedrock 호출 기록."""
+
+    def __init__(self):
+        self.calls: list[dict] = []
+
+    def add(self, kind: str, model: str, ms: float, tin: int = 0, tout: int = 0):
+        self.calls.append({"kind": kind, "model": short_model(model), "ms": round(ms), "in": tin, "out": tout})
+
+    def since(self, i: int) -> list[dict]:
+        return self.calls[i:]
+
+
+def _wrap(e: Exception) -> BedrockError:
+    name = type(e).__name__
+    msg = str(e)
+    if "SSO" in name or "Token" in name or "ExpiredToken" in msg or "sso" in msg.lower():
+        return BedrockError("AWS 로그인 만료 · `aws sso login --profile kosa` 실행 필요")
+    return BedrockError(f"{name}: {msg[:200]}")
+
+
+def converse_tool(system: str, user: str, tool_name: str, schema: dict, *, model: str | None = None,
+                  log: CallLog | None = None, max_tokens: int = 4000, kind: str = "converse") -> dict:
+    """도구 호출을 강제해 JSON 스키마에 맞는 입력(dict)을 받는다."""
+    model = model or MODEL_ID
+    t0 = time.perf_counter()
+    try:
+        r = client().converse(
+            modelId=model,
+            system=[{"text": system}],
+            messages=[{"role": "user", "content": [{"text": user}]}],
+            toolConfig={"tools": [{"toolSpec": {"name": tool_name, "description": "결과를 이 형식으로 제출한다.",
+                                                "inputSchema": {"json": schema}}}],
+                        "toolChoice": {"tool": {"name": tool_name}}},
+            inferenceConfig={"maxTokens": max_tokens, "temperature": 0},
+        )
+    except Exception as e:  # noqa: BLE001
+        raise _wrap(e) from e
+    u = r.get("usage", {})
+    if log is not None:
+        log.add(kind, model, (time.perf_counter() - t0) * 1000, u.get("inputTokens", 0), u.get("outputTokens", 0))
+    for c in r["output"]["message"]["content"]:
+        if "toolUse" in c:
+            return c["toolUse"]["input"]
+    raise BedrockError("구조화 출력 없음")
+
+
+def embed(texts: list[str], log: CallLog | None = None, dims: int = 512) -> list[list[float]]:
+    """Titan V2 임베딩 (정규화된 벡터). 동시에 몇 개씩 호출한다."""
+    from concurrent.futures import ThreadPoolExecutor
+
+    def one(t):
+        r = client().invoke_model(modelId=EMBED_MODEL_ID,
+                                  body=json.dumps({"inputText": t[:2000], "dimensions": dims, "normalize": True}))
+        return json.loads(r["body"].read())["embedding"]
+
+    t0 = time.perf_counter()
+    try:
+        with ThreadPoolExecutor(max_workers=8) as ex:
+            out = list(ex.map(one, texts))
+    except Exception as e:  # noqa: BLE001
+        raise _wrap(e) from e
+    if log is not None and texts:
+        log.add("embed", EMBED_MODEL_ID, (time.perf_counter() - t0) * 1000, len(texts), 0)
+    return out
+
+
+def guardrail_mask(text: str, log: CallLog | None = None) -> tuple[str, int]:
+    """ApplyGuardrail(PII ANONYMIZE). GUARDRAIL_ID가 없으면 그대로 돌려준다."""
+    if not GUARDRAIL_ID:
+        return text, 0
+    t0 = time.perf_counter()
+    try:
+        r = client().apply_guardrail(guardrailIdentifier=GUARDRAIL_ID, guardrailVersion=GUARDRAIL_VERSION,
+                                     source="INPUT", content=[{"text": {"text": text}}])
+    except Exception as e:  # noqa: BLE001
+        raise _wrap(e) from e
+    if log is not None:
+        log.add("guardrail", "guardrail", (time.perf_counter() - t0) * 1000)
+    if r.get("action") != "GUARDRAIL_INTERVENED":
+        return text, 0
+    n = 0
+    for a in r.get("assessments", []):
+        n += len(a.get("sensitiveInformationPolicy", {}).get("piiEntities", []))
+        n += len(a.get("sensitiveInformationPolicy", {}).get("regexes", []))
+    outs = r.get("outputs") or []
+    masked = outs[0]["text"] if outs else text
+    for k, v in _PII_LABEL.items():
+        masked = masked.replace("{" + k + "}", v)
+    return masked, n
+
+
+_PII_LABEL = {"NAME": "[이름]", "ADDRESS": "[주소]", "AGE": "[나이]", "URL": "[URL]", "EMAIL": "[이메일]",
+              "PHONE": "[전화번호]", "USERNAME": "[아이디]", "PASSWORD": "[비밀번호]", "KR_RRN": "[주민번호]"}
+
+
+def cites_valid(text: str, allowed: set[str]) -> bool:
+    """설명문이 근거 ID를 최소 1개 인용하고, 없는 ID를 지어내지 않았는지."""
+    cited = set(_CITE.findall(text))
+    return bool(cited) and cited <= allowed
+
+
+def template_why(step: dict, evidence: dict[str, dict]) -> str:
+    """LLM 없이 근거를 이어 붙인 설명 (목업·폴백용)."""
+    parts = []
+    for eid in step.get("evidence_ids", []):
+        e = evidence[eid]
+        if e["type"] in ("corp", "market", "plan"):
+            parts.append(f"{e['text']} [{eid}]")
+        elif e["type"] == "resume":
+            parts.append(f"이력서 근거: “{e['text']}” [{eid}]")
+        elif e["type"] == "posting":
+            parts.append(f"공고 문장: “{e['text']}” [{eid}]")
+    return " · ".join(parts)
+
+
+def explain_step(step: dict, evidence: dict[str, dict]) -> str:
+    """하위호환: 단계 하나의 템플릿 설명."""
+    return template_why(step, evidence)
+
+
+_EXPLAIN_SYS = """너는 취업 준비생에게 학습경로의 각 단계를 왜 추천하는지 설명한다.
+규칙:
+- 단계마다 한국어 1~2문장, 존댓말(~해요체).
+- 그 단계에 주어진 근거만 사용하고, 사용한 근거 뒤에 [E1]처럼 근거 ID를 붙인다. 최소 1개는 반드시 인용한다.
+- 그 단계 목록에 없는 근거 ID, 근거에 없는 숫자·회사·과정 이름을 만들지 않는다.
+- 근거가 말하지 않는 평가(높다, 핵심, 필수적이다 등)를 덧붙이지 않는다. 숫자는 근거에 있는 그대로 쓴다.
+- 점수나 합격 가능성을 판단하지 않는다."""
+
+_EXPLAIN_SCHEMA = {
+    "type": "object",
+    "properties": {"items": {"type": "array", "items": {
+        "type": "object",
+        "properties": {"step": {"type": "integer"}, "why": {"type": "string"}},
+        "required": ["step", "why"]}}},
+    "required": ["items"],
+}
+
+_KIND = {"public": "공공 교육과정", "corp": "기업 교육 트랙", "proof": "결과물로 증명하기", "self": "자습"}
+
+
+def explain_steps(steps: list[dict], evidence: dict[str, dict], company_name: str, log: CallLog | None = None,
+                  model: str | None = None) -> tuple[list[str], int]:
+    """학습경로 전체 단계의 설명을 한 번에 생성한다. 인용이 틀린 단계는 한 번 재생성하고,
+    그래도 틀리면 템플릿으로 대체한다. → (설명 목록, 템플릿으로 대체한 수)"""
+
+    def ask(idx: list[int], note: str = "") -> dict[int, str]:
+        lines = [f"기업: {company_name}", note]
+        for i in idx:
+            st = steps[i]
+            lines.append(f"\n[단계 {i}] {st['skill']} · {_KIND.get(st['kind'], st['kind'])} · {st['title']} · {st['hours']}시간")
+            for eid in st["evidence_ids"]:
+                lines.append(f"  - {eid} ({evidence[eid]['type']}): {evidence[eid]['text']}")
+        out = converse_tool(_EXPLAIN_SYS, "\n".join(lines), "submit_explanations", _EXPLAIN_SCHEMA,
+                            model=model or EXPLAIN_MODEL_ID, log=log, max_tokens=3000, kind="explain")
+        return {int(x["step"]): x["why"].strip() for x in out.get("items", []) if "step" in x and "why" in x}
+
+    result: dict[int, str] = ask(list(range(len(steps))))
+    bad = [i for i in range(len(steps)) if not cites_valid(result.get(i, ""), set(steps[i]["evidence_ids"]))]
+    if bad:
+        result.update(ask(bad, "주의: 직전 답에서 근거 ID 인용이 없거나 목록에 없는 ID를 썼다. 각 단계 목록의 ID만 인용하라."))
+    n_fallback = 0
+    whys = []
+    for i, st in enumerate(steps):
+        w = result.get(i, "")
+        if not cites_valid(w, set(st["evidence_ids"])):
+            w = template_why(st, evidence)
+            n_fallback += 1
+        whys.append(w)
+    return whys, n_fallback

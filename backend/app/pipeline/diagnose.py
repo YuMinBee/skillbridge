@@ -1,0 +1,241 @@
+"""취준생 진단 에이전트: 고정 순서 파이프라인 + 단계별 trace.
+
+BEDROCK_MOCK=0이면 마스킹·추출·공고 기준선·설명을 Bedrock으로 하고, 어느 단계든 실패하면
+그 단계만 규칙/템플릿으로 폴백한다 (fallbacks에 사유를 남겨 화면에 표시).
+점수와 학습경로는 항상 규칙으로 계산한다 (명세 원칙 4).
+"""
+import time
+from concurrent.futures import ThreadPoolExecutor
+from contextlib import contextmanager
+
+from ..adapters import bedrock, storage
+from ..guards import pii
+from ..skills import get_dict
+from . import market
+from .extract import STATUS_LABEL, extract_posting_llm, extract_resume, extract_resume_llm, posting_requirements, \
+    requirements_from
+from .recommend import build_path, optimize_order
+from .score import FORMULA, WEIGHT_LABEL, gaps, readiness, status_of
+
+
+class Trace:
+    def __init__(self, clog: "bedrock.CallLog | None" = None):
+        self.steps = []
+        self.clog = clog
+
+    @contextmanager
+    def step(self, name: str, tool: str):
+        rec = {"name": name, "tool": tool, "detail": ""}
+        i0 = len(self.clog.calls) if self.clog else 0
+        t0 = time.perf_counter()
+        try:
+            yield rec
+        finally:
+            rec["ms"] = round((time.perf_counter() - t0) * 1000, 1)
+            if self.clog:
+                rec.setdefault("calls", []).extend(self.clog.since(i0))
+            self.steps.append(rec)
+
+
+def effective_requirements(company: dict) -> dict[str, int]:
+    ex = set(company.get("excluded", []))
+    return {s: w for s, w in company.get("requirements", {}).items() if s not in ex and w in (1, 2)}
+
+
+def _usage(*logs) -> dict:
+    calls = [c for lg in logs if lg for c in lg.calls]
+    return {"calls": len(calls),
+            "input_tokens": sum(c["in"] for c in calls if c["kind"] != "embed"),
+            "output_tokens": sum(c["out"] for c in calls),
+            "embed_texts": sum(c["in"] for c in calls if c["kind"] == "embed")}
+
+
+def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = True) -> dict:
+    sd = get_dict()
+    mock = bedrock.mode() == "mock"
+    clog = None if mock else bedrock.CallLog()
+    plog = None if mock else bedrock.CallLog()
+    tr = Trace(clog)
+    fallbacks: list[str] = []
+    extraction = None
+
+    company = storage.get_company(company_id)
+    if company is None:
+        raise KeyError(company_id)
+
+    # 공고 추출은 이력서와 무관하므로 먼저 병렬로 시작한다 (같은 공고 본문은 캐시)
+    pool = ThreadPoolExecutor(max_workers=1)
+    fut_posting = None if mock else pool.submit(extract_posting_llm, company.get("posting_text", ""), plog)
+
+    with tr.step("개인정보 마스킹", "guard.regex_mask" if mock else "guard.regex_mask → bedrock.apply_guardrail(PII)") as s:
+        masked, n_pii = pii.mask(resume_text)
+        if not mock:
+            if not bedrock.GUARDRAIL_ID:
+                s["tool"] = "guard.regex_mask (GUARDRAIL_ID 미설정)"
+            else:
+                try:
+                    masked, n_g = bedrock.guardrail_mask(masked, log=clog)
+                    n_pii += n_g
+                except bedrock.BedrockError as e:
+                    fallbacks.append(f"Guardrail: {e}")
+                    s["tool"] = "guard.regex_mask (Guardrail 실패 → 폴백)"
+        s["detail"] = f"{n_pii}건 가림 · 원문은 저장하지 않음"
+
+    with tr.step("이력서 스킬 추출·정규화",
+                 "skills.alias_match" if mock else "bedrock.converse(구조화 출력) → 사전 → 임베딩 top-5 → LLM 선택") as s:
+        status_map = None
+        if not mock:
+            try:
+                status_map, extraction = extract_resume_llm(masked, log=clog)
+                s["detail"] = (f"{len(status_map)}개 스킬 · 언급 {extraction['mentions']}건 "
+                               f"(사전 {extraction['dict']} · 임베딩+LLM {extraction['embed_llm']} · "
+                               f"미매칭 {extraction['unmatched']} · 원문에 없는 근거 버림 {extraction['dropped']})")
+            except bedrock.BedrockError as e:
+                fallbacks.append(f"이력서 추출: {e}")
+                s["tool"] = "skills.alias_match (Bedrock 실패 → 폴백)"
+        if status_map is None:
+            status_map = extract_resume(masked)
+            s["detail"] = f"{len(status_map)}개 스킬"
+
+    with tr.step("근거 기반 상태 판정",
+                 "rules.judge_status" if extraction is None else "LLM 판정(보유/부분/검증 필요) + 원문 근거 대조") as s:
+        cnt = {k: sum(1 for v in status_map.values() if v["status"] == k) for k in ("own", "part", "verify")}
+        s["detail"] = " · ".join(f"{STATUS_LABEL[k]} {v}" for k, v in cnt.items())
+
+    with tr.step("기업 기준 조회", f"store.get_company(tenant={company_id})") as s:
+        reqs = effective_requirements(company)
+        s["detail"] = f"{company['name']} · 요구역량 {len(reqs)}개"
+
+    with tr.step("시장 기준 조회", "market.rates(region, job)") as s:
+        mrate = market.rate_for_company(company)
+        s["detail"] = f"{company.get('region')} · {market.JOBS.get(company.get('job'), '')}"
+
+    with tr.step("준비도 계산", "rules.readiness") as s:
+        score = readiness(reqs, status_map)
+        s["detail"] = f"{score}점"
+
+    with tr.step("학습경로 생성", "catalog ∪ corp_track → plan(hours) → greedy(시간당 기업 준비도+시장 적합도)") as s:
+        path = build_path(reqs, status_map, company, weekly_hours)
+        mregion = "dg" if company.get("region") == "대경권" else "all"
+        path = optimize_order(path, status_map, reqs, market.posting_requirement_maps(mregion, company.get("job", "ai")))
+        m = path["market"]
+        s["detail"] = (f"{len(path['steps'])}단계 · {path['total_hours']}시간 · 시간당 효과 순 정렬 · "
+                       f"시장 공고 평균 적합도 {m['fit_before']} → {m['fit_after']}점 ({m['postings']}건)")
+
+    with tr.step("공고만 본 기준선",
+                 "rules.posting_requirements" if mock else "bedrock.converse(공고 구조화 출력, 캐시)") as s:
+        preqs = None
+        if fut_posting is not None:
+            try:
+                preqs = requirements_from(fut_posting.result())
+                s["calls"] = list(plog.calls)
+                if not plog.calls:
+                    s["tool"] += " · 캐시 적중"
+            except bedrock.BedrockError as e:
+                fallbacks.append(f"공고 추출: {e}")
+                s["tool"] = "rules.posting_requirements (Bedrock 실패 → 폴백)"
+        pool.shutdown(wait=False)
+        if preqs is None:
+            preqs = posting_requirements(company.get("posting_text", ""))
+        g_post = [g[0] for g in gaps(preqs, status_map)]
+        g_corp = [g[0] for g in gaps(reqs, status_map)]
+        baseline = {
+            "posting_requirements": [{"skill_id": k, "name": sd.name(k), "weight": w, "weight_label": WEIGHT_LABEL[w]}
+                                     for k, w in sorted(preqs.items(), key=lambda x: -x[1])],
+            "gaps_posting": [{"skill_id": k, "name": sd.name(k), "status": status_of(status_map, k)} for k in g_post],
+            "gaps_company": [{"skill_id": k, "name": sd.name(k), "status": status_of(status_map, k)} for k in g_corp],
+            "missed": [sd.name(k) for k in g_corp if k not in g_post],
+            "unnecessary": [sd.name(k) for k in g_post if k not in g_corp],
+            "readiness_posting": readiness(preqs, status_map),
+            "readiness_company": score,
+        }
+        s["detail"] = f"놓친 갭 {len(baseline['missed'])} · 불필요 {len(baseline['unnecessary'])}"
+
+    with tr.step("다른 기업과 비교", "rules.readiness × 기업") as s:
+        others = []
+        for c in storage.list_companies():
+            r = effective_requirements(c)
+            g = gaps(r, status_map)
+            others.append({"company_id": c["tenant_id"], "name": c["name"], "readiness": readiness(r, status_map),
+                           "first_task": sd.name(g[0][0]) if g else None, "current": c["tenant_id"] == company_id})
+        others.sort(key=lambda x: -x["readiness"])
+        s["detail"] = f"{len(others)}개 기업"
+
+    # 근거 목록: 추천 설명은 이 목록의 ID만 인용할 수 있다
+    evidence: dict[str, dict] = {}
+
+    def add_ev(type_, text):
+        eid = f"E{len(evidence) + 1}"
+        evidence[eid] = {"id": eid, "type": type_, "text": text}
+        return eid
+
+    posting_ev = {}
+    for line in company.get("posting_text", "").splitlines():
+        for m in sd.find(line):
+            posting_ev.setdefault(m["skill_id"], line.lstrip("-•· ").strip())
+
+    with tr.step("설명 작성", "template(근거 인용)" if mock else "bedrock.converse(근거 ID 인용만 허용) → 인용 검증") as s:
+        ev_by_skill: dict[str, list[str]] = {}
+        for st in path["steps"]:
+            sid = st["skill_id"]
+            if sid not in ev_by_skill:
+                ids = [add_ev("corp", f"{company['name']} 등록 기준: {WEIGHT_LABEL[st['weight']]}")]
+                if sid in mrate:
+                    ids.append(add_ev("market", f"시장 언급률 {mrate[sid]:.0f}% ({company.get('region')})"))
+                if sid in status_map:
+                    ids.append(add_ev("resume", status_map[sid]["evidence"]))
+                if sid in posting_ev:
+                    ids.append(add_ev("posting", posting_ev[sid]))
+                ev_by_skill[sid] = ids
+            st["evidence_ids"] = list(ev_by_skill[sid])
+            if st.get("gain"):
+                g = st["gain"]
+                st["evidence_ids"].append(add_ev("plan", f"이 단계를 마치면 기업 준비도 {g['readiness_after']}점(+{g['readiness']}), "
+                                                          f"시장 공고 평균 적합도 +{g['market_fit']}점 · 시간당 효과 {g['per_hour']}"))
+        whys, n_tpl = None, 0
+        if not mock and path["steps"]:
+            try:
+                whys, n_tpl = bedrock.explain_steps(path["steps"], evidence, company["name"], log=clog)
+            except bedrock.BedrockError as e:
+                fallbacks.append(f"설명: {e}")
+                s["tool"] = "template(근거 인용) (Bedrock 실패 → 폴백)"
+        if whys is None:
+            whys = [bedrock.template_why(st, evidence) for st in path["steps"]]
+        for st, w in zip(path["steps"], whys):
+            st["why"] = w
+        s["detail"] = f"근거 {len(evidence)}건"
+        if not mock:
+            s["detail"] += f" · 인용 검증 통과 {len(whys) - n_tpl}/{len(whys)}" + (f" · {n_tpl}건 템플릿 대체" if n_tpl else "")
+
+    matrix = []
+    for sid, w in sorted(reqs.items(), key=lambda x: (-x[1], x[0])):
+        st = status_of(status_map, sid)
+        ev = status_map.get(sid, {}).get("evidence")
+        matrix.append({"skill_id": sid, "name": sd.name(sid), "weight": w, "weight_label": WEIGHT_LABEL[w],
+                       "status": st, "status_label": STATUS_LABEL[st],
+                       "evidence": ev or (f"기업 요구 · 시장 언급률 {mrate.get(sid, 0):.0f}%" if st == "miss" else "-"),
+                       "market_pct": round(mrate.get(sid, 0), 1)})
+
+    if log:
+        storage.log_session(company_id, g_corp, {k: v["status"] for k, v in status_map.items()})  # 익명: 상태 코드만
+
+    return {
+        "company": {"id": company["tenant_id"], "name": company["name"], "desc": company.get("desc", "")},
+        "readiness": score,
+        "formula": FORMULA,
+        "skills_found": [{"skill_id": k, "name": sd.name(k), "status": v["status"],
+                          "status_label": STATUS_LABEL[v["status"]], "evidence": v["evidence"],
+                          "how": v.get("how", "dict-rule")}
+                         for k, v in sorted(status_map.items(), key=lambda x: (-["miss", "verify", "part", "own"].index(x[1]["status"]), x[0]))],
+        "matrix": matrix,
+        "path": path,
+        "baseline": baseline,
+        "others": others,
+        "evidence": evidence,
+        "trace": tr.steps,
+        "mode": bedrock.mode(),
+        "fallbacks": fallbacks,
+        "extraction": extraction,
+        "usage": None if mock else _usage(clog, plog),
+        "pii_masked": n_pii,
+    }

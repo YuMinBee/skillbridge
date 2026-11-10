@@ -1,0 +1,162 @@
+skill_id,canonical,category,aliases_ko,aliases_en,onet_ref,ncs_unit,reviewed
+python,Python,언어,파이썬,Python,,,0
+java,Java,언어,자바,Java,,,0
+javascript,JavaScript,언어,자바스크립트,JavaScript|JS,,,0
+typescript,TypeScript,언어,타입스크립트,TypeScript,,,0
+golang,Go,언어,고언어|Go언어|Go 언어,Golang,,,0
+cpp,C++,언어,씨쁠쁠,C++|CPP,,,0
+csharp,C#,언어,씨샵,C#,,,0
+kotlin,Kotlin,언어,코틀린,Kotlin,,,0
+rust,Rust,언어,러스트 언어,Rust,,,0
+scala,Scala,언어,스칼라 언어,Scala,,,0
+r_lang,R,언어,R언어|R 언어,RStudio,,,0
+shell,Shell Script,언어,쉘 스크립트|셸 스크립트|쉘스크립트,Shell Script|Bash|Shell,,,0
+sql,SQL,데이터,에스큐엘,SQL,,,0
+pandas,Pandas,데이터,판다스,Pandas,,,0
+numpy,NumPy,데이터,넘파이,NumPy,,,0
+scikit_learn,scikit-learn,머신러닝,사이킷런,scikit-learn|sklearn,,,0
+machine_learning,머신러닝,머신러닝,머신러닝|기계학습,Machine Learning,,,0
+deep_learning,딥러닝,딥러닝,딥러닝|심층학습,Deep Learning,,,0
+pytorch,PyTorch,딥러닝,파이토치,PyTorch|torch,,,0
+tensorflow,TensorFlow,딥러닝,텐서플로|텐서플로우,TensorFlow,,,0
+keras,Keras,딥러닝,케라스,Keras,,,0
+jax,JAX,딥러닝,잭스,JAX,,,0
+xgboost,XGBoost,머신러닝,엑스지부스트,XGBoost|LightGBM,,,0
+computer_vision,컴퓨터비전,컴퓨터비전,컴퓨터비전|컴퓨터 비전|이미지 분류|객체 탐지|영상 인식|비전 검사,Computer Vision|Object Detection,,,0
+opencv,OpenCV,컴퓨터비전,오픈씨브이,OpenCV,,,0
+yolo,YOLO,컴퓨터비전,욜로,YOLO|YOLOv8,,,0
+nlp,자연어처리,자연어처리,자연어처리|자연어 처리,NLP|Natural Language Processing,,,0
+llm,LLM,생성형AI,대규모 언어모델|대규모 언어 모델|거대언어모델|LLM API,LLM|Large Language Model|GPT,,,0
+rag,RAG,생성형AI,검색 증강 생성|검색증강생성,RAG|Retrieval-Augmented Generation,,,0
+prompt_engineering,프롬프트 엔지니어링,생성형AI,프롬프트 엔지니어링|프롬프트 설계,Prompt Engineering,,,0
+ai_agent,AI 에이전트,생성형AI,AI 에이전트|에이전트 개발|멀티 에이전트,AI Agent|Agentic,,,0
+langchain,LangChain,생성형AI,랭체인,LangChain|LangGraph,,,0
+llamaindex,LlamaIndex,생성형AI,라마인덱스,LlamaIndex,,,0
+huggingface,Hugging Face,생성형AI,허깅페이스,Hugging Face|HuggingFace|Transformers,,,0
+fine_tuning,파인튜닝,생성형AI,파인튜닝|미세조정|미세 조정,Fine-tuning|LoRA|PEFT,,,0
+vector_db,벡터 DB,생성형AI,벡터 DB|벡터DB|벡터 데이터베이스|벡터 검색,Vector DB|Pinecone|Milvus|pgvector|FAISS|Chroma,,,0
+embedding,임베딩,생성형AI,임베딩,Embedding,,,0
+mcp,MCP,생성형AI,모델 컨텍스트 프로토콜,MCP|Model Context Protocol,,,0
+amazon_bedrock,Amazon Bedrock,AWS,베드록|아마존 베드록,Amazon Bedrock|Bedrock,,,0
+aws_sagemaker,Amazon SageMaker,AWS,세이지메이커,SageMaker|Amazon SageMaker|AWS SageMaker,,,0
+aws,AWS,클라우드,아마존 웹 서비스|AWS 클라우드,AWS|Amazon Web Services,,,0
+aws_cert,AWS 자격증,자격증,AWS 자격증,AWS Certified|AWS Certified Cloud Practitioner|AWS SAA|Solutions Architect,,,0
+aws_ec2,Amazon EC2,AWS,이씨투,EC2|Amazon EC2,,,0
+aws_s3,Amazon S3,AWS,에스쓰리,S3|Amazon S3,,,0
+aws_lambda,AWS Lambda,AWS,람다,AWS Lambda|Lambda,,,0
+aws_eks,Amazon EKS,AWS,이케이에스,EKS|Amazon EKS,,,0
+aws_ecs,Amazon ECS,AWS,이씨에스,ECS|Fargate,,,0
+aws_rds,Amazon RDS,AWS,알디에스,RDS|Aurora,,,0
+aws_dynamodb,Amazon DynamoDB,AWS,다이나모디비,DynamoDB,,,0
+aws_vpc,Amazon VPC,AWS,브이피씨,VPC,,,0
+aws_iam,AWS IAM,AWS,접근 권한 관리,IAM,,,0
+aws_cloudformation,AWS CloudFormation,AWS,클라우드포메이션,CloudFormation|SAM|CDK,,,0
+aws_athena,Amazon Athena,AWS,아테나,Athena,,,0
+aws_glue,AWS Glue,AWS,AWS 글루,AWS Glue|Glue,,,0
+aws_cloudwatch,Amazon CloudWatch,AWS,클라우드워치,CloudWatch,,,0
+aws_api_gateway,Amazon API Gateway,AWS,API 게이트웨이,API Gateway,,,0
+aws_kinesis,Amazon Kinesis,AWS,키네시스,Kinesis,,,0
+aws_redshift,Amazon Redshift,AWS,레드시프트,Redshift,,,0
+gcp,Google Cloud,클라우드,구글 클라우드,GCP|Google Cloud,,,0
+azure,Microsoft Azure,클라우드,애저,Azure,,,0
+ncp,Naver Cloud Platform,클라우드,네이버 클라우드|네이버클라우드,NCP|Naver Cloud,,,0
+cloud_architecture,클라우드 아키텍처,클라우드,클라우드 아키텍처|클라우드 설계,Cloud Architecture,,,0
+multi_cloud,멀티클라우드,클라우드,멀티클라우드|멀티 클라우드|하이브리드 클라우드,Multi-cloud|Hybrid Cloud,,,0
+serverless,서버리스,클라우드,서버리스,Serverless,,,0
+docker,Docker,컨테이너,도커|컨테이너화,Docker|Dockerfile,,,0
+kubernetes,Kubernetes,컨테이너,쿠버네티스|컨테이너 오케스트레이션,Kubernetes|k8s,,,0
+helm,Helm,컨테이너,헬름,Helm,,,0
+terraform,Terraform,IaC,테라폼,Terraform,,,0
+ansible,Ansible,IaC,앤서블,Ansible,,,0
+iac,IaC,IaC,코드형 인프라|인프라 코드화,IaC|Infrastructure as Code,,,0
+linux,Linux,운영체제,리눅스,Linux|Ubuntu|CentOS|RHEL,,,0
+networking,네트워크,인프라,네트워크,Networking|TCP/IP|DNS,,,0
+cicd,CI/CD,DevOps,지속적 통합|배포 자동화,CI/CD|CICD,,,0
+jenkins,Jenkins,DevOps,젠킨스,Jenkins,,,0
+github_actions,GitHub Actions,DevOps,깃허브 액션,GitHub Actions,,,0
+gitlab_ci,GitLab CI,DevOps,깃랩 CI,GitLab CI,,,0
+argocd,Argo CD,DevOps,아르고 CD,Argo CD|ArgoCD|GitOps,,,0
+git,Git,도구,깃허브|깃랩,Git|GitHub|GitLab,,,0
+devops,DevOps,DevOps,데브옵스,DevOps,,,0
+sre,SRE,DevOps,사이트 신뢰성,SRE,,,0
+prometheus,Prometheus,모니터링,프로메테우스,Prometheus,,,0
+grafana,Grafana,모니터링,그라파나,Grafana,,,0
+elk,ELK,모니터링,엘라스틱서치|엘라스틱 서치,ELK|Elasticsearch|Kibana|Logstash|OpenSearch,,,0
+datadog,Datadog,모니터링,데이터독,Datadog,,,0
+observability,모니터링,모니터링,모니터링|관측성,Observability|OpenTelemetry,,,0
+mlops,MLOps,MLOps,엠엘옵스|모델 배포|모델 서빙,MLOps|Model Serving,,,0
+mlflow,MLflow,MLOps,엠엘플로우,MLflow,,,0
+kubeflow,Kubeflow,MLOps,큐브플로우,Kubeflow,,,0
+airflow,Airflow,데이터엔지니어링,에어플로우,Airflow|Apache Airflow,,,0
+spark,Spark,데이터엔지니어링,스파크,Spark|Apache Spark|PySpark,,,0
+hadoop,Hadoop,데이터엔지니어링,하둡,Hadoop|HDFS|Hive,,,0
+kafka,Kafka,데이터엔지니어링,카프카,Kafka|Apache Kafka,,,0
+data_pipeline,데이터 파이프라인,데이터엔지니어링,데이터 파이프라인|ETL 파이프라인,ETL|Data Pipeline|ELT,,,0
+data_warehouse,데이터 웨어하우스,데이터엔지니어링,데이터 웨어하우스|데이터웨어하우스|데이터 레이크,Data Warehouse|Data Lake|Snowflake|BigQuery,,,0
+data_analysis,데이터 분석,데이터,데이터 분석|통계 분석,Data Analysis,,,0
+statistics,통계,데이터,통계학|통계 모델링,Statistics,,,0
+data_visualization,데이터 시각화,데이터,데이터 시각화|대시보드,Tableau|Power BI|Data Visualization,,,0
+excel,Excel,도구,엑셀,Excel,,,0
+mysql,MySQL,DB,마이에스큐엘,MySQL|MariaDB,,,0
+postgresql,PostgreSQL,DB,포스트그레스,PostgreSQL|Postgres,,,0
+oracle_db,Oracle DB,DB,오라클,Oracle DB|Oracle,,,0
+mongodb,MongoDB,DB,몽고디비,MongoDB,,,0
+redis,Redis,DB,레디스,Redis,,,0
+nosql,NoSQL,DB,노에스큐엘,NoSQL,,,0
+fastapi,FastAPI,백엔드,패스트API,FastAPI,,,0
+flask,Flask,백엔드,플라스크,Flask,,,0
+django,Django,백엔드,장고,Django,,,0
+spring,Spring,백엔드,스프링|스프링부트|스프링 부트,Spring|Spring Boot,,,0
+nodejs,Node.js,백엔드,노드JS|노드제이에스,Node.js|NodeJS|Express,,,0
+rest_api,REST API,백엔드,API 설계|API 개발,REST API|RESTful|OpenAPI,,,0
+graphql,GraphQL,백엔드,그래프큐엘,GraphQL,,,0
+grpc,gRPC,백엔드,지알피씨,gRPC,,,0
+msa,MSA,아키텍처,마이크로서비스,MSA|Microservices,,,0
+react,React,프론트엔드,리액트,React|Next.js,,,0
+vue,Vue,프론트엔드,뷰JS,Vue|Vue.js,,,0
+security,보안,보안,정보보안|클라우드 보안|보안 정책,Security|DevSecOps,,,0
+iam_security,접근 제어,보안,접근 제어|권한 관리,SSO|OAuth|OIDC,,,0
+ros,ROS,로보틱스,로봇 운영체제,ROS|ROS2,,,0
+embedded,임베디드,임베디드,임베디드|펌웨어,Embedded|Firmware,,,0
+edge_ai,엣지 AI,임베디드,엣지 AI|온디바이스 AI|온디바이스,Edge AI|On-device AI|TensorRT|ONNX,,,0
+cuda,CUDA,딥러닝,쿠다|GPU 프로그래밍,CUDA,,,0
+distributed_training,분산 학습,딥러닝,분산 학습|분산학습,Distributed Training|DeepSpeed,,,0
+reinforcement_learning,강화학습,머신러닝,강화학습|강화 학습,Reinforcement Learning,,,0
+recommender,추천 시스템,머신러닝,추천 시스템|추천시스템,Recommender System,,,0
+time_series,시계열 분석,머신러닝,시계열 분석|시계열 예측,Time Series,,,0
+anomaly_detection,이상 탐지,머신러닝,이상 탐지|이상탐지|불량 탐지,Anomaly Detection,,,0
+speech,음성 인식,음성,음성 인식|음성인식,Speech Recognition|STT|TTS|Whisper,,,0
+data_labeling,데이터 라벨링,데이터,데이터 라벨링|라벨링|어노테이션,Data Labeling|Annotation,,,0
+mlops_monitoring,모델 모니터링,MLOps,모델 모니터링|드리프트 탐지,Model Monitoring|Drift Detection,,,0
+feature_store,피처 스토어,MLOps,피처 스토어,Feature Store,,,0
+ab_testing,A/B 테스트,데이터,A/B 테스트|AB 테스트,A/B Testing,,,0
+llm_evaluation,LLM 평가,생성형AI,LLM 평가|생성형 AI 평가,LLM Evaluation|LLM-as-a-judge,,,0
+guardrails,가드레일,생성형AI,가드레일|안전성 필터,Guardrails,,,0
+ai_ethics,AI 윤리,생성형AI,AI 윤리|책임 있는 AI,Responsible AI|AI Ethics,,,0
+paper_research,논문 연구,연구,논문|학회 발표,Paper|Publication,,,0
+math,수학 기초,연구,선형대수|확률통계,Linear Algebra,,,0
+agile,애자일,협업,애자일|스크럼,Agile|Scrum,,,0
+jira,Jira,협업,지라 사용,Jira|Confluence,,,0
+communication,커뮤니케이션,협업,커뮤니케이션|의사소통|협업 능력,Communication,,,0
+english,영어,협업,영어 회화|영문 문서,English|TOEIC|OPIc,,,0
+technical_writing,기술 문서 작성,협업,기술 문서|기술문서,Technical Writing,,,0
+mlops_pipeline,ML 파이프라인,MLOps,ML 파이프라인|학습 파이프라인,ML Pipeline|SageMaker Pipelines,,,0
+gpu_infra,GPU 인프라,인프라,GPU 서버|GPU 클러스터|GPU 인프라,GPU Cluster|Slurm,,,0
+nginx,Nginx,인프라,엔진엑스,Nginx,,,0
+load_balancing,로드밸런싱,인프라,로드밸런서|로드 밸런싱,Load Balancer|ALB|ELB,,,0
+backup_dr,백업·재해복구,인프라,재해복구|재해 복구|백업 정책,Disaster Recovery|DR,,,0
+finops,FinOps,클라우드,클라우드 비용 최적화|비용 최적화,FinOps,,,0
+cloud_migration,클라우드 마이그레이션,클라우드,클라우드 마이그레이션|클라우드 전환,Cloud Migration,,,0
+virtualization,가상화,인프라,가상화,VMware|Virtualization|KVM,,,0
+windows_server,Windows Server,운영체제,윈도우 서버,Windows Server|Active Directory,,,0
+smart_factory,스마트팩토리,도메인,스마트팩토리|스마트 팩토리|제조 데이터,Smart Factory|MES,,,0
+office,문서·OA 활용,디지털기초,한컴오피스|한글 프로그램|아래아한글|MS오피스|MS 오피스|오피스 프로그램|파워포인트|문서 프로그램|문서작성 프로그램|OA 활용|OA 프로그램|PC 활용|PC활용,MS Office|MS-Office|PowerPoint|HWP|OA S/W,,,0
+cert_computer,컴퓨터활용능력,자격증,컴퓨터활용능력|컴퓨터 활용능력|컴활,,,,0
+cert_office,사무 OA 자격증,자격증,워드프로세서|사무자동화산업기사|전산회계운용사,ITQ|MOS|e-test,,,0
+cert_info_processing,정보처리기사,자격증,정보처리기사|정보처리산업기사|정보처리기능사|전자계산기조직응용기사|전자계산기기사,,,,0
+cert_data,데이터 자격증,자격증,빅데이터분석기사|빅데이터 분석기사|데이터분석준전문가|데이터분석전문가|데이터아키텍처전문가,ADsP|ADSP|ADP|SQLD|SQLP|DAP,,,0
+cert_security,정보보안 자격증,자격증,정보보안기사|정보보안산업기사,CISSP|CISA|CPPG,,,0
+cert_network,네트워크·통신 자격증,자격증,정보통신기사|네트워크관리사|리눅스마스터|무선설비기사,CCNA|CCNP,,,0
+stat_tool,통계 분석 도구,데이터,통계프로그램|통계 프로그램|통계패키지|통계 패키지|통계소프트웨어|통계 소프트웨어|사회조사분석사,SAS|SPSS|STATA,,,0
+gen_ai_use,생성형 AI 활용,AI활용,생성형 AI 활용|생성형AI 활용|생성형 AI를 활용|챗GPT|챗지피티,ChatGPT|Copilot,,,0
+ai_general,인공지능(AI),머신러닝,인공지능|AI 관련|AI 분야|AI 기술|AI 사업|AI 연구|의료 AI|AI융합,Artificial Intelligence,,,0

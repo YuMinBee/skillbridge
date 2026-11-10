@@ -1,0 +1,4700 @@
+{
+ "_note": "고용24 OPEN-API로 2026-11-09 수집. 개강 20261109~20270309 과정 중 과정명에 사전 스킬이 있는 것만, 스킬별 최대 6개. 원격 과정은 지역 '전국'.",
+ "collected_at": "2026-11-09",
+ "api_calls": 442,
+ "courses": [
+  {
+   "id": "W24-ACG20253001136843-47",
+   "title": "와우패스! SQL 개발자(SQLD) 합격반(이론+문풀)",
+   "provider": "유비온원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "sql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-14",
+   "end": "2026-12-13",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "97.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001136843&tracseTme=47&crseTracseSe=C0031&trainstCstmrId=500020053385",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20253001139513-22",
+   "title": "쿠버네티스도커",
+   "provider": "(주)알파코",
+   "hours": 34,
+   "skills": [
+    "kubernetes",
+    "docker"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 성동구",
+   "start": "2026-11-15",
+   "end": "2027-01-14",
+   "cost": 73780,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001139513&tracseTme=22&crseTracseSe=C0031&trainstCstmrId=500020014456",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20253001142782-287",
+   "title": "비전공자를 위한 SQL 입문",
+   "provider": "에듀퓨어",
+   "hours": 17,
+   "skills": [
+    "sql"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "62.9",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001142782&tracseTme=287&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20253001143032-19",
+   "title": "가장 쉽게 배우는 AWS, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 18,
+   "skills": [
+    "aws"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 53460,
+   "ncs": {
+    "code": "20020110",
+    "name": "클라우드플랫폼구축"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001143032&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20253001143109-134",
+   "title": "[상위1% 프로그래밍] Hello, Java Programming",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "java"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001143109&tracseTme=134&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20253001149037-43",
+   "title": "Python과 SQL을 활용한 텍스트 분석 웹페이지 만들기",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "python",
+    "sql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 129360,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "71.4",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20253001149037&tracseTme=43&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001154068-40",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001154068&tracseTme=40&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001169609-284",
+   "title": "[상위 1% 인공지능] 수식으로 구현해보는 딥러닝 알고리즘",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 83600,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001169609&tracseTme=284&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001178506-35",
+   "title": "AI로 일하는 기술: 인공지능의 이해와 활용(Tensorflow실습)",
+   "provider": "미래디지털 원격평생교육원",
+   "hours": 22,
+   "skills": [
+    "tensorflow"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강서구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 135520,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001178506&tracseTme=35&crseTracseSe=C0031&trainstCstmrId=500020011130",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001191369-16",
+   "title": "처음부터설치하며배우는앤서블",
+   "provider": "(주)알파코",
+   "hours": 34,
+   "skills": [
+    "ansible"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 성동구",
+   "start": "2026-11-15",
+   "end": "2027-01-14",
+   "cost": 73780,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001191369&tracseTme=16&crseTracseSe=C0031&trainstCstmrId=500020014456",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199814-130",
+   "title": "[원패스] 네트워크관리사 2급 올인원 (필기+실기)",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 23,
+   "skills": [
+    "networking"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 68310,
+   "ncs": {
+    "code": "20020103",
+    "name": "네트워크구축"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199814&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199815-130",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199815&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199826-130",
+   "title": "Python을 활용한 빅데이터 분석과 시각화",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "python",
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199826&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199827-130",
+   "title": "R을 활용한 빅데이터 및 통계분석",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "r_lang",
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199827&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199836-130",
+   "title": "디지털 시대의 사이버보안",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199836&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199851-63",
+   "title": "비전공자도 쉽게 하는 Python 입문",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "python"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199851&tracseTme=63&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001199855-108",
+   "title": "완전정복! 디지털 시대의 기업 보안 마스터",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001199855&tracseTme=108&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001201169-251",
+   "title": "HTML5 & Javascript",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 20,
+   "skills": [
+    "javascript"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001201169&tracseTme=251&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001201263-259",
+   "title": "비전공자를 위한 SQL 입문",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 17,
+   "skills": [
+    "sql"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001201263&tracseTme=259&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224210-14",
+   "title": "가장 쉽게 배우는 MLOps, 기초부터 ML서비스 실무까지!",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "mlops"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224210&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224238-14",
+   "title": "가장 쉽게 배우는 Vue.js, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "vue"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224238&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224244-14",
+   "title": "가장 쉽게 배우는 도커, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "docker"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224244&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224251-14",
+   "title": "가장 쉽게 배우는 자바스크립트, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "javascript"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224251&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224254-14",
+   "title": "가장 쉽게 배우는 코틀린, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "kotlin"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224254&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001224276-14",
+   "title": "가장 쉽게 배우는 쿠버네티스, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "kubernetes"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "57.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001224276&tracseTme=14&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001246894-216",
+   "title": "해킹과 침투의 시대, 보안을 배우다",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 31,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 92070,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001246894&tracseTme=216&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001247846-12",
+   "title": "도커/쿠버네티스를활용한컨테이너개발실전입문",
+   "provider": "(주)알파코",
+   "hours": 34,
+   "skills": [
+    "docker",
+    "kubernetes"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 성동구",
+   "start": "2026-11-15",
+   "end": "2027-01-14",
+   "cost": 73780,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001247846&tracseTme=12&crseTracseSe=C0031&trainstCstmrId=500020014456",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001251613-28",
+   "title": "비전공자를 위한 SQL 입문",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "sql"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001251613&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001251617-28",
+   "title": "[ICT 지식 큐브] 인공지능, 보안, 네트워크, 클라우드",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "security",
+    "networking"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010102",
+    "name": "정보기술컨설팅"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001251617&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001251618-28",
+   "title": "R을 활용한 빅데이터 및 통계분석",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "r_lang",
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001251618&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001251625-28",
+   "title": "[ITⓔ코칭] JAVA로 잡는 실전 프로그래밍",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "java"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001251625&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001251684-216",
+   "title": "랜섬웨어 예방 및 사이버 보안의 첫 걸음-전사원을 교육하라!",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 71060,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001251684&tracseTme=216&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001254408-28",
+   "title": "[ITⓔ코칭] Do it! HTML+CSS+자바스크립트 웹 표준의 정석",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "javascript"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001254408&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001254415-28",
+   "title": "[ITⓔ코칭] Do it! Java 프로그래밍 완성",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "java"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001254415&tracseTme=28&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001255506-130",
+   "title": "[엑셀로 OK] 실무에서 가장 많이 쓰는 데이터 분석, 기본부터 실전까지",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 129360,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001255506&tracseTme=130&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001257131-222",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "에듀퓨어",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001257131&tracseTme=222&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001260041-32",
+   "title": "[IT 마스터 클래스] C++답게 코딩하자",
+   "provider": "(주)이패스코리아",
+   "hours": 19,
+   "skills": [
+    "cpp"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 영등포구",
+   "start": "2026-11-12",
+   "end": "2026-12-11",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010208",
+    "name": "시스템SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001260041&tracseTme=32&crseTracseSe=C0031&trainstCstmrId=500020051943",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001261286-144",
+   "title": "챗GPT 실무 올인원(문서·리서치·데이터분석)",
+   "provider": "케이스원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "llm"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010103",
+    "name": "정보기술기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001261286&tracseTme=144&crseTracseSe=C0031&trainstCstmrId=500020050628",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001262724-197",
+   "title": "알아두면 쓸모 있는 신비한 사이버보안",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001262724&tracseTme=197&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001284248-159",
+   "title": "머신러닝의 이해와 실습",
+   "provider": "에듀퓨어",
+   "hours": 21,
+   "skills": [
+    "machine_learning"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001284248&tracseTme=159&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001296246-20",
+   "title": "[상위1% 파이썬 웹 ] Django를 이용한 웹 애플리케이션 작성",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "python",
+    "django"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001296246&tracseTme=20&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001296253-20",
+   "title": "[상위1% 프로그래밍] Hello, Java Programming",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "java"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001296253&tracseTme=20&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001300252-194",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001300252&tracseTme=194&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001308433-89",
+   "title": "[상위1% 빅데이터 ] 기업이 주목하는 Hadoop 제대로 배우기",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "hadoop"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010304",
+    "name": "빅데이터운영·관리"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001308433&tracseTme=89&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001324662-20",
+   "title": "[사회조사분석사] 통계분석과 활용",
+   "provider": "뉴엠원격평생교육원",
+   "hours": 29,
+   "skills": [
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 영등포구",
+   "start": "2026-11-09",
+   "end": "2026-12-04",
+   "cost": 121220,
+   "ncs": {
+    "code": "02010303",
+    "name": "통계조사"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001324662&tracseTme=20&crseTracseSe=C0031&trainstCstmrId=500020056877",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001325052-21",
+   "title": "라벨러 완전정복! 수익형의 끝판왕 데이터 라벨링 기초+심화 패키지",
+   "provider": "크라우드아카데미 원격평생교육원",
+   "hours": 29,
+   "skills": [
+    "data_labeling"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-10",
+   "end": "2026-12-09",
+   "cost": 178640,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "81.3",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001325052&tracseTme=21&crseTracseSe=C0031&trainstCstmrId=500036105838",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001326560-3",
+   "title": "노코드 데이터분석으로 디지털 역량 레벨업! (feat. 엑셀&파워BI&챗GPT)",
+   "provider": "투썬캠퍼스 원격평생교육원",
+   "hours": 28,
+   "skills": [
+    "llm"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 성남시 분당구",
+   "start": "2026-11-10",
+   "end": "2026-12-09",
+   "cost": 117040,
+   "ncs": {
+    "code": "20010702",
+    "name": "인공지능서비스기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001326560&tracseTme=3&crseTracseSe=C0031&trainstCstmrId=500043663245",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001326563-10",
+   "title": "[AI Agent 시대의 새 공식] CONTEXT로 완성하는 멀티 에이전트 워크플로우",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 71060,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "78.6",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001326563&tracseTme=10&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001326616-151",
+   "title": "실습과 함께하는! 데이터베이스 Oracle 12C",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 22,
+   "skills": [
+    "oracle_db"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 65340,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001326616&tracseTme=151&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001327266-151",
+   "title": "실전 개발자를 위한 Spring Framework",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 23,
+   "skills": [
+    "spring"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 68310,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001327266&tracseTme=151&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001327279-151",
+   "title": "보통 직장인을 위한 데이터 분석",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010107",
+    "name": "빅데이터기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001327279&tracseTme=151&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001336664-152",
+   "title": "[IT 마스터 클래스] C++답게 코딩하자",
+   "provider": "에듀퓨어",
+   "hours": 19,
+   "skills": [
+    "cpp"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010208",
+    "name": "시스템SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001336664&tracseTme=152&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001341089-71",
+   "title": "탈중앙화 글로벌 금융 네트워크(비트코인)의 이해",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 34,
+   "skills": [
+    "networking"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 100980,
+   "ncs": {
+    "code": "20010108",
+    "name": "핀테크기술기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001341089&tracseTme=71&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001341105-71",
+   "title": "R을 활용한 빅데이터 및 통계분석",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 25,
+   "skills": [
+    "r_lang",
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001341105&tracseTme=71&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344499-19",
+   "title": "실전 개발자를 위한 Spring Framework",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 23,
+   "skills": [
+    "spring"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 68310,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344499&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344500-19",
+   "title": "실습과 함께하는! 데이터베이스 Oracle 12C",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 22,
+   "skills": [
+    "oracle_db"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 65340,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344500&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344513-19",
+   "title": "[IT 마스터 클래스] C++답게 코딩하자",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "cpp"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010208",
+    "name": "시스템SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344513&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344521-19",
+   "title": "R을 활용한 빅데이터 및 통계분석",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "r_lang",
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344521&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344531-19",
+   "title": "epass SQL 개발자(SQLD)",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "sql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344531&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001344539-19",
+   "title": "epass Tableau 활용 데이터 시각화",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 24,
+   "skills": [
+    "data_visualization"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 71280,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001344539&tracseTme=19&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001361563-4",
+   "title": "IT 엔지니어를 위한 AWS 운영의 기본과 노하우",
+   "provider": "고려아카데미(원격)",
+   "hours": 34,
+   "skills": [
+    "aws"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 금천구",
+   "start": "2026-12-01",
+   "end": "2027-01-31",
+   "cost": 73780,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001361563&tracseTme=4&crseTracseSe=C0031&trainstCstmrId=500037441563",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001369958-103",
+   "title": "실습과 함께하는! 데이터베이스 MySQL",
+   "provider": "에듀퓨어",
+   "hours": 21,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001369958&tracseTme=103&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001376924-110",
+   "title": "[상위1% 빅데이터] 기업이 주목하는 Hadoop 제대로 배우기",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "hadoop"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010304",
+    "name": "빅데이터운영·관리"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001376924&tracseTme=110&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001376942-110",
+   "title": "[원패스] 네트워크관리사 2급 올인원 (필기+실기)",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 23,
+   "skills": [
+    "networking"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 68310,
+   "ncs": {
+    "code": "20020103",
+    "name": "네트워크구축"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001376942&tracseTme=110&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001376948-110",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001376948&tracseTme=110&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001376962-98",
+   "title": "R을 활용한 빅데이터 및 통계분석",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 25,
+   "skills": [
+    "r_lang",
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001376962&tracseTme=98&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001377845-101",
+   "title": "파이썬을 이용한 자동화 스크립트",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 26,
+   "skills": [
+    "python"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 77220,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001377845&tracseTme=101&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001377889-98",
+   "title": "머신러닝의 이해와 실습",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "machine_learning"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001377889&tracseTme=98&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001378115-110",
+   "title": "[상위1% 파이썬 웹] Django를 이용한 웹 애플리케이션 작성",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "python",
+    "django"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001378115&tracseTme=110&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001382366-37",
+   "title": "[상위 1% 인공지능] 수식으로 구현해보는 딥러닝 알고리즘",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001382366&tracseTme=37&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001382369-37",
+   "title": "완전정복! 디지털 시대의 기업 보안 마스터",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "security"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001382369&tracseTme=37&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001384630-37",
+   "title": "[상위1% 프로그래밍] Hello, MySQL",
+   "provider": "러닝팩토리 원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 83600,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001384630&tracseTme=37&crseTracseSe=C0031&trainstCstmrId=500020035790",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407264-101",
+   "title": "[상위 1% 인공지능] 수식으로 구현해보는 딥러닝 알고리즘",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 20,
+   "skills": [
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 83600,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407264&tracseTme=101&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407265-101",
+   "title": "[상위 1% 프로그래밍] Hello, MySQL",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 20,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 83600,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407265&tracseTme=101&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407532-61",
+   "title": "[품질관리전문가] 품질기획 및 통계적 공정관리(SPC)",
+   "provider": "나무원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "statistics"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "부산 동래구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 50490,
+   "ncs": {
+    "code": "02040201",
+    "name": "QM/QC관리"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407532&tracseTme=61&crseTracseSe=C0031&trainstCstmrId=500041606927",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407611-62",
+   "title": "왕초보를 위한 프론트엔드 개발자 첫걸음 : 기초 코딩, 리액트, 취업 가이드까지 한 번에!",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "react"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407611&tracseTme=62&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407625-62",
+   "title": "초보 마케터도 실무에 바로 활용하는 데이터 분석 : 엑셀, SPSS",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 47520,
+   "ncs": {
+    "code": "02010301",
+    "name": "마케팅전략기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407625&tracseTme=62&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407629-62",
+   "title": "왕초보를 위한 실무 엑셀 : 데이터 분석과 자동화",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 18,
+   "skills": [
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 53460,
+   "ncs": {
+    "code": "02020302",
+    "name": "사무행정"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407629&tracseTme=62&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407785-62",
+   "title": "입문자를 위한 R데이터 분석과 텍스트 마이닝: 단계별 학습 가이드",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "r_lang",
+    "data_analysis"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407785&tracseTme=62&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001407786-62",
+   "title": "왕초보도 할 수 있는 파이썬 프로그래밍 : 기초 개념부터 자동 매매봇 구현까지",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 16,
+   "skills": [
+    "python"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 47520,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001407786&tracseTme=62&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001408596-83",
+   "title": "[상위1% 빅데이터 ] 기업이 주목하는 Hadoop 제대로 배우기",
+   "provider": "(1st)인비원 평생교육원",
+   "hours": 21,
+   "skills": [
+    "hadoop"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-09",
+   "cost": 87780,
+   "ncs": {
+    "code": "20010304",
+    "name": "빅데이터운영·관리"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001408596&tracseTme=83&crseTracseSe=C0031&trainstCstmrId=500044312625",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001417823-82",
+   "title": "[상위1% 인공지능] 수식으로 구현해보는 딥러닝 알고리즘",
+   "provider": "에듀퓨어",
+   "hours": 20,
+   "skills": [
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "경기 고양시 일산동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001417823&tracseTme=82&crseTracseSe=C0031&trainstCstmrId=500020034527",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422210-46",
+   "title": "[원패스] 리눅스마스터 2급 올인원",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 21,
+   "skills": [
+    "linux"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422210&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422212-46",
+   "title": "[원패스] 네트워크관리사 2급 올인원 (필기+실기)",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 23,
+   "skills": [
+    "networking"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 68310,
+   "ncs": {
+    "code": "20020103",
+    "name": "네트워크구축"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422212&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422216-46",
+   "title": "비전공자도 쉽게 하는 Python 입문",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 17,
+   "skills": [
+    "python"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422216&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422230-46",
+   "title": "[상위 1% 프로그래밍] Hello, MySQL",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 20,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422230&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422234-46",
+   "title": "[상위1% 프로그래밍] Hello, Java Programming",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 19,
+   "skills": [
+    "java"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422234&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001422327-46",
+   "title": "[ICT 지식 큐브] 인공지능, 보안, 네트워크, 클라우드",
+   "provider": "에듀윌원격국비교육원",
+   "hours": 25,
+   "skills": [
+    "security",
+    "networking"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-06",
+   "cost": 74250,
+   "ncs": {
+    "code": "20010102",
+    "name": "정보기술컨설팅"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001422327&tracseTme=46&crseTracseSe=C0031&trainstCstmrId=500042836001",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001423062-3",
+   "title": "LLM 파인튜닝 A to Z : 데이터 구축부터 API 배포까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "llm",
+    "fine_tuning"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 50490,
+   "ncs": {
+    "code": "20010702",
+    "name": "인공지능서비스기획"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001423062&tracseTme=3&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001423090-3",
+   "title": "[AI 포트폴리오 완성] PyTorch로 구현하는 컴퓨터 비전 로드맵",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 37,
+   "skills": [
+    "pytorch",
+    "computer_vision"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 154660,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001423090&tracseTme=3&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001423098-7",
+   "title": "[상위 1% 프로그래밍] Hello, MySQL",
+   "provider": "케이지에듀원 원격평생교육원",
+   "hours": 20,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 동작구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 59400,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001423098&tracseTme=7&crseTracseSe=C0031&trainstCstmrId=500020015894",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001446869-104",
+   "title": "[상위1% 빅데이터 ] 기업이 주목하는 Hadoop 제대로 배우기",
+   "provider": "(주) 올윈에듀",
+   "hours": 21,
+   "skills": [
+    "hadoop"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 금천구",
+   "start": "2026-11-09",
+   "end": "2027-01-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010304",
+    "name": "빅데이터운영·관리"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001446869&tracseTme=104&crseTracseSe=C0031&trainstCstmrId=500020024074",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001446892-104",
+   "title": "[상위1% 파이썬 웹 ] Django를 이용한 웹 애플리케이션 작성",
+   "provider": "(주) 올윈에듀",
+   "hours": 21,
+   "skills": [
+    "python",
+    "django"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 금천구",
+   "start": "2026-11-09",
+   "end": "2027-01-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001446892&tracseTme=104&crseTracseSe=C0031&trainstCstmrId=500020024074",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001470215-4",
+   "title": "[상위1% 파이썬 웹] Django를 이용한 웹 애플리케이션 작성",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "python",
+    "django"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001470215&tracseTme=4&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001470231-4",
+   "title": "[웹UI 전문가] 실무능력 향상을 위한 인터랙티브 웹 디자인 & 자바스크립트 기초",
+   "provider": "그린온라인캠프원격평생교육원",
+   "hours": 36,
+   "skills": [
+    "javascript"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 221760,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001470231&tracseTme=4&crseTracseSe=C0031&trainstCstmrId=500044312613",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001471294-1",
+   "title": "쿠버네티스도커",
+   "provider": "(주)알파코",
+   "hours": 34,
+   "skills": [
+    "kubernetes",
+    "docker"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 성동구",
+   "start": "2026-12-01",
+   "end": "2027-01-31",
+   "cost": 73780,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001471294&tracseTme=1&crseTracseSe=C0031&trainstCstmrId=500020014456",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001488824-5",
+   "title": "실습과 함께하는! 데이터베이스 MySQL",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "mysql"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001488824&tracseTme=5&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001488832-12",
+   "title": "Big Data 시대에 반드시 알아야 할 기초 통계지식",
+   "provider": "윈스펙원격평생교육원",
+   "hours": 17,
+   "skills": [
+    "statistics"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 50490,
+   "ncs": {
+    "code": "02010303",
+    "name": "통계조사"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001488832&tracseTme=12&crseTracseSe=C0031&trainstCstmrId=500034225481",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001493826-1",
+   "title": "현업에서 통하는 React+TypeScript 올인원 패키지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 21,
+   "skills": [
+    "react",
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001493826&tracseTme=1&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-ACG20263001493831-1",
+   "title": "가장 쉽게 배우는 Go언어, 기초부터 실무까지",
+   "provider": "챔프스터디 원격평생교육원",
+   "hours": 19,
+   "skills": [
+    "golang"
+   ],
+   "level": "기초",
+   "region": "전국",
+   "address": "서울 서초구",
+   "start": "2026-11-15",
+   "end": "2026-12-14",
+   "cost": 56430,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "근로자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=ACG20263001493831&tracseTme=1&crseTracseSe=C0031&trainstCstmrId=500020025590",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000417826-2",
+   "title": "Vue 프레임워크를 활용한 웹프론트엔드 개발 입문 과정",
+   "provider": "하이미디어컴퓨터학원",
+   "hours": 300,
+   "skills": [
+    "vue"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 노원구",
+   "start": "2026-11-19",
+   "end": "2027-02-16",
+   "cost": 1986000,
+   "ncs": {
+    "code": "20010207",
+    "name": "UI/UX엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000417826&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020012631",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000418251-1",
+   "title": "『타입스크립트』함수형 프로그래밍 완전정복",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 39,
+   "skills": [
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-12-31",
+   "end": "2027-02-16",
+   "cost": 258180,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000418251&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000419109-12",
+   "title": "[자바(JAVA)]UI/UX 스프링프레임워크 활용 웹 애플리케이션 개발(SQL)",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 280,
+   "skills": [
+    "java",
+    "spring",
+    "sql"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-11",
+   "end": "2027-01-29",
+   "cost": 1853600,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000419109&tracseTme=12&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000422240-2",
+   "title": "리액트(React.js)&뷰(Vue.js)활용 UI/UX 웹&앱 개발 실무",
+   "provider": "메가스터디에이아이캠퍼스",
+   "hours": 120,
+   "skills": [
+    "react",
+    "vue"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-18",
+   "end": "2026-12-21",
+   "cost": 794400,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000422240&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020028586",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000430475-1",
+   "title": "리액트(React.js)와 뷰(vue.js)를 활용한 UI/UX 웹&앱 디자인 실무",
+   "provider": "더조은컴퓨터아카데미 종로",
+   "hours": 120,
+   "skills": [
+    "react",
+    "vue"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-12",
+   "end": "2026-12-15",
+   "cost": 794400,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000430475&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020027870",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000436112-4",
+   "title": "자바(JAVA)프로그래밍 입문+챗GPT",
+   "provider": "더조은컴퓨터아카데미 종로",
+   "hours": 60,
+   "skills": [
+    "java",
+    "llm"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2026-12-10",
+   "cost": 397200,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000436112&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020018050",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000436389-3",
+   "title": "React와 Node.js를 활용한 프런트엔드 개발",
+   "provider": "한울직업전문학교",
+   "hours": 240,
+   "skills": [
+    "react",
+    "nodejs"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "전남광주 서구",
+   "start": "2026-12-15",
+   "end": "2027-03-15",
+   "cost": 1588800,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000436389&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020033667",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20230000444330-1",
+   "title": "『(주말)타입스크립트』함수형 프로그래밍 완전정복",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 39,
+   "skills": [
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-12-31",
+   "end": "2027-02-16",
+   "cost": 258180,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20230000444330&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459039-6",
+   "title": "기업요구 프로젝트 중심 MSA기반 자바 풀스택 (클라우드 활용) 개발자 양성과정",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 1060,
+   "skills": [
+    "msa",
+    "java"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 중구",
+   "start": "2026-11-12",
+   "end": "2027-05-28",
+   "cost": 10062580,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "92.9",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459039&tracseTme=6&crseTracseSe=C0061&trainstCstmrId=500020014651",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459129-4",
+   "title": "[프로젝트기반]자바 풀스택 개발자(React.js, Springboot, CI/CD 활용)",
+   "provider": "하이미디어아카데미인재개발원",
+   "hours": 960,
+   "skills": [
+    "java",
+    "react",
+    "cicd"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-11",
+   "end": "2027-05-06",
+   "cost": 9113280,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "92.5",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459129&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020037340",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459262-4",
+   "title": "AI를 활용한 자바(JAVA)개발자 (React, SpringBoot, LLM)",
+   "provider": "패스트캠퍼스구로학원",
+   "hours": 1040,
+   "skills": [
+    "java",
+    "react",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2027-05-18",
+   "cost": 9872720,
+   "ncs": {
+    "code": "20010201",
+    "name": "SW아키텍처"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "88.6",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459262&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020014478",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459267-10",
+   "title": "자바/파이썬/챗GPT를 활용한 AI 개발자 양성과정",
+   "provider": "(주)솔데스크",
+   "hours": 960,
+   "skills": [
+    "java",
+    "python",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-04-30",
+   "cost": 9113280,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "89.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459267&tracseTme=10&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459268-14",
+   "title": "AWS와 Azure 기반 하이브리드 멀티클라우드 DevOps",
+   "provider": "(주)솔데스크",
+   "hours": 960,
+   "skills": [
+    "aws",
+    "azure",
+    "multi_cloud",
+    "devops"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-04-30",
+   "cost": 9113280,
+   "ncs": {
+    "code": "20010215",
+    "name": "클라우드인프라스트럭쳐엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "89.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459268&tracseTme=14&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459303-7",
+   "title": "심화_기업 연계형 실전 프로젝트 중심 AI과정_자연어처리(심화)",
+   "provider": "주식회사멋쟁이사자처럼",
+   "hours": 343,
+   "skills": [
+    "nlp"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-12-23",
+   "end": "2027-02-25",
+   "cost": 5009850,
+   "ncs": {
+    "code": "20010701",
+    "name": "인공지능플랫폼구축"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "87.9",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459303&tracseTme=7&crseTracseSe=C0061&trainstCstmrId=500037933544",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459311-20",
+   "title": "심화_심층 데이터 분석을 통한 개인 맞춤형 예측 자동화 서비스 솔루션 개발 과정 (Hadoop, Tableau, TensorFlow)",
+   "provider": "(주)삼성에이엑스아이",
+   "hours": 349,
+   "skills": [
+    "data_analysis",
+    "hadoop",
+    "data_visualization",
+    "tensorflow"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 수정구",
+   "start": "2026-11-09",
+   "end": "2027-01-11",
+   "cost": 5097490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "60.4",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459311&tracseTme=20&crseTracseSe=C0061&trainstCstmrId=500020026271",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000459360-11",
+   "title": "클라우드&데브옵스 배포 기반 실무형 프론트&백엔드(자바, 스프링, 리액트) 멘토링 클래스",
+   "provider": "더조은컴퓨터학원",
+   "hours": 1000,
+   "skills": [
+    "devops",
+    "java",
+    "spring",
+    "react"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-12-08",
+   "end": "2027-06-10",
+   "cost": 9493000,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "89.6",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000459360&tracseTme=11&crseTracseSe=C0061&trainstCstmrId=500020061827",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000467589-3",
+   "title": "[FastAPI]파이썬 개발자를 위한 프로그래밍 입문",
+   "provider": "메가스터디에이아이캠퍼스",
+   "hours": 39,
+   "skills": [
+    "fastapi",
+    "python"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-10",
+   "end": "2026-12-01",
+   "cost": 258180,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "75",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000467589&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020028586",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000473283-4",
+   "title": "쉽게 배우는 리액트(React.js) 앱 제작 실무",
+   "provider": "더조은컴퓨터아카데미 종로",
+   "hours": 60,
+   "skills": [
+    "react"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2026-12-10",
+   "cost": 397200,
+   "ncs": {
+    "code": "20010207",
+    "name": "UI/UX엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "82.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000473283&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020027870",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000474477-2",
+   "title": "웹퍼블리셔 (HTML, CSS, Javascript)",
+   "provider": "노원그린컴퓨터아카데미",
+   "hours": 180,
+   "skills": [
+    "javascript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 노원구",
+   "start": "2026-11-09",
+   "end": "2027-01-12",
+   "cost": 1011600,
+   "ncs": {
+    "code": "08020104",
+    "name": "디지털디자인"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000474477&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020044993",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000488249-1",
+   "title": "C# 프로그래밍",
+   "provider": "부산예일직업전문학교",
+   "hours": 60,
+   "skills": [
+    "csharp"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "부산 부산진구",
+   "start": "2026-12-05",
+   "end": "2027-03-20",
+   "cost": 397200,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000488249&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020033591",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000496351-1",
+   "title": "『파이썬』 Python프로그래밍(수집, 전처리, 시각화, 웹크롤링, 판다스) 기초",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 39,
+   "skills": [
+    "python",
+    "pandas"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-12-31",
+   "end": "2027-02-16",
+   "cost": 258180,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000496351&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498099-3",
+   "title": "지역인재양성을 위한 MSA기반 크로스 플랫폼(자바,Springboot,Flutter) 개발자 과정",
+   "provider": "그린컴퓨터아카데미 부산",
+   "hours": 1100,
+   "skills": [
+    "msa",
+    "java"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "부산 부산진구",
+   "start": "2026-11-12",
+   "end": "2027-06-03",
+   "cost": 10442300,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498099&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020016714",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498102-3",
+   "title": "기업요구 프로젝트 중심 풀스택 개발자 (PWA를 활용한 React, Express.js) 양성과정",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 960,
+   "skills": [
+    "react",
+    "nodejs"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 중구",
+   "start": "2026-11-12",
+   "end": "2027-05-07",
+   "cost": 9113280,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "94.6",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498102&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020014651",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498108-24",
+   "title": "생성형 AI를 활용한 영상 웹퍼블리셔&프론트엔드(React) 개발자 양성",
+   "provider": "엠비씨(MBC)아카데미 컴퓨터교육센터 화곡점",
+   "hours": 918,
+   "skills": [
+    "react"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강서구",
+   "start": "2026-11-09",
+   "end": "2027-04-23",
+   "cost": 8714570,
+   "ncs": {
+    "code": "20010207",
+    "name": "UI/UX엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "84",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498108&tracseTme=24&crseTracseSe=C0061&trainstCstmrId=500020044103",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498115-17",
+   "title": "딥러닝 모델(자연어처리, 컴퓨터비전) 기반 AI 엔지니어 부트캠프",
+   "provider": "코드잇",
+   "hours": 1250,
+   "skills": [
+    "deep_learning",
+    "nlp",
+    "computer_vision"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-12",
+   "end": "2027-06-10",
+   "cost": 22687500,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "84.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498115&tracseTme=17&crseTracseSe=C0061&trainstCstmrId=500042496680",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498123-12",
+   "title": "머신러닝을 활용한 데이터 분석 부트캠프",
+   "provider": "아이티윌",
+   "hours": 920,
+   "skills": [
+    "machine_learning",
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2027-04-23",
+   "cost": 8733560,
+   "ncs": {
+    "code": "20010209",
+    "name": "빅데이터플랫폼구축"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "89.9",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498123&tracseTme=12&crseTracseSe=C0061&trainstCstmrId=500020051277",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498209-9",
+   "title": "IaC 기반 하이브리드 클라우드 인프라 및 보안 솔루션 구축 과정",
+   "provider": "메가스터디아이티(IT)아카데미학원",
+   "hours": 968,
+   "skills": [
+    "iac",
+    "multi_cloud",
+    "security"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-30",
+   "end": "2027-05-27",
+   "cost": 9189220,
+   "ncs": {
+    "code": "20010612",
+    "name": "클라우드 보안 관리·운영"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "85.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498209&tracseTme=9&crseTracseSe=C0061&trainstCstmrId=500036090856",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498213-10",
+   "title": "클라우드환경 자바(JAVA) 풀스택 AI융합 웹개발자(AWS, SpringBoot, React.js)",
+   "provider": "패스트캠퍼스구로학원",
+   "hours": 1064,
+   "skills": [
+    "java",
+    "aws",
+    "react"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2027-05-21",
+   "cost": 10100550,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "93.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498213&tracseTme=10&crseTracseSe=C0061&trainstCstmrId=500020014478",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498223-28",
+   "title": "심화_인공지능 YOLO기반 부트캠프",
+   "provider": "엠비씨(MBC)아카데미 컴퓨터교육센터 신림점",
+   "hours": 349,
+   "skills": [
+    "yolo"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 관악구",
+   "start": "2026-11-25",
+   "end": "2027-01-27",
+   "cost": 5097490,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "86.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498223&tracseTme=28&crseTracseSe=C0061&trainstCstmrId=500034282945",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498293-78",
+   "title": "자바(Spring)기반 크로스 플랫폼(React-Native) 웹&앱 개발자 양성 과정",
+   "provider": "라인컴퓨터아트학원",
+   "hours": 992,
+   "skills": [
+    "java",
+    "spring",
+    "react"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 안산시 단원구",
+   "start": "2026-11-09",
+   "end": "2027-05-10",
+   "cost": 9417050,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "81.3",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498293&tracseTme=78&crseTracseSe=C0061&trainstCstmrId=500020047973",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498353-8",
+   "title": "심화_생성형 AI·클라우드 풀스택(리액트, 리덕스, JPA, Django) 아키텍처 단기 프로젝트 멘토링 트랙",
+   "provider": "더조은컴퓨터학원",
+   "hours": 344,
+   "skills": [
+    "react",
+    "django"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-30",
+   "end": "2027-01-29",
+   "cost": 5024464,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "85",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498353&tracseTme=8&crseTracseSe=C0061&trainstCstmrId=500020061827",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000498368-7",
+   "title": "AI MSP 베스핀글로벌의 멀티클라우드(AWS·Azure·GCP·NCP) 엔지니어 부트캠프",
+   "provider": "베스핀글로벌주식회사",
+   "hours": 1000,
+   "skills": [
+    "multi_cloud",
+    "aws",
+    "azure",
+    "gcp",
+    "ncp"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 서초구",
+   "start": "2026-12-09",
+   "end": "2027-06-15",
+   "cost": 18150000,
+   "ncs": {
+    "code": "20010215",
+    "name": "클라우드인프라스트럭쳐엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "83.6",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000498368&tracseTme=7&crseTracseSe=C0061&trainstCstmrId=500041642929",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000499225-90",
+   "title": "Power BI 경영정보 데이터 시각화(재무제표 활용)",
+   "provider": "이젠아카데미DX교육센터",
+   "hours": 22,
+   "skills": [
+    "data_visualization"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 서초구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 330000,
+   "ncs": {
+    "code": "02020302",
+    "name": "사무행정"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "80.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000499225&tracseTme=90&crseTracseSe=C0105&trainstCstmrId=500020017427",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000499351-33",
+   "title": "(콜로소)개발자 커리어 확장을 위해 쉽게 배우는 최신 리액트&타입스크립트",
+   "provider": "주식회사 데이원컴퍼니",
+   "hours": 43,
+   "skills": [
+    "react",
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-18",
+   "end": "2026-12-23",
+   "cost": 322500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "87",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000499351&tracseTme=33&crseTracseSe=C0105&trainstCstmrId=500037441805",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20240000499634-183",
+   "title": "상위 1% 일잘러를 위한 고급 프롬프트 엔지니어링",
+   "provider": "(주)모두의연구소",
+   "hours": 8,
+   "skills": [
+    "prompt_engineering"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 150000,
+   "ncs": {
+    "code": "20010702",
+    "name": "인공지능서비스기획"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "80.4",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20240000499634&tracseTme=183&crseTracseSe=C0105&trainstCstmrId=500037143258",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501373-6",
+   "title": "정보보안 기반 클라우드, 서버 DevOps 인프라 및 네트워크 구성을 통한 실무형 엔지니어 양성",
+   "provider": "4세대아카데미컴퓨터학원",
+   "hours": 900,
+   "skills": [
+    "security",
+    "devops",
+    "networking"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-12-28",
+   "end": "2027-06-18",
+   "cost": 8543700,
+   "ncs": {
+    "code": "20010601",
+    "name": "정보보호관리·운영"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "94.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501373&tracseTme=6&crseTracseSe=C0061&trainstCstmrId=500020047095",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501415-6",
+   "title": "(머신러닝+딥러닝 활용)제조 데이터를 활용한 빅데이터 플랫폼 구축과정",
+   "provider": "두드림IT교육원",
+   "hours": 1024,
+   "skills": [
+    "machine_learning",
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 중원구",
+   "start": "2026-11-09",
+   "end": "2027-05-17",
+   "cost": 9720830,
+   "ncs": {
+    "code": "20010209",
+    "name": "빅데이터플랫폼구축"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501415&tracseTme=6&crseTracseSe=C0061&trainstCstmrId=500020013381",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501436-8",
+   "title": "빅데이터를 활용한 오라클 데이터 전문가 부트캠프",
+   "provider": "아이티윌",
+   "hours": 808,
+   "skills": [
+    "oracle_db"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-12-15",
+   "end": "2027-05-14",
+   "cost": 7670340,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "95.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501436&tracseTme=8&crseTracseSe=C0061&trainstCstmrId=500020051277",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501460-21",
+   "title": "AWS & CI/CD 기반 Java 클라우드 Full-Stack 개발자 양성과정",
+   "provider": "쌍용강북교육센터",
+   "hours": 1120,
+   "skills": [
+    "aws",
+    "cicd",
+    "java"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 마포구",
+   "start": "2026-11-30",
+   "end": "2027-06-24",
+   "cost": 10632160,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "95.2",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501460&tracseTme=21&crseTracseSe=C0061&trainstCstmrId=500020059609",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501479-10",
+   "title": "심화_생성형 AI와 AWS 클라우드를 활용한 풀스택 & 자동화 실무 개발",
+   "provider": "두드림컴퓨터학원",
+   "hours": 348,
+   "skills": [
+    "aws"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 분당구",
+   "start": "2026-11-09",
+   "end": "2026-12-22",
+   "cost": 5082880,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "92.3",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501479&tracseTme=10&crseTracseSe=C0061&trainstCstmrId=500020055633",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501497-3",
+   "title": "클라우드 AI기반 마이크로서비스 풀스택(리액트/자바) 개발",
+   "provider": "동성인재개발교육원",
+   "hours": 1070,
+   "skills": [
+    "msa",
+    "react",
+    "java"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "부산 부산진구",
+   "start": "2026-12-02",
+   "end": "2027-06-21",
+   "cost": 10157510,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501497&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020041918",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501668-4",
+   "title": "Python & Elasticsearch 기반 금융솔루션 개발자 아카데미",
+   "provider": "KH아카데미 강남",
+   "hours": 1010,
+   "skills": [
+    "python",
+    "elk"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-10",
+   "end": "2027-05-19",
+   "cost": 9587930,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "90.5",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501668&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020062069",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501694-10",
+   "title": "[이스트캠프] AI 휴먼(멀티모달, TTS, STT, 프롬프트 엔지니어링, RAG)",
+   "provider": "(주)이스트소프트",
+   "hours": 800,
+   "skills": [
+    "speech",
+    "prompt_engineering",
+    "rag"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 서초구",
+   "start": "2026-12-08",
+   "end": "2027-05-07",
+   "cost": 14520000,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "82.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501694&tracseTme=10&crseTracseSe=C0061&trainstCstmrId=500035988371",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501724-7",
+   "title": "클라우드 네이티브 풀스택 & DevOps 개발자 아카데미",
+   "provider": "KH정보교육원AX 부산",
+   "hours": 1053,
+   "skills": [
+    "devops"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "부산 부산진구",
+   "start": "2026-11-30",
+   "end": "2027-06-11",
+   "cost": 9996120,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "86.3",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501724&tracseTme=7&crseTracseSe=C0061&trainstCstmrId=500035498556",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501754-4",
+   "title": "ROS2를 활용한 AI 로보틱스",
+   "provider": "대구가톨릭대학교 인재개발교육원",
+   "hours": 960,
+   "skills": [
+    "ros"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "경북 경산시",
+   "start": "2026-11-11",
+   "end": "2027-05-10",
+   "cost": 17424000,
+   "ncs": {
+    "code": "19010802",
+    "name": "자동제어기기제작"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "81.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501754&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020038642",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000501779-9",
+   "title": "프로그래머스 데브코스 심화_Spring AI와 MSA를 활용한 백엔드 개발",
+   "provider": "(주)그렙",
+   "hours": 344,
+   "skills": [
+    "spring",
+    "msa"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 서초구",
+   "start": "2026-11-16",
+   "end": "2027-02-11",
+   "cost": 5024460,
+   "ncs": {
+    "code": "20010201",
+    "name": "SW아키텍처"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "88.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000501779&tracseTme=9&crseTracseSe=C0061&trainstCstmrId=500036172479",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000505161-5",
+   "title": "Oracle SQL 기초 이해부터 실무활용 과정(SQL/PL-SQL)",
+   "provider": "오라클자바교육학원",
+   "hours": 40,
+   "skills": [
+    "oracle_db",
+    "sql"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-14",
+   "end": "2026-11-28",
+   "cost": 450000,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000505161&tracseTme=5&crseTracseSe=C0061&trainstCstmrId=500020017030",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000505580-3",
+   "title": "Oracle SQL 기초이해부터 옵티마이저. Hint, Tuning 실무 향상과정",
+   "provider": "오라클자바교육학원",
+   "hours": 80,
+   "skills": [
+    "oracle_db",
+    "sql"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-21",
+   "end": "2026-12-20",
+   "cost": 700000,
+   "ncs": {
+    "code": "20010204",
+    "name": "DB엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000505580&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020017030",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000505995-5",
+   "title": "닷넷 프레임워크 C# 어플리케이션 실무개발 향상과정",
+   "provider": "오라클자바교육학원",
+   "hours": 40,
+   "skills": [
+    "csharp"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-14",
+   "end": "2026-12-12",
+   "cost": 450000,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000505995&tracseTme=5&crseTracseSe=C0061&trainstCstmrId=500020017030",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000513054-1",
+   "title": "[디지털컨버전스] 클라우드 가상화 기반 SW개발자 양성(AWS, Docker)",
+   "provider": "더조은컴퓨터아카데미 종로",
+   "hours": 900,
+   "skills": [
+    "virtualization",
+    "aws",
+    "docker"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-04-21",
+   "cost": 6561000,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000513054&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020027870",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000515646-1",
+   "title": "(스마트웹&콘텐츠개발) 프론트엔드 개발자(자바스크립트,리엑트)",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 950,
+   "skills": [
+    "javascript"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 중구",
+   "start": "2026-11-13",
+   "end": "2027-05-07",
+   "cost": 6925500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000515646&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020014651",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000517410-1",
+   "title": "(디지털컨버전스) AI코딩 어시스턴트 Github Copilot 활용 프론트엔드 개발자(React+TypeScript+Firebase)",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 900,
+   "skills": [
+    "react",
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-26",
+   "end": "2027-05-17",
+   "cost": 6561000,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000517410&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000519846-45",
+   "title": "(스마트웹&콘텐츠개발)AI & 클라우드 통합 웹서비스(스프링 부트)개발",
+   "provider": "성남 그린컴퓨터아카데미",
+   "hours": 900,
+   "skills": [
+    "spring"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 분당구",
+   "start": "2026-11-09",
+   "end": "2027-04-21",
+   "cost": 6561000,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000519846&tracseTme=45&crseTracseSe=C0061&trainstCstmrId=500020054642",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000520401-14",
+   "title": "(디지털컨버전스) 생성 AI 융합 콘텐츠(웹툰/영상/애니메이션) 제작 프롬프트 엔지니어링(챗GPT, 미드저니, 런웨이) A",
+   "provider": "연희직업전문학교(주)",
+   "hours": 536,
+   "skills": [
+    "prompt_engineering",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "인천 서해구",
+   "start": "2026-11-09",
+   "end": "2027-02-15",
+   "cost": 3907440,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000520401&tracseTme=14&crseTracseSe=C0061&trainstCstmrId=500020041301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000521467-2",
+   "title": "[AI 활용 소프트웨어 개발 및 응용]자바,파이썬 활용 빅데이터분석과 AI(머신러닝,딥러닝,인공지능) SW개발자 양성",
+   "provider": "더조은컴퓨터아카데미 종로",
+   "hours": 1050,
+   "skills": [
+    "java",
+    "python",
+    "machine_learning",
+    "deep_learning"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-05-21",
+   "cost": 7654500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "70.1",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000521467&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020027870",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000525087-185",
+   "title": "(디지털컨버전스) 생성 AI 융합 콘텐츠(웹툰/영상/애니메이션) 제작 프롬프트 엔지니어링(챗GPT, 미드저니, 런웨이) B",
+   "provider": "연희직업전문학교(주)",
+   "hours": 712,
+   "skills": [
+    "prompt_engineering",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "인천 서해구",
+   "start": "2026-11-09",
+   "end": "2027-03-18",
+   "cost": 5190480,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000525087&tracseTme=185&crseTracseSe=C0061&trainstCstmrId=500020041301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000525169-67",
+   "title": "(디지털컨버전스) AI로 만드는 스마트 영상(영상/애니메이션/비디오북) 콘텐츠제작 프롬프트 엔지니어링(챗GPT, 미드저니, 런웨이)",
+   "provider": "연희직업전문학교(주)",
+   "hours": 480,
+   "skills": [
+    "prompt_engineering",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "인천 서해구",
+   "start": "2026-11-10",
+   "end": "2027-02-10",
+   "cost": 3499200,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "72.7",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000525169&tracseTme=67&crseTracseSe=C0061&trainstCstmrId=500020041301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000526832-1",
+   "title": "C# 프로그래밍",
+   "provider": "부산예일직업전문학교",
+   "hours": 60,
+   "skills": [
+    "csharp"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "부산 부산진구",
+   "start": "2026-12-02",
+   "end": "2027-02-10",
+   "cost": 397200,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000526832&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020033591",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000527941-3",
+   "title": "누구나 쉽게 접근하는 도커와 쿠버네티스 가상화",
+   "provider": "더조은컴퓨터학원",
+   "hours": 60,
+   "skills": [
+    "docker",
+    "kubernetes",
+    "virtualization"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-28",
+   "end": "2027-01-16",
+   "cost": 397200,
+   "ncs": {
+    "code": "20010213",
+    "name": "인프라스트럭쳐아키텍처구축"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "73.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000527941&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020061827",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000529344-1",
+   "title": "Power BI와 엑셀 파워피벗을 활용한 데이터시각화(경영정보시각화)",
+   "provider": "이젠아카데미컴퓨터학원",
+   "hours": 80,
+   "skills": [
+    "data_visualization"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 안양시 만안구",
+   "start": "2026-11-10",
+   "end": "2026-12-07",
+   "cost": 480000,
+   "ncs": {
+    "code": "02020302",
+    "name": "사무행정"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000529344&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020025920",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000533576-2",
+   "title": "(디지털컨버전스)Java Full-Stack 개발자를 위한 AWS 기반 Docker 컨테이너 구축 양성과정(B)",
+   "provider": "쌍용교육센터",
+   "hours": 896,
+   "skills": [
+    "java",
+    "aws",
+    "docker"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-23",
+   "end": "2027-05-10",
+   "cost": 6857980,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000533576&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020052430",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000533880-12",
+   "title": "(스마트웹&콘텐츠개발) AI코딩 어시스턴트 Github Copilot 활용 프론트엔드 개발자(React+TypeScript+Firebase)",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 950,
+   "skills": [
+    "react",
+    "typescript"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-10",
+   "end": "2027-04-30",
+   "cost": 6925500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국가기간전략산업직종",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000533880&tracseTme=12&crseTracseSe=C0061&trainstCstmrId=500020062235",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000534171-1",
+   "title": "파이썬 활용 빅데이터 시각화 분석 전문가 양성과정",
+   "provider": "(주)삼성에이엑스아이",
+   "hours": 190,
+   "skills": [
+    "python",
+    "data_visualization"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 수정구",
+   "start": "2026-11-09",
+   "end": "2026-12-10",
+   "cost": 1392700,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000534171&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020026271",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000539887-96",
+   "title": "트랜스포머와 자연어처리를 활용한 챗봇 시스템 구축",
+   "provider": "라인원격평생교육원",
+   "hours": 49,
+   "skills": [
+    "nlp"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "대구 수성구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 460000,
+   "ncs": {
+    "code": "20010701",
+    "name": "인공지능플랫폼구축"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "91.4",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000539887&tracseTme=96&crseTracseSe=C0105&trainstCstmrId=500033918310",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000539889-96",
+   "title": "파이썬과 머신러닝을 활용한 반도체 제조 공정 데이터 분석",
+   "provider": "라인원격평생교육원",
+   "hours": 37,
+   "skills": [
+    "python",
+    "machine_learning",
+    "data_analysis"
+   ],
+   "level": "실무",
+   "region": "전국",
+   "address": "대구 수성구",
+   "start": "2026-11-11",
+   "end": "2026-12-10",
+   "cost": 345000,
+   "ncs": {
+    "code": "19030601",
+    "name": "반도체개발"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "92.5",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000539889&tracseTme=96&crseTracseSe=C0105&trainstCstmrId=500033918310",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000540073-64",
+   "title": "[Kotlin 웹 마스터] Java에서 함수형까지, 실무형 웹 마이그레이션 완전 정복",
+   "provider": "주식회사  하이테커",
+   "hours": 35,
+   "skills": [
+    "kotlin",
+    "java"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 성동구",
+   "start": "2026-11-09",
+   "end": "2026-12-08",
+   "cost": 423500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 기초역량훈련",
+   "satisfaction": "92.9",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000540073&tracseTme=64&crseTracseSe=C0105&trainstCstmrId=500041100657",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20250000540292-1",
+   "title": "[일반고] 생성 AI 융합 콘텐츠(웹툰/영상애니메이션) 제작 프롬프트 엔지니어링(챗GPT, 미드저니, 런웨이) 및 GTQ 2급, GTQi 2급 자격증",
+   "provider": "연희직업전문학교(주)",
+   "hours": 1232,
+   "skills": [
+    "prompt_engineering",
+    "llm"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "인천 서해구",
+   "start": "2026-12-01",
+   "end": "2027-07-13",
+   "cost": 8372630,
+   "ncs": {
+    "code": "20010207",
+    "name": "UI/UX엔지니어링"
+   },
+   "target": "일반고특화훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20250000540292&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020041301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000546259-6",
+   "title": "[AI융복합과정]코딩 없이 끝내는 AI 업무자동화 _ 빅데이터 분석 & 업무자동화 & AI 에이전트",
+   "provider": "에이블원 교육센터",
+   "hours": 80,
+   "skills": [
+    "data_analysis",
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2027-01-08",
+   "cost": 528000,
+   "ncs": {
+    "code": "02020302",
+    "name": "사무행정"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000546259&tracseTme=6&crseTracseSe=C0061&trainstCstmrId=500035552903",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000547007-2",
+   "title": "[AI융복합과정]LLM으로 만드는 AI 에이전트 실전 개발",
+   "provider": "패스트캠퍼스구로학원",
+   "hours": 120,
+   "skills": [
+    "llm",
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-09",
+   "end": "2026-12-10",
+   "cost": 873840,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "국민내일배움카드(일반)",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000547007&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020014478",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000562832-1",
+   "title": "AI 코어 엔지니어 과정 II(산업 AX 프로젝트를 위한 비정형·원천 데이터 기반 모델 엔지니어링 & MLOps 과정)",
+   "provider": "(주)엘리스그룹",
+   "hours": 1199,
+   "skills": [
+    "mlops"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-12-17",
+   "end": "2027-08-20",
+   "cost": 21761850,
+   "ncs": {
+    "code": "20010701",
+    "name": "인공지능플랫폼구축"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000562832&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500038398274",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000562927-2",
+   "title": "하이브리드 인프라 기반 AI & 클라우드 MLOps 엔지니어",
+   "provider": "(주)솔데스크",
+   "hours": 1040,
+   "skills": [
+    "mlops"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-05-19",
+   "cost": 18876000,
+   "ncs": {
+    "code": "20010301",
+    "name": "IT시스템관리"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000562927&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000567295-1",
+   "title": "자율 제조 공정 개발을 위한 RAG 모델  전문인력 양성",
+   "provider": "경북산업직업전문학교",
+   "hours": 1000,
+   "skills": [
+    "rag"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 동구",
+   "start": "2026-11-30",
+   "end": "2027-06-18",
+   "cost": 18150000,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000567295&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020019775",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000574544-2",
+   "title": "LLM 기반 자율형 AI 에이전트 & SaaS 서비스 개발",
+   "provider": "(주)솔데스크",
+   "hours": 1050,
+   "skills": [
+    "llm",
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-05-21",
+   "cost": 19057500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000574544&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000579657-1",
+   "title": "AI 기반 임베디드 시스템 개발자 양성과정(로봇/모빌리티)",
+   "provider": "경북대학교산학협력단",
+   "hours": 1000,
+   "skills": [
+    "embedded"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 북구",
+   "start": "2026-11-23",
+   "end": "2027-05-26",
+   "cost": 18150000,
+   "ncs": {
+    "code": "20010203",
+    "name": "임베디드SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000579657&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500037343589",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000580405-2",
+   "title": "LLM & RAG 기반 AI 에이전트 서비스 개발",
+   "provider": "(주)솔데스크",
+   "hours": 1050,
+   "skills": [
+    "llm",
+    "rag",
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-05-21",
+   "cost": 19057500,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000580405&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000580422-2",
+   "title": "NPU 기반 엣지 컴퓨팅 온디바이스 AI 모델링 개발",
+   "provider": "(주)솔데스크",
+   "hours": 1000,
+   "skills": [
+    "edge_ai",
+    "embedded"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-09",
+   "end": "2027-05-11",
+   "cost": 18150000,
+   "ncs": {
+    "code": "20010203",
+    "name": "임베디드SW엔지니어링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000580422&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020026366",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000581131-2",
+   "title": "LLM·비전 AI 모델 엔지니어 양성과정 (파인튜닝·RAG·온디바이스 경량화)",
+   "provider": "동국대학교",
+   "hours": 720,
+   "skills": [
+    "llm",
+    "fine_tuning",
+    "rag",
+    "edge_ai"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 중구",
+   "start": "2026-11-09",
+   "end": "2027-03-19",
+   "cost": 13068000,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000581131&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020020602",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20260000581202-2",
+   "title": "NHN CLOUD 활용 AI 팩토리 구현을 위한 GPU 가속 MLOps 스쿨",
+   "provider": "구디아카데미",
+   "hours": 1000,
+   "skills": [
+    "mlops"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 금천구",
+   "start": "2026-11-10",
+   "end": "2027-05-12",
+   "cost": 18150000,
+   "ncs": {
+    "code": "20010701",
+    "name": "인공지능플랫폼구축"
+   },
+   "target": "K-디지털 트레이닝",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20260000581202&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020028075",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001287160-8",
+   "title": "(AI 전문인력 양성)_기업이 원하는 AI에이전트개발 부트캠프(LLM&RAG활용)",
+   "provider": "인천더조은컴퓨터아트학원",
+   "hours": 1000,
+   "skills": [
+    "llm",
+    "rag"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "인천 부평구",
+   "start": "2026-11-09",
+   "end": "2027-05-11",
+   "cost": 8606000,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001287160&tracseTme=8&crseTracseSe=C0061&trainstCstmrId=500020037783",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001289491-4",
+   "title": "(AI 전문인력 양성) AI 에이전트 서비스 개발자 부트캠프 - RAG 데이터 설계와 MCP 연동, MLOps 배포",
+   "provider": "중앙정보기술인재개발원",
+   "hours": 560,
+   "skills": [
+    "ai_agent",
+    "rag",
+    "mcp",
+    "mlops"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 마포구",
+   "start": "2026-11-24",
+   "end": "2027-03-08",
+   "cost": 4819360,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "86.8",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001289491&tracseTme=4&crseTracseSe=C0061&trainstCstmrId=500020054900",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001300488-2",
+   "title": "(산대특)_(AI 전문인력 양성)_Spring AI/Langchain 활용 멀티모달(LMM) AI 개발 마스터 과정",
+   "provider": "엠비씨(MBC)아카데미컴퓨터학원 천호점",
+   "hours": 884,
+   "skills": [
+    "spring",
+    "langchain"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강동구",
+   "start": "2026-11-09",
+   "end": "2027-04-19",
+   "cost": 7607700,
+   "ncs": {
+    "code": "20010703",
+    "name": "인공지능모델링"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001300488&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020054992",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001327855-2",
+   "title": "(산대특_일반)[AI 협업기반] DevOps 물류 플랫폼 구축을 위한 Java 전문가 양성과정_육성산업",
+   "provider": "서울IT교육센터직업전문학교",
+   "hours": 1584,
+   "skills": [
+    "devops",
+    "java"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "경남 진주시",
+   "start": "2026-11-09",
+   "end": "2027-09-08",
+   "cost": 13631900,
+   "ncs": {
+    "code": "20010215",
+    "name": "클라우드인프라스트럭쳐엔지니어링"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001327855&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020050557",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001344717-2",
+   "title": "(산대특)AI와 JAVA기반 LLM적용 공공서비스 프로젝트 개발자 양성과정(Python LlamaIndex RAG)",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 700,
+   "skills": [
+    "java",
+    "llm",
+    "python",
+    "llamaindex",
+    "rag"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "대전 서구",
+   "start": "2027-02-26",
+   "end": "2027-07-05",
+   "cost": 6024200,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001344717&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020062241",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001414709-1",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정 - 벡터 DB 파이프라인",
+   "provider": "하이미디어아카데미인재개발원",
+   "hours": 45,
+   "skills": [
+    "vector_db"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-11",
+   "end": "2026-12-01",
+   "cost": 387270,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001414709&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020037340",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001414733-1",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정 - 데이터 파이프라인 통합",
+   "provider": "하이미디어아카데미인재개발원",
+   "hours": 46,
+   "skills": [
+    "data_pipeline"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-12-02",
+   "end": "2026-12-23",
+   "cost": 395870,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001414733&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020037340",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001415106-1",
+   "title": "[AI Shift Track] AI 서비스 개발자 과정 - RAG 지식베이스",
+   "provider": "하이미디어아카데미인재개발원",
+   "hours": 45,
+   "skills": [
+    "rag"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 종로구",
+   "start": "2026-11-11",
+   "end": "2026-12-01",
+   "cost": 387270,
+   "ncs": {
+    "code": "20010705",
+    "name": "인공지능서비스구현"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001415106&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020037340",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001427685-1",
+   "title": "(산대특_단기)지능형 제어시스템 구축을 위한 임베디드실무 향상과정_지원산업",
+   "provider": "한국폴리텍대학 창원캠퍼스",
+   "hours": 40,
+   "skills": [
+    "embedded"
+   ],
+   "level": "실무",
+   "region": "기타",
+   "address": "경남 창원시 성산구",
+   "start": "2026-11-09",
+   "end": "2026-11-20",
+   "cost": 264800,
+   "ncs": {
+    "code": "20010203",
+    "name": "임베디드SW엔지니어링"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001427685&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020012574",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001432964-3",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정-벡터 DB 파이프라인",
+   "provider": "메가스터디에이아이캠퍼스",
+   "hours": 45,
+   "skills": [
+    "vector_db"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-14",
+   "end": "2026-12-05",
+   "cost": 387270,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001432964&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020028586",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001433005-3",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정-데이터 파이프라인 통합",
+   "provider": "메가스터디에이아이캠퍼스",
+   "hours": 46,
+   "skills": [
+    "data_pipeline"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-14",
+   "end": "2026-12-05",
+   "cost": 395870,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001433005&tracseTme=3&crseTracseSe=C0061&trainstCstmrId=500020028586",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001463502-1",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정_Module 2. 벡터 DB 파이프라인",
+   "provider": "더조은컴퓨터학원",
+   "hours": 45,
+   "skills": [
+    "vector_db"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-12-06",
+   "end": "2027-01-10",
+   "cost": 387270,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001463502&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020061827",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001463508-1",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정_Module 3. 데이터 파이프라인 통합",
+   "provider": "더조은컴퓨터학원",
+   "hours": 46,
+   "skills": [
+    "data_pipeline"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-12-06",
+   "end": "2027-01-10",
+   "cost": 395870,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001463508&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020061827",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001465855-1",
+   "title": "[AI Shift Track] AI 에이전트 엔지니어링 과정",
+   "provider": "그린컴퓨터아트학원",
+   "hours": 137,
+   "skills": [
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "대경권",
+   "address": "대구 중구",
+   "start": "2026-12-01",
+   "end": "2027-01-21",
+   "cost": 1179020,
+   "ncs": {
+    "code": "20010701",
+    "name": "인공지능플랫폼구축"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001465855&tracseTme=1&crseTracseSe=C0061&trainstCstmrId=500020014651",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001505600-2",
+   "title": "(산대특)ROS2 기반 피지컬 AI 지능형 로봇 개발자 양성과정(육성)",
+   "provider": "(주)삼성에이엑스아이",
+   "hours": 700,
+   "skills": [
+    "ros"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 수정구",
+   "start": "2026-11-10",
+   "end": "2027-03-22",
+   "cost": 6233500,
+   "ncs": {
+    "code": "19030803",
+    "name": "로봇소프트웨어개발"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001505600&tracseTme=2&crseTracseSe=C0061&trainstCstmrId=500020026271",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AIG20263001506920-14",
+   "title": "(산대특)Python 기반 RAG·AI 에이전트 지식서비스 개발(지원)",
+   "provider": "성남 그린컴퓨터아카데미",
+   "hours": 80,
+   "skills": [
+    "python",
+    "rag",
+    "ai_agent"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "경기 성남시 분당구",
+   "start": "2026-11-09",
+   "end": "2026-12-23",
+   "cost": 529600,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "산업구조변화대응",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AIG20263001506920&tracseTme=14&crseTracseSe=C0061&trainstCstmrId=500020054642",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AVA20263001248351-27",
+   "title": "[상위1% 빅데이터 ] 기업이 주목하는 Hadoop 제대로 배우기",
+   "provider": "사단법인 한국에듀테크산업협회",
+   "hours": 21,
+   "skills": [
+    "hadoop"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-12",
+   "end": "2026-12-09",
+   "cost": 87780,
+   "ncs": {
+    "code": "20010304",
+    "name": "빅데이터운영·관리"
+   },
+   "target": "실업자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AVA20263001248351&tracseTme=27&crseTracseSe=C0055&trainstCstmrId=500020013301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AVA20263001321885-16",
+   "title": "[상위1% 파이썬 웹 ] Django를 이용한 웹 애플리케이션 작성",
+   "provider": "사단법인 한국에듀테크산업협회",
+   "hours": 21,
+   "skills": [
+    "python",
+    "django"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 강남구",
+   "start": "2026-11-12",
+   "end": "2026-12-09",
+   "cost": 62370,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "실업자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AVA20263001321885&tracseTme=16&crseTracseSe=C0055&trainstCstmrId=500020013301",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AVA20263001406566-14",
+   "title": "라벨러 완전정복! 수익형의 끝판왕 데이터 라벨링 기초+심화 패키지",
+   "provider": "한국이러닝협회",
+   "hours": 29,
+   "skills": [
+    "data_labeling"
+   ],
+   "level": "기초",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-12",
+   "end": "2026-12-09",
+   "cost": 121220,
+   "ncs": {
+    "code": "20010706",
+    "name": "인공지능학습데이터구축"
+   },
+   "target": "실업자원격훈련",
+   "satisfaction": "100",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AVA20263001406566&tracseTme=14&crseTracseSe=C0055&trainstCstmrId=500020055159",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AVA20263001406649-15",
+   "title": "epass Tableau 활용 데이터 시각화",
+   "provider": "한국이러닝협회",
+   "hours": 24,
+   "skills": [
+    "data_visualization"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-12",
+   "end": "2026-12-09",
+   "cost": 71280,
+   "ncs": {
+    "code": "20010105",
+    "name": "빅데이터분석"
+   },
+   "target": "실업자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AVA20263001406649&tracseTme=15&crseTracseSe=C0055&trainstCstmrId=500020055159",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  },
+  {
+   "id": "W24-AVA20263001498164-3",
+   "title": "쿠버네티스 기반 GitOps 구축하기",
+   "provider": "한국이러닝협회",
+   "hours": 27,
+   "skills": [
+    "kubernetes",
+    "argocd"
+   ],
+   "level": "실무",
+   "region": "수도권",
+   "address": "서울 구로구",
+   "start": "2026-11-12",
+   "end": "2026-12-09",
+   "cost": 80190,
+   "ncs": {
+    "code": "20010202",
+    "name": "응용SW엔지니어링"
+   },
+   "target": "실업자원격훈련",
+   "satisfaction": "0",
+   "link": "https://www.work24.go.kr/hr/a/a/3100/selectTracseDetl.do?tracseId=AVA20263001498164&tracseTme=3&crseTracseSe=C0055&trainstCstmrId=500020055159",
+   "source": "고용24 국민내일배움카드 훈련과정 API"
+  }
+ ]
+}

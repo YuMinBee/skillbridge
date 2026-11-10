@@ -1,0 +1,23 @@
+{
+  "tenant_id": "C",
+  "name": "한빛AI랩(가상)",
+  "desc": "LLM 서비스 스타트업",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "LLM 애플리케이션 엔지니어",
+  "requirements": {
+    "python": 2,
+    "llm": 2,
+    "rag": 2,
+    "aws": 1,
+    "amazon_bedrock": 1,
+    "sql": 1,
+    "docker": 1,
+    "mlops": 1
+  },
+  "excluded": [],
+  "posting_text": "담당업무\n- 생성형 AI 기반 문서 검색 서비스 개발\n자격요건\n- Python 개발 경험\n- LLM 활용 서비스 개발 경험\n- RAG 구축 경험\n우대사항\n- PyTorch 모델 학습 경험\n- SQL 활용 가능자",
+  "tracks": [
+    {"id": "C-T1", "skills": ["amazon_bedrock", "ai_agent"], "title": "Bedrock 에이전트로 사내 문서 QA 만들기", "hours": 8, "benefit": ""}
+  ]
+}

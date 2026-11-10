@@ -1,0 +1,89 @@
+{
+ "_meta": {
+  "at": "2026-11-10 13:15",
+  "sec": 84.9,
+  "model": "global.anthropic.claude-sonnet-4-6"
+ },
+ "ALIO-305787": {
+  "excel": "preferred"
+ },
+ "ALIO-301495": {
+  "excel": "preferred",
+  "office": "preferred"
+ },
+ "ALIO-304989": {
+  "security": "required"
+ },
+ "ALIO-293827": {},
+ "ALIO-300068": {
+  "excel": "preferred",
+  "stat_tool": "preferred",
+  "office": "preferred",
+  "machine_learning": "preferred",
+  "r_lang": "preferred",
+  "cert_computer": "preferred"
+ },
+ "ALIO-304482": {
+  "cert_security": "required",
+  "cert_info_processing": "required"
+ },
+ "ALIO-296639": {
+  "excel": "preferred"
+ },
+ "ALIO-293317": {
+  "ai_general": "required"
+ },
+ "ALIO-296280": {
+  "stat_tool": "preferred",
+  "r_lang": "preferred",
+  "statistics": "preferred"
+ },
+ "ALIO-295014": {
+  "office": "preferred",
+  "excel": "preferred"
+ },
+ "ALIO-302970": {
+  "cert_info_processing": "required",
+  "cert_security": "preferred"
+ },
+ "ALIO-301603": {},
+ "ALIO-299568": {
+  "cert_office": "required",
+  "cert_computer": "required"
+ },
+ "ALIO-304425": {},
+ "ALIO-303972": {
+  "cert_computer": "preferred",
+  "cert_office": "preferred",
+  "cert_info_processing": "preferred"
+ },
+ "ALIO-298259": {
+  "cert_info_processing": "required"
+ },
+ "ALIO-297629": {
+  "office": "required",
+  "excel": "required"
+ },
+ "ALIO-304532": {
+  "cert_office": "required"
+ },
+ "ALIO-293174": {
+  "cert_info_processing": "required",
+  "cert_network": "required",
+  "cert_security": "required"
+ },
+ "ALIO-301840": {
+  "excel": "preferred",
+  "office": "preferred"
+ },
+ "ALIO-303027": {},
+ "ALIO-296840": {},
+ "ALIO-301364": {},
+ "ALIO-303957": {},
+ "ALIO-304027": {},
+ "ALIO-297211": {},
+ "ALIO-297046": {},
+ "ALIO-304449": {},
+ "ALIO-304261": {},
+ "ALIO-298294": {}
+}
