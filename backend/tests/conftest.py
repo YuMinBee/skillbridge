@@ -7,6 +7,8 @@ from pathlib import Path
 os.environ["BEDROCK_MOCK"] = "1"
 os.environ["DATA_MODE"] = "sample"
 os.environ["DB_PATH"] = str(Path(tempfile.mkdtemp()) / "test.db")
+os.environ["RATE_PER_MIN"] = "10000"  # 상한 자체는 test_guards.py에서 따로 검증
+os.environ["STORAGE"] = "sqlite"
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import pytest  # noqa: E402

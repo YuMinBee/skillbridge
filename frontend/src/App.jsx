@@ -38,8 +38,9 @@ export default function App() {
   };
 
   const reset = async () => {
-    if (!confirm("기업 설정과 진단 기록을 시연 초기 상태로 되돌릴까요?")) return;
-    await api.reset(); setCorpVersion((v) => v + 1); notify("시연 데이터를 초기화했습니다.");
+    if (!confirm("내가 바꾼 기업 설정을 처음 상태로 되돌릴까요? (다른 방문자에게는 영향 없음)")) return;
+    try { await api.reset(); setCorpVersion((v) => v + 1); notify("기업 설정을 처음 상태로 되돌렸습니다."); }
+    catch (e) { notify(e.message); }
   };
 
   return (

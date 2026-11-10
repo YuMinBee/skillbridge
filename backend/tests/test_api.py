@@ -97,3 +97,14 @@ def test_supply_endpoint(client):
     assert r["points"] and all(p["status"] in ("있음", "원격만", "공백") for p in r["points"])
     assert all((p["seats"] > 0) == (p["status"] == "있음") for p in r["points"])
     assert client.get("/api/supply?region=zz").status_code == 400
+
+
+def test_path_puts_apply_tier_before_work_tier(client):
+    """공고(지원 기준) 갭을 먼저, 기업 실무 기준 갭을 나중에. 공고에만 있는 스킬도 경로에 들어간다."""
+    r = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}).json()
+    tiers = [s["tier"] for s in r["path"]["steps"]]
+    assert tiers == sorted(tiers, key=lambda t: t != "apply")          # apply가 전부 앞
+    preq = {p["skill_id"] for p in r["baseline"]["posting_requirements"]}
+    assert all(s["skill_id"] in preq for s in r["path"]["steps"] if s["tier"] == "apply")
+    assert 0 <= r["readiness_apply"] <= 100 and r["readiness_apply"] == r["baseline"]["readiness_posting"]
+    assert {m["tier"] for m in r["matrix"]} <= {"apply", "work"}

@@ -1,5 +1,16 @@
+// 방문자 샌드박스 ID: 기업 콘솔에서 바꾼 기준은 이 방문자에게만 보인다 (24시간 유지).
+// 저장이 막힌 브라우저면 이 페이지를 연 동안만 쓰는 ID로 동작한다.
+const SANDBOX = (() => {
+  const make = () => "v-" + Array.from(crypto.getRandomValues(new Uint8Array(12)), (b) => b.toString(16).padStart(2, "0")).join("");
+  try {
+    let id = localStorage.getItem("sandbox");
+    if (!id || !/^[A-Za-z0-9_-]{8,40}$/.test(id)) { id = make(); localStorage.setItem("sandbox", id); }
+    return id;
+  } catch { return make(); }
+})();
+
 async function req(method, url, body, isForm = false) {
-  const opt = { method, headers: {} };
+  const opt = { method, headers: { "X-Sandbox": SANDBOX } };
   if (body !== undefined) {
     if (isForm) opt.body = body;
     else { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }
@@ -37,4 +48,5 @@ export const api = {
   simulate: (id, requirements, assumeTracks) => req("POST", `/api/companies/${id}/simulate`, { requirements, assume_tracks: assumeTracks }),
   insights: (id) => req("GET", `/api/companies/${id}/insights`),
   reset: () => req("POST", "/api/reset"),
+  coach: (companyId, question, statuses) => req("POST", "/api/coach", { company_id: companyId, question, statuses }),
 };

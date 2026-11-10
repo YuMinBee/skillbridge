@@ -1,4 +1,4 @@
-"""취준생 진단 에이전트: 고정 순서 파이프라인 + 단계별 trace.
+﻿"""취준생 진단 에이전트: 고정 순서 파이프라인 + 단계별 trace.
 
 BEDROCK_MOCK=0이면 마스킹·추출·공고 기준선·설명을 Bedrock으로 하고, 어느 단계든 실패하면
 그 단계만 규칙/템플릿으로 폴백한다 (fallbacks에 사유를 남겨 화면에 표시).
@@ -56,7 +56,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
     clog = None if mock else bedrock.CallLog()
     plog = None if mock else bedrock.CallLog()
     tr = Trace(clog)
-    fallbacks: list[str] = []
+    fallbacks: list[str] = [bedrock.forced_reason()] if bedrock.forced_reason() else []
     extraction = None
 
     company = storage.get_company(company_id)
@@ -102,7 +102,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         cnt = {k: sum(1 for v in status_map.values() if v["status"] == k) for k in ("own", "part", "verify")}
         s["detail"] = " · ".join(f"{STATUS_LABEL[k]} {v}" for k, v in cnt.items())
 
-    with tr.step("기업 기준 조회", f"store.get_company(tenant={company_id})") as s:
+    with tr.step("기업 실무 기준 조회", f"store.get_company(tenant={company_id})") as s:
         reqs = effective_requirements(company)
         s["detail"] = f"{company['name']} · 요구역량 {len(reqs)}개"
 
@@ -110,19 +110,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         mrate = market.rate_for_company(company)
         s["detail"] = f"{company.get('region')} · {market.JOBS.get(company.get('job'), '')}"
 
-    with tr.step("준비도 계산", "rules.readiness") as s:
-        score = readiness(reqs, status_map)
-        s["detail"] = f"{score}점"
-
-    with tr.step("학습경로 생성", "catalog ∪ corp_track → plan(hours) → greedy(시간당 기업 준비도+시장 적합도)") as s:
-        path = build_path(reqs, status_map, company, weekly_hours)
-        mregion = "dg" if company.get("region") == "대경권" else "all"
-        path = optimize_order(path, status_map, reqs, market.posting_requirement_maps(mregion, company.get("job", "ai")))
-        m = path["market"]
-        s["detail"] = (f"{len(path['steps'])}단계 · {path['total_hours']}시간 · 시간당 효과 순 정렬 · "
-                       f"시장 공고 평균 적합도 {m['fit_before']} → {m['fit_after']}점 ({m['postings']}건)")
-
-    with tr.step("공고만 본 기준선",
+    with tr.step("공고 지원 기준 조회",
                  "rules.posting_requirements" if mock else "bedrock.converse(공고 구조화 출력, 캐시)") as s:
         preqs = None
         if fut_posting is not None:
@@ -137,6 +125,25 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         pool.shutdown(wait=False)
         if preqs is None:
             preqs = posting_requirements(company.get("posting_text", ""))
+        s["detail"] = f"공고 요구 {len(preqs)}개 (입사 문턱)"
+
+    with tr.step("준비도 계산", "rules.readiness × (공고 지원 기준, 기업 실무 기준)") as s:
+        score = readiness(reqs, status_map)
+        score_apply = readiness(preqs, status_map)
+        s["detail"] = f"지원 {score_apply}점 · 실무 {score}점"
+
+    with tr.step("학습경로 생성",
+                 "catalog ∪ corp_track → 지원 기준 갭 먼저 → 실무 기준 갭 → 단계 안에서 greedy(시간당 준비도+시장 적합도)") as s:
+        path = build_path(reqs, status_map, company, weekly_hours, apply_reqs=preqs)
+        mregion = "dg" if company.get("region") == "대경권" else "all"
+        path = optimize_order(path, status_map, reqs, market.posting_requirement_maps(mregion, company.get("job", "ai")),
+                              apply_reqs=preqs)
+        m = path["market"]
+        n_apply = sum(st["tier"] == "apply" for st in path["steps"])
+        s["detail"] = (f"{len(path['steps'])}단계(지원 {n_apply} · 실무 {len(path['steps']) - n_apply}) · "
+                       f"{path['total_hours']}시간 · 시장 공고 평균 적합도 {m['fit_before']} → {m['fit_after']}점 ({m['postings']}건)")
+
+    with tr.step("지원 기준 vs 실무 기준", "rules.gaps × 2") as s:
         g_post = [g[0] for g in gaps(preqs, status_map)]
         g_corp = [g[0] for g in gaps(reqs, status_map)]
         baseline = {
@@ -146,10 +153,10 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
             "gaps_company": [{"skill_id": k, "name": sd.name(k), "status": status_of(status_map, k)} for k in g_corp],
             "missed": [sd.name(k) for k in g_corp if k not in g_post],
             "unnecessary": [sd.name(k) for k in g_post if k not in g_corp],
-            "readiness_posting": readiness(preqs, status_map),
+            "readiness_posting": score_apply,
             "readiness_company": score,
         }
-        s["detail"] = f"놓친 갭 {len(baseline['missed'])} · 불필요 {len(baseline['unnecessary'])}"
+        s["detail"] = f"입사 후 추가로 필요한 것 {len(baseline['missed'])} · 지원에만 필요한 것 {len(baseline['unnecessary'])}"
 
     with tr.step("다른 기업과 비교", "rules.readiness × 기업") as s:
         others = []
@@ -179,7 +186,11 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         for st in path["steps"]:
             sid = st["skill_id"]
             if sid not in ev_by_skill:
-                ids = [add_ev("corp", f"{company['name']} 등록 기준: {WEIGHT_LABEL[st['weight']]}")]
+                ids = []
+                if sid in preqs:
+                    ids.append(add_ev("apply", f"{company['name']} 공고 지원 기준: {WEIGHT_LABEL[preqs[sid]]}"))
+                if sid in reqs:
+                    ids.append(add_ev("corp", f"{company['name']} 등록 실무 기준: {WEIGHT_LABEL[reqs[sid]]}"))
                 if sid in mrate:
                     ids.append(add_ev("market", f"시장 언급률 {mrate[sid]:.0f}% ({company.get('region')})"))
                 if sid in status_map:
@@ -190,7 +201,8 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
             st["evidence_ids"] = list(ev_by_skill[sid])
             if st.get("gain"):
                 g = st["gain"]
-                st["evidence_ids"].append(add_ev("plan", f"이 단계를 마치면 기업 준비도 {g['readiness_after']}점(+{g['readiness']}), "
+                apply_txt = f"지원 준비도 {g['apply_after']}점(+{g['apply']}), " if g.get("apply_after") is not None else ""
+                st["evidence_ids"].append(add_ev("plan", f"이 단계를 마치면 {apply_txt}실무 준비도 {g['readiness_after']}점(+{g['readiness']}), "
                                                           f"시장 공고 평균 적합도 +{g['market_fit']}점 · 시간당 효과 {g['per_hour']}"))
         whys, n_tpl = None, 0
         if not mock and path["steps"]:
@@ -207,13 +219,20 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         if not mock:
             s["detail"] += f" · 인용 검증 통과 {len(whys) - n_tpl}/{len(whys)}" + (f" · {n_tpl}건 템플릿 대체" if n_tpl else "")
 
+    # 매트릭스: 공고(지원 기준) 스킬 먼저, 그다음 기업 실무 기준에만 있는 스킬
     matrix = []
-    for sid, w in sorted(reqs.items(), key=lambda x: (-x[1], x[0])):
+    rows = sorted(preqs.items(), key=lambda x: (-x[1], x[0])) + \
+        sorted(((k, v) for k, v in reqs.items() if k not in preqs), key=lambda x: (-x[1], x[0]))
+    for sid, w in rows:
         st = status_of(status_map, sid)
         ev = status_map.get(sid, {}).get("evidence")
+        tiers = [lab for lab, src in (("지원", preqs), ("실무", reqs)) if sid in src]
         matrix.append({"skill_id": sid, "name": sd.name(sid), "weight": w, "weight_label": WEIGHT_LABEL[w],
+                       "tier": "apply" if sid in preqs else "work", "tier_label": "·".join(tiers),
+                       "weight_apply": preqs.get(sid), "weight_work": reqs.get(sid),
                        "status": st, "status_label": STATUS_LABEL[st],
-                       "evidence": ev or (f"기업 요구 · 시장 언급률 {mrate.get(sid, 0):.0f}%" if st == "miss" else "-"),
+                       "evidence": ev or (f"{'공고' if sid in preqs else '기업'} 요구 · 시장 언급률 {mrate.get(sid, 0):.0f}%"
+                                          if st == "miss" else "-"),
                        "market_pct": round(mrate.get(sid, 0), 1)})
 
     if log:
@@ -221,7 +240,8 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
 
     return {
         "company": {"id": company["tenant_id"], "name": company["name"], "desc": company.get("desc", "")},
-        "readiness": score,
+        "readiness": score,               # 실무 준비도 (기업 등록 기준)
+        "readiness_apply": score_apply,   # 지원 준비도 (공고 기준)
         "formula": FORMULA,
         "skills_found": [{"skill_id": k, "name": sd.name(k), "status": v["status"],
                           "status_label": STATUS_LABEL[v["status"]], "evidence": v["evidence"],

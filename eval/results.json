@@ -1,5 +1,5 @@
 {
- "at": "2026-11-10 13:26",
+ "at": "2026-11-10 18:38",
  "live": false,
  "postings": {
   "n": 30,
@@ -44,17 +44,17 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
       "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
       "skill": "cert_security"
-     },
-     {
-      "id": "ALIO-304989",
-      "type": "FN",
-      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-293827",
@@ -64,12 +64,12 @@
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "cert_computer"
      },
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "cert_computer"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-300068",
@@ -124,18 +124,22 @@
      {
       "id": "ALIO-293174",
       "type": "FN",
-      "skill": "cert_network"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-293174",
       "type": "FN",
-      "skill": "cert_info_processing"
+      "skill": "cert_network"
      },
      {
       "id": "ALIO-303957",
       "type": "FP",
       "skill": "communication"
      }
+    ],
+    "f1_ci": [
+     0.6153846153846154,
+     0.8378378378378378
     ]
    },
    {
@@ -167,17 +171,17 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
       "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
       "skill": "cert_security"
-     },
-     {
-      "id": "ALIO-304989",
-      "type": "FN",
-      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-293827",
@@ -187,12 +191,12 @@
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-296639",
@@ -207,17 +211,17 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
+      "skill": "paper_research"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
       "skill": "data_analysis"
      },
      {
       "id": "ALIO-296280",
       "type": "FN",
       "skill": "english"
-     },
-     {
-      "id": "ALIO-296280",
-      "type": "FN",
-      "skill": "paper_research"
      },
      {
       "id": "ALIO-302970",
@@ -232,19 +236,30 @@
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "networking"
+      "skill": "security"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "security"
+      "skill": "networking"
      },
      {
       "id": "ALIO-304449",
       "type": "FN",
       "skill": "english"
      }
-    ]
+    ],
+    "f1_ci": [
+     0.6486486486486487,
+     0.891566265060241
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.07206208425720628,
+      0.15959595959595962
+     ],
+     "p_le0": 0.219
+    }
    },
    {
     "stage": "llm_embed",
@@ -285,17 +300,22 @@
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-296639",
       "type": "FN",
       "skill": "office"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "paper_research"
      },
      {
       "id": "ALIO-296280",
@@ -306,11 +326,6 @@
       "id": "ALIO-296280",
       "type": "FN",
       "skill": "english"
-     },
-     {
-      "id": "ALIO-296280",
-      "type": "FN",
-      "skill": "paper_research"
      },
      {
       "id": "ALIO-295014",
@@ -325,12 +340,12 @@
      {
       "id": "ALIO-301603",
       "type": "FP",
-      "skill": "cert_security"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-301603",
       "type": "FP",
-      "skill": "cert_info_processing"
+      "skill": "cert_security"
      },
      {
       "id": "ALIO-299568",
@@ -340,22 +355,22 @@
      {
       "id": "ALIO-304425",
       "type": "FP",
-      "skill": "cert_security"
-     },
-     {
-      "id": "ALIO-304425",
-      "type": "FP",
       "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-304425",
-      "type": "FN",
-      "skill": "networking"
+      "type": "FP",
+      "skill": "cert_security"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
       "skill": "security"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
      },
      {
       "id": "ALIO-297629",
@@ -382,7 +397,18 @@
       "type": "FN",
       "skill": "english"
      }
-    ]
+    ],
+    "f1_ci": [
+     0.66,
+     0.851063829787234
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.11280051981806372,
+      0.17342657342657342
+     ],
+     "p_le0": 0.371
+    }
    },
    {
     "stage": "llm_full",
@@ -413,17 +439,17 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
       "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
       "skill": "cert_security"
-     },
-     {
-      "id": "ALIO-304989",
-      "type": "FN",
-      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-300068",
@@ -438,17 +464,17 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
+      "skill": "paper_research"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
       "skill": "data_analysis"
      },
      {
       "id": "ALIO-296280",
       "type": "FN",
       "skill": "english"
-     },
-     {
-      "id": "ALIO-296280",
-      "type": "FN",
-      "skill": "paper_research"
      },
      {
       "id": "ALIO-302970",
@@ -458,22 +484,22 @@
      {
       "id": "ALIO-304425",
       "type": "FP",
-      "skill": "cert_security"
-     },
-     {
-      "id": "ALIO-304425",
-      "type": "FP",
       "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-304425",
-      "type": "FN",
-      "skill": "networking"
+      "type": "FP",
+      "skill": "cert_security"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
       "skill": "security"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
      },
      {
       "id": "ALIO-297629",
@@ -490,7 +516,18 @@
       "type": "FN",
       "skill": "english"
      }
-    ]
+    ],
+    "f1_ci": [
+     0.6666666666666667,
+     0.923076923076923
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.07792207792207795,
+      0.2087719298245615
+     ],
+     "p_le0": 0.183
+    }
    }
   ]
  },
@@ -510,7 +547,11 @@
     "n_oov": 44,
     "readiness_mae": 14.1,
     "gap_n": 126,
-    "own_n": 94
+    "own_n": 94,
+    "false_gap_ci": [
+     0.1588785046728972,
+     0.3191489361702128
+    ]
    },
    {
     "stage": "llm_dict",
@@ -523,7 +564,18 @@
     "n_oov": 44,
     "readiness_mae": 4.2,
     "gap_n": 126,
-    "own_n": 94
+    "own_n": 94,
+    "false_gap_ci": [
+     0.031578947368421054,
+     0.1686746987951807
+    ],
+    "vs_dict": {
+     "ci": [
+      0.0808080808080808,
+      0.2
+     ],
+     "p_le0": 0.0
+    }
    },
    {
     "stage": "llm_embed",
@@ -536,7 +588,18 @@
     "n_oov": 44,
     "readiness_mae": 2.8,
     "gap_n": 126,
-    "own_n": 94
+    "own_n": 94,
+    "false_gap_ci": [
+     0.02127659574468085,
+     0.13541666666666666
+    ],
+    "vs_dict": {
+     "ci": [
+      0.09782608695652174,
+      0.2247191011235955
+     ],
+     "p_le0": 0.0
+    }
    },
    {
     "stage": "llm_full",
@@ -549,7 +612,18 @@
     "n_oov": 44,
     "readiness_mae": 2.8,
     "gap_n": 126,
-    "own_n": 94
+    "own_n": 94,
+    "false_gap_ci": [
+     0.02127659574468085,
+     0.13541666666666666
+    ],
+    "vs_dict": {
+     "ci": [
+      0.09782608695652174,
+      0.2247191011235955
+     ],
+     "p_le0": 0.0
+    }
    },
    {
     "stage": "llm_full_net",
@@ -562,7 +636,18 @@
     "n_oov": 44,
     "readiness_mae": 2.8,
     "gap_n": 126,
-    "own_n": 94
+    "own_n": 94,
+    "false_gap_ci": [
+     0.02127659574468085,
+     0.13541666666666666
+    ],
+    "vs_dict": {
+     "ci": [
+      0.09782608695652174,
+      0.2247191011235955
+     ],
+     "p_le0": 0.0
+    }
    }
   ]
  },
@@ -797,16 +882,31 @@
  "baseline": {
   "agg": {
    "company": {
-    "hit3": 1.0,
     "gap_cov": 0.9944444444444444,
-    "waste": 0.0,
-    "hours": 53.266666666666666
+    "apply_cov": 0.9916666666666667,
+    "apply_first": 1.0,
+    "hours": 88.26666666666667,
+    "gap_cov_ci": [
+     0.9833333333333333,
+     1.0
+    ]
    },
    "posting": {
-    "hit3": 0.6388888888888888,
     "gap_cov": 0.5127777777777778,
-    "waste": 0.39166666666666666,
-    "hours": 67.43333333333334
+    "apply_cov": 0.9916666666666667,
+    "apply_first": 1.0,
+    "hours": 67.43333333333334,
+    "gap_cov_ci": [
+     0.45722222222222225,
+     0.57
+    ]
+   },
+   "diff_gap_cov": {
+    "ci": [
+     0.4272222222222223,
+     0.5344444444444444
+    ],
+    "p_le0": 0.0
    }
   },
   "n": 30,

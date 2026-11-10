@@ -7,6 +7,7 @@ BEDROCK_MOCK=0이면 Converse API(도구 호출로 구조화 출력), Titan 임�
 import json
 import re
 import time
+from contextvars import ContextVar
 from functools import lru_cache
 
 from ..config import AWS_PROFILE, AWS_REGION, BEDROCK_MOCK, EMBED_MODEL_ID, EXPLAIN_MODEL_ID, FAST_MODEL_ID, GUARDRAIL_ID, \
@@ -14,6 +15,8 @@ from ..config import AWS_PROFILE, AWS_REGION, BEDROCK_MOCK, EMBED_MODEL_ID, EXPL
 
 _CITE = re.compile(r"\[(E\d+)\]")
 BEDROCK_READY = True
+# 비용 상한을 넘은 요청은 이 요청만 규칙 엔진으로 돈다 (guards/limits.py가 설정)
+_force_mock: ContextVar[str | None] = ContextVar("force_mock", default=None)
 
 
 class BedrockError(RuntimeError):
@@ -21,7 +24,22 @@ class BedrockError(RuntimeError):
 
 
 def mode() -> str:
+    if _force_mock.get():
+        return "mock"
     return "bedrock" if (not BEDROCK_MOCK and BEDROCK_READY and MODEL_ID) else "mock"
+
+
+def configured_mode() -> str:
+    """요청별 상한과 무관한 설정상의 모드 (배지 표시용)."""
+    return "bedrock" if (not BEDROCK_MOCK and BEDROCK_READY and MODEL_ID) else "mock"
+
+
+def force_mock(reason: str):
+    return _force_mock.set(reason)
+
+
+def forced_reason() -> str | None:
+    return _force_mock.get()
 
 
 @lru_cache(maxsize=1)
@@ -84,6 +102,25 @@ def converse_tool(system: str, user: str, tool_name: str, schema: dict, *, model
     raise BedrockError("구조화 출력 없음")
 
 
+def converse_turn(system: str, messages: list[dict], tools: list[dict], *, model: str | None = None,
+                  log: CallLog | None = None, max_tokens: int = 1500, kind: str = "agent") -> dict:
+    """도구를 고를 수 있는 한 턴 (에이전트 루프용). → 모델 메시지 {role, content}"""
+    model = model or FAST_MODEL_ID or MODEL_ID
+    t0 = time.perf_counter()
+    try:
+        r = client().converse(
+            modelId=model, system=[{"text": system}], messages=messages,
+            toolConfig={"tools": [{"toolSpec": t} for t in tools], "toolChoice": {"auto": {}}},
+            inferenceConfig={"maxTokens": max_tokens, "temperature": 0},
+        )
+    except Exception as e:  # noqa: BLE001
+        raise _wrap(e) from e
+    u = r.get("usage", {})
+    if log is not None:
+        log.add(kind, model, (time.perf_counter() - t0) * 1000, u.get("inputTokens", 0), u.get("outputTokens", 0))
+    return r["output"]["message"]
+
+
 def embed(texts: list[str], log: CallLog | None = None, dims: int = 512) -> list[list[float]]:
     """Titan V2 임베딩 (정규화된 벡터). 동시에 몇 개씩 호출한다."""
     from concurrent.futures import ThreadPoolExecutor
@@ -144,7 +181,7 @@ def template_why(step: dict, evidence: dict[str, dict]) -> str:
     parts = []
     for eid in step.get("evidence_ids", []):
         e = evidence[eid]
-        if e["type"] in ("corp", "market", "plan"):
+        if e["type"] in ("apply", "corp", "market", "plan"):
             parts.append(f"{e['text']} [{eid}]")
         elif e["type"] == "resume":
             parts.append(f"이력서 근거: “{e['text']}” [{eid}]")

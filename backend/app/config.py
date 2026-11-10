@@ -32,6 +32,14 @@ BUNDLED_CACHE = ROOT / "backend" / "cache_bundle"
 ATHENA_WORKGROUP = os.getenv("ATHENA_WORKGROUP", "")
 ATHENA_DATABASE = os.getenv("ATHENA_DATABASE", "kosa06_skillbridge")
 DATA_BUCKET = os.getenv("DATA_BUCKET", "")
+# 저장소: sqlite(로컬) | dynamodb(배포, TABLE_NAME)
+STORAGE = os.getenv("STORAGE", "sqlite")
+TABLE_NAME = os.getenv("TABLE_NAME", "kosa06-skillbridge")
+# 원본 기업 설정 쓰기·초기화 허용. 공개 주소(Lambda)에서는 기본 금지 → 방문자 샌드박스에서만 수정
+ALLOW_BASE_WRITE = _flag("ALLOW_BASE_WRITE", "0" if ON_LAMBDA else "1")
+# 비용 보호: IP당 분당 Bedrock 요청 수, 인스턴스당 시간당 Bedrock 요청 수 (넘으면 그 요청만 규칙 엔진으로)
+RATE_PER_MIN = int(os.getenv("RATE_PER_MIN", "8"))
+BEDROCK_PER_HOUR = int(os.getenv("BEDROCK_PER_HOUR", "120"))
 
 SKILLS_CSV = ROOT / "data" / "skills.csv"
 SEED = ROOT / "seed"

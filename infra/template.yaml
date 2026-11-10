@@ -31,8 +31,31 @@ Parameters:
     Type: String
     Default: "0"
     AllowedValues: ["0", "1"]
+  MaxConcurrency:
+    Type: Number
+    Default: 3
+    MinValue: 1
+    MaxValue: 10
+  BedrockPerHour:
+    Type: String
+    Default: "60"
+    Description: 인스턴스당 시간당 Bedrock 요청 상한 (넘으면 그 요청은 규칙 엔진)
 
 Resources:
+  Table:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: kosa06-skillbridge
+      BillingMode: PAY_PER_REQUEST   # 쓴 만큼만 과금
+      AttributeDefinitions:
+        - { AttributeName: pk, AttributeType: S }
+        - { AttributeName: sk, AttributeType: S }
+      KeySchema:
+        - { AttributeName: pk, KeyType: HASH }
+        - { AttributeName: sk, KeyType: RANGE }
+      TimeToLiveSpecification: { AttributeName: ttl, Enabled: true }   # 방문자 샌드박스 24시간 뒤 삭제
+      SSESpecification: { SSEEnabled: true }
+
   ApiRole:
     Type: AWS::IAM::Role
     Properties:
@@ -68,6 +91,10 @@ Resources:
                   - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:catalog
                   - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:database/${GlueDb}
                   - !Sub arn:aws:glue:${AWS::Region}:${AWS::AccountId}:table/${GlueDb}/*
+              - Sid: Store
+                Effect: Allow
+                Action: [dynamodb:GetItem, dynamodb:PutItem, dynamodb:DeleteItem, dynamodb:Query]
+                Resource: !GetAtt Table.Arn
               - Sid: Data
                 Effect: Allow
                 Action: [s3:GetObject, s3:PutObject, s3:ListBucket, s3:GetBucketLocation]
@@ -87,8 +114,15 @@ Resources:
       Role: !GetAtt ApiRole.Arn
       MemorySize: 1536
       Timeout: 60
+      # 비용 보호: 동시 실행 상한 × 인스턴스당 시간당 Bedrock 요청 상한(BEDROCK_PER_HOUR) = 시간당 최대 요청 수
+      ReservedConcurrentExecutions: !Ref MaxConcurrency
       Environment:
         Variables:
+          STORAGE: dynamodb
+          TABLE_NAME: !Ref Table
+          ALLOW_BASE_WRITE: "0"   # 공개 주소: 원본 기업 설정 쓰기 금지, 방문자 샌드박스에서만 수정
+          RATE_PER_MIN: "8"
+          BEDROCK_PER_HOUR: !Ref BedrockPerHour
           BEDROCK_MOCK: !Ref BedrockMock
           DATA_MODE: live
           MODEL_ID: !Ref ModelId

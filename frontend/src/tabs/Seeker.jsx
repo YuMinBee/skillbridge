@@ -146,6 +146,71 @@ export default function Seeker({ companies, corpVersion, active, mode }) {
   );
 }
 
+const COACH_Q = ["하나만 먼저 한다면 뭐부터 할까요?", "이 회사는 이 기술을 실제로 어떤 업무에 써요?", "시장 수요가 큰 갭은 뭐예요?"];
+const TOOL_LABEL = {
+  get_company_criteria: "기업 기준 조회", search_courses: "과정 검색", market_stats: "시장 통계",
+  company_docs: "기업 문서(KB) 검색", readiness_after: "준비도 계산(규칙)",
+};
+
+function Coach({ r }) {
+  const [q, setQ] = useState("");
+  const [log, setLog] = useState([]);
+  const [busy, setBusy] = useState(false);
+  const [err, setErr] = useState("");
+  // 진단 대상이 바뀌면 대화를 비운다
+  const key = r.company.id + ":" + r.skills_found.map((s) => s.skill_id + s.status).join(",");
+  useEffect(() => { setLog([]); setErr(""); }, [key]);
+
+  async function ask(question) {
+    const text = question.trim();
+    if (!text || busy) return;
+    setBusy(true); setErr("");
+    try {
+      // 이력서 원문이 아니라 스킬 상태 코드만 보낸다
+      const statuses = Object.fromEntries(r.skills_found.map((s) => [s.skill_id, s.status]));
+      const a = await api.coach(r.company.id, text, statuses);
+      setLog((l) => [...l, { q: text, a }]); setQ("");
+    } catch (e) { setErr(e.message); }
+    finally { setBusy(false); }
+  }
+
+  return (
+    <div className="panel coach">
+      <h2>학습 코치에게 묻기</h2>
+      <p className="hint">에이전트가 필요한 도구(기업 기준 · 과정 검색 · 시장 통계 · {r.company.name} 문서 · 준비도 계산)를 골라 근거를 모은 뒤 답합니다. 과정은 카탈로그에 있는 것만, 점수는 규칙 계산값만 씁니다. 이력서 원문은 보내지 않습니다.</p>
+      <div className="row">
+        {COACH_Q.map((x) => <button key={x} className="btn ghost sm" disabled={busy} onClick={() => ask(x)}>{x}</button>)}
+      </div>
+      <form className="coach-in" onSubmit={(e) => { e.preventDefault(); ask(q); }}>
+        <input value={q} maxLength={300} onChange={(e) => setQ(e.target.value)} placeholder="예: Docker는 어떤 과정부터 들으면 돼요?" aria-label="코치에게 질문" />
+        <button className="btn" disabled={busy || !q.trim()}>{busy ? "생각 중…" : "묻기"}</button>
+      </form>
+      {err && <p className="err">{err}</p>}
+      {log.map(({ q: qq, a }, i) => (
+        <div className="turn" key={i}>
+          <p className="q">{qq}</p>
+          <p className="a">{a.answer.split(/(\[C:[^\]]+\])/).map((x, j) => /^\[C:/.test(x) ? <sup key={j} className="hint">과정</sup> : x)}</p>
+          {a.courses.length > 0 && (
+            <ul className="coach-courses">
+              {a.courses.map((c) => (
+                <li key={c.id}>{c.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(c.link)
+                  ? <a href={c.link} target="_blank" rel="noopener noreferrer">{c.title}</a> : c.title} · {c.provider} · {c.hours}시간</li>
+              ))}
+            </ul>
+          )}
+          {a.fallbacks.length > 0 && <p className="warn" role="status">{a.fallbacks.join(" / ")}</p>}
+          <details>
+            <summary className="hint">도구 호출 {a.tool_calls.length}회 · {a.mode === "bedrock" ? "Bedrock이 도구 선택" : "규칙 플래너가 도구 선택"}{a.usage ? ` · 모델 호출 ${a.usage.calls}회 · 토큰 ${a.usage.tokens}` : ""}</summary>
+            <ol className="trace">
+              {a.tool_calls.map((t, k) => <li key={k} className="done"><span className="dot" /><div><b>{TOOL_LABEL[t.tool] ?? t.tool}</b><small>{t.summary} · {t.ms}ms</small></div></li>)}
+            </ol>
+          </details>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const EV_TYPE = { corp: "기업 기준", market: "시장", resume: "이력서", posting: "공고 문장", plan: "경로 효과(계산)" };
 const HOW = { dict: "별칭 사전", "dict-std": "LLM 표준명 → 사전", llm: "임베딩 후보 → LLM 선택", "dict-rule": "사전 + 규칙 판정(안전망)" };
 
@@ -155,10 +220,11 @@ function Result({ r }) {
     <>
       <div className="panel">
         <div className="score">
-          <div className="ring" style={{ "--p": r.readiness }}><span>{r.readiness}</span></div>
+          <div className="ring-cap"><div className="ring" style={{ "--p": r.readiness_apply }}><span>{r.readiness_apply}</span></div><small>① 지원</small></div>
+          <div className="ring-cap"><div className="ring alt" style={{ "--p": r.readiness }}><span>{r.readiness}</span></div><small>② 실무</small></div>
           <div style={{ display: "grid", gap: 4, minWidth: 0 }}>
-            <h2>{r.company.name} 기준 준비도</h2>
-            <p className="hint">점수는 규칙으로 계산하고, LLM은 설명만 합니다. 같은 입력이면 항상 같은 점수가 나옵니다.</p>
+            <h2>{r.company.name} · 지원 준비도 {r.readiness_apply} / 실무 준비도 {r.readiness}</h2>
+            <p className="hint">지원 준비도는 공고에 적힌 입사 문턱, 실무 준비도는 기업이 등록한 '입사 후 실제로 쓰는 역량' 기준입니다. 점수는 규칙으로 계산하고, LLM은 설명만 합니다.</p>
             <div className="formula">{r.formula}</div>
           </div>
         </div>
@@ -171,11 +237,11 @@ function Result({ r }) {
         </div>
         <div className="tbl-wrap">
           <table>
-            <thead><tr><th>스킬</th><th>구분</th><th>내 상태</th><th>근거</th></tr></thead>
+            <thead><tr><th>스킬</th><th>기준</th><th>구분</th><th>내 상태</th><th>근거</th></tr></thead>
             <tbody>
               {r.matrix.map((m) => (
                 <tr key={m.skill_id}>
-                  <td>{m.name}</td><td>{m.weight_label}</td>
+                  <td>{m.name}</td><td>{m.tier_label}</td><td>{m.weight_label}</td>
                   <td><StatusChip status={m.status}>{m.status_label}</StatusChip></td>
                   <td><span className="why">{m.evidence}</span></td>
                 </tr>
@@ -189,12 +255,13 @@ function Result({ r }) {
         <h2>맞춤 학습경로</h2>
         <p className="hint">
           {p.steps.length
-            ? `${p.optimized ? "시간당 효과(기업 준비도 + 시장 공고 적합도 상승)가 큰 단계부터 배치했습니다." : "필수 갭부터, 공공 과정으로 기초를 채우고 기업 트랙으로 마무리합니다."} 총 ${p.total_hours}시간 (공공 ${p.hours_by_kind.public} · 기업 ${p.hours_by_kind.corp} · 결과물 ${p.hours_by_kind.proof}${p.hours_by_kind.self ? ` · 자습 ${p.hours_by_kind.self}` : ""}) · 주 ${p.weekly_hours}시간 기준 약 ${p.weeks}주.`
+            ? `① 지원 기준(공고) 갭으로 먼저 입사 문턱을 넘고, ② 실무 기준(기업 등록) 갭으로 입사 후 쓸 역량을 준비합니다. 각 단계 안에서는 시간당 효과가 큰 순서입니다. 총 ${p.total_hours}시간 (공공 ${p.hours_by_kind.public} · 기업 ${p.hours_by_kind.corp} · 결과물 ${p.hours_by_kind.proof}${p.hours_by_kind.self ? ` · 자습 ${p.hours_by_kind.self}` : ""}) · 주 ${p.weekly_hours}시간 기준 약 ${p.weeks}주.`
             : "이 기업 기준 갭이 없습니다."}
         </p>
         {p.market && (
           <div className="fit-row">
-            <div><small>기업 준비도</small><span className="num">{r.readiness} → {p.steps.length ? p.steps[p.steps.length - 1].gain.readiness_after : r.readiness}점</span></div>
+            <div><small>지원 준비도</small><span className="num">{p.apply_before ?? r.readiness_apply} → {p.apply_after ?? r.readiness_apply}점</span></div>
+            <div><small>실무 준비도</small><span className="num">{p.work_before ?? r.readiness} → {p.work_after ?? r.readiness}점</span></div>
             <div><small>시장 공고 평균 적합도 ({p.market.postings}건)</small><span className="num">{p.market.fit_before} → {p.market.fit_after}점</span></div>
             <div><small>{p.market.threshold}점 넘는 공고</small><span className="num">{p.market.qualified_before}% → {p.market.qualified_after}%</span></div>
           </div>
@@ -205,9 +272,10 @@ function Result({ r }) {
               <div>
                 <div className="t">{s.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(s.link) && s.kind === "public"
                   ? <a href={s.link} target="_blank" rel="noopener noreferrer">{s.title}</a> : s.title}{" "}
-                  <span className={`chip ${KIND[s.kind][1]}`}>{KIND[s.kind][0]}</span></div>
-                <div className="m">{(s.covers || [s.skill]).join(", ")} · {s.weight_label} 갭 · {s.hours}시간 · {s.meta}</div>
-                {s.gain && <div className="gain"><span className="num">준비도 +{s.gain.readiness} → {s.gain.readiness_after}</span><span className="num">시장 적합도 +{s.gain.market_fit}</span><span className="num hint">시간당 {s.gain.per_hour}</span></div>}
+                  <span className={`chip ${KIND[s.kind][1]}`}>{KIND[s.kind][0]}</span>{" "}
+                  <span className="chip">{s.tier === "apply" ? "① 지원" : "② 실무"}</span></div>
+                <div className="m">{(s.covers || [s.skill]).join(", ")} · {s.tier_label} {s.weight_label} 갭 · {s.hours}시간 · {s.meta}</div>
+                {s.gain && <div className="gain">{s.gain.apply_after != null && <span className="num">지원 +{s.gain.apply} → {s.gain.apply_after}</span>}<span className="num">실무 +{s.gain.readiness} → {s.gain.readiness_after}</span><span className="num">시장 적합도 +{s.gain.market_fit}</span><span className="num hint">시간당 {s.gain.per_hour}</span></div>}
                 <div className="w">{s.why.split(/(\[E\d+\])/).map((x, j) => /^\[E\d+\]$/.test(x) ? <b key={j}>{x}</b> : x)}</div>
               </div>
             </li>
@@ -221,23 +289,25 @@ function Result({ r }) {
         )}
       </div>
 
+      <Coach r={r} />
+
       <div className="panel">
-        <h2>공고만 본 추천 vs 기업 기준 추천</h2>
-        <p className="hint">일반 개인 에이전트는 공고 문구만 봅니다. 기업이 등록한 요구역량을 쓰면 갭이 이렇게 달라집니다.</p>
+        <h2>지원 기준(공고) vs 실무 기준(기업)</h2>
+        <p className="hint">공고는 입사 문턱을 알려줍니다. 기업이 등록한 실무 기준은 입사 후 실제로 쓰는 역량입니다. 공고만 보고 준비하면 오른쪽 갭은 입사 후에 메워야 합니다.</p>
         <div className="cmp">
           <div className="col">
-            <h4>공고 문구만 사용 · 준비도 <span className="num">{b.readiness_posting}</span></h4>
+            <h4>① 지원 기준 (공고) · 준비도 <span className="num">{b.readiness_posting}</span></h4>
             <div className="row">{b.gaps_posting.length ? b.gaps_posting.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
           </div>
           <div className="col">
-            <h4>기업 등록 기준 사용 · 준비도 <span className="num">{b.readiness_company}</span></h4>
+            <h4>② 실무 기준 (기업 등록) · 준비도 <span className="num">{b.readiness_company}</span></h4>
             <div className="row">{b.gaps_company.length ? b.gaps_company.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
           </div>
         </div>
         <div className="diff">
-          {b.missed.length > 0 && <div className="plus">공고만 봤으면 놓쳤을 갭: {b.missed.join(", ")}</div>}
-          {b.unnecessary.length > 0 && <div className="minus">공고만 봤으면 불필요하게 공부했을 것: {b.unnecessary.join(", ")}</div>}
-          <div className="hint">공고 기준 준비도 {b.readiness_posting} → 기업 기준 준비도 {b.readiness_company}</div>
+          {b.missed.length > 0 && <div className="plus">공고엔 없지만 입사 후 필요한 것: {b.missed.join(", ")}</div>}
+          {b.unnecessary.length > 0 && <div className="minus">지원할 때만 보는 것 (실무 기준엔 없음): {b.unnecessary.join(", ")}</div>}
+          <div className="hint">학습경로는 두 기준의 갭을 모두 다룹니다 (지원 먼저 → 실무).</div>
         </div>
       </div>
 

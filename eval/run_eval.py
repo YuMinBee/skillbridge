@@ -46,6 +46,40 @@ def prf(tp, fp, fn):
     return p, r, (2 * p * r / (p + r) if p + r else 0.0)
 
 
+# ── 부트스트랩 (표본이 작으니 95% 신뢰구간과 짝지은 차이를 같이 낸다) ──
+B_ITER, B_SEED = 2000, 6
+
+
+def _samples(n):
+    import random
+    rng = random.Random(B_SEED)  # 시드 고정 → 같은 입력이면 같은 구간
+    return [[rng.randrange(n) for _ in range(n)] for _ in range(B_ITER)]
+
+
+def _ci(vals):
+    v = sorted(vals)
+    return [v[int(0.025 * len(v))], v[int(0.975 * len(v)) - 1]]
+
+
+def boot(units: list, stat) -> list[float]:
+    """문서(공고·지원자) 단위로 복원 추출해 stat의 95% 구간"""
+    return _ci([stat([units[i] for i in idx]) for idx in _samples(len(units))])
+
+
+def boot_diff(a: list, b: list, stat) -> dict:
+    """같은 문서 묶음으로 stat(b) − stat(a). 0을 안 넘는 비율 p(차이≤0)"""
+    d = [stat([b[i] for i in idx]) - stat([a[i] for i in idx]) for idx in _samples(len(a))]
+    return {"ci": _ci(d), "p_le0": sum(x <= 0 for x in d) / len(d)}
+
+
+def f1_of(triples):
+    return prf(sum(t for t, _, _ in triples), sum(f for _, f, _ in triples), sum(n for _, _, n in triples))[2]
+
+
+def ratio_of(i, j):
+    return lambda rows: (sum(r[i] for r in rows) / s) if (s := sum(r[j] for r in rows)) else 0.0
+
+
 def cached(stage: str, items: list[dict], fn):
     """Bedrock 단계: --live면 호출해서 저장, 아니면 저장본을 읽는다. 없으면 None."""
     path = PRED / f"{stage}.json"
@@ -85,11 +119,12 @@ def eval_postings():
         tp = fp = fn = req_ok = 0
         by = {"hint": [0, 0, 0], "random": [0, 0, 0]}
         clean_fp = 0  # 라벨이 0개인 공고에서 무언가를 뽑은 공고 수
-        errors = []
+        errors, docs = [], []
         for r in gold:
             g, p = r["labels"], preds[k].get(r["id"], {})
             t = len(set(g) & set(p)); f = len(set(p) - set(g)); n = len(set(g) - set(p))
             tp += t; fp += f; fn += n
+            docs.append((t, f, n))
             by[r["stratum"]][0] += t; by[r["stratum"]][1] += f; by[r["stratum"]][2] += n
             req_ok += sum(g[s] == p[s] for s in set(g) & set(p))
             if not g and p:
@@ -102,7 +137,14 @@ def eval_postings():
         rows.append({"stage": k, "label": label, "available": True, "p": P, "r": R, "f1": F, "tp": tp, "fp": fp, "fn": fn,
                      "req_acc": req_ok / tp if tp else 0.0,
                      "f1_hint": prf(*by["hint"])[2], "f1_random": prf(*by["random"])[2],
-                     "clean_fp": clean_fp, "n_clean": sum(not r["labels"] for r in gold), "errors": errors})
+                     "clean_fp": clean_fp, "n_clean": sum(not r["labels"] for r in gold), "errors": errors,
+                     "f1_ci": boot(docs, f1_of), "_docs": docs})
+    base = next(r for r in rows if r["stage"] == "dict")
+    for r in rows:
+        if r["available"] and r["stage"] != "dict":
+            r["vs_dict"] = boot_diff(base["_docs"], r["_docs"], f1_of)
+    for r in rows:
+        r.pop("_docs", None)
     return {"n": len(gold), "n_labels": sum(len(r["labels"]) for r in gold),
             "labels_by": {k: sum(len(r["labels"]) for r in gold if r["stratum"] == k) for k in ("hint", "random")},
             "n_oov": sum(len(r["oov"]) for r in gold), "rows": rows}
@@ -116,26 +158,28 @@ def _company(t):
 def gap_metrics(cands, preds):
     gap_tp = gap_n = own_fp = own_n = st_ok = st_n = 0
     oov_ok = oov_n = 0
-    mae = []
+    mae, units = [], []
     for c in cands:
         reqs = _company(c["company"])["requirements"]
         p = {s: v["status"] if isinstance(v, dict) else v for s, v in preds.get(c["id"], {}).items()}
+        u = [0, 0, 0, 0]  # 지원자 단위: own_fp, own_n, gap_tp, gap_n
         for sid, gs in c["gold_status"].items():
             ps = p.get(sid, "miss")
             st_n += 1; st_ok += ps == gs
             if gs != "own":
-                gap_n += 1; gap_tp += ps != "own"
+                gap_n += 1; gap_tp += ps != "own"; u[2] += ps != "own"; u[3] += 1
             else:
-                own_n += 1; own_fp += ps != "own"
+                own_n += 1; own_fp += ps != "own"; u[0] += ps != "own"; u[1] += 1
             v = c["variants"].get(sid)
             if v and not v["in_dict"]:
                 oov_n += 1; oov_ok += ps == gs
         gm = {s: {"status": st} for s, st in c["gold_status"].items()}
         pm = {s: {"status": p.get(s, "miss")} for s in reqs}
         mae.append(abs(readiness(reqs, gm) - readiness(reqs, pm)))
+        units.append(tuple(u))
     return {"gap_recall": gap_tp / gap_n, "false_gap": own_fp / own_n, "status_acc": st_ok / st_n,
             "oov_acc": oov_ok / oov_n if oov_n else None, "n_oov": oov_n, "readiness_mae": sum(mae) / len(mae),
-            "gap_n": gap_n, "own_n": own_n}
+            "gap_n": gap_n, "own_n": own_n, "false_gap_ci": boot(units, ratio_of(0, 1)), "_units": units}
 
 
 def eval_gaps():
@@ -154,6 +198,12 @@ def eval_gaps():
             preds[k] = p
     rows = [{"stage": k, "label": lab, "available": k in preds, **(gap_metrics(cands, preds[k]) if k in preds else {})}
             for k, lab in labels.items()]
+    base = rows[0]
+    for r in rows[1:]:
+        if r["available"]:  # 오탐률은 낮을수록 좋다 → (사전 − 단계)가 0 이하일 확률
+            r["vs_dict"] = boot_diff(r["_units"], base["_units"], ratio_of(0, 1))
+    for r in rows:
+        r.pop("_units", None)
     n_m = sum(len(c["variants"]) for c in cands)
     return {"n": len(cands), "mentions": n_m, "oov": sum(not v["in_dict"] for c in cands for v in c["variants"].values()),
             "rows": rows}
@@ -196,24 +246,32 @@ def eval_baseline():
     sd = get_dict()
     res = {"company": [], "posting": []}
     missed_all, wasted_all = [], []
+    # 지원 기준 = 공고 요구, 실무 기준 = 기업 등록 요구. 합성 지원자의 정답 상태는 실무 기준 스킬에만 있으므로
+    # 공고에만 있는 스킬은 이력서에 없다고(miss) 본다 — 템플릿 이력서가 실무 기준 스킬만 언급하기 때문.
     for c in jl("synthetic_candidates.jsonl"):
         comp = _company(c["company"])
         reqs = comp["requirements"]
-        gold_gaps = {s for s, st in c["gold_status"].items() if st != "own"}
+        preqs = extract.posting_requirements(comp.get("posting_text", ""))
+        work_gaps = {s for s, st in c["gold_status"].items() if st != "own"}
+        apply_gaps = {s for s in preqs if c["gold_status"].get(s, "miss") != "own"}
         sm = {s: {"status": st} for s, st in c["gold_status"].items() if st != "miss"}
-        for k, rq in (("company", reqs), ("posting", extract.posting_requirements(comp.get("posting_text", "")))):
-            path = build_path(rq, sm, comp, 10)
+        paths = {"company": build_path(reqs, sm, comp, 10, apply_reqs=preqs),   # 역량다리: 지원 → 실무
+                 "posting": build_path(preqs, sm, comp, 10)}                     # 공고만
+        for k, path in paths.items():
             steps = [s["skill_id"] for s in path["steps"]]
-            top3 = steps[:3]
-            hit = sum(s in gold_gaps for s in top3) / len(top3) if top3 else 0.0
-            covered = {s for s in steps if s in gold_gaps}
-            res[k].append({"hit3": hit, "gap_cov": len(covered) / len(gold_gaps) if gold_gaps else 1.0,
-                           "waste": sum(s not in reqs for s in steps) / len(steps) if steps else 0.0,
+            res[k].append({"gap_cov": len(work_gaps & set(steps)) / len(work_gaps) if work_gaps else 1.0,
+                           "apply_cov": len(apply_gaps & set(steps)) / len(apply_gaps) if apply_gaps else 1.0,
+                           "apply_first": all(s in preqs for s in steps[:len(apply_gaps & set(steps))]),
                            "hours": path["total_hours"]})
             if k == "posting":
-                missed_all += [sd.name(s) for s in gold_gaps - covered]
+                missed_all += [sd.name(s) for s in work_gaps - set(steps)]
                 wasted_all += [sd.name(s) for s in set(steps) if s not in reqs]
-    agg = {k: {m: sum(x[m] for x in v) / len(v) for m in ("hit3", "gap_cov", "waste", "hours")} for k, v in res.items()}
+    agg = {k: {m: sum(x[m] for x in v) / len(v) for m in ("gap_cov", "apply_cov", "apply_first", "hours")}
+           for k, v in res.items()}
+    mean_cov = lambda rows: sum(x["gap_cov"] for x in rows) / len(rows)  # noqa: E731
+    for k in agg:
+        agg[k]["gap_cov_ci"] = boot(res[k], mean_cov)
+    agg["diff_gap_cov"] = boot_diff(res["posting"], res["company"], mean_cov)
     from collections import Counter
     return {"agg": agg, "n": len(res["company"]), "top_missed": Counter(missed_all).most_common(5),
             "top_wasted": Counter(wasted_all).most_common(5)}
@@ -267,6 +325,20 @@ def report(R):
         L.append(f"| {r['label']} | {f3(r['p'])} | {f3(r['r'])} | **{f3(r['f1'])}** | {pct(r['req_acc'])} | {f3(r['f1_hint'])} | "
                  f"{f3(r['f1_random'])} | {r['clean_fp']}/{r['n_clean']} |")
     d = next(r for r in po["rows"] if r["stage"] == "dict")
+    L += ["", f"**95% 신뢰구간** (공고 단위 부트스트랩 {B_ITER}회, 시드 {B_SEED}) · 사전 대비 F1 차이는 같은 공고 묶음으로 짝지어 계산:", "",
+          "| 단계 | F1 95% 구간 | 사전 대비 ΔF1 95% 구간 | 개선이 아닐 확률 p(Δ≤0) |", "|---|---|---|---|"]
+    for r in po["rows"]:
+        if r["available"]:
+            v = r.get("vs_dict")
+            L.append(f"| {r['label']} | {f3(r['f1_ci'][0])}–{f3(r['f1_ci'][1])} | "
+                     + (f"{v['ci'][0]:+.3f} ~ {v['ci'][1]:+.3f} | {v['p_le0']:.3f} |" if v else "— | — |"))
+    full = next((r for r in po["rows"] if r["stage"] == "llm_full" and r["available"]), None)
+    if full and full.get("vs_dict"):
+        sig = full["vs_dict"]["ci"][0] > 0
+        L += ["", ("해석: 운영 설정의 F1 개선은 95% 구간이 0보다 커서 유의합니다." if sig else
+                   f"해석: 공고 {po['n']}건으로는 F1 개선이 **통계적으로 확실하지 않습니다**(구간이 0을 포함). "
+                   "정밀도·라벨 0개 공고 오탐 감소는 방향이 일관되지만, 확정하려면 공고를 늘려야 합니다. "
+                   "발표에서는 유의한 이력서 오탐 감소(2절)와 갭 커버율 차이(4절)를 근거로 씁니다.")]
     L += ["", f"사전만 쓸 때 놓친 것(FN) {d['fn']}개 · 잘못 뽑은 것(FP) {d['fp']}개. 오류 목록은 `results.json`의 `errors`. "
           "무작위 10건은 정답이 거의 없어 F1보다 '라벨 0개 공고 오탐'(없는 스킬을 지어내는지)을 보는 용도입니다.", ""]
 
@@ -279,6 +351,13 @@ def report(R):
             continue
         L.append(f"| {r['label']} | **{pct(r['gap_recall'])}** | {pct(r['false_gap'])} | {pct(r['status_acc'])} | "
                  f"{pct(r['oov_acc'])} | {r['readiness_mae']:.1f} |")
+    L += ["", "오탐률 95% 신뢰구간 (지원자 단위 부트스트랩) · 사전 대비 감소폭:", "",
+          "| 단계 | 오탐률 95% 구간 | 사전 대비 감소 95% 구간 | 개선이 아닐 확률 |", "|---|---|---|---|"]
+    for r in ga["rows"]:
+        if r["available"]:
+            v = r.get("vs_dict")
+            L.append(f"| {r['label']} | {pct(r['false_gap_ci'][0])}–{pct(r['false_gap_ci'][1])} | "
+                     + (f"{v['ci'][0] * 100:+.1f} ~ {v['ci'][1] * 100:+.1f}%p | {v['p_le0']:.3f} |" if v else "— | — |"))
     L += ["", "갭 recall은 심어 둔 갭(보유가 아닌 요구역량)을 갭으로 잡은 비율, 오탐률은 실제 보유인데 갭으로 본 비율입니다.", ""]
 
     a = co["agg"]
@@ -290,12 +369,22 @@ def report(R):
           f"과정이 없는 스킬({', '.join(p['skill'] for p in co['per_skill'] if p['n'] == 0)})은 자습·기업 트랙으로 대체합니다.", ""]
 
     b = ba["agg"]
-    L += [f"## 4. 공고만 본 추천 vs 기업 기준 추천 (같은 지원자 {ba['n']}명, 정답 상태 사용)", "",
-          "| 기준 | 경로 상위 3단계 적중 | 실제 갭 커버율 | 불필요한 단계 | 평균 경로 시간 |", "|---|---|---|---|---|",
-          f"| 기업 등록 기준 (역량다리) | **{pct(b['company']['hit3'])}** | **{pct(b['company']['gap_cov'])}** | {pct(b['company']['waste'])} | {b['company']['hours']:.0f}h |",
-          f"| 공고 문구만 | {pct(b['posting']['hit3'])} | {pct(b['posting']['gap_cov'])} | {pct(b['posting']['waste'])} | {b['posting']['hours']:.0f}h |",
-          "", "공고만 볼 때 가장 많이 놓친 갭: " + ", ".join(f"{n}({c})" for n, c in ba["top_missed"]),
-          "", "공고만 볼 때 생긴 불필요한 공부: " + (", ".join(f"{n}({c})" for n, c in ba["top_wasted"]) or "없음"), ""]
+    L += [f"## 4. 공고만 본 경로 vs 지원+실무 경로 — 가상 기업 시나리오 (같은 지원자 {ba['n']}명, 정답 상태 사용)", "",
+          "> 전제: 공고는 **입사 문턱**이고, 기업이 등록한 실무 기준은 **입사 후 실제로 쓰는 역량**입니다. "
+          "⚠ 기업 A·B·C의 실무 기준과 공고 문구는 **팀이 만든 가상 데이터**라, 이 절은 '실무 기준이 공고보다 넓을 때 "
+          "경로가 그 차이까지 다루는가'를 보는 시나리오 검증입니다. 실제 공고와 실무의 차이를 잰 실측이 아닙니다 "
+          "(공개 사례는 docs/EVIDENCE_POSTING_GAP.md).", "",
+          "| 경로 | 지원 갭 커버율 | 실무 갭 커버율 | 지원 갭을 먼저 배치 | 평균 경로 시간 |", "|---|---|---|---|---|",
+          f"| 역량다리 (지원 → 실무) | {pct(b['company']['apply_cov'])} | **{pct(b['company']['gap_cov'])}** | {pct(b['company']['apply_first'])} | {b['company']['hours']:.0f}h |",
+          f"| 공고 문구만 | {pct(b['posting']['apply_cov'])} | {pct(b['posting']['gap_cov'])} | — | {b['posting']['hours']:.0f}h |",
+          "", f"공고만 보면 입사 후 필요한 역량을 덜 준비하는 대신 시간이 {b['company']['hours'] - b['posting']['hours']:.0f}시간 적게 듭니다. "
+          "지원 갭 커버율은 두 경로 모두 높아야 정상입니다(공고 기준을 빼먹지 않는지 확인).",
+          "", f"실무 갭 커버율 95% 구간: 역량다리 {pct(b['company']['gap_cov_ci'][0])}–{pct(b['company']['gap_cov_ci'][1])} · "
+          f"공고만 {pct(b['posting']['gap_cov_ci'][0])}–{pct(b['posting']['gap_cov_ci'][1])} · "
+          f"차이 {b['diff_gap_cov']['ci'][0] * 100:+.1f} ~ {b['diff_gap_cov']['ci'][1] * 100:+.1f}%p "
+          f"(p(Δ≤0) = {b['diff_gap_cov']['p_le0']:.3f})",
+          "", "공고만 볼 때 준비 못 한 실무 역량: " + ", ".join(f"{n}({c})" for n, c in ba["top_missed"]),
+          "", "지원할 때만 보는 역량(실무 기준엔 없음): " + (", ".join(f"{n}({c})" for n, c in ba["top_wasted"]) or "없음"), ""]
 
     L += ["## 5. 라벨 일치도", ""]
     if ag["available"]:

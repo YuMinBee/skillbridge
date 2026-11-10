@@ -1,4 +1,4 @@
-"""BEDROCK_MOCK=0 경로를 가짜 Bedrock 클라이언트로 검증한다 (AWS 호출 없음).
+﻿"""BEDROCK_MOCK=0 경로를 가짜 Bedrock 클라이언트로 검증한다 (AWS 호출 없음).
 
 확인하는 것: 원문에 없는 근거 버림, 후보 밖 스킬 ID 거부, 인용 검증·재생성·템플릿 대체,
 trace에 호출 기록, 호출 실패 시 단계별 폴백.
@@ -144,7 +144,7 @@ def test_diagnose_bedrock_mode_records_calls(fake):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert r["mode"] == "bedrock" and r["fallbacks"] == []
-    assert len(r["trace"]) == 10
+    assert len(r["trace"]) == 11
     kinds = {c["kind"] for s in r["trace"] for c in s.get("calls", [])}
     assert {"guardrail", "extract", "explain"} <= kinds
     assert r["usage"]["calls"] >= 4
@@ -161,4 +161,4 @@ def test_each_step_falls_back_on_failure(fake, where):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert len(r["fallbacks"]) == 1
-    assert len(r["trace"]) == 10 and r["readiness"] >= 0
+    assert len(r["trace"]) == 11 and r["readiness"] >= 0

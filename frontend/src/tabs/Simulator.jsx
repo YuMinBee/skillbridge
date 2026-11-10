@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+﻿import { useEffect, useMemo, useState } from "react";
 import { api } from "../api.js";
 
 // 기업 기준 시뮬레이터: 요구역량을 바꾸면 우리 지원자 풀 중 '지원 가능선' 이상이 몇 %가 되는가.
@@ -52,7 +52,7 @@ export default function Simulator({ company, onApply }) {
   return (
     <div className="panel">
       <h2>기준 시뮬레이터 <span className="hint">(저장하지 않고 미리 계산)</span></h2>
-      <p className="hint">요구역량을 바꾸거나 우리 교육 트랙 이수를 가정하면, 지원자 풀 중 준비도 {r?.threshold ?? 70}점 이상이 몇 %가 되는지 바로 계산합니다.
+      <p className="hint">요구역량을 바꾸거나 우리 교육 트랙 이수를 가정하면, 지원자 풀 중 실무 준비도 {r?.threshold ?? 70}점 이상이 몇 %가 되는지 바로 계산합니다.
         취준생 진단과 같은 점수 공식을 씁니다.</p>
       {err && <p className="err">{err}</p>}
       {r && (

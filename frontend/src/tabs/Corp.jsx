@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+﻿import { useEffect, useState } from "react";
 import { api } from "../api.js";
 import { Bars } from "../ui.jsx";
 import Simulator from "./Simulator.jsx";
@@ -86,12 +86,15 @@ export default function Corp({ companies, corpVersion, active, onChanged }) {
         <>
           <div className="grid2">
             <div className="panel">
-              <h2>우리 회사 요구역량</h2>
-              <p className="hint">시장 빈도({c.market_scope})를 참고해 필수·우대를 정합니다. 바꾸면 취준생 진단에 바로 반영됩니다.</p>
+              <h2>입사 후 실무에 필요한 역량</h2>
+              <p className="hint">공고에는 입사 문턱만 적어도 됩니다. 여기에는 입사 후 실제로 쓰는 역량을 필수·우대로 등록하세요(시장 빈도: {c.market_scope}). 취준생 진단의 실무 준비도와 학습경로 ② 단계에 바로 반영됩니다. 시연용이라 바꾼 기준은 이 브라우저에만 적용되고(24시간), 원본과 다른 방문자 화면은 그대로입니다.</p>
+              {c.data_note && <p className="warn" role="note">{c.data_note}</p>}
               <div className="weights">
                 {c.requirements_view.map((r) => (
                   <div className="w" key={r.skill_id}>
-                    <span>{r.name}</span>
+                    <span>{r.name}{c.sources?.[r.skill_id] && (
+                      <a className="src" href={c.sources[r.skill_id].url} target="_blank" rel="noopener noreferrer"
+                        title={`${c.sources[r.skill_id].from}: “${c.sources[r.skill_id].quote}”`}> [{c.sources[r.skill_id].from}]</a>)}</span>
                     <span className="v num" title="시장 언급률">{r.market_pct}%</span>
                     <select aria-label={`${r.name} 구분`} value={r.weight} onChange={(e) => setWeight(r.skill_id, +e.target.value)}
                       disabled={r.weight > 0 && c.requirements_view.length === 1}>
@@ -170,8 +173,8 @@ export default function Corp({ companies, corpVersion, active, onChanged }) {
           <Simulator company={c} onApply={(reqs) => saveReqs(reqs, "시뮬레이터 기준을 적용했습니다. 취준생 진단에 반영됩니다.")} />
 
           <div className="panel">
-            <h2>기업 자료로 요구역량 초안 만들기</h2>
-            <p className="hint">JD·기술블로그 글·스택 설명을 붙여 넣거나 .md/.txt 파일을 올리면 요구역량 후보를 제안합니다. (지식베이스 적재는 M4)</p>
+            <h2>기업 자료로 실무 역량 초안 만들기</h2>
+            <p className="hint">실제 쓰는 기술은 공고보다 기술 블로그·온보딩 문서·스택 설명에 흩어져 있습니다. 붙여 넣거나 .md/.txt 파일을 올리면 실무 역량 후보를 제안하고, 우리 회사 문서(지식베이스)에서 근거 문단을 붙입니다.</p>
             <textarea value={doc} onChange={(e) => setDoc(e.target.value)} placeholder="예: 서비스는 EKS 위의 Kubernetes로 운영하고 Terraform으로 인프라를 관리합니다…" style={{ minHeight: 110 }} />
             <div className="row">
               <input type="file" accept=".md,.txt,text/plain,text/markdown" onChange={onDocFile} />

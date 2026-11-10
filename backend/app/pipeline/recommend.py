@@ -41,16 +41,32 @@ def _course_meta(c: dict) -> str:
     return " · ".join(b for b in bits if b)
 
 
+TIER_LABEL = {"apply": "지원 기준", "work": "실무 기준"}
+
+
+def tiered_gaps(requirements: dict[str, int], status_map: dict[str, dict],
+                apply_reqs: dict[str, int] | None = None) -> list[tuple[str, int, str, str]]:
+    """(스킬, 가중치, 상태, 단계) — 공고(지원 기준) 갭을 먼저, 기업이 등록한 실무 기준 갭을 나중에.
+    공고와 실무 기준에 모두 있으면 지원 단계로 보고 둘 중 큰 가중치를 쓴다."""
+    if not apply_reqs:
+        return [(s, w, st, "work") for s, w, st in gaps(requirements, status_map)]
+    out = [(s, max(w, requirements.get(s, 0)), st, "apply") for s, w, st in gaps(apply_reqs, status_map)]
+    out += [(s, w, st, "work") for s, w, st in gaps(requirements, status_map) if s not in apply_reqs]
+    return out
+
+
 def build_path(requirements: dict[str, int], status_map: dict[str, dict], company: dict,
-               weekly_hours: int) -> dict:
+               weekly_hours: int, apply_reqs: dict[str, int] | None = None) -> dict:
+    """requirements = 기업 실무 기준, apply_reqs = 공고(지원) 기준. apply_reqs가 있으면 두 기준의 갭을 모두 다룬다."""
     sd = get_dict()
     steps: list[dict] = []
     used_course: dict[str, dict] = {}
     used_track: set[str] = set()
 
-    for sid, w, st in gaps(requirements, status_map):
+    for sid, w, st, tier in tiered_gaps(requirements, status_map, apply_reqs):
         name = sd.name(sid)
-        base = {"skill_id": sid, "skill": name, "weight": w, "weight_label": WEIGHT_LABEL[w], "status": st}
+        base = {"skill_id": sid, "skill": name, "weight": w, "weight_label": WEIGHT_LABEL[w], "status": st,
+                "tier": tier, "tier_label": TIER_LABEL[tier]}
         if st == "verify":
             steps.append({**base, "kind": "proof", "title": f"{name} 결과물로 증명하기", "hours": PROOF_HOURS,
                           "meta": "이력서에 키워드만 있음 → 작은 실습 결과물(GitHub)과 README로 근거를 남기면 '보유'로 바뀝니다"})
@@ -112,7 +128,10 @@ def _market_fit(postings: list[dict[str, int]], status: dict) -> tuple[float, fl
     return sum(sc) / len(sc), sum(x >= QUALIFY for x in sc) / len(sc) * 100
 
 
-def optimize_order(path: dict, status_map: dict, requirements: dict[str, int], postings: list[dict[str, int]]) -> dict:
+def optimize_order(path: dict, status_map: dict, requirements: dict[str, int], postings: list[dict[str, int]],
+                   apply_reqs: dict[str, int] | None = None) -> dict:
+    """단계(지원 → 실무)는 지키고, 각 단계 안에서 시간당 효과가 큰 순으로 고른다.
+    보상: 지원 단계 = 지원 준비도 상승 + 시장 적합도 상승, 실무 단계 = 실무 준비도 상승 + 시장 적합도 상승."""
     from .score import readiness
 
     def apply(st, step):
@@ -120,29 +139,36 @@ def optimize_order(path: dict, status_map: dict, requirements: dict[str, int], p
         nxt = _AFTER[step["kind"]].get(cur, cur)
         return {**st, step["skill_id"]: {"status": nxt}}
 
+    areqs = apply_reqs or {}
     status = {k: {"status": v["status"]} for k, v in status_map.items()}
-    remaining = list(path["steps"])
-    r0 = readiness(requirements, status)
+    r0, a0 = readiness(requirements, status), readiness(areqs, status) if areqs else None
     f0, q0 = _market_fit(postings, status)
-    r_cur, f_cur, q_cur, ordered = r0, f0, q0, []
-    while remaining:
-        # 같은 스킬의 앞 단계가 남아 있으면 뒤 단계는 아직 고를 수 없다
-        firsts = [s for i, s in enumerate(remaining) if all(p["skill_id"] != s["skill_id"] for p in remaining[:i])]
-        best = None
-        for s in firsts:
-            st2 = apply(status, s)
-            r2 = readiness(requirements, st2)
-            f2, q2 = _market_fit(postings, st2)
-            gain = (r2 - r_cur) + (f2 - f_cur)
-            key = (gain / max(1, s["hours"]), gain, -s["hours"])
-            if best is None or key > best[0]:
-                best = (key, s, st2, r2, f2, q2)
-        _, s, status, r2, f2, q2 = best
-        s["gain"] = {"readiness": r2 - r_cur, "market_fit": round(f2 - f_cur, 1), "per_hour": round(best[0][0], 2),
-                     "readiness_after": r2, "market_fit_after": round(f2, 1), "qualified_after": round(q2, 1)}
-        r_cur, f_cur, q_cur = r2, f2, q2
-        ordered.append(s)
-        remaining.remove(s)
+    r_cur, a_cur, f_cur, q_cur, ordered = r0, a0, f0, q0, []
+    for tier in ("apply", "work"):
+        remaining = [s for s in path["steps"] if s.get("tier", "work") == tier]
+        target = areqs if tier == "apply" else requirements
+        while remaining:
+            # 같은 스킬의 앞 단계가 남아 있으면 뒤 단계는 아직 고를 수 없다
+            firsts = [s for i, s in enumerate(remaining) if all(p["skill_id"] != s["skill_id"] for p in remaining[:i])]
+            best = None
+            for s in firsts:
+                st2 = apply(status, s)
+                t_gain = readiness(target, st2) - readiness(target, status)
+                f2, q2 = _market_fit(postings, st2)
+                gain = t_gain + (f2 - f_cur)
+                key = (gain / max(1, s["hours"]), gain, -s["hours"])
+                if best is None or key > best[0]:
+                    best = (key, s, st2, f2, q2)
+            _, s, status, f2, q2 = best
+            r2 = readiness(requirements, status)
+            a2 = readiness(areqs, status) if areqs else None
+            s["gain"] = {"readiness": r2 - r_cur, "market_fit": round(f2 - f_cur, 1), "per_hour": round(best[0][0], 2),
+                         "readiness_after": r2, "market_fit_after": round(f2, 1), "qualified_after": round(q2, 1),
+                         "apply": (a2 - a_cur) if areqs else None, "apply_after": a2}
+            r_cur, a_cur, f_cur, q_cur = r2, a2, f2, q2
+            ordered.append(s)
+            remaining.remove(s)
     return {**path, "steps": ordered, "optimized": True,
+            "apply_before": a0, "apply_after": a_cur, "work_before": r0, "work_after": r_cur,
             "market": {"postings": len(postings), "fit_before": round(f0, 1), "fit_after": round(f_cur, 1),
                        "qualified_before": round(q0, 1), "qualified_after": round(q_cur, 1), "threshold": QUALIFY}}

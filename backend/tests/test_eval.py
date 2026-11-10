@@ -1,4 +1,4 @@
-"""M5 평가 스크립트가 오프라인에서 끝까지 돌고, 정답셋 형식이 맞는지."""
+﻿"""M5 평가 스크립트가 오프라인에서 끝까지 돌고, 정답셋 형식이 맞는지."""
 import json
 import subprocess
 import sys
@@ -40,4 +40,4 @@ def test_run_eval_offline_writes_report():
     d = next(x for x in res["postings"]["rows"] if x["stage"] == "dict")
     assert 0 < d["f1"] <= 1
     assert res["baseline"]["agg"]["company"]["gap_cov"] >= res["baseline"]["agg"]["posting"]["gap_cov"]
-    assert "## 4. 공고만 본 추천" in (EV / "report.md").read_text(encoding="utf-8")
+    assert "## 4. 공고만 본 경로" in (EV / "report.md").read_text(encoding="utf-8")
