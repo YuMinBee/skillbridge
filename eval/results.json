@@ -1,5 +1,5 @@
 {
- "at": "2026-11-13 16:11",
+ "at": "2026-11-13 16:25",
  "live": false,
  "postings": {
   "n": 30,
@@ -49,12 +49,12 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "cert_info_processing"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-293827",
@@ -124,12 +124,12 @@
      {
       "id": "ALIO-293174",
       "type": "FN",
-      "skill": "cert_info_processing"
+      "skill": "cert_network"
      },
      {
       "id": "ALIO-293174",
       "type": "FN",
-      "skill": "cert_network"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-303957",
@@ -176,12 +176,12 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "cert_info_processing"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-293827",
@@ -216,12 +216,12 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "paper_research"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "paper_research"
      },
      {
       "id": "ALIO-302970",
@@ -320,12 +320,12 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "paper_research"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "paper_research"
      },
      {
       "id": "ALIO-295014",
@@ -444,12 +444,12 @@
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "cert_info_processing"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-304989",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "cert_info_processing"
      },
      {
       "id": "ALIO-300068",
@@ -469,12 +469,12 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "paper_research"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "paper_research"
      },
      {
       "id": "ALIO-302970",
@@ -920,11 +920,11 @@
     7
    ],
    [
-    "엣지 AI",
+    "C++",
     6
    ],
    [
-    "C++",
+    "엣지 AI",
     6
    ],
    [

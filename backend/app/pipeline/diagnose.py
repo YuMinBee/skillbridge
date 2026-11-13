@@ -10,8 +10,9 @@ from contextlib import contextmanager
 
 from ..adapters import bedrock, storage
 from ..guards import pii
+from ..data import seed_companies
 from ..skills import get_dict
-from . import implies, market
+from . import implies, market, projectfit
 from .extract import STATUS_LABEL, extract_posting_llm, extract_resume, extract_resume_llm, posting_requirements, \
     requirements_from
 from .recommend import build_path, optimize_order
@@ -177,6 +178,18 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         others.sort(key=lambda x: -x["readiness"])
         s["detail"] = f"{len(others)}개 기업"
 
+    with tr.step("프로젝트 적합도", "rules.projectfit (경험 단위 × 부서 실무 기준 · 도메인 단어)") as s:
+        seeds = seed_companies()
+
+        def with_domain(c):  # 로컬 DB에 예전 설정이 남아 있어도 도메인 단어는 seed에서 채운다
+            return c if c.get("domain") else {**c, "domain": seeds.get(c["tenant_id"], {}).get("domain")}
+
+        pfit = projectfit.assess(masked, status_map, with_domain(company), reqs)
+        for o in others:
+            c = storage.get_company(o["company_id"])
+            o["project_fit"] = projectfit.best_fit(masked, status_map, with_domain(c), effective_requirements(c))
+        s["detail"] = f"경험 {pfit['n_units']}개 · 가장 맞는 경험 {pfit['best_fit']}점 · {pfit['verdict_label']}"
+
     # 근거 목록: 추천 설명은 이 목록의 ID만 인용할 수 있다
     evidence: dict[str, dict] = {}
 
@@ -261,6 +274,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         "matrix": matrix,
         "path": path,
         "baseline": baseline,
+        "project_fit": pfit,
         "others": others,
         "evidence": evidence,
         "trace": tr.steps,

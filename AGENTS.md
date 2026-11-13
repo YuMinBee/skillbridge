@@ -31,7 +31,7 @@
 
 | 경로 | 내용 |
 |---|---|
-| `backend/app/` | FastAPI. `pipeline/`(extract·normalize·score·recommend·diagnose·coach·market·simulate·supply·digital), `adapters/`(bedrock·athena·kb·storage[SQLite/DynamoDB]), `routers/`(market·diagnose·corp·coach), `guards/`(pii, limits: 샌드박스·IP/시간당 상한) |
+| `backend/app/` | FastAPI. `pipeline/`(extract·normalize·implies·score·projectfit·recommend·diagnose·coach·market·simulate·supply·digital), `adapters/`(bedrock·athena·kb·storage[SQLite/DynamoDB]), `routers/`(market·diagnose·corp·coach), `guards/`(pii, limits: 샌드박스·IP/시간당 상한) |
 | `frontend/src/` | React + Vite. 탭: 시장 분석(Market·Digital·SupplyMap·Quality), 취준생 진단, 기업 콘솔(Corp·Simulator) |
 | `data/skills.csv` | 스킬 사전 171개 (한·영 별칭) |
 | `seed/` | 기업 A~H(가상 3·공개 재구성 1·현업 청취 4), 예시 지원자, 기업 문서(`corp-docs/{A,B,C}`), 실데이터 공고(`market/postings_live.jsonl`, 잡알리오 11,637건), 고용24 과정 |
@@ -44,7 +44,7 @@
 ```powershell
 .\tasks.ps1 setup          # .venv, npm install, .env 생성 (.env.example 복사 → 값 채우기)
 .\tasks.ps1 run            # API :8010 + 웹 :5173
-.\tasks.ps1 test           # pytest 69개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
+.\tasks.ps1 test           # pytest 72개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
 .\tasks.ps1 eval           # AWS 없이, 저장된 예측으로 eval/report.md 재생성
 ```
 
@@ -61,6 +61,7 @@
 | M4 기업 지식베이스 | 🟡 코드 완료(`adapters/kb.py`, tenant 필터 서버 강제, 다른 회사 결과 이중 차단, 테스트 포함). KB 생성(`infra/build_kb.py --yes`)은 아직 안 함 |
 | M5 평가 | ✅ Bedrock 실측 + 95% 신뢰구간. 2차 라벨(κ)만 남음 |
 | 공개 배포 가드 | ✅ 방문자 샌드박스(기업 설정 원본 보호), IP당 분당 8회, 시간당 Bedrock 상한 → 규칙 엔진, Lambda 동시 실행 3, DynamoDB 저장소 |
+| 현업 청취 반영 | ✅ 기업 E~H(멘토 경유 실제 부서 기준), 상하위 스킬 보완(`pipeline/implies.py`), **프로젝트 적합도**(`pipeline/projectfit.py`). 경계값·도메인 단어는 멘토링에서 검증 필요 |
 | 학습 코치 에이전트 | ✅ `pipeline/coach.py`: Converse 도구 선택 루프(도구 5개), tenant 고정, 과정 인용 검증, 규칙 플래너 폴백 |
 | M6 배포 | 🟡 `infra/deploy.py` 완료(로컬 빌드 11.5MB 확인). **실제 배포는 팀장 승인 대기** |
 

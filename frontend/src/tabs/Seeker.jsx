@@ -214,6 +214,43 @@ function Coach({ r }) {
 const EV_TYPE = { corp: "기업 기준", market: "시장", resume: "이력서", posting: "공고 문장", plan: "경로 효과(계산)" };
 const HOW = { dict: "별칭 사전", "dict-std": "LLM 표준명 → 사전", llm: "임베딩 후보 → LLM 선택", "dict-rule": "사전 + 규칙 판정(안전망)" };
 
+const VERDICT_CLS = { fit: "own", partial: "part", far: "miss" };
+
+function ProjectFit({ pf, company }) {
+  return (
+    <div className="panel">
+      <h2>프로젝트 적합도 · {company.job_title || company.name}</h2>
+      <p className="hint">현업 청취: “{pf.quote.replace(" (현업 청취)", "")}” 스킬을 가졌는지가 아니라, <b>경험 하나</b>가 이 부서 실무 기준을 얼마나 보여주는지 규칙으로 잽니다{pf.domain_label ? ` (부서 도메인: ${pf.domain_label})` : ""}.</p>
+      <div className="row"><StatusChip status={VERDICT_CLS[pf.verdict]}>{pf.verdict_label}</StatusChip><span className="hint">가장 맞는 경험 <span className="num">{pf.best_fit}</span>점 · 경험 {pf.n_units}개</span></div>
+      {pf.units.length > 0 ? (
+        <ul className="pf">
+          {pf.units.map((u, i) => (
+            <li key={i}>
+              <div className="pf-bar" aria-hidden="true"><i style={{ width: `${u.fit}%` }} /></div>
+              <span className="num">{u.fit}</span>
+              <div>
+                <div>{u.text}</div>
+                <div className="row">
+                  {u.matched.map((m) => <StatusChip key={m.skill_id} status={m.status}>{m.name}</StatusChip>)}
+                  {u.domain.length > 0 && <span className="chip">도메인 일치: {u.domain.join(", ")}</span>}
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      ) : <p className="empty">이 부서 기준과 겹치는 프로젝트·인턴·연구 경험이 없습니다.</p>}
+      {pf.mini_project && (
+        <div className="mini">
+          <h4>이 부서용 미니 프로젝트 제안 · {pf.mini_project.title}</h4>
+          <div className="m">스킬: {pf.mini_project.skills.join(", ")}</div>
+          <ul>{pf.mini_project.show.map((x, i) => <li key={i}><b>{x.skill}</b> — 결과물에 보여줄 것: {x.what}</li>)}</ul>
+          <p className="hint">{pf.mini_project.note}</p>
+        </div>
+      )}
+    </div>
+  );
+}
+
 function Result({ r }) {
   const p = r.path, b = r.baseline;
   return (
@@ -250,6 +287,8 @@ function Result({ r }) {
           </table>
         </div>
       </div>
+
+      {r.project_fit && <ProjectFit pf={r.project_fit} company={r.company} />}
 
       <div className="panel">
         <h2>맞춤 학습경로</h2>
@@ -316,7 +355,7 @@ function Result({ r }) {
         <p className="hint">같은 프로필이 기업마다 다른 준비도와 첫 학습 과제를 받습니다.</p>
         <Bars unit="" rows={r.others.map((o) => ({
           key: o.company_id, label: o.name.replace("(가상)", ""), value: o.readiness, cls: o.current ? "" : "alt",
-          note: o.first_task ? `첫 과제: ${o.first_task}` : "갭 없음",
+          note: `${o.first_task ? `첫 과제: ${o.first_task}` : "갭 없음"}${o.project_fit != null ? ` · 가장 맞는 경험 ${o.project_fit}점` : ""}`,
         }))} />
       </div>
     </>

@@ -17,7 +17,39 @@
   "excluded": [],
   "posting_text": "담당업무\n- 고객사 클라우드 인프라 운영 및 장애 대응\n자격요건\n- AWS 서비스 운영 경험\n- Linux 서버 관리 경험\n우대사항\n- 네트워크 기본 지식\n- Python 스크립트 작성 가능자\n- Docker 사용 경험",
   "tracks": [
-    {"id": "B-T1", "skills": ["terraform", "iac"], "title": "고객사 환경 IaC 템플릿 실습", "hours": 12, "benefit": "이수 시 인턴 면접 기회 (가상)"},
-    {"id": "B-T2", "skills": ["observability", "prometheus"], "title": "장애 대응·관측성 실습", "hours": 10, "benefit": ""}
-  ]
+    {
+      "id": "B-T1",
+      "skills": [
+        "terraform",
+        "iac"
+      ],
+      "title": "고객사 환경 IaC 템플릿 실습",
+      "hours": 12,
+      "benefit": "이수 시 인턴 면접 기회 (가상)"
+    },
+    {
+      "id": "B-T2",
+      "skills": [
+        "observability",
+        "prometheus"
+      ],
+      "title": "장애 대응·관측성 실습",
+      "hours": 10,
+      "benefit": ""
+    }
+  ],
+  "domain": {
+    "label": "클라우드 운영",
+    "keywords": [
+      "운영",
+      "인프라",
+      "클라우드",
+      "서버",
+      "모니터링",
+      "장애",
+      "배포",
+      "MSP"
+    ],
+    "note": "팀이 정한 도메인 단어 (프로젝트 적합도용)"
+  }
 }

@@ -16,15 +16,56 @@
     "elk": 1
   },
   "sources": {
-    "llm": {"from": "공고", "url": "https://toss.im/career/job-detail?job_id=7575603003", "quote": "LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요."},
-    "nlp": {"from": "공고", "url": "https://toss.im/career/job-detail?job_id=7575603003", "quote": "LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요."},
-    "mlops": {"from": "기술 블로그", "url": "https://toss.tech/article/tech_talk_talk_2", "quote": "vLLM이나 SGLang 같은 서빙 프레임워크가 제공하는 지표들이 있었어요. / 그래서 ML 플랫폼을 직접 구축했습니다."},
-    "kubernetes": {"from": "기술 블로그", "url": "https://toss.tech/article/tech_talk_talk_2", "quote": "토스증권은 쿠버네티스, Argo CD 같은 여러 기술 스택 위에서 움직여요."},
-    "argocd": {"from": "기술 블로그", "url": "https://toss.tech/article/tech_talk_talk_2", "quote": "토스증권은 쿠버네티스, Argo CD 같은 여러 기술 스택 위에서 움직여요."},
-    "grafana": {"from": "기술 블로그", "url": "https://toss.tech/article/tech_talk_talk_2", "quote": "Grafana — 메트릭을 수집해 추이와 이상을 탐지"},
-    "elk": {"from": "기술 블로그", "url": "https://toss.tech/article/tech_talk_talk_2", "quote": "Kibana — 단건 로그를 확인"}
+    "llm": {
+      "from": "공고",
+      "url": "https://toss.im/career/job-detail?job_id=7575603003",
+      "quote": "LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요."
+    },
+    "nlp": {
+      "from": "공고",
+      "url": "https://toss.im/career/job-detail?job_id=7575603003",
+      "quote": "LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요."
+    },
+    "mlops": {
+      "from": "기술 블로그",
+      "url": "https://toss.tech/article/tech_talk_talk_2",
+      "quote": "vLLM이나 SGLang 같은 서빙 프레임워크가 제공하는 지표들이 있었어요. / 그래서 ML 플랫폼을 직접 구축했습니다."
+    },
+    "kubernetes": {
+      "from": "기술 블로그",
+      "url": "https://toss.tech/article/tech_talk_talk_2",
+      "quote": "토스증권은 쿠버네티스, Argo CD 같은 여러 기술 스택 위에서 움직여요."
+    },
+    "argocd": {
+      "from": "기술 블로그",
+      "url": "https://toss.tech/article/tech_talk_talk_2",
+      "quote": "토스증권은 쿠버네티스, Argo CD 같은 여러 기술 스택 위에서 움직여요."
+    },
+    "grafana": {
+      "from": "기술 블로그",
+      "url": "https://toss.tech/article/tech_talk_talk_2",
+      "quote": "Grafana — 메트릭을 수집해 추이와 이상을 탐지"
+    },
+    "elk": {
+      "from": "기술 블로그",
+      "url": "https://toss.tech/article/tech_talk_talk_2",
+      "quote": "Kibana — 단건 로그를 확인"
+    }
   },
   "excluded": [],
   "posting_text": "담당업무\n- 분류, 추출, 요약, 번역 등 텍스트 기반 문제에 맞는 모델을 직접 학습해요.\n- 실제 서비스 환경에 모델을 서빙하고 안정적으로 운영해요.\n자격요건\n- LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요.\n우대사항\n- 다국어 텍스트 데이터를 다루거나, 다국어(cross-lingual) 모델을 학습·평가해 본 경험이 있으면 더 좋아요.",
-  "tracks": []
+  "tracks": [],
+  "domain": {
+    "label": "증권·금융 ML",
+    "keywords": [
+      "증권",
+      "금융",
+      "투자",
+      "주식",
+      "LLM",
+      "NLP",
+      "자연어"
+    ],
+    "note": "팀이 정한 도메인 단어 (프로젝트 적합도용)"
+  }
 }

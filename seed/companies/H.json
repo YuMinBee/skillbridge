@@ -49,5 +49,18 @@
   "excluded": [],
   "posting_text": "",
   "tracks": [],
-  "work_source": "현업 필수+우대"
+  "work_source": "현업 필수+우대",
+  "domain": {
+    "label": "게임 클라이언트",
+    "keywords": [
+      "게임",
+      "유니티",
+      "Unity",
+      "클라이언트",
+      "출시",
+      "스토어",
+      "UI"
+    ],
+    "note": "팀이 정한 도메인 단어 (프로젝트 적합도용)"
+  }
 }

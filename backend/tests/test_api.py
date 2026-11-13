@@ -137,3 +137,23 @@ def test_child_skill_implies_parent(client):
     row = next(x for x in d["matrix"] if x["skill_id"] == "sql")
     assert row["status"] == "own" and "MySQL 근거로 인정" in row["evidence"]
     assert "sql" not in {g["skill_id"] for g in d["baseline"]["gaps_posting"]}
+
+
+def test_project_fit_depends_on_department(client):
+    """현업: '그 부서에 맞는 경험이었는지'. 같은 이력서라도 게임 부서엔 맞고 서비스 운영 부서엔 안 맞는다."""
+    resume = ("[프로젝트]\n- 게임 동아리에서 Unity와 C#으로 모바일 퍼즐 게임을 개발해 스토어에 출시함\n"
+              "  UGUI로 인벤토리 화면과 버튼 이벤트를 구현함\n[보유기술] Docker")
+    h = client.post("/api/diagnose", json={"company_id": "H", "resume_text": resume}).json()["project_fit"]
+    assert h["verdict"] == "fit" and h["mini_project"] is None
+    assert "게임" in h["units"][0]["domain"] and {"unity", "csharp", "ugui"} <= {m["skill_id"] for m in h["units"][0]["matched"]}
+    f = client.post("/api/diagnose", json={"company_id": "F", "resume_text": resume}).json()
+    pf = f["project_fit"]
+    assert pf["verdict"] != "fit" and pf["mini_project"]
+    assert any("Docker를 활용한 컨테이너" in x["what"] for x in pf["mini_project"]["show"])  # 현업 문항 원문
+    assert next(o for o in f["others"] if o["company_id"] == "H")["project_fit"] == h["best_fit"]
+
+
+def test_project_units_skip_skill_lists():
+    from app.pipeline.projectfit import units
+    u = units("[보유기술] Docker, Python\n- 졸업작품: 쇼핑몰 백엔드 개발\n  REST API 설계\n[학력] OO대")
+    assert u == ["- 졸업작품: 쇼핑몰 백엔드 개발 REST API 설계"]

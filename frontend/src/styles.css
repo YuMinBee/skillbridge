@@ -231,3 +231,14 @@ details.ev b{font-family:var(--font-data);font-weight:500;color:var(--fg)}
 .ring.alt { background: conic-gradient(var(--muted) calc(var(--p) * 1%), var(--surface-2) 0); }
 
 .weights .src { font-size: 11px; color: var(--muted); margin-left: 4px; }
+
+/* 프로젝트 적합도 */
+.pf{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:10px}
+.pf li{display:grid;grid-template-columns:72px 28px minmax(0,1fr);gap:10px;align-items:start;font-size:14px}
+.pf-bar{height:8px;margin-top:6px;background:var(--surface-2);border-radius:4px;overflow:hidden}
+.pf-bar i{display:block;height:100%;background:var(--accent);border-radius:0 4px 4px 0}
+.pf .row{margin-top:4px}
+.mini{margin-top:14px;padding:12px 14px;border:1px dashed var(--line);border-radius:8px;background:var(--surface-2)}
+.mini h4{margin:0 0 6px;font-size:14px}
+.mini ul{margin:6px 0;padding-left:18px;font-size:13px}
+@media (max-width:520px){.pf li{grid-template-columns:48px 24px minmax(0,1fr)}}
