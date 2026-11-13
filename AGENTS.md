@@ -1,7 +1,7 @@
 ﻿# 작업 인수인계 (AI 코딩 도구용)
 
 > Claude Code는 `CLAUDE.md`를, Codex는 이 파일을 자동으로 읽습니다. 사람이 읽어도 됩니다.
-> 작업이 끝나면 아래 **현재 상태**와 **다음 할 일**을 갱신하고 커밋하세요. 마지막 갱신: 2026-11-10 (변유민 + Claude).
+> 작업이 끝나면 아래 **현재 상태**와 **다음 할 일**을 갱신하고 커밋하세요. 마지막 갱신: 2026-11-13 (변유민 + Claude).
 
 ## 프로젝트 한 줄
 
@@ -10,7 +10,7 @@
 - 채점: 문제해결력, 현장 적용성, 창의성, 전달력, AWS 활용도·팀워크 (각 20점). 항목별 목표와 진행 상황은 [docs/SCORECARD.md](docs/SCORECARD.md)에 있다.
 - 명세: [docs/역량다리_구현명세.md](docs/역량다리_구현명세.md). 설계 결정과 이유: [DECISIONS.md](DECISIONS.md). 역할: [docs/TEAM.md](docs/TEAM.md).
 - 시연 흐름(5분): [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)
-- 문제 근거(공고 vs 실제 기술, 공개 사례 5건): [docs/EVIDENCE_POSTING_GAP.md](docs/EVIDENCE_POSTING_GAP.md). 기업 A·B·C는 가상이고, 실제 기업 기준은 멘토(김민관 대표)께 요청 중
+- 문제 근거(공고 vs 실제 기술, 공개 사례 5건): [docs/EVIDENCE_POSTING_GAP.md](docs/EVIDENCE_POSTING_GAP.md). 기업 A·B·C는 가상, D는 공개 자료 재구성, **E~H는 멘토(김민관 대표)를 통한 현업 청취 기준**([docs/INTERVIEWS.md](docs/INTERVIEWS.md))
 
 ## 반드시 지킬 규칙
 
@@ -33,8 +33,8 @@
 |---|---|
 | `backend/app/` | FastAPI. `pipeline/`(extract·normalize·score·recommend·diagnose·coach·market·simulate·supply·digital), `adapters/`(bedrock·athena·kb·storage[SQLite/DynamoDB]), `routers/`(market·diagnose·corp·coach), `guards/`(pii, limits: 샌드박스·IP/시간당 상한) |
 | `frontend/src/` | React + Vite. 탭: 시장 분석(Market·Digital·SupplyMap·Quality), 취준생 진단, 기업 콘솔(Corp·Simulator) |
-| `data/skills.csv` | 스킬 사전 161개 (한·영 별칭) |
-| `seed/` | 가상 기업 A·B·C, 예시 지원자, 기업 문서(`corp-docs/{A,B,C}`), 실데이터 공고(`market/postings_live.jsonl`, 잡알리오 11,637건), 고용24 과정 |
+| `data/skills.csv` | 스킬 사전 171개 (한·영 별칭) |
+| `seed/` | 기업 A~H(가상 3·공개 재구성 1·현업 청취 4), 예시 지원자, 기업 문서(`corp-docs/{A,B,C}`), 실데이터 공고(`market/postings_live.jsonl`, 잡알리오 11,637건), 고용24 과정 |
 | `collectors/` | 고용24·잡알리오 수집기 (키 필요) |
 | `eval/` | 정답셋, `run_eval.py`, 저장된 Bedrock 예측(`predictions/`), 결과(`report.md`·`results.json`), 라벨 규칙(`LABELING.md`), 설문(`SURVEY.md`) |
 | `infra/` | `template.yaml`(CloudFormation: Lambda 함수 URL, Glue, Athena), `deploy.py`, `build_kb.py`(Bedrock KB + S3 Vectors) |
@@ -44,7 +44,7 @@
 ```powershell
 .\tasks.ps1 setup          # .venv, npm install, .env 생성 (.env.example 복사 → 값 채우기)
 .\tasks.ps1 run            # API :8010 + 웹 :5173
-.\tasks.ps1 test           # pytest 67개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
+.\tasks.ps1 test           # pytest 69개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
 .\tasks.ps1 eval           # AWS 없이, 저장된 예측으로 eval/report.md 재생성
 ```
 

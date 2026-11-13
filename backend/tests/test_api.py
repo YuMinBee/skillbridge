@@ -108,3 +108,15 @@ def test_path_puts_apply_tier_before_work_tier(client):
     assert all(s["skill_id"] in preq for s in r["path"]["steps"] if s["tier"] == "apply")
     assert 0 <= r["readiness_apply"] <= 100 and r["readiness_apply"] == r["baseline"]["readiness_posting"]
     assert {m["tier"] for m in r["matrix"]} <= {"apply", "work"}
+
+
+def test_interview_company_uses_stated_must_haves_as_apply_tier(client):
+    """공고가 없는 현업 청취 기업: '필수'가 지원 기준, 필수+우대가 실무 기준."""
+    c = client.get("/api/companies/F").json()
+    assert c["apply_requirements"] == {"docker": 2, "networking": 2, "rest_api": 2}
+    assert all(not s.get("url") for s in c["sources"].values())
+    d = client.post("/api/diagnose", json={"company_id": "F", "resume_text":
+                    "Docker로 서비스를 배포하고 운영했습니다. Nginx 리버스 프록시를 구축했습니다."}).json()
+    tiers = {m["skill_id"]: m["tier"] for m in d["matrix"]}
+    assert tiers["docker"] == tiers["rest_api"] == "apply" and tiers["nginx"] == "work"
+    assert any("현업 필수" in s["detail"] for s in d["trace"])

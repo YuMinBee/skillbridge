@@ -37,7 +37,7 @@ class Ctx:
 # ---------------------------------------------------------------- 도구
 def t_company_criteria(ctx: Ctx) -> dict:
     sd = get_dict()
-    preqs = posting_requirements(ctx.company.get("posting_text", ""))
+    preqs = ctx.company.get("apply_requirements") or posting_requirements(ctx.company.get("posting_text", ""))
     return {"company": ctx.company["name"],
             "apply_requirements": [{"skill_id": s, "name": sd.name(s), "weight": WEIGHT_LABEL[w],
                                     "my_status": ctx.status_map.get(s, {}).get("status", "miss")} for s, w in preqs.items()],

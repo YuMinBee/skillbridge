@@ -123,7 +123,7 @@ def dynamo_storage():
 def test_dynamo_backend_roundtrip(dynamo_storage):
     storage, fake = dynamo_storage
     ids = [c["tenant_id"] for c in storage.list_companies()]
-    assert ids == ["A", "B", "C", "D"]                              # 페이지 넘김 포함
+    assert ids == ["A", "B", "C", "D", "E", "F", "G", "H"]                              # 페이지 넘김 포함
     storage.update_company("B", desc="바뀜")
     assert storage.get_company("B")["desc"] == "바뀜"
     tok = storage.set_sandbox(SB1)

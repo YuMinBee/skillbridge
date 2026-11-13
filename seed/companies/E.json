@@ -1,0 +1,52 @@
+{
+  "tenant_id": "E",
+  "name": "현업① 군수납품 업체",
+  "desc": "군수납품 · 실제 부서 기준(익명)",
+  "region": "미상",
+  "job": "public_it",
+  "job_title": "제품 품질 관리",
+  "data_note": "현업 청취 자료입니다. 멘토(김민관 대표)가 업체 대표·인사 담당자에게 들은 부서별 기준을 2026-11-13에 받아 옮겼습니다. 업체명은 익명입니다. 공개 공고가 없어서 현업이 '필수'라고 한 항목을 지원 기준으로, 필수+우대를 실무 기준으로 씁니다. 스킬 사전에 맞춘 대응은 팀이 정했습니다(문항 원문은 출처 표시에 있음).",
+  "apply_source": "현업 필수",
+  "apply_requirements": {
+    "electronics": 2,
+    "python": 2
+  },
+  "requirements": {
+    "electronics": 2,
+    "python": 2,
+    "c_lang": 1,
+    "defense_domain": 1,
+    "computer_vision": 1,
+    "cert_info_processing": 1
+  },
+  "sources": {
+    "electronics": {
+      "from": "현업 필수",
+      "quote": "전자 회로 지식 보유"
+    },
+    "python": {
+      "from": "현업 필수",
+      "quote": "기초적인 프로그래밍 언어 사용 경험 보유 (언어 무관 → 과정 매칭을 위해 Python으로 대응)"
+    },
+    "c_lang": {
+      "from": "현업 우대",
+      "quote": "C언어, 파이썬에 대한 전문적 역량"
+    },
+    "defense_domain": {
+      "from": "현업 우대",
+      "quote": "미사일, 레이다, 드론 관련 프로젝트 경험 보유"
+    },
+    "computer_vision": {
+      "from": "현업 우대",
+      "quote": "드론에서 응용 가능한 영상처리 경험 보유"
+    },
+    "cert_info_processing": {
+      "from": "현업 우대",
+      "quote": "정보처리기사 자격증"
+    }
+  },
+  "excluded": [],
+  "posting_text": "",
+  "tracks": [],
+  "work_source": "현업 필수+우대"
+}

@@ -65,7 +65,9 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
 
     # 공고 추출은 이력서와 무관하므로 먼저 병렬로 시작한다 (같은 공고 본문은 캐시)
     pool = ThreadPoolExecutor(max_workers=1)
-    fut_posting = None if mock else pool.submit(extract_posting_llm, company.get("posting_text", ""), plog)
+    apply_src = company.get("apply_source", "공고")
+    explicit_apply = company.get("apply_requirements")  # 공고가 없는 기업: 현업이 말한 '필수' 항목을 지원 기준으로
+    fut_posting = None if (mock or explicit_apply) else pool.submit(extract_posting_llm, company.get("posting_text", ""), plog)
 
     with tr.step("개인정보 마스킹", "guard.regex_mask" if mock else "guard.regex_mask → bedrock.apply_guardrail(PII)") as s:
         masked, n_pii = pii.mask(resume_text)
@@ -123,9 +125,12 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
                 fallbacks.append(f"공고 추출: {e}")
                 s["tool"] = "rules.posting_requirements (Bedrock 실패 → 폴백)"
         pool.shutdown(wait=False)
+        if explicit_apply:
+            preqs = dict(explicit_apply)
+            s["tool"] = "company.apply_requirements (현업 인터뷰 필수 항목)"
         if preqs is None:
             preqs = posting_requirements(company.get("posting_text", ""))
-        s["detail"] = f"공고 요구 {len(preqs)}개 (입사 문턱)"
+        s["detail"] = f"{apply_src} 요구 {len(preqs)}개 (입사 문턱)"
 
     with tr.step("준비도 계산", "rules.readiness × (공고 지원 기준, 기업 실무 기준)") as s:
         score = readiness(reqs, status_map)
@@ -188,9 +193,9 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
             if sid not in ev_by_skill:
                 ids = []
                 if sid in preqs:
-                    ids.append(add_ev("apply", f"{company['name']} 공고 지원 기준: {WEIGHT_LABEL[preqs[sid]]}"))
+                    ids.append(add_ev("apply", f"{company['name']} {apply_src} 지원 기준: {WEIGHT_LABEL[preqs[sid]]}"))
                 if sid in reqs:
-                    ids.append(add_ev("corp", f"{company['name']} 등록 실무 기준: {WEIGHT_LABEL[reqs[sid]]}"))
+                    ids.append(add_ev("corp", f"{company['name']} {company.get('work_source', '등록')} 실무 기준: {WEIGHT_LABEL[reqs[sid]]}"))
                 if sid in mrate:
                     ids.append(add_ev("market", f"시장 언급률 {mrate[sid]:.0f}% ({company.get('region')})"))
                 if sid in status_map:

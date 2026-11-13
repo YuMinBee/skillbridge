@@ -1,0 +1,48 @@
+{
+  "tenant_id": "F",
+  "name": "현업② 웹 서비스 업체",
+  "desc": "웹 서비스 개발 · 실제 부서 기준(익명)",
+  "region": "미상",
+  "job": "public_it",
+  "job_title": "서비스 운영",
+  "data_note": "현업 청취 자료입니다. 멘토(김민관 대표)가 업체 대표·인사 담당자에게 들은 부서별 기준을 2026-11-13에 받아 옮겼습니다. 업체명은 익명입니다. 공개 공고가 없어서 현업이 '필수'라고 한 항목을 지원 기준으로, 필수+우대를 실무 기준으로 씁니다. 스킬 사전에 맞춘 대응은 팀이 정했습니다(문항 원문은 출처 표시에 있음).",
+  "apply_source": "현업 필수",
+  "apply_requirements": {
+    "docker": 2,
+    "networking": 2,
+    "rest_api": 2
+  },
+  "requirements": {
+    "docker": 2,
+    "networking": 2,
+    "rest_api": 2,
+    "security": 1,
+    "nginx": 1
+  },
+  "sources": {
+    "docker": {
+      "from": "현업 필수",
+      "quote": "Docker를 활용한 컨테이너 기반 서비스 배포 및 격리 환경 관리 경험"
+    },
+    "networking": {
+      "from": "현업 필수",
+      "quote": "클라우드 인프라 네트워크 구조에 대한 이해"
+    },
+    "rest_api": {
+      "from": "현업 필수",
+      "quote": "REST API에 대한 기본적인 이해도"
+    },
+    "security": {
+      "from": "현업 우대",
+      "quote": "보안 관련 프로젝트 경험"
+    },
+    "nginx": {
+      "from": "현업 우대",
+      "quote": "nginx를 활용한 리버스 프록시 웹 서버 구축 및 포트 포워딩 설정"
+    }
+  },
+  "excluded": [],
+  "posting_text": "",
+  "tracks": [],
+  "work_source": "현업 필수+우대"
+}

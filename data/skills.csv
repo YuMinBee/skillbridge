@@ -160,3 +160,13 @@ cert_network,네트워크·통신 자격증,자격증,정보통신기사|네트�
 stat_tool,통계 분석 도구,데이터,통계프로그램|통계 프로그램|통계패키지|통계 패키지|통계소프트웨어|통계 소프트웨어|사회조사분석사,SAS|SPSS|STATA,,,0
 gen_ai_use,생성형 AI 활용,AI활용,생성형 AI 활용|생성형AI 활용|생성형 AI를 활용|챗GPT|챗지피티,ChatGPT|Copilot,,,0
 ai_general,인공지능(AI),머신러닝,인공지능|AI 관련|AI 분야|AI 기술|AI 사업|AI 연구|의료 AI|AI융합,Artificial Intelligence,,,0
+c_lang,C언어,언어,C언어|C 언어,C language|ANSI C,,,0
+electronics,전자 회로,하드웨어,전자 회로|전자회로|회로 설계|회로 지식|회로 이해,circuit design|electronic circuit,,,0
+defense_domain,방산·드론 도메인,도메인,방산|군수|미사일|레이다|레이더|드론,defense|radar|drone|UAV,,,0
+unity,Unity,게임,유니티,Unity|Unity3D,,,0
+ugui,Unity UI(UGUI),게임,UGUI|유니티 UI,UGUI|Unity UI,,,0
+game_resource,패치·동적 리소스 관리,게임,패치 시스템|에셋 번들|어드레서블|동적 리소스,AssetBundle|Addressables,,,0
+rendering_opt,렌더링 최적화,게임,렌더링 최적화|드로우콜,rendering optimization|draw call,,,0
+perf_opt,메모리·프레임 최적화,게임,메모리 최적화|프레임 최적화|프로파일링,frame optimization|memory optimization|profiling,,,0
+data_modeling,데이터 모델링,DB,데이터 모델링|DB 설계|ERD,data modeling|ERD,,,0
+query_tuning,쿼리 튜닝,DB,실행 계획|쿼리 튜닝|인덱스 설계|인덱스 활용,EXPLAIN|query tuning|execution plan,,,0

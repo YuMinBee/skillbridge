@@ -92,9 +92,10 @@ export default function Corp({ companies, corpVersion, active, onChanged }) {
               <div className="weights">
                 {c.requirements_view.map((r) => (
                   <div className="w" key={r.skill_id}>
-                    <span>{r.name}{c.sources?.[r.skill_id] && (
+                    <span>{r.name}{c.sources?.[r.skill_id] && (c.sources[r.skill_id].url ? (
                       <a className="src" href={c.sources[r.skill_id].url} target="_blank" rel="noopener noreferrer"
-                        title={`${c.sources[r.skill_id].from}: “${c.sources[r.skill_id].quote}”`}> [{c.sources[r.skill_id].from}]</a>)}</span>
+                        title={`${c.sources[r.skill_id].from}: “${c.sources[r.skill_id].quote}”`}> [{c.sources[r.skill_id].from}]</a>) : (
+                      <span className="src" title={`${c.sources[r.skill_id].from}: “${c.sources[r.skill_id].quote}”`}> [{c.sources[r.skill_id].from}]</span>))}</span>
                     <span className="v num" title="시장 언급률">{r.market_pct}%</span>
                     <select aria-label={`${r.name} 구분`} value={r.weight} onChange={(e) => setWeight(r.skill_id, +e.target.value)}
                       disabled={r.weight > 0 && c.requirements_view.length === 1}>
