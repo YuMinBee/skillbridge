@@ -11,7 +11,7 @@ from contextlib import contextmanager
 from ..adapters import bedrock, storage
 from ..guards import pii
 from ..skills import get_dict
-from . import market
+from . import implies, market
 from .extract import STATUS_LABEL, extract_posting_llm, extract_resume, extract_resume_llm, posting_requirements, \
     requirements_from
 from .recommend import build_path, optimize_order
@@ -98,6 +98,10 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         if status_map is None:
             status_map = extract_resume(masked)
             s["detail"] = f"{len(status_map)}개 스킬"
+
+    with tr.step("상하위 스킬 보완", "rules.implies (MySQL → SQL 같은 포함 관계만)") as s:
+        status_map, implied = implies.expand(status_map)
+        s["detail"] = (", ".join(f"{sd.name(a)} ← {sd.name(b)}" for a, b in implied) or "보완 없음")
 
     with tr.step("근거 기반 상태 판정",
                  "rules.judge_status" if extraction is None else "LLM 판정(보유/부분/검증 필요) + 원문 근거 대조") as s:
@@ -231,6 +235,8 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
     for sid, w in rows:
         st = status_of(status_map, sid)
         ev = status_map.get(sid, {}).get("evidence")
+        if ev and status_map[sid].get("implied_by"):
+            ev = f"{sd.name(status_map[sid]['implied_by'])} 근거로 인정: {ev}"
         tiers = [lab for lab, src in (("지원", preqs), ("실무", reqs)) if sid in src]
         matrix.append({"skill_id": sid, "name": sd.name(sid), "weight": w, "weight_label": WEIGHT_LABEL[w],
                        "tier": "apply" if sid in preqs else "work", "tier_label": "·".join(tiers),

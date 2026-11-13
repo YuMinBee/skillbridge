@@ -120,3 +120,20 @@ def test_interview_company_uses_stated_must_haves_as_apply_tier(client):
     tiers = {m["skill_id"]: m["tier"] for m in d["matrix"]}
     assert tiers["docker"] == tiers["rest_api"] == "apply" and tiers["nginx"] == "work"
     assert any("현업 필수" in s["detail"] for s in d["trace"])
+
+
+def test_child_skill_implies_parent(client):
+    """MySQL로 DB를 설계했으면 'SQL' 필수는 갭이 아니다. 반대 방향(SQL → MySQL)은 인정하지 않는다."""
+    from app.pipeline import implies
+    m, added = implies.expand({"pytorch": {"status": "own", "evidence": "PyTorch 모델 개발"}})
+    assert m["deep_learning"]["status"] == m["machine_learning"]["status"] == "own"
+    assert ("deep_learning", "pytorch") in added and "pytorch" in m
+    m, _ = implies.expand({"sql": {"status": "own", "evidence": "SQL"}})
+    assert "mysql" not in m
+    m, _ = implies.expand({"sql": {"status": "own", "evidence": "a"}, "mysql": {"status": "part", "evidence": "b"}})
+    assert m["sql"]["evidence"] == "a"                                   # 더 강한 직접 근거 유지
+    d = client.post("/api/diagnose", json={"company_id": "G", "resume_text":
+                    "MySQL로 쇼핑몰 DB를 설계하고 운영했습니다."}).json()
+    row = next(x for x in d["matrix"] if x["skill_id"] == "sql")
+    assert row["status"] == "own" and "MySQL 근거로 인정" in row["evidence"]
+    assert "sql" not in {g["skill_id"] for g in d["baseline"]["gaps_posting"]}
