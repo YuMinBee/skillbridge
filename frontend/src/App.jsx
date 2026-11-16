@@ -54,7 +54,7 @@ export default function App() {
             {meta && (
               <>
                 <span className={`mode ${meta.bedrock === "bedrock" ? "live" : ""}`} title="Bedrock 호출 모드">
-                  {meta.bedrock === "bedrock" ? "BEDROCK" : "MOCK"}
+                  {meta.bedrock === "bedrock" ? "BEDROCK" : meta.public_mock ? "규칙 엔진 · 공개" : "MOCK"}
                 </span>
                 <span className={`mode ${meta.sources?.courses === "live" ? "live" : ""}`} title={meta.sources?.courses === "live" ? "교육과정: 고용24 훈련과정 API 실데이터" : "교육과정: 가상 샘플"}>과정 {meta.sources?.courses === "live" ? "LIVE" : "SAMPLE"}</span>
                 <span className={`mode ${meta.sources?.market === "live" ? "live" : ""}`} title={meta.sources?.market === "live" ? "시장: 실제 공고 + 가상 샘플 보충" : "시장: 가상 공고 샘플"}>시장 {meta.sources?.market === "live" ? "LIVE+SAMPLE" : "SAMPLE"}</span>

@@ -9,8 +9,22 @@ const SANDBOX = (() => {
   } catch { return make(); }
 })();
 
+// 시연 키: 발표자는 주소 뒤에 ?demo=키 를 한 번 붙여 열면 이 브라우저에 저장되고 주소에서는 지워진다.
+// 키가 없는 공개 방문자는 규칙 엔진으로 돈다 (Bedrock 비용 0).
+const DEMO = (() => {
+  try {
+    const u = new URL(location.href), k = u.searchParams.get("demo");
+    if (k !== null) {
+      if (k) localStorage.setItem("demoKey", k); else localStorage.removeItem("demoKey");
+      u.searchParams.delete("demo"); history.replaceState(null, "", u.toString());
+    }
+    return localStorage.getItem("demoKey") || "";
+  } catch { return ""; }
+})();
+
 async function req(method, url, body, isForm = false) {
   const opt = { method, headers: { "X-Sandbox": SANDBOX } };
+  if (DEMO) opt.headers["X-Demo-Key"] = DEMO;
   if (body !== undefined) {
     if (isForm) opt.body = body;
     else { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }

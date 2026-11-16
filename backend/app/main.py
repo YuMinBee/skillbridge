@@ -35,7 +35,8 @@ async def _forbidden(_req: Request, e: storage.BaseWriteForbidden):
 @app.get("/api/meta")
 def meta():
     from .data import courses_source, market_source
-    return {"bedrock": bedrock.configured_mode(), "bedrock_mock_env": config.BEDROCK_MOCK, "data_mode": config.DATA_MODE,
+    return {"bedrock": "mock" if bedrock.forced_reason() else bedrock.configured_mode(),
+            "public_mock": bool(config.DEMO_KEY) and bedrock.forced_reason() is not None, "bedrock_mock_env": config.BEDROCK_MOCK, "data_mode": config.DATA_MODE,
             "sources": {"courses": courses_source(), "market": market_source()},
             "storage": storage.backend().name, "sandbox": storage.current_sandbox() is not None,
             "limits": {"per_ip_per_min": config.RATE_PER_MIN, "bedrock_per_hour": config.BEDROCK_PER_HOUR},

@@ -154,10 +154,11 @@ def main():
     if acct != EXPECTED_ACCOUNT:
         sys.exit(f"  ✗ 예상 계정 {EXPECTED_ACCOUNT}과 다릅니다. SSO 포털에서 계정을 확인하세요 (EXPECTED_ACCOUNT로 바꿀 수 있음)")
     bucket = f"kosa06-skillbridge-{acct}"
-    print(f"  만들 것: S3 {bucket} · Lambda kosa06-skillbridge-api(+함수 URL, 공개, 동시 실행 3) · "
+    print(f"  만들 것: S3 {bucket} · Lambda kosa06-skillbridge-api(+함수 URL, 공개, 동시 실행 2) · "
           f"DynamoDB kosa06-skillbridge(온디맨드) · Glue DB kosa06_skillbridge · "
           f"Athena 워크그룹 kosa06-skillbridge · IAM 역할 1개 · 태그 project=kosa06")
-    print("  비용 보호: IP당 분당 8회 · 인스턴스당 시간당 Bedrock 60회(넘으면 규칙 엔진) · Athena 쿼리당 1GB")
+    print("  비용 보호: IP당 분당 8회 · 인스턴스당 시간당 Bedrock 20회(넘으면 규칙 엔진) · Athena 쿼리당 1GB")
+    print(f"  시연 키: {'설정됨 (' + str(len(config.DEMO_KEY)) + '자) → 공개 방문자는 규칙 엔진, 키 있는 요청만 Bedrock' if config.DEMO_KEY else '없음 → 모든 방문자가 Bedrock 호출 (비용 주의)'}")
     if not a.yes:
         print("  (확인만 했습니다. 배포하려면 --yes)")
         return
@@ -171,7 +172,7 @@ def main():
         "DataBucket": bucket, "CodeKey": key, "ModelId": config.MODEL_ID, "FastModelId": config.FAST_MODEL_ID,
         "EmbedModelId": config.EMBED_MODEL_ID, "GuardrailId": config.GUARDRAIL_ID,
         "GuardrailVersion": config.GUARDRAIL_VERSION if config.GUARDRAIL_ID else "",
-        "KbId": config.KB_ID, "BedrockMock": "1" if a.mock else "0"})
+        "KbId": config.KB_ID, "BedrockMock": "1" if a.mock else "0", "DemoKey": config.DEMO_KEY})
     print(f"\n시연 주소: {o.get('AppUrl')}")
 
 

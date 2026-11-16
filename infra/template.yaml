@@ -33,12 +33,17 @@ Parameters:
     AllowedValues: ["0", "1"]
   MaxConcurrency:
     Type: Number
-    Default: 3
+    Default: 2
     MinValue: 1
     MaxValue: 10
+  DemoKey:
+    Type: String
+    Default: ""
+    NoEcho: true
+    Description: 시연 키 (.env DEMO_KEY). 이 키를 보낸 요청만 Bedrock, 나머지 공개 방문자는 규칙 엔진
   BedrockPerHour:
     Type: String
-    Default: "60"
+    Default: "20"
     Description: 인스턴스당 시간당 Bedrock 요청 상한 (넘으면 그 요청은 규칙 엔진)
 
 Resources:
@@ -124,6 +129,7 @@ Resources:
           RATE_PER_MIN: "8"
           BEDROCK_PER_HOUR: !Ref BedrockPerHour
           BEDROCK_MOCK: !Ref BedrockMock
+          DEMO_KEY: !Ref DemoKey
           DATA_MODE: live
           MODEL_ID: !Ref ModelId
           FAST_MODEL_ID: !Ref FastModelId

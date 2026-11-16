@@ -3,8 +3,10 @@
 1. 방문자 샌드박스: X-Sandbox 헤더 → storage 컨텍스트. 기업 설정은 방문자 사본으로 읽고 쓴다.
 2. IP당 분당 요청 상한 (Bedrock을 부르는 경로만): 넘으면 429.
 3. 인스턴스당 시간당 Bedrock 요청 상한: 넘으면 그 요청은 규칙 엔진으로 돈다 (화면에 폴백 사유 표시).
+4. 시연 키(DEMO_KEY): 설정돼 있으면 X-Demo-Key가 맞는 요청만 Bedrock. 공개 방문자는 규칙 엔진 → Bedrock 비용 0.
    Lambda 동시 실행 상한(template.yaml)과 곱하면 시간당 최대 호출 수가 정해진다.
 """
+import hmac
 import json
 import threading
 import time
@@ -61,6 +63,14 @@ def _header(scope, name: bytes) -> str | None:
     return None
 
 
+def demo_ok(scope) -> bool:
+    """시연 키가 없으면(로컬) 항상 True. 있으면 헤더가 정확히 맞을 때만."""
+    if not config.DEMO_KEY:
+        return True
+    got = _header(scope, b"x-demo-key") or ""
+    return hmac.compare_digest(got.encode(), config.DEMO_KEY.encode())
+
+
 def client_ip(scope) -> str:
     xff = _header(scope, b"x-forwarded-for")
     if xff:
@@ -79,6 +89,8 @@ class GuardMiddleware:
         tok_sb = storage.set_sandbox(_header(scope, b"x-sandbox"))
         tok_mock = None
         try:
+            if not demo_ok(scope):
+                tok_mock = bedrock.force_mock("공개 방문자 → 규칙 엔진 (Bedrock은 시연 키가 있을 때만)")
             if costly(scope["method"], scope["path"]):
                 verdict = limiter.check(client_ip(scope))
                 if verdict == "ip":
@@ -87,7 +99,7 @@ class GuardMiddleware:
                                 "headers": [(b"content-type", b"application/json; charset=utf-8"), (b"retry-after", b"60")]})
                     await send({"type": "http.response.body", "body": body})
                     return
-                if verdict == "budget":
+                if verdict == "budget" and tok_mock is None:
                     tok_mock = bedrock.force_mock(f"시간당 Bedrock 호출 상한({config.BEDROCK_PER_HOUR}회) 도달 → 규칙 엔진")
             await self.app(scope, receive, send)
         finally:

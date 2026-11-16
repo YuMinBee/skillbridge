@@ -154,3 +154,17 @@ def test_dynamo_expired_sandbox_is_ignored(dynamo_storage):
         assert storage.get_company("A")["desc"] != "만료 예정"        # 읽을 때 거른다
     finally:
         storage.reset_sandbox_token(tok)
+
+
+def test_demo_key_gates_bedrock(client, monkeypatch):
+    """시연 키가 있으면 공개 방문자는 규칙 엔진, 키를 보낸 요청만 설정된 모드."""
+    from app import config
+    from app.adapters import bedrock
+    monkeypatch.setattr(config, "DEMO_KEY", "demo-secret-123456")
+    m = client.get("/api/meta").json()
+    assert m["bedrock"] == "mock" and m["public_mock"] is True
+    d = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}).json()
+    assert d["mode"] == "mock" and any("공개 방문자" in f for f in d["fallbacks"])
+    m = client.get("/api/meta", headers={"X-Demo-Key": "demo-secret-123456"}).json()
+    assert m["public_mock"] is False and m["bedrock"] == bedrock.configured_mode()
+    assert client.get("/api/meta", headers={"X-Demo-Key": "wrong"}).json()["public_mock"] is True

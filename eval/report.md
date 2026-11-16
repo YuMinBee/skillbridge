@@ -1,6 +1,6 @@
 # 역량다리 평가 보고서
 
-생성: 2026-11-13 16:25 · 명령: `python eval/run_eval.py` · 정답셋은 `eval/`, 라벨 규칙은 [LABELING.md](LABELING.md)
+생성: 2026-11-16 11:29 · 명령: `python eval/run_eval.py` · 정답셋은 `eval/`, 라벨 규칙은 [LABELING.md](LABELING.md)
 
 > 정답 라벨 1차는 AI 보조 초안(`claude-draft`)이고 팀원 2차 라벨로 검수·일치도를 잽니다. 2차 라벨 전까지 아래 수치는 **잠정**입니다.
 
@@ -70,7 +70,7 @@
 
 실무 갭 커버율 95% 구간: 역량다리 98.3%–100.0% · 공고만 45.7%–57.0% · 차이 +42.7 ~ +53.4%p (p(Δ≤0) = 0.000)
 
-공고만 볼 때 준비 못 한 실무 역량: Docker(10), Terraform(7), C++(6), 엣지 AI(6), Kubernetes(6)
+공고만 볼 때 준비 못 한 실무 역량: Docker(10), Terraform(7), 엣지 AI(6), C++(6), Kubernetes(6)
 
 지원할 때만 보는 역량(실무 기준엔 없음): SQL(10), LLM(10), 네트워크(10), PyTorch(10)
 

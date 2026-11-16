@@ -40,6 +40,9 @@ ALLOW_BASE_WRITE = _flag("ALLOW_BASE_WRITE", "0" if ON_LAMBDA else "1")
 # 비용 보호: IP당 분당 Bedrock 요청 수, 인스턴스당 시간당 Bedrock 요청 수 (넘으면 그 요청만 규칙 엔진으로)
 RATE_PER_MIN = int(os.getenv("RATE_PER_MIN", "8"))
 BEDROCK_PER_HOUR = int(os.getenv("BEDROCK_PER_HOUR", "120"))
+# 시연 키: 설정하면 X-Demo-Key 헤더가 맞는 요청만 Bedrock을 부르고, 나머지 공개 방문자는 규칙 엔진으로 돈다 (비용 0).
+# 값은 .env와 Lambda 환경 변수에만 둔다. 비우면 (로컬 기본) 이 제한이 없다.
+DEMO_KEY = os.getenv("DEMO_KEY", "")
 
 SKILLS_CSV = ROOT / "data" / "skills.csv"
 SEED = ROOT / "seed"
