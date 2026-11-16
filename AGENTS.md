@@ -1,7 +1,7 @@
 ﻿# 작업 인수인계 (AI 코딩 도구용)
 
 > Claude Code는 `CLAUDE.md`를, Codex는 이 파일을 자동으로 읽습니다. 사람이 읽어도 됩니다.
-> 작업이 끝나면 아래 **현재 상태**와 **다음 할 일**을 갱신하고 커밋하세요. 마지막 갱신: 2026-11-13 (변유민 + Claude).
+> 작업이 끝나면 아래 **현재 상태**와 **다음 할 일**을 갱신하고 커밋하세요. 마지막 갱신: 2026-11-16 (변유민 + Claude).
 
 ## 프로젝트 한 줄
 
@@ -58,12 +58,12 @@
 |---|---|
 | M0–M2 골격·규칙 엔진·Bedrock 파이프라인 | ✅ (Sonnet 4.6 추출, Haiku 4.5 정규화·설명, Titan v2 임베딩, Guardrail PII) |
 | M3 실데이터 | ✅ 잡알리오 공고 11,637건, 고용24 과정 199개. S3·Glue·Athena 코드는 완료, 배포 전 |
-| M4 기업 지식베이스 | 🟡 코드 완료(`adapters/kb.py`, tenant 필터 서버 강제, 다른 회사 결과 이중 차단, 테스트 포함). KB 생성(`infra/build_kb.py --yes`)은 아직 안 함 |
+| M4 기업 지식베이스 | ✅ KB 생성·적재 완료(2026-11-16). 코드(`adapters/kb.py`, tenant 필터 서버 강제, 다른 회사 결과 이중 차단, 테스트 포함). KB 생성(`infra/build_kb.py --yes`)은 아직 안 함 |
 | M5 평가 | ✅ Bedrock 실측 + 95% 신뢰구간. 2차 라벨(κ)만 남음 |
 | 공개 배포 가드 | ✅ 방문자 샌드박스(기업 설정 원본 보호), IP당 분당 8회, 시간당 Bedrock 상한 → 규칙 엔진, Lambda 동시 실행 3, DynamoDB 저장소 |
 | 현업 청취 반영 | ✅ 기업 E~H(멘토 경유 실제 부서 기준), 상하위 스킬 보완(`pipeline/implies.py`), **프로젝트 적합도**(`pipeline/projectfit.py`). 경계값·도메인 단어는 멘토링에서 검증 필요 |
 | 학습 코치 에이전트 | ✅ `pipeline/coach.py`: Converse 도구 선택 루프(도구 5개), tenant 고정, 과정 인용 검증, 규칙 플래너 폴백 |
-| M6 배포 | 🟡 `infra/deploy.py` 완료(로컬 빌드 11.5MB 확인). **실제 배포는 팀장 승인 대기** |
+| M6 배포 | ✅ 2026-11-16 배포: https://fazwtcf7omav34gdiahcgvds3m0zyafv.lambda-url.ap-northeast-2.on.aws/ · DynamoDB · Athena 집계 확인(로컬과 일치) · KB `AQXJTFLOCI`(S3 Vectors, tenant 격리 검증) · 시연 키 없음(모두 Bedrock), IP당 분당 8 · 시간당 20 · 동시 2 |
 
 평가 핵심 숫자 (`eval/report.md`). 발표에 쓰는 값이라 바뀌면 README·SCORECARD·DEMO_SCRIPT도 같이 고친다.
 
@@ -76,7 +76,7 @@
 
 | 우선 | 일 | 담당 | 방법 |
 |---|---|---|---|
-| 1 | 배포: `python infra/deploy.py --yes` → `python infra/build_kb.py --yes` → 출력된 `KB_ID`를 `.env`에 넣기 → 다시 배포 → 배포 주소에서 시장 탭 "집계: Athena" 확인 | 변유민 | **승인 후에만**. 함수 URL은 공개 주소라 Bedrock 비용이 나갈 수 있다 |
+| 1 | 배포 주소로 화면 점검(프로젝트 적합도 카드, 현업 E~H), 코드를 바꾸면 `python infra/deploy.py --yes`로 다시 배포 | 변유민 | 스택 삭제는 해커톤 끝난 뒤 팀장 승인 후 |
 | 2 | 2차 라벨 30건 → `eval/gold_postings_b.jsonl` 푸시 (`run_eval.py`가 κ를 자동 계산) | 김채희 | `eval/LABELING.md` 4절 |
 | 3 | 슬라이드 8장 이내 + 리허설 2회 | 변유민·이승연 | DEMO_SCRIPT.md |
 | 4 | 설문 5명 이상 + 시연 영상 `docs/demo.mp4` | 이승연 | `eval/SURVEY.md`, 배포 주소 |
