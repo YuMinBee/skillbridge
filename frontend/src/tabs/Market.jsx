@@ -34,7 +34,8 @@ export default function Market() {
 
   return (
     <section className="view" aria-label="시장 분석">
-      <p className="lead">{isLive
+      <p className="lead"><b>지역 교육기관·지자체용 화면이에요.</b> 채용공고가 요구하는 역량과 지역 교육과정 공급을 비교해서, 어디가 비어 있는지 보여줘요.</p>
+      <p className="hint">{isLive
         ? "공공기관 채용공고(잡알리오 실공고)에서 스킬을 추출해 전 직무의 AI·데이터·디지털 역량 요구를 집계합니다."
         : "민간 AI·클라우드 직무는 라벨링한 가상 샘플 공고로 요구역량과 추세를 보여줍니다 (시연용)."}</p>
       <div className="row">

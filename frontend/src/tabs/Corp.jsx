@@ -74,6 +74,7 @@ export default function Corp({ companies, corpVersion, active, onChanged }) {
 
   return (
     <section className="view" aria-label="기업 콘솔">
+      <p className="lead"><b>기업 담당자용 화면이에요.</b> 공고에 다 못 쓴 '입사 후 실제로 쓰는 역량'을 등록하면, 취준생 진단의 실무 준비도와 학습 순서에 바로 반영돼요. 기준을 바꿨을 때 지원자 풀이 어떻게 달라지는지도 미리 볼 수 있어요.</p>
       <div className="row">
         <label className="fld" style={{ minWidth: 260 }}>기업
           <select value={cid} onChange={(e) => setCid(e.target.value)}>

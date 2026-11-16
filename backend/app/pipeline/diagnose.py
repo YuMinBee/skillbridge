@@ -263,7 +263,8 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         storage.log_session(company_id, g_corp, {k: v["status"] for k, v in status_map.items()})  # 익명: 상태 코드만
 
     return {
-        "company": {"id": company["tenant_id"], "name": company["name"], "desc": company.get("desc", "")},
+        "company": {"id": company["tenant_id"], "name": company["name"], "desc": company.get("desc", ""),
+                    "job_title": company.get("job_title", ""), "region": company.get("region", "")},
         "readiness": score,               # 실무 준비도 (기업 등록 기준)
         "readiness_apply": score_apply,   # 지원 준비도 (공고 기준)
         "formula": FORMULA,

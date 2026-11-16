@@ -4,8 +4,12 @@ import Market from "./tabs/Market.jsx";
 import Seeker from "./tabs/Seeker.jsx";
 import Corp from "./tabs/Corp.jsx";
 
-const TABS = [["market", "① 시장 분석"], ["seeker", "② 취준생 진단"], ["corp", "③ 기업 콘솔"]];
-const hashTab = () => { const h = location.hash.slice(1); return TABS.some(([k]) => k === h) ? h : "market"; };
+const TABS = [
+  ["seeker", "내 준비도 진단", "취준생"],
+  ["corp", "기업 기준 등록", "기업"],
+  ["market", "시장·교육 현황", "지역·기관"],
+];
+const hashTab = () => { const h = location.hash.slice(1); return TABS.some(([k]) => k === h) ? h : "seeker"; };
 
 export default function App() {
   const [tab, setTab] = useState(hashTab);
@@ -48,16 +52,17 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <h1>역량다리</h1>
-          <p>AI·클라우드 채용시장 분석 → 기업 교육 트랙 → 취준생 맞춤 학습경로 (Amazon Bedrock 에이전트)</p>
-          <span className="sample">{meta?.sources?.market === "live" ? "실데이터 · 기업·지원자는 가상" : "가상 데이터 데모"}</span>
+          <p>공고만으로는 모르는 <b>입사 후 실무 역량</b>까지, 내가 뭘 먼저 준비하면 되는지 알려드려요.</p>
           <div className="tools">
             {meta && (
               <>
                 <span className={`mode ${meta.bedrock === "bedrock" ? "live" : ""}`} title="Bedrock 호출 모드">
-                  {meta.bedrock === "bedrock" ? "BEDROCK" : meta.public_mock ? "규칙 엔진 · 공개" : "MOCK"}
+                  {meta.bedrock === "bedrock" ? "AI 연결됨 · Bedrock" : meta.public_mock ? "규칙 엔진 · 공개" : "규칙 엔진(오프라인)"}
                 </span>
-                <span className={`mode ${meta.sources?.courses === "live" ? "live" : ""}`} title={meta.sources?.courses === "live" ? "교육과정: 고용24 훈련과정 API 실데이터" : "교육과정: 가상 샘플"}>과정 {meta.sources?.courses === "live" ? "LIVE" : "SAMPLE"}</span>
-                <span className={`mode ${meta.sources?.market === "live" ? "live" : ""}`} title={meta.sources?.market === "live" ? "시장: 실제 공고 + 가상 샘플 보충" : "시장: 가상 공고 샘플"}>시장 {meta.sources?.market === "live" ? "LIVE+SAMPLE" : "SAMPLE"}</span>
+                <span className={`mode ${meta.sources?.courses === "live" && meta.sources?.market === "live" ? "live" : ""}`}
+                  title="공고(잡알리오)·교육과정(고용24)은 실데이터 · 기업 A·B·C와 예시 지원자는 가상 · D는 공개 자료 재구성 · E~H는 현업 청취 기준">
+                  {meta.sources?.courses === "live" && meta.sources?.market === "live" ? "공고·과정 실데이터" : "샘플 데이터"}
+                </span>
               </>
             )}
             <button className="btn ghost sm" onClick={toggleTheme} aria-label="라이트/다크 전환">테마</button>
@@ -65,8 +70,8 @@ export default function App() {
           </div>
         </div>
         <nav className="tabs" role="tablist" aria-label="화면 전환">
-          {TABS.map(([k, l]) => (
-            <button key={k} role="tab" aria-selected={tab === k} onClick={() => go(k)}>{l}</button>
+          {TABS.map(([k, l, who]) => (
+            <button key={k} role="tab" aria-selected={tab === k} onClick={() => go(k)}>{l} <small>{who}</small></button>
           ))}
         </nav>
       </header>

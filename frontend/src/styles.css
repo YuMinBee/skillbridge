@@ -19,7 +19,7 @@
   --corp:#c39af0; --corp-soft:#2e2340; color-scheme:dark; }
 
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.6;
+body{margin:0;word-break:keep-all;overflow-wrap:anywhere;background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.6;
   padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-bottom:48px}
 .wrap{max-width:1120px;margin:0 auto}
 header.top{position:sticky;top:0;z-index:5;background:var(--bg);padding-block:16px 0;border-bottom:1px solid var(--line)}
@@ -242,3 +242,45 @@ details.ev b{font-family:var(--font-data);font-weight:500;color:var(--fg)}
 .mini h4{margin:0 0 6px;font-size:14px}
 .mini ul{margin:6px 0;padding-left:18px;font-size:13px}
 @media (max-width:520px){.pf li{grid-template-columns:48px 24px minmax(0,1fr)}}
+
+/* ── 직관 개편 (2026-11-16): 단계 입력 · 요약 먼저 · 세부는 접기 ── */
+nav.tabs button small{font-weight:500;font-size:11.5px;color:var(--muted);margin-left:4px}
+.brand p b{color:var(--fg)}
+.panel.input{gap:10px}
+.step{display:flex;align-items:center;gap:10px;margin-top:6px}
+.step:first-child{margin-top:0}
+.step .n{width:24px;height:24px;border-radius:50%;background:var(--accent);color:var(--accent-fg);display:grid;place-items:center;font-family:var(--font-data);font-size:12.5px;flex:none}
+.step h2{font-size:15px}
+label.fld .inline{display:flex;align-items:center;gap:8px;color:var(--fg);font-weight:500}
+label.fld .inline input{width:90px}
+label.fld.file{font-weight:500}
+.btn.big{font-size:16px;padding:13px 18px;width:100%}
+
+.summary{gap:16px}
+.summary .kicker{margin:0;font-size:12.5px;color:var(--muted);font-weight:600}
+.summary .headline{font-size:20px;line-height:1.4;margin:0}
+.scores{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+.sc{display:flex;gap:14px;align-items:center;padding:12px;border:1px solid var(--line);border-radius:10px;min-width:0}
+.sc b{display:block;font-size:15px}
+.sc small{display:block;color:var(--muted);font-size:12.5px;line-height:1.45}
+.todo{background:var(--accent-soft);border-radius:10px;padding:14px 16px;display:grid;gap:4px}
+.todo small{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.03em}
+.todo-t{font-size:17px;font-weight:700}
+@media (max-width:620px){.scores{grid-template-columns:minmax(0,1fr)}}
+
+.tier{display:grid;gap:10px}
+.tier + .tier{margin-top:6px;padding-top:12px;border-top:1px dashed var(--line)}
+.tier h3{font-size:13.5px;color:var(--fg)}
+ol.path li::before{content:var(--n, counter(step))}
+details.why-d summary{cursor:pointer;font-size:12px;color:var(--accent);margin-top:2px;width:max-content}
+details.why-d[open] summary{margin-bottom:4px}
+
+details.how{gap:10px}
+details.how > summary{cursor:pointer;list-style:none;display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+details.how > summary::-webkit-details-marker{display:none}
+details.how > summary::before{content:"▸";color:var(--muted);transition:transform .15s}
+details.how[open] > summary::before{transform:rotate(90deg)}
+details.how[open] > summary{margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){details.how > summary::before{transition:none}}
+blockquote.quote{margin:0;padding:10px 14px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:0 8px 8px 0;font-size:14px}
+blockquote.quote cite{display:block;font-style:normal;font-size:12px;color:var(--muted);margin-top:2px}

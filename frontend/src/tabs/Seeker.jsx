@@ -77,72 +77,83 @@ export default function Seeker({ companies, corpVersion, active, mode }) {
   return (
     <section className="view" aria-label="취준생 진단">
       <div className="grid-side">
-        <div className="panel">
-          <h2>내 프로필</h2>
-          <label className="fld">예시 지원자 (가상)
+        <div className="panel input">
+          <div className="step"><span className="n">1</span><h2>이력서 넣기</h2></div>
+          <label className="fld">예시 지원자로 바로 해 보기
             <select value={pid} onChange={(e) => { const p = personas.find((x) => x.id === e.target.value); if (p) pick(p); }}>
               {!pid && <option value="">직접 입력 / PDF</option>}
-              {personas.map((p) => <option key={p.id} value={p.id}>{p.name}</option>)}
+              {personas.map((p) => <option key={p.id} value={p.id}>{p.name} (가상)</option>)}
             </select>
           </label>
-          <label className="fld">이력서 텍스트
+          <label className="fld">또는 내 이력서 붙여 넣기
             <textarea value={text} onChange={(e) => { setText(e.target.value); setPid(""); pdfRef.current = null; }}
-              placeholder="경력·프로젝트·교육·보유기술을 붙여 넣으세요" />
+              placeholder="프로젝트·인턴·교육·보유기술을 한 줄씩 적어 주세요" />
           </label>
-          <label className="fld">또는 PDF 업로드
+          <label className="fld file">PDF로 올리기
             <input type="file" accept="application/pdf,.pdf" onChange={onPdf} />
           </label>
-          {pdfRef.current && <p className="hint">PDF: {pdfRef.current.name}{ready && res.extracted_chars != null ? ` · ${res.extracted_chars}자 추출` : ""}</p>}
-          <label className="fld">목표 기업
-            <select value={cid} onChange={(e) => { setCid(e.target.value); if (ready) run({ instant: true, c: e.target.value }); }}>
-              {companies.map((c) => <option key={c.id} value={c.id}>{c.name} · {c.desc}</option>)}
-            </select>
-          </label>
-          <label className="fld">주당 학습 가능 시간
-            <input type="number" min={1} max={80} value={hours}
+          {pdfRef.current && <p className="hint">PDF: {pdfRef.current.name}{ready && res.extracted_chars != null ? ` · ${res.extracted_chars}자 읽음` : ""}</p>}
+
+          <div className="step"><span className="n">2</span><h2>가고 싶은 회사</h2></div>
+          <select aria-label="가고 싶은 회사" value={cid} onChange={(e) => { setCid(e.target.value); if (ready) run({ instant: true, c: e.target.value }); }}>
+            {companies.map((c) => <option key={c.id} value={c.id}>{c.name} · {c.desc}</option>)}
+          </select>
+          <label className="fld">일주일에 공부할 수 있는 시간
+            <span className="inline"><input type="number" min={1} max={80} value={hours}
               onChange={(e) => setHours(Math.max(1, Math.min(80, +e.target.value || 1)))}
-              onBlur={() => ready && run({ instant: true })} />
+              onBlur={() => ready && run({ instant: true })} /> 시간</span>
           </label>
-          <button className="btn" disabled={busy || (!text.trim() && !pdfRef.current)} onClick={() => run()}>
-            {busy ? "진단 중…" : "진단 실행"}
+
+          <div className="step"><span className="n">3</span><h2>진단하기</h2></div>
+          <button className="btn big" disabled={busy || (!text.trim() && !pdfRef.current)} onClick={() => run()}>
+            {busy ? "진단 중…" : "내 준비도 진단하기"}
           </button>
-          {busy && mode === "bedrock" && <p className="hint">Bedrock 호출 중 · 보통 10초 안팎 걸려요</p>}
+          {busy && mode === "bedrock" && <p className="hint">AI가 이력서를 읽는 중이에요 · 보통 10초 안팎</p>}
           {err && <p className="err">{err}</p>}
+          <p className="notice">결과는 나에게만 보이고 채용 합불 판단에 쓰이지 않아요. 이력서 원문은 저장하지 않아요.</p>
+        </div>
+
+        <div className="stack">
+          {ready ? <Result r={res} />
+            : res?.trace ? <div className="panel"><h2>AI가 분석하는 중…</h2><Trace res={res} shown={shown} /></div>
+            : <div className="panel"><p className="empty">{busy ? "진단 중…" : "왼쪽에서 이력서를 넣고 ‘내 준비도 진단하기’를 눌러 주세요."}</p></div>}
           {ready && (
-            <div>
-              <h3>추출된 스킬</h3>
-              <div className="row" style={{ marginTop: 6 }}>
+            <details className="panel how">
+              <summary><b>AI가 어떻게 판단했나요?</b> <span className="hint">찾은 스킬 {res.skills_found.length}개 · 실행 단계 {res.trace.length}개{res.usage ? ` · 모델 호출 ${res.usage.calls}회` : ""}</span></summary>
+              <h3>이력서에서 찾은 스킬</h3>
+              <div className="row">
                 {res.skills_found.length ? res.skills_found.map((s) => (
                   <span key={s.skill_id} title={`${s.evidence}
 정규화: ${HOW[s.how] || s.how}`}><StatusChip status={s.status}>{s.name} · {s.status_label}</StatusChip></span>
                 )) : <span className="hint">인식된 스킬이 없습니다</span>}
               </div>
-            </div>
+              <h3>실행 단계 <span className="hint">({res.mode === "bedrock" ? "Bedrock" : "규칙 엔진"}{res.usage ? ` · 토큰 ${res.usage.input_tokens + res.usage.output_tokens}` : ""})</span></h3>
+              <Trace res={res} shown={shown} />
+              <h3>점수 계산식 (규칙)</h3>
+              <div className="formula">{res.formula}</div>
+            </details>
           )}
-          {res?.trace && (
-            <div>
-              <h3>에이전트 실행 단계 <span className="hint">({res.mode === "bedrock" ? "Bedrock" : "목업"} 모드{res.usage ? ` · 호출 ${res.usage.calls}회 · 토큰 ${res.usage.input_tokens + res.usage.output_tokens}` : ""})</span></h3>
-              {res.fallbacks?.length > 0 && (
-                <p className="warn" role="status">일부 단계가 규칙 방식으로 대체됨: {res.fallbacks.join(" / ")}</p>
-              )}
-              <ol className="trace" style={{ marginTop: 6 }}>
-                {res.trace.map((t, i) => (
-                  <li key={t.name} className={i < shown ? "done" : ""}>
-                    <span className="dot" />
-                    <div><b>{t.name}</b><small>{t.tool} · {t.ms}ms{t.detail ? ` · ${t.detail}` : ""}</small>
-                      {t.calls?.length > 0 && <small className="calls">{t.calls.map((c) => `${c.model} ${(c.ms / 1000).toFixed(1)}s${c.kind !== "embed" && c.in ? ` · ${c.in}→${c.out} tok` : ""}`).join("  |  ")}</small>}
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          )}
-          <p className="notice">개인 진단 결과는 본인에게만 보이며 채용 합불 판단에 쓰이지 않습니다. 이력서 원문은 저장하지 않고, 기업에는 갭 스킬의 익명 집계만 제공합니다.</p>
         </div>
-
-        <div className="stack">{ready ? <Result r={res} /> : <div className="panel"><p className="empty">{busy ? "진단 중…" : "왼쪽에서 진단을 실행하세요."}</p></div>}</div>
       </div>
     </section>
+  );
+}
+
+function Trace({ res, shown }) {
+  return (
+    <>
+      {res.fallbacks?.length > 0 && <p className="warn" role="status">일부 단계가 규칙 방식으로 대체됨: {res.fallbacks.join(" / ")}</p>}
+      <ol className="trace">
+        {res.trace.map((t, i) => (
+          <li key={t.name} className={i < shown ? "done" : ""}>
+            <span className="dot" />
+            <div><b>{t.name}</b><small>{t.tool} · {t.ms}ms{t.detail ? ` · ${t.detail}` : ""}</small>
+              {t.calls?.length > 0 && <small className="calls">{t.calls.map((c) => `${c.model} ${(c.ms / 1000).toFixed(1)}s${c.kind !== "embed" && c.in ? ` · ${c.in}→${c.out} tok` : ""}`).join("  |  ")}</small>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </>
   );
 }
 
@@ -177,7 +188,7 @@ function Coach({ r }) {
   return (
     <div className="panel coach">
       <h2>학습 코치에게 묻기</h2>
-      <p className="hint">에이전트가 필요한 도구(기업 기준 · 과정 검색 · 시장 통계 · {r.company.name} 문서 · 준비도 계산)를 골라 근거를 모은 뒤 답합니다. 과정은 카탈로그에 있는 것만, 점수는 규칙 계산값만 씁니다. 이력서 원문은 보내지 않습니다.</p>
+      <p className="hint">궁금한 걸 물어보세요. AI가 회사 기준·교육과정·시장 통계·회사 문서를 직접 찾아보고 답해요. 실제 있는 과정만 추천해요.</p>
       <div className="row">
         {COACH_Q.map((x) => <button key={x} className="btn ghost sm" disabled={busy} onClick={() => ask(x)}>{x}</button>)}
       </div>
@@ -219,8 +230,9 @@ const VERDICT_CLS = { fit: "own", partial: "part", far: "miss" };
 function ProjectFit({ pf, company }) {
   return (
     <div className="panel">
-      <h2>프로젝트 적합도 · {company.job_title || company.name}</h2>
-      <p className="hint">현업 청취: “{pf.quote.replace(" (현업 청취)", "")}” 스킬을 가졌는지가 아니라, <b>경험 하나</b>가 이 부서 실무 기준을 얼마나 보여주는지 규칙으로 잽니다{pf.domain_label ? ` (부서 도메인: ${pf.domain_label})` : ""}.</p>
+      <h2>내 프로젝트가 이 부서에 맞나요?</h2>
+      <blockquote className="quote">“프로젝트 경험은 필수인데, 그 경험이 해당 부서에 필요한 경험이었는지가 중요하다” <cite>현업 인사 담당자</cite></blockquote>
+      <p className="hint">경험 하나하나가 {company.job_title || company.name} 기준을 몇 점어치 보여주는지 계산했어요{pf.domain_label ? ` · 부서 도메인: ${pf.domain_label}` : ""}.</p>
       <div className="row"><StatusChip status={VERDICT_CLS[pf.verdict]}>{pf.verdict_label}</StatusChip><span className="hint">가장 맞는 경험 <span className="num">{pf.best_fit}</span>점 · 경험 {pf.n_units}개</span></div>
       {pf.units.length > 0 ? (
         <ul className="pf">
@@ -241,34 +253,117 @@ function ProjectFit({ pf, company }) {
       ) : <p className="empty">이 부서 기준과 겹치는 프로젝트·인턴·연구 경험이 없습니다.</p>}
       {pf.mini_project && (
         <div className="mini">
-          <h4>이 부서용 미니 프로젝트 제안 · {pf.mini_project.title}</h4>
-          <div className="m">스킬: {pf.mini_project.skills.join(", ")}</div>
-          <ul>{pf.mini_project.show.map((x, i) => <li key={i}><b>{x.skill}</b> — 결과물에 보여줄 것: {x.what}</li>)}</ul>
-          <p className="hint">{pf.mini_project.note}</p>
+          <h4>추천: 이 부서에 맞는 미니 프로젝트 하나</h4>
+          <div className="m">{pf.mini_project.skills.join(" + ")}를 써서 {pf.domain_label || "이 부서"} 주제로 작게 만들어 보세요.</div>
+          {pf.mini_project.show.some((x) => !x.what.endsWith("결과 화면)")) && (
+            <ul>{pf.mini_project.show.filter((x) => !x.what.endsWith("결과 화면)")).map((x, i) => <li key={i}><b>{x.skill}</b>: 현업이 본다고 한 것 “{x.what}”</li>)}</ul>
+          )}
+          <p className="hint">결과물에는 각 스킬을 실제로 쓴 흔적(코드·설정·결과 화면)을 남기고, 이력서에 프로젝트 한 줄로 적으세요.</p>
         </div>
       )}
     </div>
   );
 }
 
+function verdict(apply, work) {
+  if (apply >= 80 && work >= 80) return "지원도, 입사 후 실무도 준비가 잘 돼 있어요. 남은 갭만 다듬으면 돼요.";
+  if (apply >= 70) return work < apply ? "서류 문턱은 거의 넘었어요. 이제 입사 후 실무에 쓰는 역량을 채우면 돼요." : "서류 문턱은 거의 넘었어요. 남은 필수 역량만 채우면 돼요.";
+  if (apply >= 40) return "지원 기준의 필수 역량부터 채우면 서류 문턱을 넘을 수 있어요.";
+  return "이 회사 기준과는 아직 거리가 있어요. 아래 순서대로 하나씩 채워 보세요.";
+}
+
 function Result({ r }) {
   const p = r.path, b = r.baseline;
+  const first = p.steps[0];
+  const tiers = [["apply", "① 서류 문턱 넘기 (지원 기준)"], ["work", "② 입사 후 실무 준비 (실무 기준)"]];
   return (
     <>
-      <div className="panel">
-        <div className="score">
-          <div className="ring-cap"><div className="ring" style={{ "--p": r.readiness_apply }}><span>{r.readiness_apply}</span></div><small>① 지원</small></div>
-          <div className="ring-cap"><div className="ring alt" style={{ "--p": r.readiness }}><span>{r.readiness}</span></div><small>② 실무</small></div>
-          <div style={{ display: "grid", gap: 4, minWidth: 0 }}>
-            <h2>{r.company.name} · 지원 준비도 {r.readiness_apply} / 실무 준비도 {r.readiness}</h2>
-            <p className="hint">지원 준비도는 공고에 적힌 입사 문턱, 실무 준비도는 기업이 등록한 '입사 후 실제로 쓰는 역량' 기준입니다. 점수는 규칙으로 계산하고, LLM은 설명만 합니다.</p>
-            <div className="formula">{r.formula}</div>
+      <div className="panel summary">
+        <p className="kicker">{r.company.name} · {r.company.job_title || r.company.desc}</p>
+        <h2 className="headline">{verdict(r.readiness_apply, r.readiness)}</h2>
+        <div className="scores">
+          <div className="sc">
+            <div className="ring" style={{ "--p": r.readiness_apply }}><span>{r.readiness_apply}</span></div>
+            <div><b>지원 준비도</b><small>공고·필수 기준, 즉 입사 문턱을 얼마나 넘었나</small></div>
           </div>
+          <div className="sc">
+            <div className="ring alt" style={{ "--p": r.readiness }}><span>{r.readiness}</span></div>
+            <div><b>실무 준비도</b><small>기업이 입사 후 실제로 쓰는 역량을 얼마나 갖췄나</small></div>
+          </div>
+        </div>
+        {first ? (
+          <div className="todo">
+            <small>지금 할 일 1순위</small>
+            <div className="todo-t">{first.title}</div>
+            <div className="hint">{(first.covers || [first.skill]).join(", ")} · {first.hours}시간 · <span className={`chip ${KIND[first.kind][1]}`}>{KIND[first.kind][0]}</span>{first.gain?.apply_after != null ? ` · 끝내면 지원 준비도 ${first.gain.apply_after}점` : ""}</div>
+          </div>
+        ) : <div className="todo"><div className="todo-t">이 회사 기준으로 채울 갭이 없어요.</div></div>}
+        {p.steps.length > 0 && <p className="hint">전체 {p.steps.length}단계 · {p.total_hours}시간 · 주 {p.weekly_hours}시간이면 약 {p.weeks}주. 점수는 규칙으로 계산하고, AI는 설명만 써요.</p>}
+      </div>
+
+      {p.steps.length > 0 && (
+        <div className="panel">
+          <h2>할 일 순서</h2>
+          <p className="hint">서류 문턱(지원 기준)부터 넘고, 그다음 입사 후 실무 역량을 준비해요. 같은 단계 안에서는 시간 대비 효과가 큰 것부터예요.</p>
+          {tiers.map(([tk, tl]) => {
+            const steps = p.steps.map((st, i) => [st, i]).filter(([st]) => st.tier === tk);
+            if (!steps.length) return null;
+            return (
+              <div key={tk} className="tier">
+                <h3>{tl}</h3>
+                <ol className="path">
+                  {steps.map(([st, i]) => (
+                    <li key={i} style={{ "--n": `"${i + 1}"` }}>
+                      <div>
+                        <div className="t">{st.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(st.link) && st.kind === "public"
+                          ? <a href={st.link} target="_blank" rel="noopener noreferrer">{st.title}</a> : st.title}{" "}
+                          <span className={`chip ${KIND[st.kind][1]}`}>{KIND[st.kind][0]}</span></div>
+                        <div className="m">{(st.covers || [st.skill]).join(", ")} · {st.weight_label} · {st.hours}시간{st.gain ? ` · 지원 ${st.gain.apply_after ?? "-"}점 · 실무 ${st.gain.readiness_after}점이 돼요` : ""}</div>
+                        <details className="why-d"><summary>왜 이 순서인가요?</summary>
+                          <div className="w">{st.why.split(/(\[E\d+\])/).map((x, j) => /^\[E\d+\]$/.test(x) ? <b key={j}>{x}</b> : x)}</div>
+                          <div className="w">{st.meta}</div>
+                        </details>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            );
+          })}
+          {p.market && <p className="hint">이 경로를 마치면 {r.company.region !== "미상" ? `${r.company.region} ` : ""}시장 공고 평균 적합도 {p.market.fit_before} → {p.market.fit_after}점 ({p.market.postings}건 기준)</p>}
+          {Object.keys(r.evidence).length > 0 && (
+            <details className="ev">
+              <summary>근거 목록 {Object.keys(r.evidence).length}건 (설명은 이 목록만 인용해요)</summary>
+              <ul>{Object.values(r.evidence).map((e) => <li key={e.id}><b>[{e.id}]</b> {EV_TYPE[e.type] ?? e.type} · {e.text}</li>)}</ul>
+            </details>
+          )}
+        </div>
+      )}
+
+      {r.project_fit && <ProjectFit pf={r.project_fit} company={r.company} />}
+
+      <Coach r={r} />
+
+      <div className="panel">
+        <h2>공고만 보고 준비하면 놓치는 것</h2>
+        <div className="cmp">
+          <div className="col">
+            <h4>공고(지원 기준)만 볼 때 갭 · 준비도 <span className="num">{b.readiness_posting}</span></h4>
+            <div className="row">{b.gaps_posting.length ? b.gaps_posting.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
+          </div>
+          <div className="col">
+            <h4>실무 기준까지 볼 때 갭 · 준비도 <span className="num">{b.readiness_company}</span></h4>
+            <div className="row">{b.gaps_company.length ? b.gaps_company.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
+          </div>
+        </div>
+        <div className="diff">
+          {b.missed.length > 0 && <div className="plus">공고엔 없지만 입사 후 필요한 것: {b.missed.join(", ")}</div>}
+          {b.unnecessary.length > 0 && <div className="minus">지원할 때만 보는 것: {b.unnecessary.join(", ")}</div>}
         </div>
       </div>
 
-      <div className="panel">
-        <h2>역량 갭 매트릭스</h2>
+      <details className="panel how">
+        <summary><b>스킬별 상세 표</b> <span className="hint">{r.matrix.length}개 스킬 · 내 상태와 근거</span></summary>
         <div className="row">
           <StatusChip status="own" /><StatusChip status="part" /><StatusChip status="verify" /><StatusChip status="miss" />
         </div>
@@ -286,76 +381,14 @@ function Result({ r }) {
             </tbody>
           </table>
         </div>
-      </div>
-
-      {r.project_fit && <ProjectFit pf={r.project_fit} company={r.company} />}
+      </details>
 
       <div className="panel">
-        <h2>맞춤 학습경로</h2>
-        <p className="hint">
-          {p.steps.length
-            ? `① 지원 기준(공고) 갭으로 먼저 입사 문턱을 넘고, ② 실무 기준(기업 등록) 갭으로 입사 후 쓸 역량을 준비합니다. 각 단계 안에서는 시간당 효과가 큰 순서입니다. 총 ${p.total_hours}시간 (공공 ${p.hours_by_kind.public} · 기업 ${p.hours_by_kind.corp} · 결과물 ${p.hours_by_kind.proof}${p.hours_by_kind.self ? ` · 자습 ${p.hours_by_kind.self}` : ""}) · 주 ${p.weekly_hours}시간 기준 약 ${p.weeks}주.`
-            : "이 기업 기준 갭이 없습니다."}
-        </p>
-        {p.market && (
-          <div className="fit-row">
-            <div><small>지원 준비도</small><span className="num">{p.apply_before ?? r.readiness_apply} → {p.apply_after ?? r.readiness_apply}점</span></div>
-            <div><small>실무 준비도</small><span className="num">{p.work_before ?? r.readiness} → {p.work_after ?? r.readiness}점</span></div>
-            <div><small>시장 공고 평균 적합도 ({p.market.postings}건)</small><span className="num">{p.market.fit_before} → {p.market.fit_after}점</span></div>
-            <div><small>{p.market.threshold}점 넘는 공고</small><span className="num">{p.market.qualified_before}% → {p.market.qualified_after}%</span></div>
-          </div>
-        )}
-        <ol className="path">
-          {p.steps.map((s, i) => (
-            <li key={i}>
-              <div>
-                <div className="t">{s.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(s.link) && s.kind === "public"
-                  ? <a href={s.link} target="_blank" rel="noopener noreferrer">{s.title}</a> : s.title}{" "}
-                  <span className={`chip ${KIND[s.kind][1]}`}>{KIND[s.kind][0]}</span>{" "}
-                  <span className="chip">{s.tier === "apply" ? "① 지원" : "② 실무"}</span></div>
-                <div className="m">{(s.covers || [s.skill]).join(", ")} · {s.tier_label} {s.weight_label} 갭 · {s.hours}시간 · {s.meta}</div>
-                {s.gain && <div className="gain">{s.gain.apply_after != null && <span className="num">지원 +{s.gain.apply} → {s.gain.apply_after}</span>}<span className="num">실무 +{s.gain.readiness} → {s.gain.readiness_after}</span><span className="num">시장 적합도 +{s.gain.market_fit}</span><span className="num hint">시간당 {s.gain.per_hour}</span></div>}
-                <div className="w">{s.why.split(/(\[E\d+\])/).map((x, j) => /^\[E\d+\]$/.test(x) ? <b key={j}>{x}</b> : x)}</div>
-              </div>
-            </li>
-          ))}
-        </ol>
-        {Object.keys(r.evidence).length > 0 && (
-          <details className="ev">
-            <summary>근거 목록 ({Object.keys(r.evidence).length}건) — 설명은 이 목록만 인용합니다</summary>
-            <ul>{Object.values(r.evidence).map((e) => <li key={e.id}><b>[{e.id}]</b> {EV_TYPE[e.type] ?? e.type} · {e.text}</li>)}</ul>
-          </details>
-        )}
-      </div>
-
-      <Coach r={r} />
-
-      <div className="panel">
-        <h2>지원 기준(공고) vs 실무 기준(기업)</h2>
-        <p className="hint">공고는 입사 문턱을 알려줍니다. 기업이 등록한 실무 기준은 입사 후 실제로 쓰는 역량입니다. 공고만 보고 준비하면 오른쪽 갭은 입사 후에 메워야 합니다.</p>
-        <div className="cmp">
-          <div className="col">
-            <h4>① 지원 기준 (공고) · 준비도 <span className="num">{b.readiness_posting}</span></h4>
-            <div className="row">{b.gaps_posting.length ? b.gaps_posting.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
-          </div>
-          <div className="col">
-            <h4>② 실무 기준 (기업 등록) · 준비도 <span className="num">{b.readiness_company}</span></h4>
-            <div className="row">{b.gaps_company.length ? b.gaps_company.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
-          </div>
-        </div>
-        <div className="diff">
-          {b.missed.length > 0 && <div className="plus">공고엔 없지만 입사 후 필요한 것: {b.missed.join(", ")}</div>}
-          {b.unnecessary.length > 0 && <div className="minus">지원할 때만 보는 것 (실무 기준엔 없음): {b.unnecessary.join(", ")}</div>}
-          <div className="hint">학습경로는 두 기준의 갭을 모두 다룹니다 (지원 먼저 → 실무).</div>
-        </div>
-      </div>
-
-      <div className="panel">
-        <h2>다른 기업과 비교</h2>
-        <p className="hint">같은 프로필이 기업마다 다른 준비도와 첫 학습 과제를 받습니다.</p>
+        <h2>다른 회사라면?</h2>
+        <p className="hint">같은 이력서도 회사마다 준비도와 첫 할 일이 달라요.</p>
         <Bars unit="" rows={r.others.map((o) => ({
           key: o.company_id, label: o.name.replace("(가상)", ""), value: o.readiness, cls: o.current ? "" : "alt",
-          note: `${o.first_task ? `첫 과제: ${o.first_task}` : "갭 없음"}${o.project_fit != null ? ` · 가장 맞는 경험 ${o.project_fit}점` : ""}`,
+          note: `${o.first_task ? `첫 할 일: ${o.first_task}` : "갭 없음"}${o.project_fit != null ? ` · 가장 맞는 경험 ${o.project_fit}점` : ""}`,
         }))} />
       </div>
     </>
