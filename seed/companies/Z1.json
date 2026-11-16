@@ -1,0 +1,104 @@
+{
+  "tenant_id": "Z1",
+  "name": "포스코DX(공개 자료 재구성)",
+  "desc": "신입 IT/OT엔지니어링·AI (포항/광양/판교) · 실제 공고 + 기술 블로그",
+  "region": "대경권",
+  "job": "ai",
+  "job_title": "신입 IT/OT엔지니어링·AI (포항/광양/판교)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 접수 2026-09-01~09-16, 마감 (원 접수처 recruit.posco.com). 주의: 대경권(포항) 근무 포함 신입 공채 — 공고 지원자격에 기술 스택이 없음; 실무 글은 AWS ProServe가 쓰고 포스코DX 연구소가 참여한 PoC(운영 환경 아님); 공고(신입 공채)와 글(AX융합연구소)은 팀이 다름. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "english": 2,
+    "gen_ai_use": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "english": 2,
+    "gen_ai_use": 1,
+    "amazon_bedrock": 1,
+    "embedding": 1,
+    "rag": 1,
+    "fastapi": 1,
+    "aws_ecs": 1,
+    "aws_cloudwatch": 1,
+    "llm": 1
+  },
+  "sources": {
+    "english": {
+      "from": "공고",
+      "url": "https://linkareer.com/activity/347063",
+      "quote": "어학: 토익스피킹 IM3(130점) 또는 OPIc(영어) IM1 이상 ('24.9.1. 이후 성적만 인정)"
+    },
+    "gen_ai_use": {
+      "from": "공고(우대)",
+      "url": "https://linkareer.com/activity/347063",
+      "quote": "공고 본문 참고"
+    },
+    "amazon_bedrock": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "이 글에서는 이 문제를 어떻게 정의했는지, 그리고 Amazon Bedrock 과 Graphiti 기반 지식 그래프를 활용하여 해결 방안을 PoC로 검증한 전 과정을 공유합니다.",
+      "date": "2026-07-01"
+    },
+    "embedding": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "사용자 질의에 대해 벡터 검색(Titan Embeddings), BM25 키워드 검색, 그래프 순회를 병렬로 수행하고 RRF(Reciprocal Rank Fusion)로 융합한 뒤, Bedrock Claude가 출처 인용이 포함된 답변을 생성합니다.",
+      "date": "2026-07-01"
+    },
+    "rag": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "물론, 벡터 검색의 장점 — 의미적 유사도 기반의 유연한 탐색 — 을 포기할 이유는 없습니다. 이번 솔루션에서는 지식 그래프 위에 벡터 검색을 결합한 하이브리드 방식을 채택했습니다.",
+      "date": "2026-07-01"
+    },
+    "fastapi": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "애플리케이션 서버(FastAPI)와 Neo4j는 Amazon ECS (Fargate) 위에서 서버리스로 호스팅되며, 문서 저장과 상태 추적에는 Amazon S3 와 Amazon DynamoDB 를, 사용자 인증과 프론트엔드 배포에는 Amazon CloudFront + Amazon Cognito 를 활용합니다.",
+      "date": "2026-07-01"
+    },
+    "aws_ecs": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "애플리케이션 서버(FastAPI)와 Neo4j는 Amazon ECS (Fargate) 위에서 서버리스로 호스팅되며",
+      "date": "2026-07-01"
+    },
+    "aws_cloudwatch": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "LLM 토큰 사용량과 비용은 Amazon CloudWatch 로 실시간 추적합니다.",
+      "date": "2026-07-01"
+    },
+    "llm": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/transforming-tacit-engineering-knowledge-into-ai-assets/",
+      "quote": "파이프라인은 Amazon Bedrock을 관리형으로 사용하여 모델 운영 부담을 제거했습니다. Claude Sonnet이 추출, 분류, Q&A를, Titan Embeddings가 벡터 검색을 담당합니다.",
+      "date": "2026-07-01"
+    }
+  },
+  "excluded": [],
+  "posting_text": "[모집분야]\nIT/OT엔지니어링: 전기설계, 통신설계, SW개발\nAI: AI Operator, 최적화, Vision AI, 자율주행 (석사 이상만 지원 가능)\n※ 근무지: 포항/광양(IT/OT엔지니어링), 포항/판교(AI)\n[지원자격]\n학사 학력 이상 보유자\n어학: 토익스피킹 IM3(130점) 또는 OPIc(영어) IM1 이상\n[우대사항]\n생성형 AI 도구를 활용하여 생산성을 높이거나 더 나은 결과물을 만들어 본 경험이 있는 분",
+  "tracks": [],
+  "domain": {
+    "label": "포스코DX 신입 IT/OT엔지니어링·AI (포항",
+    "keywords": [
+      "철강",
+      "플랜트",
+      "제조",
+      "PLC",
+      "제어 설계",
+      "지식 그래프"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "신입 공채 IT/OT·AI (실무 글: AX융합연구소 OT기술개발그룹)",
+    "caveats": [
+      "대경권(포항) 근무 포함 신입 공채 — 공고 지원자격에 기술 스택이 없음",
+      "실무 글은 AWS ProServe가 쓰고 포스코DX 연구소가 참여한 PoC(운영 환경 아님)",
+      "공고(신입 공채)와 글(AX융합연구소)은 팀이 다름"
+    ],
+    "posting_url": "https://linkareer.com/activity/347063"
+  }
+}

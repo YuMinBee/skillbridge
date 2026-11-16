@@ -1,0 +1,118 @@
+{
+  "tenant_id": "O",
+  "name": "무신사(공개 자료 재구성)",
+  "desc": "Backend Engineer · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "Backend Engineer",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 상시지원, 2026-11 조회 시 게시 중 (리멤버). 주의: 공고(백엔드)와 블로그(공통 플랫폼 파트)는 다른 팀. 블로그는 로깅 라이브러리가 전사 공통이라고 밝힘; 경력 5년 이상 공고; 실무 근거가 2건뿐. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "spring": 2,
+    "mysql": 2,
+    "redis": 2,
+    "kafka": 2,
+    "kubernetes": 2,
+    "docker": 2,
+    "gen_ai_use": 2,
+    "aws": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "spring": 2,
+    "mysql": 2,
+    "redis": 2,
+    "kafka": 2,
+    "kubernetes": 2,
+    "docker": 2,
+    "gen_ai_use": 2,
+    "aws": 1,
+    "observability": 1,
+    "grpc": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "Java 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "Java 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분"
+    },
+    "mysql": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "MySQL, Redis"
+    },
+    "redis": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "MySQL, Redis"
+    },
+    "kafka": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "Kafka"
+    },
+    "kubernetes": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분"
+    },
+    "docker": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "Kubernetes, Docker"
+    },
+    "gen_ai_use": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "공고 본문 참고"
+    },
+    "aws": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/277830",
+      "quote": "AWS 기반 클라우드 환경에서 서비스 개발 및 운영 경험이 있으신 분"
+    },
+    "observability": {
+      "from": "기술 블로그",
+      "url": "https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b",
+      "quote": "라이브러리가 trace_id를 읽는 곳은 OpenTelemetry의 Span.current()입니다.",
+      "date": "2026-10-01"
+    },
+    "grpc": {
+      "from": "기술 블로그",
+      "url": "https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b",
+      "quote": "외부로 나가는 HTTP나 gRPC 호출에도 traceparent를 자동으로 넣습니다.",
+      "date": "2026-10-01"
+    }
+  },
+  "excluded": [],
+  "posting_text": "자격 요건\n[기술 스택]\nJava / Spring Framework\nJPA / QueryDSL\nMySQL, Redis\nKafka\nKubernetes, Docker\n[자격 요건]\nJava 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분\n분산 시스템과 대규모 트래픽 처리에 대한 설계 및 운영 경험이 있으신 분\n클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분",
+  "tracks": [],
+  "domain": {
+    "label": "무신사 Backend Engineer",
+    "keywords": [
+      "패션",
+      "커머스",
+      "주문",
+      "결제",
+      "쿠폰",
+      "트래픽"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "무신사 엔지니어링 (블로그: PEL 공통서비스 파트)",
+    "caveats": [
+      "공고(백엔드)와 블로그(공통 플랫폼 파트)는 다른 팀. 블로그는 로깅 라이브러리가 전사 공통이라고 밝힘",
+      "경력 5년 이상 공고",
+      "실무 근거가 2건뿐"
+    ],
+    "posting_url": "https://career.rememberapp.co.kr/job/posting/277830"
+  }
+}

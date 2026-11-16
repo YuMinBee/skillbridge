@@ -43,7 +43,7 @@ def test_reject_unknown_skill_and_empty(client):
     assert client.put("/api/companies/A/requirements", json={"requirements": {"nope": 2}}).status_code == 400
     assert client.put("/api/companies/A/requirements", json={"requirements": {"python": 0}}).status_code == 400
     assert client.post("/api/diagnose", json={"resume_text": "  ", "company_id": "A"}).status_code == 400
-    assert client.post("/api/diagnose", json={"resume_text": "Python", "company_id": "Z"}).status_code == 404
+    assert client.post("/api/diagnose", json={"resume_text": "Python", "company_id": "NOPE"}).status_code == 404
 
 
 def test_tracks_and_doc_suggestions(client):

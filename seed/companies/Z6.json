@@ -1,0 +1,132 @@
+{
+  "tenant_id": "Z6",
+  "name": "요기요(위대한상상)(공개 자료 재구성)",
+  "desc": "Data Scientist (추천 모델링) · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "Data Scientist (추천 모델링)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (리멤버), 경력 7년 이상. 주의: 근거가 회사 블로그가 아닌 Google Cloud 고객 사례(벤더 자료), 날짜 미표시; 공고(추천)와 사례(데이터 플랫폼)는 다른 조직; 경력 7년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "python": 2,
+    "sql": 2,
+    "recommender": 2,
+    "ab_testing": 2,
+    "pytorch": 1,
+    "tensorflow": 1,
+    "airflow": 1,
+    "aws_sagemaker": 1,
+    "mlflow": 1,
+    "kubeflow": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "python": 2,
+    "sql": 2,
+    "recommender": 2,
+    "ab_testing": 2,
+    "pytorch": 1,
+    "tensorflow": 1,
+    "airflow": 1,
+    "aws_sagemaker": 1,
+    "mlflow": 1,
+    "kubeflow": 1,
+    "data_warehouse": 1,
+    "gcp": 1,
+    "postgresql": 1
+  },
+  "sources": {
+    "python": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "Python, SQL 활용 능력"
+    },
+    "sql": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "Python, SQL 활용 능력"
+    },
+    "recommender": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "공고 본문 참고"
+    },
+    "ab_testing": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "공고 본문 참고"
+    },
+    "pytorch": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "PyTorch, TensorFlow 등 ML/DL 프레임워크 활용 경험"
+    },
+    "tensorflow": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "PyTorch, TensorFlow 등 ML/DL 프레임워크 활용 경험"
+    },
+    "airflow": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "Airflow, dbt 등 데이터 파이프라인 프레임워크 사용 경험"
+    },
+    "aws_sagemaker": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "SageMaker, MLflow, Kubeflow 등 MLOps 프레임워크 활용 경험"
+    },
+    "mlflow": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "SageMaker, MLflow, Kubeflow 등 MLOps 프레임워크 활용 경험"
+    },
+    "kubeflow": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/252644",
+      "quote": "SageMaker, MLflow, Kubeflow 등 MLOps 프레임워크 활용 경험"
+    },
+    "data_warehouse": {
+      "from": "고객 사례",
+      "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+      "quote": "요기요는 실시간 분석이 필요한 현업 담당자들에게 즉각적인 데이터를 제공하기 위해 AlloyDB를 도입하고 BigQuery와 연합 쿼리를 통해 데이터 활용성을 높였습니다.",
+      "date": "미표시"
+    },
+    "gcp": {
+      "from": "고객 사례",
+      "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+      "quote": "이제까지 요기요는 BigQuery를 통한 쿼리와 분석 환경은 북미 리전의 구글 클라우드에서 운영되었습니다.",
+      "date": "미표시"
+    },
+    "postgresql": {
+      "from": "고객 사례",
+      "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+      "quote": "PostgreSQL 호환성으로 분석 속도, 편의성 확보",
+      "date": "미표시"
+    }
+  },
+  "excluded": [],
+  "posting_text": "추천/ 랭킹 ML모델 개발 / 사용자-가게 간 상호작용 및 다양한 로그 데이터 기반 피처 엔지니어링\n자격요건\n데이터사이언티스트 경력 7년 이상\n추천 모델링 경력 3년 이상\n온라인 실험 설계 및 분석 역량\nPython, SQL 활용 능력",
+  "tracks": [],
+  "domain": {
+    "label": "요기요 Data Scientist (추천 모",
+    "keywords": [
+      "배달",
+      "음식",
+      "가게",
+      "추천",
+      "랭킹",
+      "실시간 분석"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "AI/ML 팀 (근거: 데이터 조직 고객 사례)",
+    "caveats": [
+      "근거가 회사 블로그가 아닌 Google Cloud 고객 사례(벤더 자료), 날짜 미표시",
+      "공고(추천)와 사례(데이터 플랫폼)는 다른 조직",
+      "경력 7년 이상"
+    ],
+    "posting_url": "https://career.rememberapp.co.kr/job/posting/252644"
+  }
+}

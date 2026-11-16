@@ -1,0 +1,173 @@
+{
+  "tenant_id": "N",
+  "name": "컬리(공개 자료 재구성)",
+  "desc": "데이터 백엔드 개발자 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "데이터 백엔드 개발자",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-11 조회 시 게시 중 (리멤버). 주의: 공고(데이터 백엔드)와 블로그(AI검색추천개발) 같은 팀인지 미확인; 경력 6년 이상 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "mysql": 2,
+    "spring": 2,
+    "kafka": 2,
+    "aws": 2,
+    "gcp": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "gen_ai_use": 2,
+    "machine_learning": 1,
+    "sql": 1,
+    "mongodb": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "mysql": 2,
+    "spring": 2,
+    "kafka": 2,
+    "aws": 2,
+    "gcp": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "gen_ai_use": 2,
+    "machine_learning": 1,
+    "sql": 1,
+    "mongodb": 1,
+    "aws_sagemaker": 1,
+    "aws_eks": 1,
+    "elk": 1,
+    "aws_dynamodb": 1,
+    "mlflow": 1,
+    "embedding": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분"
+    },
+    "mysql": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분"
+    },
+    "kafka": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "Kafka 기반 비동기 처리 역량을 보유하신 분"
+    },
+    "aws": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"
+    },
+    "gcp": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"
+    },
+    "docker": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "공고 본문 참고"
+    },
+    "kubernetes": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"
+    },
+    "gen_ai_use": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "공고 본문 참고"
+    },
+    "machine_learning": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "머신러닝 기반의 서비스 운영 경험을 보유하신 분"
+    },
+    "sql": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "관계형 및 비관계형 데이터베이스(SQL, MongoDB 등) 설계·운영 경험이 있으신 분"
+    },
+    "mongodb": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/279400",
+      "quote": "관계형 및 비관계형 데이터베이스(SQL, MongoDB 등) 설계·운영 경험이 있으신 분"
+    },
+    "aws_sagemaker": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "인프라 조직과 논의한 끝에 저희 상황에는 SageMaker가 맞는다는 결론을 내렸습니다.",
+      "date": "2026-11-03"
+    },
+    "aws_eks": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "마침 전사 표준 아키텍처로 EKS를 채택한 상태여서 컨테이너 기반의 범용 워크플로우 엔진인 Argo Workflows를 자연스럽게 검토하게 됐습니다.",
+      "date": "2026-11-03"
+    },
+    "elk": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "서빙 API는 그 벡터로 검색 엔진(OpenSearch)에서 후보 상품을 조회해 최종 결과를 만듭니다.",
+      "date": "2026-11-03"
+    },
+    "aws_dynamodb": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "미리 계산해 DynamoDB에 적재",
+      "date": "2026-11-03"
+    },
+    "mlflow": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "추론 쪽은 EKS 위에 MLflow와 KServe, Karpenter를 조합하는 방안을 먼저 검토해 PoC까지 진행했습니다.",
+      "date": "2026-11-03"
+    },
+    "embedding": {
+      "from": "기술 블로그",
+      "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+      "quote": "무엇보다 모델을 새로 바꾸려면 추론 엔드포인트와 유저 임베딩, 검색 인덱스가 함께 바뀌어야 했는데, 저마다 다른 AWS 서비스에 흩어져 있어서 어떻게 한꺼번에 교체할지가 문제였습니다.",
+      "date": "2026-11-03"
+    }
+  },
+  "excluded": [],
+  "posting_text": "데이터 백엔드 개발자는 각종 AI, 머신러닝, 최적화 모델을 수행하는 백엔드 시스템을 개발하고 관리합니다.\n주요업무\n• 컬리 앱/웹에 AI/머신러닝/최적화 기반 서비스 구현/운영\n자격 요건\n• 유관경력 6년 이상이신 분\n• Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분\n• Kafka 기반 비동기 처리 역량을 보유하신 분\n• AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분",
+  "tracks": [],
+  "domain": {
+    "label": "컬리 데이터 백엔드 개발자",
+    "keywords": [
+      "신선식품",
+      "커머스",
+      "배송",
+      "물류",
+      "추천",
+      "개인화"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "데이터 직무 (블로그: AI검색추천개발)",
+    "caveats": [
+      "공고(데이터 백엔드)와 블로그(AI검색추천개발) 같은 팀인지 미확인",
+      "경력 6년 이상 공고"
+    ],
+    "posting_url": "https://career.rememberapp.co.kr/job/posting/279400"
+  }
+}

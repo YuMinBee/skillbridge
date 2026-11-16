@@ -1,0 +1,142 @@
+{
+  "tenant_id": "I",
+  "name": "네이버클라우드(공개 자료 재구성)",
+  "desc": "Multimodal MLOps (체험형 인턴) · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "Multimodal MLOps (체험형 인턴)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 모집 2026.09.14~09.23, 마감 (공고 재게시 사이트 사본). 주의: 공고는 공식 채용 사이트가 아니라 재게시 사이트 사본; 공고(평가 자동화)와 블로그(사전학습)는 같은 부서, 세부 팀 미확인; 블로그는 NVIDIA 개발자 블로그에 NAVER Cloud 저자가 쓴 글; 체험형 인턴 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "rest_api": 2,
+    "mlops_pipeline": 2,
+    "llm": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "airflow": 1,
+    "kafka": 1,
+    "llm_evaluation": 1,
+    "mlops": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "rest_api": 2,
+    "mlops_pipeline": 2,
+    "llm": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "airflow": 1,
+    "kafka": 1,
+    "llm_evaluation": 1,
+    "mlops": 1,
+    "distributed_training": 1,
+    "gpu_infra": 1,
+    "cuda": 1,
+    "perf_opt": 1,
+    "huggingface": 1
+  },
+  "sources": {
+    "rest_api": {
+      "from": "공고",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분"
+    },
+    "mlops_pipeline": {
+      "from": "공고",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분"
+    },
+    "llm": {
+      "from": "공고",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• Multimodal Model (LLaVA, Qwen, DeepSeek-VL 등) 의 구조, 학습 과정 및 평가에 대한 기본적인 이해를 갖추신 분"
+    },
+    "docker": {
+      "from": "공고",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• Docker/Kubernetes 기반 개발 경험을 보유하신 분"
+    },
+    "kubernetes": {
+      "from": "공고",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• Docker/Kubernetes 기반 개발 경험을 보유하신 분"
+    },
+    "airflow": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• Airflow, Argo Workflows 등 오케스트레이션 툴을 활용해 ML 파이프라인 또는 워크플로우 시스템을 개발한 경험을 보유하신 분"
+    },
+    "kafka": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분"
+    },
+    "llm_evaluation": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• 평가 프레임워크(LMMs-Eval, VLMEvalKit, LM-Eval-Harness 등)를 커스터마이징하거나 신규 벤치마크를 추가한 경험을 보유하신 분"
+    },
+    "mlops": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/?p=397709",
+      "quote": "• vLLM 등 추론 엔진으로 모델을 서빙하거나 최적화한 경험을 보유하신 분"
+    },
+    "distributed_training": {
+      "from": "기술 블로그",
+      "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+      "quote": "VLM을 위한 분산 학습 최적화: 텍스트 전용 LLM을 위해 설계된 parallelism 기법이 packing된 멀티모달 시퀀스에서는 아직 올바르게 동작하지 않았습니다.",
+      "date": "2026-08-18"
+    },
+    "gpu_infra": {
+      "from": "기술 블로그",
+      "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+      "quote": "학습은 멀티 노드 B200 클러스터에서 expert parallelism(EP) 8, tensor/pipeline/context parallelism(TP/PP/CP) 1, gradient accumulation 128 설정으로 수행했습니다.",
+      "date": "2026-08-18"
+    },
+    "cuda": {
+      "from": "기술 블로그",
+      "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+      "quote": "pack 교환은 전용 CUDA stream에서 forward·backward 연산과 겹쳐 수행되며, 각 worker는 이미 로컬에 있는 pack으로 첫 microbatch를 시작합니다.",
+      "date": "2026-08-18"
+    },
+    "perf_opt": {
+      "from": "기술 블로그",
+      "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+      "quote": "프로파일링을 통해 멀티모달 학습의 주요 병목이 되는 네 가지 영역을 식별하고, 이 영역들에 최적화 노력을 집중했습니다:",
+      "date": "2026-08-18"
+    },
+    "huggingface": {
+      "from": "기술 블로그",
+      "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+      "quote": "네이티브 구현은 Megatron의 parallelism를 그대로 상속받는 반면, Hugging Face encoder를 분산하려면 별도의 추가 작업이 필요합니다.",
+      "date": "2026-08-18"
+    }
+  },
+  "excluded": [],
+  "posting_text": "담당업무\n• Kafka 기반 Event Bus와 Airflow를 활용한 학습·평가·서빙 파이프라인 자동화(VLOps) 개발\n• vLLM, HuggingFace, 사내 추론 엔진 등과 여러 평가 프레임워크를 공통 스키마로 연결하는 Omni-Evaluator 개발\n자격요건\n• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분\n• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분\n• Docker/Kubernetes 기반 개발 경험을 보유하신 분\n우대사항\n• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분",
+  "tracks": [],
+  "domain": {
+    "label": "네이버클라우드 Multimodal MLOps (체험",
+    "keywords": [
+      "HyperCLOVA X",
+      "멀티모달",
+      "VLM",
+      "MLOps",
+      "EvalOps",
+      "GPU",
+      "분산 학습",
+      "LLM"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "HyperCLOVA X 멀티모달 부서",
+    "caveats": [
+      "공고는 공식 채용 사이트가 아니라 재게시 사이트 사본",
+      "공고(평가 자동화)와 블로그(사전학습)는 같은 부서, 세부 팀 미확인",
+      "블로그는 NVIDIA 개발자 블로그에 NAVER Cloud 저자가 쓴 글",
+      "체험형 인턴 공고"
+    ],
+    "posting_url": "https://inthiswork.com/?p=397709"
+  }
+}

@@ -1,0 +1,167 @@
+{
+  "tenant_id": "U",
+  "name": "직방(공개 자료 재구성)",
+  "desc": "백엔드 하우스 서비스 개발자 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "백엔드 하우스 서비스 개발자",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (원티드), 5년차 이상. 주의: 가장 약한 짝: 공고(백엔드)와 발표(데이터엔지니어링팀 데이터 플랫폼)는 팀과 직무가 다름; 발표 2022, 공고 이후; 경력 5년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "typescript": 2,
+    "csharp": 2,
+    "java": 2,
+    "kotlin": 2,
+    "python": 2,
+    "golang": 2,
+    "spring": 2,
+    "redis": 2,
+    "aws": 2,
+    "gcp": 2,
+    "azure": 2,
+    "communication": 2
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "typescript": 2,
+    "csharp": 2,
+    "java": 2,
+    "kotlin": 2,
+    "python": 2,
+    "golang": 2,
+    "spring": 2,
+    "redis": 2,
+    "aws": 2,
+    "gcp": 2,
+    "azure": 2,
+    "communication": 2,
+    "aws_eks": 1,
+    "kubernetes": 1,
+    "terraform": 1,
+    "nginx": 1,
+    "spark": 1,
+    "airflow": 1
+  },
+  "sources": {
+    "typescript": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "csharp": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "java": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "python": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "golang": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "NestJS, Spring Boot, ASP.NET Core 등 백엔드 프레임워크 개발 경험이 있으신 분"
+    },
+    "redis": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "RDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분"
+    },
+    "aws": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "AWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분"
+    },
+    "gcp": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "AWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분"
+    },
+    "azure": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "AWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분"
+    },
+    "communication": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/336075",
+      "quote": "팀 내 협업을 위한 원활한 커뮤니케이션 역량을 갖추신 분"
+    },
+    "aws_eks": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "k8s로 많이 나오고 많은 기능을 활용하기 위해 eks로 결정",
+      "date": "2022-06"
+    },
+    "kubernetes": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "EKS(kubernetes on aws) 에서 DataPlatform 운영 since 2019.8",
+      "date": "2022-06"
+    },
+    "terraform": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "- CI/CD - Terraform",
+      "date": "2022-06"
+    },
+    "nginx": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "ingress-nginx - k8s를 통한 service 기초",
+      "date": "2022-06"
+    },
+    "spark": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "spark-operator - DW batch 핵심",
+      "date": "2022-06"
+    },
+    "airflow": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+      "quote": "어느날 airflow장애발생",
+      "date": "2022-06"
+    }
+  },
+  "excluded": [],
+  "posting_text": "직방 부동산 서비스 전반(원룸, 오피스텔, 빌라 등) 및 중개사 대상 서비스의 백엔드 시스템 개발 및 운영 / 마이크로서비스 아키텍처(MSA) 기반의 API 서비스 설계 및 구현\n자격요건\n5년 이상의 백엔드 개발 경력 또는 그에 준하는 실무 경험을 보유하신 분\nTypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분\nRDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분\nAWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분",
+  "tracks": [],
+  "domain": {
+    "label": "직방 백엔드 하우스 서비스 개발자",
+    "keywords": [
+      "부동산",
+      "원룸",
+      "오피스텔",
+      "중개사",
+      "배치",
+      "이벤트"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "백엔드 하우스 서비스 (발표: 데이터엔지니어링팀)",
+    "caveats": [
+      "가장 약한 짝: 공고(백엔드)와 발표(데이터엔지니어링팀 데이터 플랫폼)는 팀과 직무가 다름",
+      "발표 2022, 공고 이후",
+      "경력 5년 이상"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/336075"
+  }
+}

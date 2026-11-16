@@ -1,0 +1,147 @@
+{
+  "tenant_id": "K",
+  "name": "우아한형제들(공개 자료 재구성)",
+  "desc": "데이터베이스 엔지니어 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "데이터베이스 엔지니어",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-03 확인, 마감 (원티드). 주의: 공고 팀(스토리지서비스팀)과 블로그 팀(클라우드스토리지개발팀)이 다름; 블로그는 2021~2023, 공고는 2025; 경력 5년 이상 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "mysql": 2,
+    "mongodb": 2,
+    "aws": 2,
+    "gcp": 2,
+    "linux": 2,
+    "shell": 2,
+    "cloud_migration": 1,
+    "python": 1,
+    "java": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "mysql": 2,
+    "mongodb": 2,
+    "aws": 2,
+    "gcp": 2,
+    "linux": 2,
+    "shell": 2,
+    "cloud_migration": 1,
+    "python": 1,
+    "java": 1,
+    "aws_cloudwatch": 1,
+    "grafana": 1,
+    "aws_rds": 1,
+    "finops": 1,
+    "postgresql": 1,
+    "query_tuning": 1
+  },
+  "sources": {
+    "mysql": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상"
+    },
+    "mongodb": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상"
+    },
+    "aws": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분"
+    },
+    "gcp": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분"
+    },
+    "linux": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분"
+    },
+    "shell": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분"
+    },
+    "cloud_migration": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• 이기종 간 마이그레이션 경험이 있는 분"
+    },
+    "python": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력"
+    },
+    "java": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/274716",
+      "quote": "• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력"
+    },
+    "aws_cloudwatch": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/13539/",
+      "quote": "데이터를 수집하기 위해 Boto3, CloudWatch API를 활용하여 Metric 데이터를 수집했습니다.",
+      "date": "2023-11-02"
+    },
+    "grafana": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/13539/",
+      "quote": "그라파나 메트릭(CPU / Memory / Connection)을 기준으로",
+      "date": "2023-11-02"
+    },
+    "aws_rds": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/13539/",
+      "quote": "RDS의 경우 CPU 지표 수치가 상승할수록, 전체 지연 시간(latency)이 상승하고 서비스 지연을 초래하는데요.",
+      "date": "2023-11-02"
+    },
+    "finops": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/13539/",
+      "quote": "높아진 인프라 비용을 점검하고 낭비되는 부분을 찾아 절감할 필요성을 느꼈습니다.",
+      "date": "2023-11-02"
+    },
+    "postgresql": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/6550/",
+      "quote": "최근 저희 팀에서는 Aurora MySQL로 운영되고 있던 대량 통계성 DB를 Aurora PostgreSQL로 이관하는 것을 검토중입니다.",
+      "date": "2021-12-07"
+    },
+    "query_tuning": {
+      "from": "기술 블로그",
+      "url": "https://techblog.woowahan.com/6550/",
+      "quote": "MySQL 환경에서 동작 중인 해당 서비스는 쿼리 개선 작업을 진행하였지만 드라마틱한 효과를 볼 수는 없었습니다.",
+      "date": "2021-12-07"
+    }
+  },
+  "excluded": [],
+  "posting_text": "• 관계형 데이터베이스 관리 및 운영 (MySQL, PostgreSQL)\n• NoSQL 관리 및 운영 (MongoDB, Redis)\n• AWS 환경 내 데이터 관련 스토리지 운영\n• Query 검수 및 Performance Tuning\n[자격요건] • MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상\n• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분\n• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분\n[우대] • 이기종 간 마이그레이션 경험이 있는 분\n• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력",
+  "tracks": [],
+  "domain": {
+    "label": "우아한형제들 데이터베이스 엔지니어",
+    "keywords": [
+      "DBA",
+      "데이터베이스",
+      "DB 운영",
+      "인프라 비용",
+      "모니터링",
+      "배달",
+      "MySQL"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "스토리지서비스팀 (블로그: 클라우드스토리지개발팀)",
+    "caveats": [
+      "공고 팀(스토리지서비스팀)과 블로그 팀(클라우드스토리지개발팀)이 다름",
+      "블로그는 2021~2023, 공고는 2025",
+      "경력 5년 이상 공고"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/274716"
+  }
+}

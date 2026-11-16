@@ -1,0 +1,139 @@
+{
+  "tenant_id": "W",
+  "name": "스캐터랩(공개 자료 재구성)",
+  "desc": "Backend Engineer (제타) · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "Backend Engineer (제타)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-11-16 기준 채용 중 (공식 채용 페이지). 주의: 같은 팀 확인(인터뷰는 이 공고를 낸 백엔드 리드); Prometheus·Grafana 글은 2022년 핑퐁팀 시절; 경력 3년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "spring": 2,
+    "kotlin": 2,
+    "java": 2,
+    "networking": 2,
+    "nosql": 2,
+    "communication": 2,
+    "kubernetes": 1,
+    "ai_general": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "spring": 2,
+    "kotlin": 2,
+    "java": 2,
+    "networking": 2,
+    "nosql": 2,
+    "communication": 2,
+    "kubernetes": 1,
+    "ai_general": 1,
+    "aws_dynamodb": 1,
+    "postgresql": 1,
+    "elk": 1,
+    "ab_testing": 1,
+    "prometheus": 1,
+    "grafana": 1
+  },
+  "sources": {
+    "spring": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "3년 이상 Spring(Kotlin 혹은 Java) 서비스를 운영한 경험, 혹은 그에 준하는 지식이 있으신 분"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "3년 이상 Spring(Kotlin 혹은 Java) 서비스를 운영한 경험, 혹은 그에 준하는 지식이 있으신 분"
+    },
+    "java": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "3년 이상 Spring(Kotlin 혹은 Java) 서비스를 운영한 경험, 혹은 그에 준하는 지식이 있으신 분"
+    },
+    "networking": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "공고 본문 참고"
+    },
+    "nosql": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "RDB, NoSQL 및 In-memory DB에 대한 이해와 사용 경험이 있으신 분"
+    },
+    "communication": {
+      "from": "공고",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "다양한 배경과 관점을 가진 팀원들과의 원활한 소통 및 협업 능력이 있으신 분"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "Kubernetes와 Istio를 활용한 인프라를 운영해본 경험이 있으신 분"
+    },
+    "ai_general": {
+      "from": "공고(우대)",
+      "url": "https://www.scatterlab.co.kr/ko/o/123249",
+      "quote": "공고 본문 참고"
+    },
+    "aws_dynamodb": {
+      "from": "인터뷰",
+      "url": "https://blog.scatterlab.co.kr/156669",
+      "quote": "예를 들어 대화 데이터처럼 규모가 크고 접근 패턴이 명확한 데이터는 DynamoDB 를, 정합성과 관계형 조회가 중요한 데이터는 PostgreSQL 을, 검색성 요구가 있는 영역은 OpenSearch 를 활용하는 식이고, 그 사이사이에 Valkey 기반 캐싱도 적극적으로 사용하고 있습니다.",
+      "date": "2026-04-10"
+    },
+    "postgresql": {
+      "from": "인터뷰",
+      "url": "https://blog.scatterlab.co.kr/156669",
+      "quote": "정합성과 관계형 조회가 중요한 데이터는 PostgreSQL 을",
+      "date": "2026-04-10"
+    },
+    "elk": {
+      "from": "인터뷰",
+      "url": "https://blog.scatterlab.co.kr/156669",
+      "quote": "검색성 요구가 있는 영역은 OpenSearch 를 활용하는 식이고",
+      "date": "2026-04-10"
+    },
+    "ab_testing": {
+      "from": "인터뷰",
+      "url": "https://blog.scatterlab.co.kr/156669",
+      "quote": "거기서 소개한 것처럼 A/B 테스트, MAB(Multi-Armed Bandit), 리더보드 등 다양한 방법으로 모델을 평가하고 있습니다. 백엔드 팀은 이런 실험들이 실제 서비스 위에서 안정적으로 돌아갈 수 있도록 실험 인프라 자체를 직접 설계하고 구축 하는 역할을 맡고 있어요.",
+      "date": "2026-04-10"
+    },
+    "prometheus": {
+      "from": "기술 블로그",
+      "url": "https://blog.scatterlab.co.kr/spring-boot-monitoring-with-prometheus",
+      "quote": "서버의 배포 환경을 고려하여 Prometheus와 Grafana를 모니터링 도구로 사용했습니다.",
+      "date": "2022-12-21"
+    },
+    "grafana": {
+      "from": "기술 블로그",
+      "url": "https://blog.scatterlab.co.kr/spring-boot-monitoring-with-prometheus",
+      "quote": "Prometheus는 서버의 각종 metric을 수집하고, Grafana는 수집된 시계열 데이터를 시각화합니다.",
+      "date": "2022-12-21"
+    }
+  },
+  "excluded": [],
+  "posting_text": "주요 업무\n수십만 명이 매일 3시간씩 체류하는 제타의 서비스를 개발하고 운영합니다.\nA/B 테스트 환경, 로그 파이프라인 설계 및 구현을 통한 데이터 기반 의사결정을 지원합니다.\n필수 역량\n3년 이상 Spring(Kotlin 혹은 Java) 서비스를 운영한 경험, 혹은 그에 준하는 지식이 있으신 분\nRDB, NoSQL 및 In-memory DB에 대한 이해와 사용 경험이 있으신 분",
+  "tracks": [],
+  "domain": {
+    "label": "스캐터랩 Backend Engineer (제타",
+    "keywords": [
+      "AI 엔터테인먼트",
+      "챗봇",
+      "대화",
+      "캐릭터",
+      "A/B 테스트",
+      "LLM 서빙"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "제타 백엔드 팀",
+    "caveats": [
+      "같은 팀 확인(인터뷰는 이 공고를 낸 백엔드 리드)",
+      "Prometheus·Grafana 글은 2022년 핑퐁팀 시절",
+      "경력 3년 이상"
+    ],
+    "posting_url": "https://www.scatterlab.co.kr/ko/o/123249"
+  }
+}

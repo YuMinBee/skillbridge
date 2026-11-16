@@ -1,0 +1,90 @@
+{
+  "tenant_id": "Z14",
+  "name": "데이원컴퍼니(포도스피킹)(공개 자료 재구성)",
+  "desc": "Product Engineer (포도 스피킹) · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "Product Engineer (포도 스피킹)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-10-14 마감 (원티드), 경력 2~5년. 주의: AWS 기술 블로그(AWS 직원 작성), 같은 포도스피킹 서비스 사례; 공고 자격요건에 기술명이 없어 갭이 크게 잡힘; 경력 2~5년. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "observability": 1,
+    "gen_ai_use": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "observability": 1,
+    "gen_ai_use": 1,
+    "aws_eks": 1,
+    "amazon_bedrock": 1,
+    "speech": 1,
+    "aws_s3": 1,
+    "golang": 1
+  },
+  "sources": {
+    "observability": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/381552",
+      "quote": "로그·이벤트·트레이스를 직접 뒤져 원인을 찾아본 경험"
+    },
+    "gen_ai_use": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/381552",
+      "quote": "AI 코딩 에이전트를 활용해 본인의 작업 방식 자체를 다시 설계해본 경험"
+    },
+    "aws_eks": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/day1company-eks-bedrock-ai-powered-personalized-education-report/",
+      "quote": "본 프로젝트에서는 모든 마이크로서비스(LiveKit, Golang Workers, STT Model Serving)를 운영하는 오케스트레이션 기반으로 활용했습니다.",
+      "date": "2025-11-17"
+    },
+    "amazon_bedrock": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/day1company-eks-bedrock-ai-powered-personalized-education-report/",
+      "quote": "3단계: 데이터 분석 (Data Analysis): Amazon Bedrock이 텍스트 스크립트를 분석하여 문법 오류, 레벨 등 구조화된 데이터를 추출합니다.",
+      "date": "2025-11-17"
+    },
+    "speech": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/day1company-eks-bedrock-ai-powered-personalized-education-report/",
+      "quote": "2단계: STT (Speech-to-Text): Amazon EKS 클러스터의 GPU Spot 인스턴스 위에서 호스팅되는 Whisper 모델이 음성을 텍스트로 변환합니다.",
+      "date": "2025-11-17"
+    },
+    "aws_s3": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/day1company-eks-bedrock-ai-powered-personalized-education-report/",
+      "quote": "1단계: 전처리 (Pre-processing): 포도시스템을 통해 진행된 수업이 종료되면 Amazon S3에 저장된 원본 음성 파일에서 노이즈를 제거하고 파일을 합치는 등 전처리 작업을 진행합니다.",
+      "date": "2025-11-17"
+    },
+    "golang": {
+      "from": "기술 블로그",
+      "url": "https://aws.amazon.com/ko/blogs/tech/day1company-eks-bedrock-ai-powered-personalized-education-report/",
+      "quote": "모든 마이크로서비스(LiveKit, Golang Workers, STT Model Serving)를 운영하는 오케스트레이션 기반으로 활용했습니다.",
+      "date": "2025-11-17"
+    }
+  },
+  "excluded": [],
+  "posting_text": "• 프론트엔드, 백엔드, 인프라, 데이터, 어드민 전 영역 개발\n• 레거시 정리 및 AI 기반 개발에서도 확장 가능한 시스템 구조 설계\n자격요건\n• 소프트웨어 개발 경력 2년 이상 5년 미만\n• 문제 정의부터 배포·검증까지 한 사이클을 주도적으로 이끌어본 경험\n• 특정 기술 스택에 얽매이지 않고, 문제에 가장 잘 맞는 방법을 선택하는 분",
+  "tracks": [],
+  "domain": {
+    "label": "데이원컴퍼니 Product Engineer (포도",
+    "keywords": [
+      "교육",
+      "어학",
+      "영어 회화",
+      "음성",
+      "학습 리포트",
+      "AI"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "포도 그룹 (공고·사례 같은 서비스)",
+    "caveats": [
+      "AWS 기술 블로그(AWS 직원 작성), 같은 포도스피킹 서비스 사례",
+      "공고 자격요건에 기술명이 없어 갭이 크게 잡힘",
+      "경력 2~5년"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/381552"
+  }
+}

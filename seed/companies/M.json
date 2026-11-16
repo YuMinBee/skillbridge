@@ -1,0 +1,202 @@
+{
+  "tenant_id": "M",
+  "name": "오늘의집(버킷플레이스)(공개 자료 재구성)",
+  "desc": "Backend Engineer, Commerce · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "Backend Engineer, Commerce",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (재게시 사이트 사본). 주의: 공고(커머스 개발)와 블로그(추천팀)는 다른 팀; 공고는 재게시 사이트 사본; 경력 3년 이상 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "kotlin": 2,
+    "java": 2,
+    "python": 2,
+    "rest_api": 2,
+    "nosql": 2,
+    "msa": 2,
+    "aws": 2,
+    "gcp": 2,
+    "gen_ai_use": 2,
+    "communication": 2,
+    "kafka": 1,
+    "spark": 1,
+    "elk": 1,
+    "kubernetes": 1,
+    "docker": 1,
+    "terraform": 1,
+    "grafana": 1,
+    "prometheus": 1,
+    "langchain": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "kotlin": 2,
+    "java": 2,
+    "python": 2,
+    "rest_api": 2,
+    "nosql": 2,
+    "msa": 2,
+    "aws": 2,
+    "gcp": 2,
+    "gen_ai_use": 2,
+    "communication": 2,
+    "kafka": 1,
+    "spark": 1,
+    "elk": 1,
+    "kubernetes": 1,
+    "docker": 1,
+    "terraform": 1,
+    "grafana": 1,
+    "prometheus": 1,
+    "langchain": 1,
+    "redis": 1,
+    "airflow": 1,
+    "feature_store": 1,
+    "hadoop": 1
+  },
+  "sources": {
+    "kotlin": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분"
+    },
+    "java": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분"
+    },
+    "python": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분"
+    },
+    "rest_api": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분"
+    },
+    "nosql": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "RDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분"
+    },
+    "msa": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분"
+    },
+    "aws": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분"
+    },
+    "gcp": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분"
+    },
+    "gen_ai_use": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "공고 본문 참고"
+    },
+    "communication": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "명확한 커뮤니케이션 역량을 갖추고, 협업 중심의 개발 문화에 익숙한 분"
+    },
+    "kafka": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kafka, Spark, Elasticsearch 등 빅데이터 및 스트리밍 처리 기술을 활용한 경험이 있는 분"
+    },
+    "spark": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kafka, Spark, Elasticsearch 등 빅데이터 및 스트리밍 처리 기술을 활용한 경험이 있는 분"
+    },
+    "elk": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kafka, Spark, Elasticsearch 등 빅데이터 및 스트리밍 처리 기술을 활용한 경험이 있는 분"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분"
+    },
+    "docker": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분"
+    },
+    "terraform": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분"
+    },
+    "grafana": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분"
+    },
+    "prometheus": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분"
+    },
+    "langchain": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/363685",
+      "quote": "n8n, Langchain 등 AI 워크플로우 도구를 활용하거나 AI 기반 프로토타입을 실험한 경험이 있는 분"
+    },
+    "redis": {
+      "from": "기술 블로그",
+      "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+      "quote": "따라서 빠른 조회가 가능한 인메모리 DB, 저희의 경우 Redis에 피처 값들을 미리 저장해두어야 합니다.",
+      "date": "2025-12-17"
+    },
+    "airflow": {
+      "from": "기술 블로그",
+      "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+      "quote": "Airflow를 이용해 주기적으로 데이터 웨어하우스에서 피처 값을 읽어옵니다.",
+      "date": "2025-12-17"
+    },
+    "feature_store": {
+      "from": "기술 블로그",
+      "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+      "quote": "저희는 우선 가장 널리 알려진 오픈소스 피처 스토어인 Feast를 기반으로 시스템을 구축하기로 결정했습니다.",
+      "date": "2025-12-17"
+    },
+    "hadoop": {
+      "from": "기술 블로그",
+      "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+      "quote": "즉, 저희는 Feast의 장점을 그대로 가져오면서도 기존에 이미 자리 잡고 있던 인프라(Hive, Spark, Flink 등)를 적극적으로 활용하는",
+      "date": "2025-12-17"
+    }
+  },
+  "excluded": [],
+  "posting_text": "자격요건\n컴퓨터공학 전공 또는 이에 준하는 개발 지식과 3년 이상의 백엔드 개발 경험이 있는 분\nKotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분\n대용량 트래픽 처리 및 실시간 시스템을 개발한 경험이 있는 분\nRDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분\nMSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분\nGPT, Claude 등 LLM 기반 도구를 실무에 적용해 본 경험이 있는 분",
+  "tracks": [],
+  "domain": {
+    "label": "오늘의집 Backend Engineer, Co",
+    "keywords": [
+      "인테리어",
+      "커머스",
+      "주문",
+      "결제",
+      "추천",
+      "개인화"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "커머스 개발 (블로그: 추천팀)",
+    "caveats": [
+      "공고(커머스 개발)와 블로그(추천팀)는 다른 팀",
+      "공고는 재게시 사이트 사본",
+      "경력 3년 이상 공고"
+    ],
+    "posting_url": "https://inthiswork.com/archives/363685"
+  }
+}

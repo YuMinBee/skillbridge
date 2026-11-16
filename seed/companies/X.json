@@ -1,0 +1,104 @@
+{
+  "tenant_id": "X",
+  "name": "업스테이지(공개 자료 재구성)",
+  "desc": "AI Research Engineer - Post-training · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "AI Research Engineer - Post-training",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-11-16 기준 채용 중 (공식 채용 페이지). 주의: 블로그(2024 Upstage Team)와 공고(2026 Post-training팀)는 회사만 같음; 블로그는 영문; 석사·논문 요구 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "fine_tuning": 2,
+    "llm": 2,
+    "nlp": 2,
+    "machine_learning": 2,
+    "paper_research": 2,
+    "ai_agent": 1,
+    "communication": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "fine_tuning": 2,
+    "llm": 2,
+    "nlp": 2,
+    "machine_learning": 2,
+    "paper_research": 2,
+    "ai_agent": 1,
+    "communication": 1,
+    "spark": 1,
+    "data_pipeline": 1
+  },
+  "sources": {
+    "fine_tuning": {
+      "from": "공고",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "LLM/VLM post-training/fine-tuning을 수행하여 특정 문제에서 최고 성능을 달성해본 경험"
+    },
+    "llm": {
+      "from": "공고",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "LLM/VLM post-training/fine-tuning을 수행하여 특정 문제에서 최고 성능을 달성해본 경험"
+    },
+    "nlp": {
+      "from": "공고",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "ML과 NLP 토픽으로 국제 학회에서 출판 기록 (1저자 혹은 교신저자)"
+    },
+    "machine_learning": {
+      "from": "공고",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "공고 본문 참고"
+    },
+    "paper_research": {
+      "from": "공고",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "공고 본문 참고"
+    },
+    "ai_agent": {
+      "from": "공고(우대)",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "공고 본문 참고"
+    },
+    "communication": {
+      "from": "공고(우대)",
+      "url": "https://careers.upstage.ai/ko/o/194876",
+      "quote": "레슨런을 효과적이고 효율적으로 전파하고 논의할 수 있는 의사소통 능력"
+    },
+    "spark": {
+      "from": "기술 블로그",
+      "url": "https://www.upstage.ai/blog/en/dataverse-preprocessing-open-source",
+      "quote": "Block-based : In Dataverse, a block means a registered ETL function which is running on Spark. You can build Spark code like putting together puzzle pieces.",
+      "date": "2024-03-26"
+    },
+    "data_pipeline": {
+      "from": "기술 블로그",
+      "url": "https://www.upstage.ai/blog/en/dataverse-preprocessing-open-source",
+      "quote": "Within Upstage, we've extensively utilized Dataverse for pre-processing datasets to train projects like Solar Mini and Up 1T Token Club . For instance, we employed Dataverse to deduplicate vast text data provided by our partner corporations for systematic cleansing and enhancement.",
+      "date": "2024-03-26"
+    }
+  },
+  "excluded": [],
+  "posting_text": "확장 가능한 Agent 환경 구축 방법론, 초고품질 데이터 필터링 시스템, RLHF·RLVR·OPD 등 최신 학습 기법을 활용해 세계 최고 수준의 사후 학습 기술 개발을 주도합니다.\n필수 사항\nLLM/VLM post-training/fine-tuning을 수행하여 특정 문제에서 최고 성능을 달성해본 경험\nFoundation Model 개발 트렌드에 대한 이해도\nML과 NLP 토픽으로 국제 학회에서 출판 기록 (1저자 혹은 교신저자)\n우대 사항\nAgent Harness를 설계하여 모델 학습을 위한 데이터 합성을 수행해본 경험\nLLM/VLM을 위한 데이터 수집, 생성, 정제등을 수행해 본 경험",
+  "tracks": [],
+  "domain": {
+    "label": "업스테이지 AI Research Engineer",
+    "keywords": [
+      "파운데이션 모델",
+      "사후 학습",
+      "LLM",
+      "에이전트",
+      "데이터 정제",
+      "Solar"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "Post-training 팀 (블로그: Upstage Team)",
+    "caveats": [
+      "블로그(2024 Upstage Team)와 공고(2026 Post-training팀)는 회사만 같음",
+      "블로그는 영문",
+      "석사·논문 요구 공고"
+    ],
+    "posting_url": "https://careers.upstage.ai/ko/o/194876"
+  }
+}

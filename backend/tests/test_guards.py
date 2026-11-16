@@ -123,7 +123,10 @@ def dynamo_storage():
 def test_dynamo_backend_roundtrip(dynamo_storage):
     storage, fake = dynamo_storage
     ids = [c["tenant_id"] for c in storage.list_companies()]
-    assert ids == ["A", "B", "C", "D", "E", "F", "G", "H"]                              # 페이지 넘김 포함
+    import json
+    from app.data import SEED
+    want = sorted(json.loads(p.read_text(encoding="utf-8"))["tenant_id"] for p in (SEED / "companies").glob("*.json"))
+    assert sorted(ids) == want and len(ids) > 8                                      # 페이지 넘김 포함
     storage.update_company("B", desc="바뀜")
     assert storage.get_company("B")["desc"] == "바뀜"
     tok = storage.set_sandbox(SB1)

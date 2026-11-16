@@ -1,0 +1,111 @@
+{
+  "tenant_id": "Z11",
+  "name": "카카오뱅크(공개 자료 재구성)",
+  "desc": "서비스 아키텍트 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "서비스 아키텍트",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-07-07 마감 (원티드), 경력 5년 이상. 주의: 서비스아키팀 같은 팀 확인. Kafka 글은 알림경험엔지니어링팀; 공고 주요업무에는 Ansible·Consul 등 전체 스택이 적혀 있음(자격요건·우대 기준으로만 비교); 경력 5년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "networking": 2,
+    "msa": 1,
+    "kubernetes": 1,
+    "golang": 1,
+    "terraform": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "networking": 2,
+    "msa": 1,
+    "kubernetes": 1,
+    "golang": 1,
+    "terraform": 1,
+    "ansible": 1,
+    "kafka": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Java(kotlin), Spring 기반의 웹 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Java(kotlin), Spring 기반의 웹 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Java(kotlin), Spring 기반의 웹 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "networking": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Server, Network, DB 등 IT기술 전반에 대한 이해가 있는 분"
+    },
+    "msa": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "MSA 기반 설계 및 개발 경험 또는 레거시 시스템을 MSA로 전환 경험이 있는 분"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "컨테이너 오케스트레이션(Kubernetes 등) 구축 및 설계 경험이 있는 분"
+    },
+    "golang": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Go 언어 개발 경험 및 Terraform Custom Provider 개발 경험이 있는 분"
+    },
+    "terraform": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/349922",
+      "quote": "Go 언어 개발 경험 및 Terraform Custom Provider 개발 경험이 있는 분"
+    },
+    "ansible": {
+      "from": "기술 블로그",
+      "url": "https://tech.kakaobank.com/posts/2502-implementing-service-discovery-in-banking/",
+      "quote": "이를 극복하기 위해 Ansible 기반의 자동화를 도입했고, 현재는 Terraform과 Kubernetes(이하 K8s)를 활용한 근본적인 해결책을 마련하고 있습니다.",
+      "date": "2025-02-07"
+    },
+    "kafka": {
+      "from": "기술 블로그",
+      "url": "https://tech.kakaobank.com/posts/2609-new-notification-platform-1/",
+      "quote": "Kafka Streams: 복잡한 스트림 처리, 상태 저장, 재처리 로직을 숨기고, stream.filter().map().groupBy()라는 선언적 API를 제공합니다.",
+      "date": "2026-09-07"
+    }
+  },
+  "excluded": [],
+  "posting_text": "자격요건\n• Java(kotlin), Spring 기반의 웹 애플리케이션 개발 및 운영 경험이 있는 분\n• 트러블 슈팅 및 성능 개선 경험이 있는 분\n• Server, Network, DB 등 IT기술 전반에 대한 이해가 있는 분\n• 관련 경력 5년 이상인 분\n우대사항\n• MSA 기반 설계 및 개발 경험 또는 레거시 시스템을 MSA로 전환 경험이 있는 분\n• 컨테이너 오케스트레이션(Kubernetes 등) 구축 및 설계 경험이 있는 분",
+  "tracks": [],
+  "domain": {
+    "label": "카카오뱅크 서비스 아키텍트",
+    "keywords": [
+      "은행",
+      "금융",
+      "서비스 디스커버리",
+      "API Gateway",
+      "MSA",
+      "알림"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "서비스아키팀 (공고·블로그 같은 팀)",
+    "caveats": [
+      "서비스아키팀 같은 팀 확인. Kafka 글은 알림경험엔지니어링팀",
+      "공고 주요업무에는 Ansible·Consul 등 전체 스택이 적혀 있음(자격요건·우대 기준으로만 비교)",
+      "경력 5년 이상"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/349922"
+  }
+}

@@ -1,0 +1,161 @@
+{
+  "tenant_id": "J",
+  "name": "카카오페이(공개 자료 재구성)",
+  "desc": "MLOps 엔지니어 - AI 플랫폼 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "ai",
+  "job_title": "MLOps 엔지니어 - AI 플랫폼",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-10 무렵, 마감 (재게시 사이트 사본; catch.co.kr/NCS/RecruitInfoDetails/530998 동일). 주의: 공고는 'AI 플랫폼' 조직, 블로그 저자는 DevOps팀 — 같은 팀 미확인; 공고는 재게시 사이트 사본; 경력 5년 이상 공고. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "mlops": 2,
+    "python": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "cicd": 2,
+    "mlops_pipeline": 2,
+    "kubeflow": 1,
+    "mlflow": 1,
+    "langchain": 1,
+    "vector_db": 1,
+    "terraform": 1,
+    "prometheus": 1,
+    "grafana": 1,
+    "pytorch": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "mlops": 2,
+    "python": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "cicd": 2,
+    "mlops_pipeline": 2,
+    "kubeflow": 1,
+    "mlflow": 1,
+    "langchain": 1,
+    "vector_db": 1,
+    "terraform": 1,
+    "prometheus": 1,
+    "grafana": 1,
+    "pytorch": 1,
+    "gpu_infra": 1,
+    "distributed_training": 1,
+    "serverless": 1
+  },
+  "sources": {
+    "mlops": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "MLOps, DevOps, SRE 또는 플랫폼 엔지니어링 관련 실무 경험 5년 이상이신 분을 찾고 있어요."
+    },
+    "python": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Python, Go, Java 등 하나 이상의 프로그래밍 언어 활용 능력을 갖추고 있으신 분을 찾고 있어요."
+    },
+    "docker": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요."
+    },
+    "kubernetes": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요."
+    },
+    "cicd": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요."
+    },
+    "mlops_pipeline": {
+      "from": "공고",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "AI/ML 워크플로우(데이터 수집/처리, 학습, 평가, 배포)에 대한 기본적인 이해가 있으신 분을 찾고 있어요."
+    },
+    "kubeflow": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요."
+    },
+    "mlflow": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요."
+    },
+    "langchain": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "LangChain, LlamaIndex, vLLM 등 LLM 애플리케이션/서빙 프레임워크 사용 경험이 있으면 좋아요."
+    },
+    "vector_db": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Vector DB (e.g., Milvus, Pinecone, Weaviate) 구축 또는 활용 경험이 있으면 좋아요."
+    },
+    "terraform": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Terraform, Ansible 등 IaC(Infrastructure as Code) 도구를 활용한 인프라 관리 경험이 있으면 좋아요."
+    },
+    "prometheus": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요."
+    },
+    "grafana": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요."
+    },
+    "pytorch": {
+      "from": "공고(우대)",
+      "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+      "quote": "TensorFlow/PyTorch 등 딥러닝 프레임워크 사용 및 모델 서빙 경험이 있으면 좋아요."
+    },
+    "gpu_infra": {
+      "from": "기술 블로그",
+      "url": "https://tech.kakaopay.com/post/ai-platform/",
+      "quote": "저희는 고성능 AI 모델 학습을 위해 H200 GPU를 도입했습니다. 하지만 이런 고성능 장비는 CPU가 데이터 처리 속도를 따라가지 못해 오히려 병목이 되는 문제가 발생합니다.",
+      "date": "2025-11-12"
+    },
+    "distributed_training": {
+      "from": "기술 블로그",
+      "url": "https://tech.kakaopay.com/post/ai-platform/",
+      "quote": "이를 해결하고, 특히 대규모 분산 학습의 효율을 극대화하기 위해 CPU를 거치지 않고 GPU끼리 직접 통신하는 RDMA 기술과 Infiniband 네트워크 도입을 결정했습니다.",
+      "date": "2025-11-12"
+    },
+    "serverless": {
+      "from": "기술 블로그",
+      "url": "https://tech.kakaopay.com/post/ai-platform/",
+      "quote": "knative란 쿠버네티스를 서버리스 플랫폼으로 이용할 수 있는 도구이며, 필요한 순간에만 동적으로 자원을 할당하고 회수하는 서버리스의 핵심적인 역할을 수행합니다.",
+      "date": "2025-11-12"
+    }
+  },
+  "excluded": [],
+  "posting_text": "업무내용\n• MLOps/LLMOps 기반 AI 플랫폼의 아키텍처를 설계, 개발 및 운영해요.\n• AI 모델(ML/LLM)의 학습, 배포, 서빙, 모니터링을 위한 CI/CD 자동화 파이프라인을 구축해요.\n• Kubernetes(K8s) 기반의 확장 가능하고 안정적인 모델 학습 및 추론 인프라를 구축 및 관리해요.\n자격요건\n• Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.\n• CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요.\n우대사항\n• Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.",
+  "tracks": [],
+  "domain": {
+    "label": "카카오페이 MLOps 엔지니어",
+    "keywords": [
+      "금융",
+      "AI 플랫폼",
+      "MLOps",
+      "LLMOps",
+      "모델 서빙",
+      "GPU",
+      "쿠버네티스"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "AI 플랫폼 조직 (블로그: DevOps팀)",
+    "caveats": [
+      "공고는 'AI 플랫폼' 조직, 블로그 저자는 DevOps팀 — 같은 팀 미확인",
+      "공고는 재게시 사이트 사본",
+      "경력 5년 이상 공고"
+    ],
+    "posting_url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372"
+  }
+}

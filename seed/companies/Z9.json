@@ -1,0 +1,103 @@
+{
+  "tenant_id": "Z9",
+  "name": "쿠팡(공개 자료 재구성)",
+  "desc": "백엔드 개발자 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "백엔드 개발자",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (원티드), 경력 6년 이상. 주의: 공고 팀명이 없어 같은 회사 수준; 경력 6년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "spring": 2,
+    "git": 2,
+    "sql": 2
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "spring": 2,
+    "git": 2,
+    "sql": 2,
+    "hadoop": 1,
+    "aws_redshift": 1,
+    "airflow": 1,
+    "aws_athena": 1,
+    "aws_s3": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/367805",
+      "quote": "Java 및 Spring 프레임웍을 이용한 Web Application 개발 경험하신 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/367805",
+      "quote": "Java 및 Spring 프레임웍을 이용한 Web Application 개발 경험하신 분"
+    },
+    "git": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/367805",
+      "quote": "Git 버전 관리 시스템 사용 경험하신 분"
+    },
+    "sql": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/367805",
+      "quote": "관계형 데이터베이스 경험하신 분"
+    },
+    "hadoop": {
+      "from": "기술 블로그",
+      "url": "https://medium.com/coupang-engineering/%EC%BF%A0%ED%8C%A1-scm-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B4%EA%B3%A0-%ED%99%95%EC%9E%A5-%EA%B0%80%EB%8A%A5%ED%95%9C-low-code-no-code-%ED%94%8C%EB%9E%AB%ED%8F%BC-%EA%B0%9C%EB%B0%9C-7d997644d14",
+      "quote": "Hive, Redshift, Aurora 등 다양한 데이터 소스에 저장되어 있는 상품 재고 및 주문 데이터를 추출하는 노드를 생성합니다.",
+      "date": "2022-12-12"
+    },
+    "aws_redshift": {
+      "from": "기술 블로그",
+      "url": "https://medium.com/coupang-engineering/%EC%BF%A0%ED%8C%A1-scm-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B4%EA%B3%A0-%ED%99%95%EC%9E%A5-%EA%B0%80%EB%8A%A5%ED%95%9C-low-code-no-code-%ED%94%8C%EB%9E%AB%ED%8F%BC-%EA%B0%9C%EB%B0%9C-7d997644d14",
+      "quote": "Hive, Redshift, Aurora 등 다양한 데이터 소스에 저장되어 있는 상품 재고 및 주문 데이터를 추출하는 노드를 생성합니다.",
+      "date": "2022-12-12"
+    },
+    "airflow": {
+      "from": "기술 블로그",
+      "url": "https://medium.com/coupang-engineering/%EC%BF%A0%ED%8C%A1-scm-%EC%9B%8C%ED%81%AC%ED%94%8C%EB%A1%9C%EC%9A%B0-%ED%9A%A8%EC%9C%A8%EC%A0%81%EC%9D%B4%EA%B3%A0-%ED%99%95%EC%9E%A5-%EA%B0%80%EB%8A%A5%ED%95%9C-low-code-no-code-%ED%94%8C%EB%9E%AB%ED%8F%BC-%EA%B0%9C%EB%B0%9C-7d997644d14",
+      "quote": "저희는 앞으로 SCM 워크플로우를 통해 기존의 Jenkins, Airflow, Notebook 같은 툴이 가진 복잡성 및 연결성을 개선하여 완전히 대체하는 것은 물론",
+      "date": "2022-12-12"
+    },
+    "aws_athena": {
+      "from": "기술 블로그",
+      "url": "https://medium.com/coupang-engineering/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%82%AC%EC%9A%A9%EB%9F%89-%EA%B4%80%EB%A6%AC%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9A%B4%EC%98%81-%EB%B9%84%EC%9A%A9-%EC%B5%9C%EC%A0%81%ED%99%94-1521565c64ec",
+      "quote": "가령 Amazon Athena를 통해 처리된 Amazon CloudWatch 데이터를 사용해 맞춤형 대시보드를 개발했고 AWS CUR(Cost & Usage Reports) 데이터 처리를 위해 저희의 BI(Business Intelligence) 대시보드도 활용했습니다.",
+      "date": "2023-03-27"
+    },
+    "aws_s3": {
+      "from": "기술 블로그",
+      "url": "https://medium.com/coupang-engineering/%ED%81%B4%EB%9D%BC%EC%9A%B0%EB%93%9C-%EC%84%9C%EB%B9%84%EC%8A%A4-%EC%82%AC%EC%9A%A9%EB%9F%89-%EA%B4%80%EB%A6%AC%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%9A%B4%EC%98%81-%EB%B9%84%EC%9A%A9-%EC%B5%9C%EC%A0%81%ED%99%94-1521565c64ec",
+      "quote": "Amazon S3: 50 페타바이트(PB) 이상을 Intelligent-Tiering(IT)으로 옮겼습니다.",
+      "date": "2023-03-27"
+    }
+  },
+  "excluded": [],
+  "posting_text": "주요업무: Java platform 기반의 Front/Back office 웹 서비스 개발 / 룰 기반 최소 비용으로 빠르게 고객의 주문을 배송할 수 있는 방법을 찾기 위한 최적 알고리즘 도입\n자격요건\nJava 및 Spring 프레임웍을 이용한 Web Application 개발 경험하신 분\n프로그래밍 경력 6년 이상인 분\nGit 버전 관리 시스템 사용 경험하신 분\n관계형 데이터베이스 경험하신 분",
+  "tracks": [],
+  "domain": {
+    "label": "쿠팡 백엔드 개발자",
+    "keywords": [
+      "주문",
+      "배송",
+      "SCM",
+      "재고",
+      "물류",
+      "커머스"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "백엔드 (블로그: SCM 워크플로우·클라우드 비용 최적화)",
+    "caveats": [
+      "공고 팀명이 없어 같은 회사 수준",
+      "경력 6년 이상"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/367805"
+  }
+}

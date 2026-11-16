@@ -1,0 +1,152 @@
+{
+  "tenant_id": "Z15",
+  "name": "마이리얼트립(공개 자료 재구성)",
+  "desc": "비즈니스 플랫폼 백엔드 개발자 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "비즈니스 플랫폼 백엔드 개발자",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-04 시작, 마감 (리멤버), 경력 5년 이상. 주의: 사내 발표 세션 정리 글, 공고(비즈니스 플랫폼 백엔드)와 다른 팀; 경력 5년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "rest_api": 2,
+    "redis": 2,
+    "elk": 2,
+    "kafka": 2,
+    "nosql": 2,
+    "aws": 1,
+    "msa": 1,
+    "gen_ai_use": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "rest_api": 2,
+    "redis": 2,
+    "elk": 2,
+    "kafka": 2,
+    "nosql": 2,
+    "aws": 1,
+    "msa": 1,
+    "gen_ai_use": 1,
+    "prompt_engineering": 1,
+    "llm": 1,
+    "data_warehouse": 1,
+    "docker": 1,
+    "ai_agent": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "Java(Kotlin) & Spring Framework 기반 웹 서버 개발 경력 5년 이상"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "Java(Kotlin) & Spring Framework 기반 웹 서버 개발 경력 5년 이상"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "Java(Kotlin) & Spring Framework 기반 웹 서버 개발 경력 5년 이상"
+    },
+    "rest_api": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "Restful API 설계 / 구현 경험이 있으신 분"
+    },
+    "redis": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "NoSQL(Redis, ElasticSearch, Kafka) 개발 및 운영 경험이 있으신 분"
+    },
+    "elk": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "NoSQL(Redis, ElasticSearch, Kafka) 개발 및 운영 경험이 있으신 분"
+    },
+    "kafka": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "NoSQL(Redis, ElasticSearch, Kafka) 개발 및 운영 경험이 있으신 분"
+    },
+    "nosql": {
+      "from": "공고",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "NoSQL(Redis, ElasticSearch, Kafka) 개발 및 운영 경험이 있으신 분"
+    },
+    "aws": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "Cloud 환경(AWS)에서 개발 경험이 있으신 분"
+    },
+    "msa": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "MSA(Microservice Architecture), EDA(Event Driven Architecture) 개발 경험"
+    },
+    "gen_ai_use": {
+      "from": "공고(우대)",
+      "url": "https://career.rememberapp.co.kr/job/posting/217347",
+      "quote": "공고 본문 참고"
+    },
+    "prompt_engineering": {
+      "from": "발표",
+      "url": "https://medium.com/myrealtrip-product/product-engineer-%ED%81%B4%EB%A6%AD-%EB%AA%87-%EB%B2%88%EC%9C%BC%EB%A1%9C-%EC%97%AC%ED%96%89-%EC%83%81%ED%92%88-5-000%EA%B0%9C%EB%A5%BC-%EB%A7%8C%EB%93%A4%EB%8B%A4-24ce85cfe56a",
+      "quote": "제림님은 변하지 않는 스타일 레퍼런스와 규칙은 시스템 프롬프트에 넣어 캐시 재사용을 극대화하고, 상품별로 달라지는 정보만 개별 요청으로 전달하는 구조를 도입했습니다.",
+      "date": "2026-04-17"
+    },
+    "llm": {
+      "from": "발표",
+      "url": "https://medium.com/myrealtrip-product/product-engineer-%ED%81%B4%EB%A6%AD-%EB%AA%87-%EB%B2%88%EC%9C%BC%EB%A1%9C-%EC%97%AC%ED%96%89-%EC%83%81%ED%92%88-5-000%EA%B0%9C%EB%A5%BC-%EB%A7%8C%EB%93%A4%EB%8B%A4-24ce85cfe56a",
+      "quote": "실제 잘 팔리는 상품 50~60개의 상세 페이지와 제목을 JSON 데이터로 만들어 AI에게 예시로 제공하는 방식입니다.",
+      "date": "2026-04-17"
+    },
+    "data_warehouse": {
+      "from": "발표",
+      "url": "https://medium.com/myrealtrip-product/product-engineer-%ED%95%98%EB%A3%A8-500%EA%B1%B4-%EB%B6%84%EC%84%9D-%EC%9A%94%EC%B2%AD%EC%9D%84-%EB%B0%9B%EC%95%84%EB%82%B4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%BC%EC%9D%84-%EB%8F%95%EB%8A%94-ai%EC%97%90%EC%84%9C-%EC%9D%BC%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-ai%EB%A1%9C-dde9b6a891c5",
+      "quote": "워커마다 권한이 분리되니 보고서 워커가 BigQuery를 직접 만지는 일이 차단됐고",
+      "date": "2026-05-08"
+    },
+    "docker": {
+      "from": "발표",
+      "url": "https://medium.com/myrealtrip-product/product-engineer-%ED%95%98%EB%A3%A8-500%EA%B1%B4-%EB%B6%84%EC%84%9D-%EC%9A%94%EC%B2%AD%EC%9D%84-%EB%B0%9B%EC%95%84%EB%82%B4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%BC%EC%9D%84-%EB%8F%95%EB%8A%94-ai%EC%97%90%EC%84%9C-%EC%9D%BC%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-ai%EB%A1%9C-dde9b6a891c5",
+      "quote": "여러 개의 Claude Code Max 계정을 Docker 가상 환경 위에 띄워 두고, 들어오는 요청을 활성 워커들이 차례로 받아갑니다.",
+      "date": "2026-05-08"
+    },
+    "ai_agent": {
+      "from": "발표",
+      "url": "https://medium.com/myrealtrip-product/product-engineer-%ED%95%98%EB%A3%A8-500%EA%B1%B4-%EB%B6%84%EC%84%9D-%EC%9A%94%EC%B2%AD%EC%9D%84-%EB%B0%9B%EC%95%84%EB%82%B4%EB%8A%94-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8-%EC%9D%BC%EC%9D%84-%EB%8F%95%EB%8A%94-ai%EC%97%90%EC%84%9C-%EC%9D%BC%EC%9D%84-%EC%88%98%ED%96%89%ED%95%98%EB%8A%94-ai%EB%A1%9C-dde9b6a891c5",
+      "quote": "슬랙에서 “데이터 에이전트”를 태그하면 답변에 번호가 붙은 이모지가 달리는데, 이 번호가 바로 클러스터의 어떤 워커가 그 분석 요청을 맡았는지를 의미합니다.",
+      "date": "2026-05-08"
+    }
+  },
+  "excluded": [],
+  "posting_text": "주요업무\n• 신뢰도 높은 여행자 회원, 프로필, 멤버십 프로그램을 개발합니다.\n자격 요건\n• Java(Kotlin) & Spring Framework 기반 웹 서버 개발 경력 5년 이상\n• Restful API 설계 / 구현 경험이 있으신 분\n• ORM (JPA, Hibernate)기반 개발 역량을 보유하신 분\n• NoSQL(Redis, ElasticSearch, Kafka) 개발 및 운영 경험이 있으신 분",
+  "tracks": [],
+  "domain": {
+    "label": "마이리얼트립 비즈니스 플랫폼 백엔드 개발자",
+    "keywords": [
+      "여행",
+      "투어",
+      "액티비티",
+      "상품",
+      "파트너",
+      "멤버십"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "비즈니스 플랫폼 백엔드 (글: T&A Experience팀·데이터엔지니어링팀)",
+    "caveats": [
+      "사내 발표 세션 정리 글, 공고(비즈니스 플랫폼 백엔드)와 다른 팀",
+      "경력 5년 이상"
+    ],
+    "posting_url": "https://career.rememberapp.co.kr/job/posting/217347"
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "tenant_id": "Z7",
+  "name": "센드버드(공개 자료 재구성)",
+  "desc": "Data Platform Engineer · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "Data Platform Engineer",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (원티드), 경력 5-15년, 영문 공고. 주의: 공고·발표 모두 영어; 발표(2019)는 팀·시기가 다름; 경력 5년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "data_pipeline": 2,
+    "aws": 2,
+    "gcp": 2,
+    "python": 2,
+    "java": 2,
+    "scala": 2,
+    "sql": 2,
+    "data_modeling": 2
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "data_pipeline": 2,
+    "aws": 2,
+    "gcp": 2,
+    "python": 2,
+    "java": 2,
+    "scala": 2,
+    "sql": 2,
+    "data_modeling": 2,
+    "aws_kinesis": 1,
+    "aws_lambda": 1,
+    "elk": 1,
+    "aws_cloudwatch": 1
+  },
+  "sources": {
+    "data_pipeline": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "5+ years of work experience in data engineering and/or building ETL pipelines in production"
+    },
+    "aws": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Work experience in AWS and/or GCP data pipeline ecosystem"
+    },
+    "gcp": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Work experience in AWS and/or GCP data pipeline ecosystem"
+    },
+    "python": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Fluency in several programming languages such as Python, Java, or Scala"
+    },
+    "java": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Fluency in several programming languages such as Python, Java, or Scala"
+    },
+    "scala": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Fluency in several programming languages such as Python, Java, or Scala"
+    },
+    "sql": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "Strong analytic skills related to data models and conducting SQL"
+    },
+    "data_modeling": {
+      "from": "공고",
+      "url": "https://www.wanted.co.kr/wd/137065",
+      "quote": "공고 본문 참고"
+    },
+    "aws_kinesis": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+      "quote": "Kinesis Data Stream and Firehose are awesome but the cost is a burden.",
+      "date": "2019"
+    },
+    "aws_lambda": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+      "quote": "Kinesis Data Firehose de-aggregates automatically the records before it delivers them to AWS Lambda",
+      "date": "2019"
+    },
+    "elk": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+      "quote": "Elasticsearch cluster free storage",
+      "date": "2019"
+    },
+    "aws_cloudwatch": {
+      "from": "발표",
+      "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+      "quote": "Cloudwatch scheduled rule can trigger AWS Lambda function",
+      "date": "2019"
+    }
+  },
+  "excluded": [],
+  "posting_text": "Design distributed, high-volume ETL data pipelines that power Sendbird analytics and products\nRequirements\n5+ years of work experience in data engineering and/or building ETL pipelines in production\nWork experience in AWS and/or GCP data pipeline ecosystem\nFluency in several programming languages such as Python, Java, or Scala\nStrong analytic skills related to data models and conducting SQL",
+  "tracks": [],
+  "domain": {
+    "label": "센드버드 Data Platform Engine",
+    "keywords": [
+      "채팅 API",
+      "SaaS",
+      "메시징",
+      "로그",
+      "검색",
+      "ETL"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "Data Platform (발표: 2019 AWS Summit)",
+    "caveats": [
+      "공고·발표 모두 영어",
+      "발표(2019)는 팀·시기가 다름",
+      "경력 5년 이상"
+    ],
+    "posting_url": "https://www.wanted.co.kr/wd/137065"
+  }
+}

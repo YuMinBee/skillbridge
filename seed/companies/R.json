@@ -1,0 +1,189 @@
+{
+  "tenant_id": "R",
+  "name": "뱅크샐러드(공개 자료 재구성)",
+  "desc": "데이터 엔지니어 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "데이터 엔지니어",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-11-09 기준 (재게시 사이트 사본). 주의: 실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료); 공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름; Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외; 공고는 재게시 사이트 사본, 경력 5년 이상. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "python": 2,
+    "java": 2,
+    "scala": 2,
+    "linux": 2,
+    "sql": 2,
+    "mysql": 2,
+    "postgresql": 2,
+    "data_warehouse": 2,
+    "aws_redshift": 2,
+    "aws_rds": 2,
+    "data_pipeline": 2,
+    "query_tuning": 1,
+    "aws": 1,
+    "kubernetes": 1,
+    "kafka": 1,
+    "aws_kinesis": 1,
+    "aws_sagemaker": 1,
+    "amazon_bedrock": 1,
+    "airflow": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "python": 2,
+    "java": 2,
+    "scala": 2,
+    "linux": 2,
+    "sql": 2,
+    "mysql": 2,
+    "postgresql": 2,
+    "data_warehouse": 2,
+    "aws_redshift": 2,
+    "aws_rds": 2,
+    "data_pipeline": 2,
+    "query_tuning": 1,
+    "aws": 1,
+    "kubernetes": 1,
+    "kafka": 1,
+    "aws_kinesis": 1,
+    "aws_sagemaker": 1,
+    "amazon_bedrock": 1,
+    "airflow": 1,
+    "terraform": 1,
+    "iac": 1
+  },
+  "sources": {
+    "python": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Python 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련"
+    },
+    "java": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Python 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련"
+    },
+    "scala": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Python 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련"
+    },
+    "linux": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험"
+    },
+    "sql": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험"
+    },
+    "mysql": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험"
+    },
+    "postgresql": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험"
+    },
+    "data_warehouse": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"
+    },
+    "aws_redshift": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"
+    },
+    "aws_rds": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Aurora MySQL, RDS PostgreSQL 등 대용량 DB 운영 및 최적화 경험"
+    },
+    "data_pipeline": {
+      "from": "공고",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "데이터 파이프라인 장애 대응 및 복구 실무 경험"
+    },
+    "query_tuning": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "DB 쿼리 튜닝 및 인덱스 최적화 경험"
+    },
+    "aws": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "AWS, Kubernetes 기반 데이터 인프라 운영 경험"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "AWS, Kubernetes 기반 데이터 인프라 운영 경험"
+    },
+    "kafka": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Kafka, Kinesis, Flink 등 실시간 데이터 스트리밍 처리 경험"
+    },
+    "aws_kinesis": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "Kafka, Kinesis, Flink 등 실시간 데이터 스트리밍 처리 경험"
+    },
+    "aws_sagemaker": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"
+    },
+    "amazon_bedrock": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"
+    },
+    "airflow": {
+      "from": "공고(우대)",
+      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+      "quote": "AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"
+    },
+    "terraform": {
+      "from": "고객 사례",
+      "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
+      "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며",
+      "date": "2024-08 전환 이후"
+    },
+    "iac": {
+      "from": "고객 사례",
+      "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
+      "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며",
+      "date": "2024-08 전환 이후"
+    }
+  },
+  "excluded": [],
+  "posting_text": "데이터 파트는 데이터의 수집·저장·운영을 담당하며, 데이터 파이프라인 설계, DW 및 데이터 레이크 구축, 데이터 품질 관리, AI·ML/LLMOps 지원까지 전사 데이터 인프라를 총괄합니다.\n자격요건\n데이터 엔지니어링, ETL, 빅데이터 분야 실무 경험 5년 이상\nPython 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련\nLinux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험\nSnowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험",
+  "tracks": [],
+  "domain": {
+    "label": "뱅크샐러드 데이터 엔지니어",
+    "keywords": [
+      "마이데이터",
+      "핀테크",
+      "금융",
+      "자산",
+      "알림",
+      "개인정보"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "Core Infra팀 데이터 파트 (사례: AI Data Platform팀)",
+    "caveats": [
+      "실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료)",
+      "공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름",
+      "Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외",
+      "공고는 재게시 사이트 사본, 경력 5년 이상"
+    ],
+    "posting_url": "https://www.yugacrew.com/careertalk/jobs/3014"
+  }
+}

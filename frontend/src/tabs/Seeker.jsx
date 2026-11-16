@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../api.js";
-import { Bars, StatusChip } from "../ui.jsx";
+import { StatusChip } from "../ui.jsx";
 
 const KIND = {
   public: ["공공", "tag-pub"],
@@ -8,6 +8,8 @@ const KIND = {
   proof: ["결과물", "st-verify"],
   self: ["자습", "st-part"],
 };
+export const band = (v) => (v >= 70 ? "hi" : v >= 40 ? "mid" : "lo");
+const BAND_LABEL = { hi: "높음", mid: "보통", lo: "부족" };
 const reduceMotion = () => window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 export default function Seeker({ companies, corpVersion, active, mode }) {
@@ -20,6 +22,7 @@ export default function Seeker({ companies, corpVersion, active, mode }) {
   const [shown, setShown] = useState(0); // trace 진행 표시
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [edit, setEdit] = useState(false);
   const pdfRef = useRef(null); // 마지막 PDF (재진단용)
   const timer = useRef(null);
   const seen = useRef(corpVersion);
@@ -76,66 +79,66 @@ export default function Seeker({ companies, corpVersion, active, mode }) {
 
   return (
     <section className="view" aria-label="취준생 진단">
-      <div className="grid-side">
-        <div className="panel input">
-          <div className="step"><span className="n">1</span><h2>이력서 넣기</h2></div>
-          <label className="fld">예시 지원자로 바로 해 보기
-            <select value={pid} onChange={(e) => { const p = personas.find((x) => x.id === e.target.value); if (p) pick(p); }}>
-              {!pid && <option value="">직접 입력 / PDF</option>}
-              {personas.map((p) => <option key={p.id} value={p.id}>{p.name} (가상)</option>)}
-            </select>
-          </label>
-          <label className="fld">또는 내 이력서 붙여 넣기
-            <textarea value={text} onChange={(e) => { setText(e.target.value); setPid(""); pdfRef.current = null; }}
-              placeholder="프로젝트·인턴·교육·보유기술을 한 줄씩 적어 주세요" />
-          </label>
-          <label className="fld file">PDF로 올리기
-            <input type="file" accept="application/pdf,.pdf" onChange={onPdf} />
-          </label>
-          {pdfRef.current && <p className="hint">PDF: {pdfRef.current.name}{ready && res.extracted_chars != null ? ` · ${res.extracted_chars}자 읽음` : ""}</p>}
-
+      <div className="panel bar-in">
+        <div className="cell">
+          <div className="step"><span className="n">1</span><h2>이력서</h2></div>
+          <select aria-label="예시 지원자" value={pid} onChange={(e) => { const p = personas.find((x) => x.id === e.target.value); if (p) pick(p); }}>
+            {!pid && <option value="">직접 입력 / PDF</option>}
+            {personas.map((p) => <option key={p.id} value={p.id}>예시: {p.name} (가상)</option>)}
+          </select>
+          <div className="row">
+            <button type="button" className="btn ghost sm" aria-expanded={edit} onClick={() => setEdit((v) => !v)}>{edit ? "이력서 닫기" : "내 이력서 붙여 넣기"}</button>
+            <label className="btn ghost sm filebtn">PDF 올리기<input type="file" accept="application/pdf,.pdf" onChange={onPdf} /></label>
+            {pdfRef.current && <span className="hint">{pdfRef.current.name}{ready && res.extracted_chars != null ? ` · ${res.extracted_chars}자` : ""}</span>}
+          </div>
+        </div>
+        <div className="cell">
           <div className="step"><span className="n">2</span><h2>가고 싶은 회사</h2></div>
           <select aria-label="가고 싶은 회사" value={cid} onChange={(e) => { setCid(e.target.value); if (ready) run({ instant: true, c: e.target.value }); }}>
             {companies.map((c) => <option key={c.id} value={c.id}>{c.name} · {c.desc}</option>)}
           </select>
-          <label className="fld">일주일에 공부할 수 있는 시간
-            <span className="inline"><input type="number" min={1} max={80} value={hours}
-              onChange={(e) => setHours(Math.max(1, Math.min(80, +e.target.value || 1)))}
-              onBlur={() => ready && run({ instant: true })} /> 시간</span>
-          </label>
-
-          <div className="step"><span className="n">3</span><h2>진단하기</h2></div>
+          <label className="fld"><span className="inline">주당 공부 <input type="number" min={1} max={80} value={hours}
+            onChange={(e) => setHours(Math.max(1, Math.min(80, +e.target.value || 1)))}
+            onBlur={() => ready && run({ instant: true })} /> 시간</span></label>
+        </div>
+        <div className="cell go">
+          <div className="step"><span className="n">3</span><h2>진단</h2></div>
           <button className="btn big" disabled={busy || (!text.trim() && !pdfRef.current)} onClick={() => run()}>
             {busy ? "진단 중…" : "내 준비도 진단하기"}
           </button>
-          {busy && mode === "bedrock" && <p className="hint">AI가 이력서를 읽는 중이에요 · 보통 10초 안팎</p>}
-          {err && <p className="err">{err}</p>}
-          <p className="notice">결과는 나에게만 보이고 채용 합불 판단에 쓰이지 않아요. 이력서 원문은 저장하지 않아요.</p>
+          <p className="notice">채용 합불 판단에 쓰이지 않고, 이력서 원문은 저장하지 않아요.</p>
         </div>
-
-        <div className="stack">
-          {ready ? <Result r={res} />
-            : res?.trace ? <div className="panel"><h2>AI가 분석하는 중…</h2><Trace res={res} shown={shown} /></div>
-            : <div className="panel"><p className="empty">{busy ? "진단 중…" : "왼쪽에서 이력서를 넣고 ‘내 준비도 진단하기’를 눌러 주세요."}</p></div>}
-          {ready && (
-            <details className="panel how">
-              <summary><b>AI가 어떻게 판단했나요?</b> <span className="hint">찾은 스킬 {res.skills_found.length}개 · 실행 단계 {res.trace.length}개{res.usage ? ` · 모델 호출 ${res.usage.calls}회` : ""}</span></summary>
-              <h3>이력서에서 찾은 스킬</h3>
-              <div className="row">
-                {res.skills_found.length ? res.skills_found.map((s) => (
-                  <span key={s.skill_id} title={`${s.evidence}
-정규화: ${HOW[s.how] || s.how}`}><StatusChip status={s.status}>{s.name} · {s.status_label}</StatusChip></span>
-                )) : <span className="hint">인식된 스킬이 없습니다</span>}
-              </div>
-              <h3>실행 단계 <span className="hint">({res.mode === "bedrock" ? "Bedrock" : "규칙 엔진"}{res.usage ? ` · 토큰 ${res.usage.input_tokens + res.usage.output_tokens}` : ""})</span></h3>
-              <Trace res={res} shown={shown} />
-              <h3>점수 계산식 (규칙)</h3>
-              <div className="formula">{res.formula}</div>
-            </details>
-          )}
-        </div>
+        {edit && (
+          <textarea className="resume" value={text} onChange={(e) => { setText(e.target.value); setPid(""); pdfRef.current = null; }}
+            placeholder="프로젝트·인턴·교육·보유기술을 한 줄씩 적어 주세요" aria-label="이력서" />
+        )}
+        {busy && mode === "bedrock" && <p className="hint full">AI가 이력서를 읽는 중이에요 · 보통 10초 안팎</p>}
+        {err && <p className="err full">{err}</p>}
       </div>
+
+      {ready ? <Result r={res} shown={shown} />
+        : res?.trace ? <div className="panel"><h2>AI가 분석하는 중…</h2><Trace res={res} shown={shown} /></div>
+        : <div className="panel"><p className="empty">{busy ? "진단 중…" : "위에서 이력서를 넣고 ‘내 준비도 진단하기’를 눌러 주세요."}</p></div>}
     </section>
+  );
+}
+
+function HowPanel({ res, shown }) {
+  return (
+    <details className="panel how">
+      <summary><b>AI가 어떻게 판단했나요?</b> <span className="hint">찾은 스킬 {res.skills_found.length}개 · 실행 단계 {res.trace.length}개{res.usage ? ` · 모델 호출 ${res.usage.calls}회` : ""}</span></summary>
+      <h3>이력서에서 찾은 스킬</h3>
+      <div className="row">
+        {res.skills_found.length ? res.skills_found.map((s) => (
+          <span key={s.skill_id} title={`${s.evidence}
+정규화: ${HOW[s.how] || s.how}`}><StatusChip status={s.status}>{s.name} · {s.status_label}</StatusChip></span>
+        )) : <span className="hint">인식된 스킬이 없습니다</span>}
+      </div>
+      <h3>실행 단계 <span className="hint">({res.mode === "bedrock" ? "Bedrock" : "규칙 엔진"}{res.usage ? ` · 토큰 ${res.usage.input_tokens + res.usage.output_tokens}` : ""})</span></h3>
+      <Trace res={res} shown={shown} />
+      <h3>점수 계산식 (규칙)</h3>
+      <div className="formula">{res.formula}</div>
+    </details>
   );
 }
 
@@ -186,7 +189,7 @@ function Coach({ r }) {
   }
 
   return (
-    <div className="panel coach">
+    <div className="panel coach card">
       <h2>학습 코치에게 묻기</h2>
       <p className="hint">궁금한 걸 물어보세요. AI가 회사 기준·교육과정·시장 통계·회사 문서를 직접 찾아보고 답해요. 실제 있는 과정만 추천해요.</p>
       <div className="row">
@@ -228,39 +231,30 @@ const HOW = { dict: "별칭 사전", "dict-std": "LLM 표준명 → 사전", llm
 const VERDICT_CLS = { fit: "own", partial: "part", far: "miss" };
 
 function ProjectFit({ pf, company }) {
+  const top = pf.units.slice(0, 3);
   return (
-    <div className="panel">
-      <h2>내 프로젝트가 이 부서에 맞나요?</h2>
-      <blockquote className="quote">“프로젝트 경험은 필수인데, 그 경험이 해당 부서에 필요한 경험이었는지가 중요하다” <cite>현업 인사 담당자</cite></blockquote>
-      <p className="hint">경험 하나하나가 {company.job_title || company.name} 기준을 몇 점어치 보여주는지 계산했어요{pf.domain_label ? ` · 부서 도메인: ${pf.domain_label}` : ""}.</p>
-      <div className="row"><StatusChip status={VERDICT_CLS[pf.verdict]}>{pf.verdict_label}</StatusChip><span className="hint">가장 맞는 경험 <span className="num">{pf.best_fit}</span>점 · 경험 {pf.n_units}개</span></div>
-      {pf.units.length > 0 ? (
+    <div className="panel card pfc">
+      <div className="ch"><h2>내 프로젝트 적합도</h2><StatusChip status={VERDICT_CLS[pf.verdict]}>{pf.verdict_label}</StatusChip></div>
+      <div className={`big-n b-${band(pf.best_fit)}`}><span className="num">{pf.best_fit}</span><small>/100 · 가장 맞는 경험</small></div>
+      <p className="hint">경험 {pf.n_units}개를 {company.job_title || company.name} 기준으로 채점{pf.domain_label ? ` · 도메인: ${pf.domain_label}` : ""}</p>
+      {top.length > 0 ? (
         <ul className="pf">
-          {pf.units.map((u, i) => (
-            <li key={i}>
-              <div className="pf-bar" aria-hidden="true"><i style={{ width: `${u.fit}%` }} /></div>
+          {top.map((u, i) => (
+            <li key={i} title={u.matched.map((m) => m.name).concat(u.domain.length ? [`도메인: ${u.domain.join(", ")}`] : []).join(" · ")}>
+              <div className="pf-t">{u.text.replace(/^[-·•\s]+/, "")}</div>
+              <div className={`pf-bar b-${band(u.fit)}`} aria-hidden="true"><i style={{ width: `${u.fit}%` }} /></div>
               <span className="num">{u.fit}</span>
-              <div>
-                <div>{u.text}</div>
-                <div className="row">
-                  {u.matched.map((m) => <StatusChip key={m.skill_id} status={m.status}>{m.name}</StatusChip>)}
-                  {u.domain.length > 0 && <span className="chip">도메인 일치: {u.domain.join(", ")}</span>}
-                </div>
-              </div>
             </li>
           ))}
         </ul>
-      ) : <p className="empty">이 부서 기준과 겹치는 프로젝트·인턴·연구 경험이 없습니다.</p>}
+      ) : <p className="empty">이 부서 기준과 겹치는 경험이 없어요.</p>}
       {pf.mini_project && (
         <div className="mini">
-          <h4>추천: 이 부서에 맞는 미니 프로젝트 하나</h4>
-          <div className="m">{pf.mini_project.skills.join(" + ")}를 써서 {pf.domain_label || "이 부서"} 주제로 작게 만들어 보세요.</div>
-          {pf.mini_project.show.some((x) => !x.what.endsWith("결과 화면)")) && (
-            <ul>{pf.mini_project.show.filter((x) => !x.what.endsWith("결과 화면)")).map((x, i) => <li key={i}><b>{x.skill}</b>: 현업이 본다고 한 것 “{x.what}”</li>)}</ul>
-          )}
-          <p className="hint">결과물에는 각 스킬을 실제로 쓴 흔적(코드·설정·결과 화면)을 남기고, 이력서에 프로젝트 한 줄로 적으세요.</p>
+          <small>추천 미니 프로젝트</small>
+          <div>{pf.mini_project.skills.join(" + ")}로 {pf.domain_label || "이 부서"} 주제 하나</div>
         </div>
       )}
+      <blockquote className="quote">“그 경험이 해당 부서에 필요한 경험이었는지가 중요하다” <cite>현업 인사 담당자</cite></blockquote>
     </div>
   );
 }
@@ -272,101 +266,106 @@ function verdict(apply, work) {
   return "이 회사 기준과는 아직 거리가 있어요. 아래 순서대로 하나씩 채워 보세요.";
 }
 
-function Result({ r }) {
-  const p = r.path, b = r.baseline;
-  const first = p.steps[0];
-  const tiers = [["apply", "① 서류 문턱 넘기 (지원 기준)"], ["work", "② 입사 후 실무 준비 (실무 기준)"]];
-  return (
-    <>
-      <div className="panel summary">
-        <p className="kicker">{r.company.name} · {r.company.job_title || r.company.desc}</p>
-        <h2 className="headline">{verdict(r.readiness_apply, r.readiness)}</h2>
-        <div className="scores">
-          <div className="sc">
-            <div className="ring" style={{ "--p": r.readiness_apply }}><span>{r.readiness_apply}</span></div>
-            <div><b>지원 준비도</b><small>공고·필수 기준, 즉 입사 문턱을 얼마나 넘었나</small></div>
-          </div>
-          <div className="sc">
-            <div className="ring alt" style={{ "--p": r.readiness }}><span>{r.readiness}</span></div>
-            <div><b>실무 준비도</b><small>기업이 입사 후 실제로 쓰는 역량을 얼마나 갖췄나</small></div>
-          </div>
-        </div>
-        {first ? (
-          <div className="todo">
-            <small>지금 할 일 1순위</small>
-            <div className="todo-t">{first.title}</div>
-            <div className="hint">{(first.covers || [first.skill]).join(", ")} · {first.hours}시간 · <span className={`chip ${KIND[first.kind][1]}`}>{KIND[first.kind][0]}</span>{first.gain?.apply_after != null ? ` · 끝내면 지원 준비도 ${first.gain.apply_after}점` : ""}</div>
-          </div>
-        ) : <div className="todo"><div className="todo-t">이 회사 기준으로 채울 갭이 없어요.</div></div>}
-        {p.steps.length > 0 && <p className="hint">전체 {p.steps.length}단계 · {p.total_hours}시간 · 주 {p.weekly_hours}시간이면 약 {p.weeks}주. 점수는 규칙으로 계산하고, AI는 설명만 써요.</p>}
-      </div>
+const isWork24 = (st) => st.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(st.link) && st.kind === "public";
 
-      {p.steps.length > 0 && (
-        <div className="panel">
-          <h2>할 일 순서</h2>
-          <p className="hint">서류 문턱(지원 기준)부터 넘고, 그다음 입사 후 실무 역량을 준비해요. 같은 단계 안에서는 시간 대비 효과가 큰 것부터예요.</p>
-          {tiers.map(([tk, tl]) => {
-            const steps = p.steps.map((st, i) => [st, i]).filter(([st]) => st.tier === tk);
-            if (!steps.length) return null;
-            return (
-              <div key={tk} className="tier">
-                <h3>{tl}</h3>
-                <ol className="path">
-                  {steps.map(([st, i]) => (
-                    <li key={i} style={{ "--n": `"${i + 1}"` }}>
-                      <div>
-                        <div className="t">{st.link && /^https:\/\/(www|hrd)\.work24\.go\.kr\//.test(st.link) && st.kind === "public"
-                          ? <a href={st.link} target="_blank" rel="noopener noreferrer">{st.title}</a> : st.title}{" "}
-                          <span className={`chip ${KIND[st.kind][1]}`}>{KIND[st.kind][0]}</span></div>
-                        <div className="m">{(st.covers || [st.skill]).join(", ")} · {st.weight_label} · {st.hours}시간{st.gain ? ` · 지원 ${st.gain.apply_after ?? "-"}점 · 실무 ${st.gain.readiness_after}점이 돼요` : ""}</div>
-                        <details className="why-d"><summary>왜 이 순서인가요?</summary>
-                          <div className="w">{st.why.split(/(\[E\d+\])/).map((x, j) => /^\[E\d+\]$/.test(x) ? <b key={j}>{x}</b> : x)}</div>
-                          <div className="w">{st.meta}</div>
-                        </details>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            );
-          })}
-          {p.market && <p className="hint">이 경로를 마치면 {r.company.region !== "미상" ? `${r.company.region} ` : ""}시장 공고 평균 적합도 {p.market.fit_before} → {p.market.fit_after}점 ({p.market.postings}건 기준)</p>}
-          {Object.keys(r.evidence).length > 0 && (
-            <details className="ev">
-              <summary>근거 목록 {Object.keys(r.evidence).length}건 (설명은 이 목록만 인용해요)</summary>
-              <ul>{Object.values(r.evidence).map((e) => <li key={e.id}><b>[{e.id}]</b> {EV_TYPE[e.type] ?? e.type} · {e.text}</li>)}</ul>
-            </details>
-          )}
+function Roadmap({ r }) {
+  const p = r.path;
+  const [sel, setSel] = useState(0);
+  const st = p.steps[Math.min(sel, p.steps.length - 1)];
+  const nApply = p.steps.filter((x) => x.tier === "apply").length;
+  const nWork = p.steps.length - nApply;
+  return (
+    <div className="panel card road">
+      <div className="ch"><h2>할 일 로드맵</h2><span className="hint">{p.steps.length}단계 · {p.total_hours}시간 · 주 {p.weekly_hours}시간이면 약 {p.weeks}주</span></div>
+      <div className="lanes" style={{ gridTemplateColumns: `${nApply}fr ${nWork}fr` }}>
+        {nApply > 0 && <span className="lane apply">① 서류 문턱</span>}
+        {nWork > 0 && <span className="lane work">② 입사 후 실무</span>}
+      </div>
+      <ol className="nodes" style={{ gridTemplateColumns: `repeat(${p.steps.length}, minmax(0,1fr))` }}>
+        {p.steps.map((x, i) => (
+          <li key={i} className={`${x.tier} ${i === sel ? "on" : ""}`} style={{ "--t": p.steps.length > 1 ? i / (p.steps.length - 1) : 0 }}>
+            <button type="button" onClick={() => setSel(i)} aria-pressed={i === sel}>
+              <span className="dot">{i + 1}</span>
+              <span className="lbl"><mark>{(x.covers || [x.skill]).join(", ")}</mark></span>
+              <span className="sub">{x.hours}시간</span>
+            </button>
+          </li>
+        ))}
+      </ol>
+      {st && (
+        <div className="node-detail">
+          <div className="t">{isWork24(st) ? <a href={st.link} target="_blank" rel="noopener noreferrer">{st.title} <span aria-hidden="true">↗</span></a> : st.title}
+            {" "}<span className={`chip ${KIND[st.kind][1]}`}>{KIND[st.kind][0]}</span></div>
+          <div className="kv">
+            <div><small>채우는 부족 역량</small><b><mark>{(st.covers || [st.skill]).join(", ")}</mark></b></div>
+            <div><small>구분</small><b>{st.weight_label}</b></div>
+            <div><small>시간</small><b className="num">{st.hours}시간</b></div>
+            {st.gain && <div><small>끝내면</small><b>지원 <span className={`num c-${band(st.gain.apply_after ?? 0)}`}>{st.gain.apply_after ?? "-"}</span> · 실무 <span className={`num c-${band(st.gain.readiness_after)}`}>{st.gain.readiness_after}</span></b></div>}
+          </div>
+          <p className="w">{st.why.split(/(\[E\d+\])/).map((x, j) => /^\[E\d+\]$/.test(x) ? <b key={j}>{x}</b> : x)}</p>
         </div>
       )}
+      <div className="foot">
+        {p.market && <span className="hint">경로를 마치면 {r.company.region !== "미상" ? `${r.company.region} ` : ""}시장 공고 적합도 {p.market.fit_before} → <b>{p.market.fit_after}</b>점 ({p.market.postings}건)</span>}
+        {Object.keys(r.evidence).length > 0 && (
+          <details className="ev">
+            <summary>근거 {Object.keys(r.evidence).length}건</summary>
+            <ul>{Object.values(r.evidence).map((e) => <li key={e.id}><b>[{e.id}]</b> {EV_TYPE[e.type] ?? e.type} · {e.text}</li>)}</ul>
+          </details>
+        )}
+      </div>
+    </div>
+  );
+}
 
+function Result({ r, shown }) {
+  const p = r.path, b = r.baseline;
+  const first = p.steps[0];
+  return (
+    <div className="dash">
+      <div className="panel hero">
+        <div className="h-msg">
+          <p className="kicker">{r.company.name} · {r.company.job_title || r.company.desc}</p>
+          <h2 className="headline">{verdict(r.readiness_apply, r.readiness)}</h2>
+          <p className="hint">점수는 규칙으로 계산하고, AI는 근거를 인용해 설명만 해요.</p>
+          <p className="legend"><i className="b-hi" />70+ 높음 <i className="b-mid" />40~69 보통 <i className="b-lo" />40 미만 · 부족한 역량</p>
+        </div>
+        <div className="sc">
+          <div className={`ring b-${band(r.readiness_apply)}`} style={{ "--p": r.readiness_apply }}><span>{r.readiness_apply}</span></div>
+          <div><b>지원 준비도 <em className={`bt b-${band(r.readiness_apply)}`}>{BAND_LABEL[band(r.readiness_apply)]}</em></b><small>입사 문턱(공고·필수)</small></div>
+        </div>
+        <div className="sc">
+          <div className={`ring b-${band(r.readiness)}`} style={{ "--p": r.readiness }}><span>{r.readiness}</span></div>
+          <div><b>실무 준비도 <em className={`bt b-${band(r.readiness)}`}>{BAND_LABEL[band(r.readiness)]}</em></b><small>입사 후 실제로 쓰는 역량</small></div>
+        </div>
+        <div className="todo">
+          <small>지금 할 일 1순위</small>
+          {first ? <>
+            <div className="todo-t">{first.title}</div>
+            <div className="hint"><mark>{(first.covers || [first.skill]).join(", ")}</mark> · {first.hours}시간{first.gain?.apply_after != null ? ` · 끝내면 지원 ${first.gain.apply_after}점` : ""}</div>
+          </> : <div className="todo-t">채울 갭이 없어요</div>}
+        </div>
+      </div>
+
+      {p.steps.length > 0 && <Roadmap r={r} />}
       {r.project_fit && <ProjectFit pf={r.project_fit} company={r.company} />}
+
+      <div className="panel card gapc">
+        <div className="ch"><h2>공고만 보면 놓치는 것</h2></div>
+        <div className="vs">
+          <div><small>공고만 볼 때 준비도</small><span className={`num c-${band(b.readiness_posting)}`}>{b.readiness_posting}</span></div>
+          <span className="arrow">→</span>
+          <div><small>실무 기준까지 보면</small><span className={`num c-${band(b.readiness_company)}`}>{b.readiness_company}</span></div>
+        </div>
+        {b.missed.length > 0 && <div className="grp"><small className="plus">공고엔 없지만 입사 후 필요</small><div className="row">{b.missed.map((x) => <span key={x} className="chip gap">{x}</span>)}</div></div>}
+        {b.unnecessary.length > 0 && <div className="grp"><small className="minus">지원할 때만 보는 것</small><div className="row">{b.unnecessary.map((x) => <span key={x} className="chip">{x}</span>)}</div></div>}
+      </div>
+      <OthersPanel r={r} />
 
       <Coach r={r} />
 
-      <div className="panel">
-        <h2>공고만 보고 준비하면 놓치는 것</h2>
-        <div className="cmp">
-          <div className="col">
-            <h4>공고(지원 기준)만 볼 때 갭 · 준비도 <span className="num">{b.readiness_posting}</span></h4>
-            <div className="row">{b.gaps_posting.length ? b.gaps_posting.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
-          </div>
-          <div className="col">
-            <h4>실무 기준까지 볼 때 갭 · 준비도 <span className="num">{b.readiness_company}</span></h4>
-            <div className="row">{b.gaps_company.length ? b.gaps_company.map((g) => <StatusChip key={g.skill_id} status={g.status}>{g.name}</StatusChip>) : <span className="hint">갭 없음</span>}</div>
-          </div>
-        </div>
-        <div className="diff">
-          {b.missed.length > 0 && <div className="plus">공고엔 없지만 입사 후 필요한 것: {b.missed.join(", ")}</div>}
-          {b.unnecessary.length > 0 && <div className="minus">지원할 때만 보는 것: {b.unnecessary.join(", ")}</div>}
-        </div>
-      </div>
-
       <details className="panel how">
         <summary><b>스킬별 상세 표</b> <span className="hint">{r.matrix.length}개 스킬 · 내 상태와 근거</span></summary>
-        <div className="row">
-          <StatusChip status="own" /><StatusChip status="part" /><StatusChip status="verify" /><StatusChip status="miss" />
-        </div>
         <div className="tbl-wrap">
           <table>
             <thead><tr><th>스킬</th><th>기준</th><th>구분</th><th>내 상태</th><th>근거</th></tr></thead>
@@ -382,15 +381,24 @@ function Result({ r }) {
           </table>
         </div>
       </details>
+      <HowPanel res={r} shown={shown} />
+    </div>
+  );
+}
 
-      <div className="panel">
-        <h2>다른 회사라면?</h2>
-        <p className="hint">같은 이력서도 회사마다 준비도와 첫 할 일이 달라요.</p>
-        <Bars unit="" rows={r.others.map((o) => ({
-          key: o.company_id, label: o.name.replace("(가상)", ""), value: o.readiness, cls: o.current ? "" : "alt",
-          note: `${o.first_task ? `첫 할 일: ${o.first_task}` : "갭 없음"}${o.project_fit != null ? ` · 가장 맞는 경험 ${o.project_fit}점` : ""}`,
-        }))} />
-      </div>
-    </>
+function OthersPanel({ r }) {
+  return (
+    <div className="panel card othc">
+      <div className="ch"><h2>다른 회사라면?</h2><span className="hint">같은 이력서, 회사별 실무 준비도</span></div>
+      <ul className="others">
+        {r.others.map((o) => (
+          <li key={o.company_id} className={`${o.current ? "cur" : ""} b-${band(o.readiness)}`} title={o.first_task ? `첫 할 일: ${o.first_task}` : "갭 없음"}>
+            <span className="nm">{o.name.replace("(가상)", "")}</span>
+            <span className="tr"><i style={{ width: `${o.readiness}%` }} /></span>
+            <span className={`num c-${band(o.readiness)}`}>{o.readiness}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
   );
 }

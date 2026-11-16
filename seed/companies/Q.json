@@ -1,0 +1,146 @@
+{
+  "tenant_id": "Q",
+  "name": "여기어때(공개 자료 재구성)",
+  "desc": "Backend Engineer [채널연동] · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "Backend Engineer [채널연동]",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 (재게시 사이트 사본), 경력 0~3년. 주의: 공고(채널연동)와 블로그(전시개발) 다른 팀. 관측 도구는 '이미 사내에서 쓰고 있었습니다'로 회사 공통; 공고는 재게시 사이트 사본; 경력 0~3년 — 신입·주니어에 가까움. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "aws_eks": 2,
+    "aws_rds": 2,
+    "redis": 2,
+    "communication": 2,
+    "kafka": 1,
+    "mongodb": 1,
+    "docker": 1,
+    "kubernetes": 1,
+    "machine_learning": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "java": 2,
+    "kotlin": 2,
+    "spring": 2,
+    "aws_eks": 2,
+    "aws_rds": 2,
+    "redis": 2,
+    "communication": 2,
+    "kafka": 1,
+    "mongodb": 1,
+    "docker": 1,
+    "kubernetes": 1,
+    "machine_learning": 1,
+    "grafana": 1,
+    "prometheus": 1,
+    "observability": 1
+  },
+  "sources": {
+    "java": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "Java(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "kotlin": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "Java(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "Java(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분"
+    },
+    "aws_eks": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "AWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"
+    },
+    "aws_rds": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "AWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"
+    },
+    "redis": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분"
+    },
+    "communication": {
+      "from": "공고",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "논리적이고 체계적인 문제 해결 능력과 커뮤니케이션 능력을 보유한 분"
+    },
+    "kafka": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "스트리밍 플랫폼(Kafka)을 활용한 실시간 데이터 파이프라인 구축 경험이 있는 분"
+    },
+    "mongodb": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분"
+    },
+    "docker": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분"
+    },
+    "machine_learning": {
+      "from": "공고(우대)",
+      "url": "https://inthiswork.com/archives/391774",
+      "quote": "공고 본문 참고"
+    },
+    "grafana": {
+      "from": "기술 블로그",
+      "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+      "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다.",
+      "date": "2026-10-10"
+    },
+    "prometheus": {
+      "from": "기술 블로그",
+      "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+      "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다.",
+      "date": "2026-10-10"
+    },
+    "observability": {
+      "from": "기술 블로그",
+      "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+      "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다.",
+      "date": "2026-10-10"
+    }
+  },
+  "excluded": [],
+  "posting_text": "채널연동개발팀은 대한민국 1위 숙박 플랫폼 여기어때의 판매 확대를 위해 글로벌 OTA, 펜션 에이전시, CMS 등과 커넥트하는 핵심 백엔드 개발팀입니다.\n이런 분과 함께 하고 싶어요\n대용량 트래픽 처리를 위한 시스템 설계 경험이 있는 분\nJava(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분\nJPA, Hibernate 등 ORM 사용과 도메인 모델링 경험이 있는 분\nAWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분",
+  "tracks": [],
+  "domain": {
+    "label": "여기어때 Backend Engineer [채널",
+    "keywords": [
+      "숙박",
+      "여행",
+      "OTA",
+      "예약",
+      "상품",
+      "재고"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "채널연동개발팀 (블로그: 전시개발팀)",
+    "caveats": [
+      "공고(채널연동)와 블로그(전시개발) 다른 팀. 관측 도구는 '이미 사내에서 쓰고 있었습니다'로 회사 공통",
+      "공고는 재게시 사이트 사본",
+      "경력 0~3년 — 신입·주니어에 가까움"
+    ],
+    "posting_url": "https://inthiswork.com/archives/391774"
+  }
+}
