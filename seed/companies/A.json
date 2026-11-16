@@ -1,5 +1,8 @@
 {
   "tenant_id": "A",
+  "level": "예시",
+  "job_family": "AI·ML 엔지니어",
+  "listed": false,
   "name": "대경모빌리티(가상)",
   "desc": "자동차 부품 · 제조 비전 AI",
   "region": "대경권",

@@ -64,10 +64,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "• 프론트엔드, 백엔드, 인프라, 데이터, 어드민 전 영역 개발\n• 레거시 정리 및 AI 기반 개발에서도 확장 가능한 시스템 구조 설계\n자격요건\n• 소프트웨어 개발 경력 2년 이상 5년 미만\n• 문제 정의부터 배포·검증까지 한 사이클을 주도적으로 이끌어본 경험\n• 특정 기술 스택에 얽매이지 않고, 문제에 가장 잘 맞는 방법을 선택하는 분",
   "tracks": [],
   "domain": {
-    "label": "데이원컴퍼니 Product Engineer (포도",
+    "label": "교육·어학",
     "keywords": [
       "교육",
       "어학",
@@ -86,5 +87,11 @@
       "경력 2~5년"
     ],
     "posting_url": "https://www.wanted.co.kr/wd/381552"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "주니어"
 }

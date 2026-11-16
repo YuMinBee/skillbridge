@@ -1,0 +1,123 @@
+{
+  "tenant_id": "Z23",
+  "name": "현대오토에버(공개 자료 재구성)",
+  "desc": "신입 · Platform Engineer (DevOps) · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "신입 · Platform Engineer (DevOps)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025 상반기 (마감) · 상세 모집요강 PDF. 주의: 상세 공고에 기술 요구가 직무별로 있음(가장 자세한 신입 공고); 실무 근거는 컨퍼런스 발표 제목 수준으로 약함. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {
+    "python": 2,
+    "git": 2,
+    "cicd": 1,
+    "kubernetes": 1,
+    "jenkins": 1,
+    "gitlab_ci": 1,
+    "linux": 1,
+    "shell": 1,
+    "docker": 1,
+    "rest_api": 1
+  },
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "python": 2,
+    "git": 2,
+    "cicd": 1,
+    "kubernetes": 1,
+    "jenkins": 1,
+    "gitlab_ci": 1,
+    "linux": 1,
+    "shell": 1,
+    "docker": 1,
+    "rest_api": 1,
+    "msa": 1
+  },
+  "sources": {
+    "python": {
+      "from": "공고",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "Python 활용 역량"
+    },
+    "git": {
+      "from": "공고",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "Git 사용 경험"
+    },
+    "cicd": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "공고 본문 참고"
+    },
+    "kubernetes": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "쿠버네티스, Jenkins, Travis CI, Bamboo, gitlab runner/bitbucket Runner 등 사용 경험"
+    },
+    "jenkins": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "쿠버네티스, Jenkins, Travis CI, Bamboo, gitlab runner/bitbucket Runner 등 사용 경험"
+    },
+    "gitlab_ci": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "공고 본문 참고"
+    },
+    "linux": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "Linux 사용 경험"
+    },
+    "shell": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "Shell, cmake, maven, make, powershell 사용 경험"
+    },
+    "docker": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "Docker 사용 경험"
+    },
+    "rest_api": {
+      "from": "공고(우대)",
+      "url": "https://media-cdn.linkareer.com/activity_manager/applications/557470",
+      "quote": "REST API 사용 경험"
+    },
+    "msa": {
+      "from": "발표",
+      "url": "https://byline.network/2022/11/10-251/",
+      "quote": "MSA(Micro Service Architecture) 아키텍처 기반의 디지털키 글로벌 서비스 전개 사례",
+      "date": "2022-11-18"
+    }
+  },
+  "excluded": [],
+  "any_of": [],
+  "posting_text": "[차량전장] Platform Engineer DevOps_CI/CT/CD 구축 및 관리 - Jenkins를 사용한 CI/CT/CD 구축 및 구동 서버 관리 - CI/CT/CD 개발 환경 구성 (Docker 사용) - 차량SW의 정적/동적 검증 도구를 이용한 CT 구성 [Minimum Qualifications] - Python 활용 역량 - Git 사용 경험 - 컴퓨터, SW 등 IT 관련 전공 [Preferred Qualifications] - CI/CT/CD에 대한 이해 - 쿠버네티스, Jenkins, Travis CI, Bamboo, gitlab runner/bitbucket Runner 등 사용 경험 - Linux 사용 경험 - Docker 사용 경험 - REST API 사용 경험",
+  "tracks": [],
+  "domain": {
+    "label": "자동차·차량 SW",
+    "keywords": [
+      "자동차",
+      "차량 SW",
+      "SDV",
+      "검증",
+      "CI/CT"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "차량전장 Platform Engineer (DevOps CI/CT/CD) · 근거: HMG 개발자 컨퍼런스 발표",
+    "caveats": [
+      "상세 공고에 기술 요구가 직무별로 있음(가장 자세한 신입 공고)",
+      "실무 근거는 컨퍼런스 발표 제목 수준으로 약함"
+    ],
+    "posting_url": "https://media-cdn.linkareer.com/activity_manager/applications/557470"
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "클라우드·인프라·운영",
+  "level": "신입"
+}

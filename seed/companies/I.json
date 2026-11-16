@@ -113,10 +113,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "담당업무\n• Kafka 기반 Event Bus와 Airflow를 활용한 학습·평가·서빙 파이프라인 자동화(VLOps) 개발\n• vLLM, HuggingFace, 사내 추론 엔진 등과 여러 평가 프레임워크를 공통 스키마로 연결하는 Omni-Evaluator 개발\n자격요건\n• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분\n• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분\n• Docker/Kubernetes 기반 개발 경험을 보유하신 분\n우대사항\n• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분",
   "tracks": [],
   "domain": {
-    "label": "네이버클라우드 Multimodal MLOps (체험",
+    "label": "HyperCLOVA X·멀티모달",
     "keywords": [
       "HyperCLOVA X",
       "멀티모달",
@@ -138,5 +139,11 @@
       "체험형 인턴 공고"
     ],
     "posting_url": "https://inthiswork.com/?p=397709"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "MLOps·AI 플랫폼",
+  "level": "신입"
 }

@@ -1,74 +1,451 @@
 [
- {"key":"ohouse","company":"오늘의집(버킷플레이스)","org_or_team":"커머스 개발 (블로그: 추천팀)","job_title":"Backend Engineer, Commerce","region":"수도권",
-  "posting":{"url":"https://inthiswork.com/archives/363685","date_or_status":"마감 (재게시 사이트 사본)",
-   "requirements_quotes":["Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분","RDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분","MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분","GPT, Claude 등 LLM 기반 도구를 실무에 적용해 본 경험이 있는 분","명확한 커뮤니케이션 역량을 갖추고, 협업 중심의 개발 문화에 익숙한 분"],
-   "preferred_quotes":["Kafka, Spark, Elasticsearch 등 빅데이터 및 스트리밍 처리 기술을 활용한 경험이 있는 분","Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분","n8n, Langchain 등 AI 워크플로우 도구를 활용하거나 AI 기반 프로토타입을 실험한 경험이 있는 분"],
-   "posting_text":"자격요건\n컴퓨터공학 전공 또는 이에 준하는 개발 지식과 3년 이상의 백엔드 개발 경험이 있는 분\nKotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분\n대용량 트래픽 처리 및 실시간 시스템을 개발한 경험이 있는 분\nRDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분\nMSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분\nGPT, Claude 등 LLM 기반 도구를 실무에 적용해 본 경험이 있는 분"},
-  "apply_skills":{"kotlin":2,"java":2,"python":2,"rest_api":2,"nosql":2,"msa":2,"aws":2,"gcp":2,"gen_ai_use":2,"communication":2,"kafka":1,"spark":1,"elk":1,"kubernetes":1,"docker":1,"terraform":1,"grafana":1,"prometheus":1,"langchain":1},
-  "work_sources":[
-   {"skill_id":"redis","from":"기술 블로그","url":"https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/","date":"2025-12-17","quote":"따라서 빠른 조회가 가능한 인메모리 DB, 저희의 경우 Redis에 피처 값들을 미리 저장해두어야 합니다."},
-   {"skill_id":"airflow","from":"기술 블로그","url":"https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/","date":"2025-12-17","quote":"Airflow를 이용해 주기적으로 데이터 웨어하우스에서 피처 값을 읽어옵니다."},
-   {"skill_id":"feature_store","from":"기술 블로그","url":"https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/","date":"2025-12-17","quote":"저희는 우선 가장 널리 알려진 오픈소스 피처 스토어인 Feast를 기반으로 시스템을 구축하기로 결정했습니다."},
-   {"skill_id":"hadoop","from":"기술 블로그","url":"https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/","date":"2025-12-17","quote":"즉, 저희는 Feast의 장점을 그대로 가져오면서도 기존에 이미 자리 잡고 있던 인프라(Hive, Spark, Flink 등)를 적극적으로 활용하는"},
-   {"skill_id":"spark","from":"기술 블로그","url":"https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/","date":"2025-12-17","quote":"오늘의집 추천팀은 기존에 PySpark를 config 기반으로 실행하도록 시스템을 구성해 두었습니다."}],
-  "domain_keywords":["인테리어","커머스","주문","결제","추천","개인화"],
-  "caveats":["공고(커머스 개발)와 블로그(추천팀)는 다른 팀","공고는 재게시 사이트 사본","경력 3년 이상 공고"]},
-
- {"key":"kurly","company":"컬리","org_or_team":"데이터 직무 (블로그: AI검색추천개발)","job_title":"데이터 백엔드 개발자","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/279400","date_or_status":"2026-11 조회 시 게시 중 (리멤버)",
-   "requirements_quotes":["생성형 AI를 적극 활용하여 개발 생산성과 기술 경쟁력을 향상시키고, 문제해결/고부가가치 업무로의 전환 등 업무 방식을 개선하는 데 관심이 있으신 분","Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분","Kafka 기반 비동기 처리 역량을 보유하신 분","AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"],
-   "preferred_quotes":["머신러닝 기반의 서비스 운영 경험을 보유하신 분","관계형 및 비관계형 데이터베이스(SQL, MongoDB 등) 설계·운영 경험이 있으신 분"],
-   "posting_text":"데이터 백엔드 개발자는 각종 AI, 머신러닝, 최적화 모델을 수행하는 백엔드 시스템을 개발하고 관리합니다.\n주요업무\n• 컬리 앱/웹에 AI/머신러닝/최적화 기반 서비스 구현/운영\n자격 요건\n• 유관경력 6년 이상이신 분\n• Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분\n• Kafka 기반 비동기 처리 역량을 보유하신 분\n• AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"},
-  "apply_skills":{"java":2,"kotlin":2,"mysql":2,"spring":2,"kafka":2,"aws":2,"gcp":2,"docker":2,"kubernetes":2,"gen_ai_use":2,"machine_learning":1,"sql":1,"mongodb":1},
-  "work_sources":[
-   {"skill_id":"aws_sagemaker","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"인프라 조직과 논의한 끝에 저희 상황에는 SageMaker가 맞는다는 결론을 내렸습니다."},
-   {"skill_id":"aws_eks","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"마침 전사 표준 아키텍처로 EKS를 채택한 상태여서 컨테이너 기반의 범용 워크플로우 엔진인 Argo Workflows를 자연스럽게 검토하게 됐습니다."},
-   {"skill_id":"elk","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"서빙 API는 그 벡터로 검색 엔진(OpenSearch)에서 후보 상품을 조회해 최종 결과를 만듭니다."},
-   {"skill_id":"aws_dynamodb","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"미리 계산해 DynamoDB에 적재"},
-   {"skill_id":"mlflow","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"추론 쪽은 EKS 위에 MLflow와 KServe, Karpenter를 조합하는 방안을 먼저 검토해 PoC까지 진행했습니다."},
-   {"skill_id":"embedding","from":"기술 블로그","url":"https://helloworld.kurly.com/blog/recommend-ml-pipeline","date":"2026-11-03","quote":"무엇보다 모델을 새로 바꾸려면 추론 엔드포인트와 유저 임베딩, 검색 인덱스가 함께 바뀌어야 했는데, 저마다 다른 AWS 서비스에 흩어져 있어서 어떻게 한꺼번에 교체할지가 문제였습니다."}],
-  "domain_keywords":["신선식품","커머스","배송","물류","추천","개인화"],
-  "caveats":["공고(데이터 백엔드)와 블로그(AI검색추천개발) 같은 팀인지 미확인","경력 6년 이상 공고"]},
-
- {"key":"musinsa","company":"무신사","org_or_team":"무신사 엔지니어링 (블로그: PEL 공통서비스 파트)","job_title":"Backend Engineer","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/277830","date_or_status":"상시지원, 2026-11 조회 시 게시 중 (리멤버)",
-   "requirements_quotes":["Java 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분","클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분","AI 기반 도구를 활용하여 개발 생산성과 문제 해결 역량을 강화한 경험이 있으신 분"],
-   "preferred_quotes":["AWS 기반 클라우드 환경에서 서비스 개발 및 운영 경험이 있으신 분"],
-   "posting_text":"자격 요건\n[기술 스택]\nJava / Spring Framework\nJPA / QueryDSL\nMySQL, Redis\nKafka\nKubernetes, Docker\n[자격 요건]\nJava 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분\n분산 시스템과 대규모 트래픽 처리에 대한 설계 및 운영 경험이 있으신 분\n클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분"},
-  "apply_skills":{"java":2,"spring":2,"mysql":2,"redis":2,"kafka":2,"kubernetes":2,"docker":2,"gen_ai_use":2,"aws":1},
-  "work_sources":[
-   {"skill_id":"observability","from":"기술 블로그","url":"https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b","date":"2026-10-01","quote":"라이브러리가 trace_id를 읽는 곳은 OpenTelemetry의 Span.current()입니다."},
-   {"skill_id":"grpc","from":"기술 블로그","url":"https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b","date":"2026-10-01","quote":"외부로 나가는 HTTP나 gRPC 호출에도 traceparent를 자동으로 넣습니다."}],
-  "domain_keywords":["패션","커머스","주문","결제","쿠폰","트래픽"],
-  "caveats":["공고(백엔드)와 블로그(공통 플랫폼 파트)는 다른 팀. 블로그는 로깅 라이브러리가 전사 공통이라고 밝힘","경력 5년 이상 공고","실무 근거가 2건뿐"]},
-
- {"key":"nol","company":"놀유니버스(야놀자·인터파크)","org_or_team":"엔터BE (NOL 티켓)","job_title":"Software Engineer, Backend - 엔터BE","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/260536","date_or_status":"리멤버 게시 (동일 공고 273017)",
-   "requirements_quotes":["• Java(or Kotlin)기반의 API 설계/개발 및 운영이 가능하신 분","• 기초 컴퓨터 과학 지식(자료구조, 알고리즘, 운영체제, 네트워크 등)을 보유하신 분","• 협업 부서와 커뮤니케이션이 원활하며 적극적이신 분"],
-   "preferred_quotes":["• Cloud 환경 서비스 운영 경험이 있으신 분","• ASP.NET MVC 개발 경험 있으신 분"],
-   "posting_text":"• 놀유니버스 엔터BE 조직은 국민 티켓예매 서비스인 NOL 티켓을 담당합니다.\n주요업무\n• NOL 티켓의 Back Office 및 예매시스템 개발을 합니다.\n자격 요건\n• 백엔드 개발 경력 4년 이상 또는 그에 준하는 실력을 갖춘 분\n• Java(or Kotlin)기반의 API 설계/개발 및 운영이 가능하신 분\n• 기초 컴퓨터 과학 지식(자료구조, 알고리즘, 운영체제, 네트워크 등)을 보유하신 분\n우대사항\n• Cloud 환경 서비스 운영 경험이 있으신 분\n• ASP.NET MVC 개발 경험 있으신 분"},
-  "apply_skills":{"java":2,"kotlin":2,"rest_api":2,"networking":2,"communication":2},
-  "work_sources":[
-   {"skill_id":"aws_ecs","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"GitHub Actions를 활용한 CI/CD 파이프라인을 구축하여 코드 커밋 시 자동으로 Docker 이미지를 빌드하고 Amazon ECR에 푸시한 후 ECS 서비스로 무중단 배포하는 완전 자동화된 배포 프로세스를 구현했습니다."},
-   {"skill_id":"github_actions","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"GitHub Actions를 활용한 CI/CD 파이프라인을 구축하여 코드 커밋 시 자동으로 Docker 이미지를 빌드하고 Amazon ECR에 푸시한 후 ECS 서비스로 무중단 배포하는 완전 자동화된 배포 프로세스를 구현했습니다."},
-   {"skill_id":"docker","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"놀유니버스는 AWS Transform으로 현대화된 .NET 애플리케이션을 리눅스 컨테이너로 패키징하여 기존 Windows Server 의존성을 완전히 제거하고 라이선스 비용을 절감했습니다."},
-   {"skill_id":"load_balancing","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"이를 통해 기존 IIS 환경에서 수동으로 진행되던 배포 작업을 완전히 자동화하고, ECS의 자동 스케일링과 로드 밸런싱 기능을 활용하여 트래픽 변화에 탄력적으로 대응할 수 있는 현대적인 컨테이너 기반 아키텍처를 성공적으로 구축했습니다."},
-   {"skill_id":"cloud_migration","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"놀유니버스는 이 AWS Transform for .NET을 활용하여 150만 라인의 코드와 1,500개의 소스 파일을 단 10시간만에 성공적으로 분석하고 변환했습니다 ."},
-   {"skill_id":"csharp","from":"기술 블로그","url":"https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/","date":"2025-11-20","quote":"기술적 한계 : .NET Framework는 4.8 이후 사실상 기능 업데이트가 종료된 상태였으며, .NET 8.0은 장기 지원 버전으로 새로운 C# 언어 기능과 성능 최적화를 제공합니다."}],
-  "domain_keywords":["티켓","예매","공연","여행","트래픽","레거시"],
-  "caveats":["같은 팀 확인됨(엔터 BE팀 공저)","출처는 회사 자체가 아니라 AWS 기술 블로그(AWS SA 공저)","경력 4년 이상 공고"]},
-
- {"key":"yeogi","company":"여기어때","org_or_team":"채널연동개발팀 (블로그: 전시개발팀)","job_title":"Backend Engineer [채널연동]","region":"수도권",
-  "posting":{"url":"https://inthiswork.com/archives/391774","date_or_status":"마감 (재게시 사이트 사본), 경력 0~3년",
-   "requirements_quotes":["논리적이고 체계적인 문제 해결 능력과 커뮤니케이션 능력을 보유한 분","Java(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분","AWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"],
-   "preferred_quotes":["스트리밍 플랫폼(Kafka)을 활용한 실시간 데이터 파이프라인 구축 경험이 있는 분","NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분","AI/ML 엔지니어링 지식을 활용한 시스템 구현 경험이 있는 분"],
-   "posting_text":"채널연동개발팀은 대한민국 1위 숙박 플랫폼 여기어때의 판매 확대를 위해 글로벌 OTA, 펜션 에이전시, CMS 등과 커넥트하는 핵심 백엔드 개발팀입니다.\n이런 분과 함께 하고 싶어요\n대용량 트래픽 처리를 위한 시스템 설계 경험이 있는 분\nJava(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분\nJPA, Hibernate 등 ORM 사용과 도메인 모델링 경험이 있는 분\nAWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"},
-  "apply_skills":{"java":2,"kotlin":2,"spring":2,"aws_eks":2,"aws_rds":2,"redis":2,"communication":2,"kafka":1,"mongodb":1,"docker":1,"kubernetes":1,"machine_learning":1},
-  "work_sources":[
-   {"skill_id":"grafana","from":"기술 블로그","url":"https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d","date":"2026-10-10","quote":"반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."},
-   {"skill_id":"prometheus","from":"기술 블로그","url":"https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d","date":"2026-10-10","quote":"반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."},
-   {"skill_id":"observability","from":"기술 블로그","url":"https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d","date":"2026-10-10","quote":"반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."},
-   {"skill_id":"mongodb","from":"기술 블로그","url":"https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d","date":"2026-10-10","quote":"전시 영역의 제휴점 상품 정보는 원래 원천 데이터에서 Kafka로 변경분을 받아 전시 쪽 MongoDB에 저장해 두고 읽는 구조였습니다."}],
-  "domain_keywords":["숙박","여행","OTA","예약","상품","재고"],
-  "caveats":["공고(채널연동)와 블로그(전시개발) 다른 팀. 관측 도구는 '이미 사내에서 쓰고 있었습니다'로 회사 공통","공고는 재게시 사이트 사본","경력 0~3년 — 신입·주니어에 가까움"]}
+ {
+  "key": "ohouse",
+  "company": "오늘의집(버킷플레이스)",
+  "org_or_team": "커머스 개발 (블로그: 추천팀)",
+  "job_title": "Backend Engineer, Commerce",
+  "region": "수도권",
+  "posting": {
+   "url": "https://inthiswork.com/archives/363685",
+   "date_or_status": "마감 (재게시 사이트 사본)",
+   "requirements_quotes": [
+    "Kotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분",
+    "RDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분",
+    "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분",
+    "GPT, Claude 등 LLM 기반 도구를 실무에 적용해 본 경험이 있는 분",
+    "명확한 커뮤니케이션 역량을 갖추고, 협업 중심의 개발 문화에 익숙한 분"
+   ],
+   "preferred_quotes": [
+    "Kafka, Spark, Elasticsearch 등 빅데이터 및 스트리밍 처리 기술을 활용한 경험이 있는 분",
+    "Kubernetes, Docker, Terraform 등 DevOps 및 모니터링(Grafana, Prometheus 등 환경을 구성하고 운영한 경험이 있는 분",
+    "n8n, Langchain 등 AI 워크플로우 도구를 활용하거나 AI 기반 프로토타입을 실험한 경험이 있는 분"
+   ],
+   "posting_text": "자격요건\n컴퓨터공학 전공 또는 이에 준하는 개발 지식과 3년 이상의 백엔드 개발 경험이 있는 분\nKotlin, Java, Python 중 하나 이상의 언어에 능숙하며, RESTful API 및 서버-DB 간 데이터 흐름을 설계한 경험이 있는 분\n대용량 트래픽 처리 및 실시간 시스템을 개발한 경험이 있는 분\nRDBMS 또는 NoSQL 기반 데이터베이스를 설계하고 운영한 경험이 있는 분\nMSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분\nGPT, Claude 등 LLM 기반 도구를 실무에 적용해 본 경험이 있는 분"
+  },
+  "apply_skills": {
+   "kotlin": 2,
+   "java": 2,
+   "python": 2,
+   "rest_api": 2,
+   "nosql": 2,
+   "msa": 2,
+   "aws": 2,
+   "gcp": 2,
+   "gen_ai_use": 2,
+   "communication": 2,
+   "kafka": 1,
+   "spark": 1,
+   "elk": 1,
+   "kubernetes": 1,
+   "docker": 1,
+   "terraform": 1,
+   "grafana": 1,
+   "prometheus": 1,
+   "langchain": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "redis",
+    "from": "기술 블로그",
+    "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+    "date": "2025-12-17",
+    "quote": "따라서 빠른 조회가 가능한 인메모리 DB, 저희의 경우 Redis에 피처 값들을 미리 저장해두어야 합니다."
+   },
+   {
+    "skill_id": "airflow",
+    "from": "기술 블로그",
+    "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+    "date": "2025-12-17",
+    "quote": "Airflow를 이용해 주기적으로 데이터 웨어하우스에서 피처 값을 읽어옵니다."
+   },
+   {
+    "skill_id": "feature_store",
+    "from": "기술 블로그",
+    "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+    "date": "2025-12-17",
+    "quote": "저희는 우선 가장 널리 알려진 오픈소스 피처 스토어인 Feast를 기반으로 시스템을 구축하기로 결정했습니다."
+   },
+   {
+    "skill_id": "hadoop",
+    "from": "기술 블로그",
+    "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+    "date": "2025-12-17",
+    "quote": "즉, 저희는 Feast의 장점을 그대로 가져오면서도 기존에 이미 자리 잡고 있던 인프라(Hive, Spark, Flink 등)를 적극적으로 활용하는"
+   },
+   {
+    "skill_id": "spark",
+    "from": "기술 블로그",
+    "url": "https://www.bucketplace.com/post/2025-12-17-개인화-추천-시스템-4-feature-store/",
+    "date": "2025-12-17",
+    "quote": "오늘의집 추천팀은 기존에 PySpark를 config 기반으로 실행하도록 시스템을 구성해 두었습니다."
+   }
+  ],
+  "domain_keywords": [
+   "인테리어",
+   "커머스",
+   "주문",
+   "결제",
+   "추천",
+   "개인화"
+  ],
+  "caveats": [
+   "공고(커머스 개발)와 블로그(추천팀)는 다른 팀",
+   "공고는 재게시 사이트 사본",
+   "경력 3년 이상 공고"
+  ],
+  "any_of": [
+   [
+    "kotlin",
+    "java",
+    "python"
+   ],
+   [
+    "aws",
+    "gcp"
+   ]
+  ],
+  "match": "none"
+ },
+ {
+  "key": "kurly",
+  "company": "컬리",
+  "org_or_team": "데이터 직무 (블로그: AI검색추천개발)",
+  "job_title": "데이터 백엔드 개발자",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/279400",
+   "date_or_status": "2026-11 조회 시 게시 중 (리멤버)",
+   "requirements_quotes": [
+    "생성형 AI를 적극 활용하여 개발 생산성과 기술 경쟁력을 향상시키고, 문제해결/고부가가치 업무로의 전환 등 업무 방식을 개선하는 데 관심이 있으신 분",
+    "Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분",
+    "Kafka 기반 비동기 처리 역량을 보유하신 분",
+    "AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"
+   ],
+   "preferred_quotes": [
+    "머신러닝 기반의 서비스 운영 경험을 보유하신 분",
+    "관계형 및 비관계형 데이터베이스(SQL, MongoDB 등) 설계·운영 경험이 있으신 분"
+   ],
+   "posting_text": "데이터 백엔드 개발자는 각종 AI, 머신러닝, 최적화 모델을 수행하는 백엔드 시스템을 개발하고 관리합니다.\n주요업무\n• 컬리 앱/웹에 AI/머신러닝/최적화 기반 서비스 구현/운영\n자격 요건\n• 유관경력 6년 이상이신 분\n• Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분\n• Kafka 기반 비동기 처리 역량을 보유하신 분\n• AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "mysql": 2,
+   "spring": 2,
+   "kafka": 2,
+   "aws": 2,
+   "gcp": 2,
+   "docker": 2,
+   "kubernetes": 2,
+   "gen_ai_use": 2,
+   "machine_learning": 1,
+   "sql": 1,
+   "mongodb": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_sagemaker",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "인프라 조직과 논의한 끝에 저희 상황에는 SageMaker가 맞는다는 결론을 내렸습니다."
+   },
+   {
+    "skill_id": "aws_eks",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "마침 전사 표준 아키텍처로 EKS를 채택한 상태여서 컨테이너 기반의 범용 워크플로우 엔진인 Argo Workflows를 자연스럽게 검토하게 됐습니다."
+   },
+   {
+    "skill_id": "elk",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "서빙 API는 그 벡터로 검색 엔진(OpenSearch)에서 후보 상품을 조회해 최종 결과를 만듭니다."
+   },
+   {
+    "skill_id": "aws_dynamodb",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "미리 계산해 DynamoDB에 적재"
+   },
+   {
+    "skill_id": "mlflow",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "추론 쪽은 EKS 위에 MLflow와 KServe, Karpenter를 조합하는 방안을 먼저 검토해 PoC까지 진행했습니다."
+   },
+   {
+    "skill_id": "embedding",
+    "from": "기술 블로그",
+    "url": "https://helloworld.kurly.com/blog/recommend-ml-pipeline",
+    "date": "2026-11-03",
+    "quote": "무엇보다 모델을 새로 바꾸려면 추론 엔드포인트와 유저 임베딩, 검색 인덱스가 함께 바뀌어야 했는데, 저마다 다른 AWS 서비스에 흩어져 있어서 어떻게 한꺼번에 교체할지가 문제였습니다."
+   }
+  ],
+  "domain_keywords": [
+   "신선식품",
+   "커머스",
+   "배송",
+   "물류",
+   "추천",
+   "개인화"
+  ],
+  "caveats": [
+   "공고(데이터 백엔드)와 블로그(AI검색추천개발) 같은 팀인지 미확인",
+   "경력 6년 이상 공고"
+  ],
+  "any_of": [
+   [
+    "java",
+    "kotlin"
+   ],
+   [
+    "aws",
+    "gcp"
+   ]
+  ],
+  "match": "none"
+ },
+ {
+  "key": "musinsa",
+  "company": "무신사",
+  "org_or_team": "무신사 엔지니어링 (블로그: PEL 공통서비스 파트)",
+  "job_title": "Backend Engineer",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/277830",
+   "date_or_status": "상시지원, 2026-11 조회 시 게시 중 (리멤버)",
+   "requirements_quotes": [
+    "Java 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분",
+    "클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분",
+    "AI 기반 도구를 활용하여 개발 생산성과 문제 해결 역량을 강화한 경험이 있으신 분"
+   ],
+   "preferred_quotes": [
+    "AWS 기반 클라우드 환경에서 서비스 개발 및 운영 경험이 있으신 분"
+   ],
+   "posting_text": "자격 요건\n[기술 스택]\nJava / Spring Framework\nJPA / QueryDSL\nMySQL, Redis\nKafka\nKubernetes, Docker\n[자격 요건]\nJava 및 Spring 기반 백엔드 개발 경력 5년 이상 또는 그에 준하는 역량을 보유하신 분\n분산 시스템과 대규모 트래픽 처리에 대한 설계 및 운영 경험이 있으신 분\n클라우드 환경 또는 Kubernetes 기반 개발 및 운영 경험이 있으신 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "spring": 2,
+   "mysql": 2,
+   "redis": 2,
+   "kafka": 2,
+   "kubernetes": 2,
+   "docker": 2,
+   "gen_ai_use": 2,
+   "aws": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "observability",
+    "from": "기술 블로그",
+    "url": "https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b",
+    "date": "2026-10-01",
+    "quote": "라이브러리가 trace_id를 읽는 곳은 OpenTelemetry의 Span.current()입니다."
+   },
+   {
+    "skill_id": "grpc",
+    "from": "기술 블로그",
+    "url": "https://techblog.musinsa.com/%EB%A1%9C%EA%B7%B8%EA%B0%80-%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC-%EC%A3%BD%EC%98%80%EB%8B%A4-4013e35a463b",
+    "date": "2026-10-01",
+    "quote": "외부로 나가는 HTTP나 gRPC 호출에도 traceparent를 자동으로 넣습니다."
+   }
+  ],
+  "domain_keywords": [
+   "패션",
+   "커머스",
+   "주문",
+   "결제",
+   "쿠폰",
+   "트래픽"
+  ],
+  "caveats": [
+   "공고(백엔드)와 블로그(공통 플랫폼 파트)는 다른 팀. 블로그는 로깅 라이브러리가 전사 공통이라고 밝힘",
+   "경력 5년 이상 공고",
+   "실무 근거가 2건뿐"
+  ],
+  "match": "none"
+ },
+ {
+  "key": "nol",
+  "company": "놀유니버스(야놀자·인터파크)",
+  "org_or_team": "엔터BE (NOL 티켓)",
+  "job_title": "Software Engineer, Backend - 엔터BE",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/260536",
+   "date_or_status": "리멤버 게시 (동일 공고 273017)",
+   "requirements_quotes": [
+    "• Java(or Kotlin)기반의 API 설계/개발 및 운영이 가능하신 분",
+    "• 기초 컴퓨터 과학 지식(자료구조, 알고리즘, 운영체제, 네트워크 등)을 보유하신 분",
+    "• 협업 부서와 커뮤니케이션이 원활하며 적극적이신 분"
+   ],
+   "preferred_quotes": [
+    "• Cloud 환경 서비스 운영 경험이 있으신 분",
+    "• ASP.NET MVC 개발 경험 있으신 분"
+   ],
+   "posting_text": "• 놀유니버스 엔터BE 조직은 국민 티켓예매 서비스인 NOL 티켓을 담당합니다.\n주요업무\n• NOL 티켓의 Back Office 및 예매시스템 개발을 합니다.\n자격 요건\n• 백엔드 개발 경력 4년 이상 또는 그에 준하는 실력을 갖춘 분\n• Java(or Kotlin)기반의 API 설계/개발 및 운영이 가능하신 분\n• 기초 컴퓨터 과학 지식(자료구조, 알고리즘, 운영체제, 네트워크 등)을 보유하신 분\n우대사항\n• Cloud 환경 서비스 운영 경험이 있으신 분\n• ASP.NET MVC 개발 경험 있으신 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "rest_api": 2,
+   "networking": 2,
+   "communication": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_ecs",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "GitHub Actions를 활용한 CI/CD 파이프라인을 구축하여 코드 커밋 시 자동으로 Docker 이미지를 빌드하고 Amazon ECR에 푸시한 후 ECS 서비스로 무중단 배포하는 완전 자동화된 배포 프로세스를 구현했습니다."
+   },
+   {
+    "skill_id": "github_actions",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "GitHub Actions를 활용한 CI/CD 파이프라인을 구축하여 코드 커밋 시 자동으로 Docker 이미지를 빌드하고 Amazon ECR에 푸시한 후 ECS 서비스로 무중단 배포하는 완전 자동화된 배포 프로세스를 구현했습니다."
+   },
+   {
+    "skill_id": "docker",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "놀유니버스는 AWS Transform으로 현대화된 .NET 애플리케이션을 리눅스 컨테이너로 패키징하여 기존 Windows Server 의존성을 완전히 제거하고 라이선스 비용을 절감했습니다."
+   },
+   {
+    "skill_id": "load_balancing",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "이를 통해 기존 IIS 환경에서 수동으로 진행되던 배포 작업을 완전히 자동화하고, ECS의 자동 스케일링과 로드 밸런싱 기능을 활용하여 트래픽 변화에 탄력적으로 대응할 수 있는 현대적인 컨테이너 기반 아키텍처를 성공적으로 구축했습니다."
+   },
+   {
+    "skill_id": "cloud_migration",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "놀유니버스는 이 AWS Transform for .NET을 활용하여 150만 라인의 코드와 1,500개의 소스 파일을 단 10시간만에 성공적으로 분석하고 변환했습니다 ."
+   },
+   {
+    "skill_id": "csharp",
+    "from": "기술 블로그",
+    "url": "https://aws.amazon.com/ko/blogs/tech/nol-universe-dot-net-modernization/",
+    "date": "2025-11-20",
+    "quote": "기술적 한계 : .NET Framework는 4.8 이후 사실상 기능 업데이트가 종료된 상태였으며, .NET 8.0은 장기 지원 버전으로 새로운 C# 언어 기능과 성능 최적화를 제공합니다."
+   }
+  ],
+  "domain_keywords": [
+   "티켓",
+   "예매",
+   "공연",
+   "여행",
+   "트래픽",
+   "레거시"
+  ],
+  "caveats": [
+   "같은 팀 확인됨(엔터 BE팀 공저)",
+   "출처는 회사 자체가 아니라 AWS 기술 블로그(AWS SA 공저)",
+   "경력 4년 이상 공고"
+  ],
+  "any_of": [
+   [
+    "java",
+    "kotlin"
+   ]
+  ]
+ },
+ {
+  "key": "yeogi",
+  "company": "여기어때",
+  "org_or_team": "채널연동개발팀 (블로그: 전시개발팀)",
+  "job_title": "Backend Engineer [채널연동]",
+  "region": "수도권",
+  "posting": {
+   "url": "https://inthiswork.com/archives/391774",
+   "date_or_status": "마감 (재게시 사이트 사본), 경력 0~3년",
+   "requirements_quotes": [
+    "논리적이고 체계적인 문제 해결 능력과 커뮤니케이션 능력을 보유한 분",
+    "Java(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분",
+    "AWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"
+   ],
+   "preferred_quotes": [
+    "스트리밍 플랫폼(Kafka)을 활용한 실시간 데이터 파이프라인 구축 경험이 있는 분",
+    "NoSQL(MongoDB, Redis) 및 컨테이너 기술(Docker, K8s) 활용 경험이 있는 분",
+    "AI/ML 엔지니어링 지식을 활용한 시스템 구현 경험이 있는 분"
+   ],
+   "posting_text": "채널연동개발팀은 대한민국 1위 숙박 플랫폼 여기어때의 판매 확대를 위해 글로벌 OTA, 펜션 에이전시, CMS 등과 커넥트하는 핵심 백엔드 개발팀입니다.\n이런 분과 함께 하고 싶어요\n대용량 트래픽 처리를 위한 시스템 설계 경험이 있는 분\nJava(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분\nJPA, Hibernate 등 ORM 사용과 도메인 모델링 경험이 있는 분\nAWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "spring": 2,
+   "aws_eks": 2,
+   "aws_rds": 2,
+   "redis": 2,
+   "communication": 2,
+   "kafka": 1,
+   "mongodb": 1,
+   "docker": 1,
+   "kubernetes": 1,
+   "machine_learning": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "grafana",
+    "from": "기술 블로그",
+    "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+    "date": "2026-10-10",
+    "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."
+   },
+   {
+    "skill_id": "prometheus",
+    "from": "기술 블로그",
+    "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+    "date": "2026-10-10",
+    "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."
+   },
+   {
+    "skill_id": "observability",
+    "from": "기술 블로그",
+    "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+    "date": "2026-10-10",
+    "quote": "반면 Grafana와 Prometheus와 Loki는 이미 사내에서 쓰고 있었습니다. 애플리케이션이 메트릭과 로그만 제대로 남기면 인프라를 하나도 바꾸지 않고 대시보드를 만들 수 있었습니다."
+   },
+   {
+    "skill_id": "mongodb",
+    "from": "기술 블로그",
+    "url": "https://techblog.gccompany.co.kr/%EC%89%90%EB%8F%84%EC%9E%89-%EA%B2%80%EC%A6%9D-%EA%B0%9C%EC%84%A0%EA%B8%B0-cef1ddc8318d",
+    "date": "2026-10-10",
+    "quote": "전시 영역의 제휴점 상품 정보는 원래 원천 데이터에서 Kafka로 변경분을 받아 전시 쪽 MongoDB에 저장해 두고 읽는 구조였습니다."
+   }
+  ],
+  "domain_keywords": [
+   "숙박",
+   "여행",
+   "OTA",
+   "예약",
+   "상품",
+   "재고"
+  ],
+  "caveats": [
+   "공고(채널연동)와 블로그(전시개발) 다른 팀. 관측 도구는 '이미 사내에서 쓰고 있었습니다'로 회사 공통",
+   "공고는 재게시 사이트 사본",
+   "경력 0~3년 — 신입·주니어에 가까움"
+  ],
+  "any_of": [
+   [
+    "java",
+    "kotlin"
+   ]
+  ],
+  "match": "none"
+ }
 ]

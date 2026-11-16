@@ -1,0 +1,82 @@
+[
+ {
+  "key": "kakaobank_grad",
+  "company": "카카오뱅크(신입크루 공채)",
+  "org_or_team": "서버 개발자 신입 공채 · 근거: 서비스아키팀·알림경험엔지니어링팀 블로그",
+  "job_title": "서버 개발자 (2026 신입크루)",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "백엔드",
+  "match": "grad_hire",
+  "posting": {
+   "url": "https://recruit.kakaobank.com/jobs/226727",
+   "date_or_status": "2025-09-08~09-28 (마감) · 웹 아카이브 사본으로 확인",
+   "requirements_quotes": [
+    "· Java, Kotlin 등 하나 이상의 백엔드 언어로 개발한 경험을 보유한 분 (학부, 개인, 팀 프로젝트 포함. 단, 입사지원서에 학교명 기재 불가능)",
+    "· Spring Boot, JPA 등 주요 백엔드 프레임워크에 대한 기본 이해를 갖춘 분",
+    "· RDBMS 등 데이터베이스에 대한 기초 지식 및 개발 경험을 보유한 분",
+    "· 팀 프로젝트 등에서 협업하며 문제를 해결한 경험을 보유한 분"
+   ],
+   "preferred_quotes": [
+    "· 대용량 트래픽, 분산 시스템, Micro Service Architecture(MSA)에 대한 관심 또는 학습 경험을 보유한 분",
+    "· Open Source(예: Redis, Kafka 등) 활용 경험 또는 관련 프로젝트 참여 경험을 보유한 분",
+    "· Docker, CI/CD, 클라우드 등 현대적 개발 환경에 대한 이해 또는 경험을 보유한 분",
+    "· React 등 프론트엔드 개발 경험을 보유한 분"
+   ],
+   "posting_text": "직무 경험과 역량 · Java, Kotlin 등 하나 이상의 백엔드 언어로 개발한 경험을 보유한 분 · Spring Boot, JPA 등 주요 백엔드 프레임워크에 대한 기본 이해를 갖춘 분 · RDBMS 등 데이터베이스에 대한 기초 지식 및 개발 경험을 보유한 분 · 팀 프로젝트 등에서 협업하며 문제를 해결한 경험을 보유한 분 우대사항 · 대용량 트래픽, 분산 시스템, Micro Service Architecture(MSA)에 대한 관심 또는 학습 경험을 보유한 분 · Open Source(예: Redis, Kafka 등) 활용 경험 또는 관련 프로젝트 참여 경험을 보유한 분 · Docker, CI/CD, 클라우드 등 현대적 개발 환경에 대한 이해 또는 경험을 보유한 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "spring": 2,
+   "sql": 2,
+   "communication": 2,
+   "msa": 1,
+   "redis": 1,
+   "kafka": 1,
+   "docker": 1,
+   "cicd": 1,
+   "react": 1
+  },
+  "any_of": [
+   [
+    "java",
+    "kotlin"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "ansible",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaobank.com/posts/2502-implementing-service-discovery-in-banking/",
+    "date": "2025-02-07",
+    "quote": "이를 극복하기 위해 Ansible 기반의 자동화를 도입했고, 현재는 Terraform과 Kubernetes(이하 K8s)를 활용한 근본적인 해결책을 마련하고 있습니다."
+   },
+   {
+    "skill_id": "terraform",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaobank.com/posts/2502-implementing-service-discovery-in-banking/",
+    "date": "2025-02-07",
+    "quote": "현재는 Terraform과 Kubernetes(이하 K8s)를 활용한 근본적인 해결책을 마련하고 있습니다."
+   },
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaobank.com/posts/2502-implementing-service-discovery-in-banking/",
+    "date": "2025-02-07",
+    "quote": "현재는 Terraform과 Kubernetes(이하 K8s)를 활용한 근본적인 해결책을 마련하고 있습니다."
+   }
+  ],
+  "domain_keywords": [
+   "은행",
+   "금융",
+   "서비스 디스커버리",
+   "MSA",
+   "대규모 트래픽"
+  ],
+  "caveats": [
+   "신입 공채(배치 팀은 입사 후 결정) — 실무 근거는 같은 회사 서버 개발 조직 블로그",
+   "공고 원문은 웹 아카이브 사본"
+  ]
+ }
+]

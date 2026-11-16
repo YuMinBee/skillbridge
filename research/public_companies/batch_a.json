@@ -1,62 +1,395 @@
 [
- {"key":"naver","company":"네이버클라우드","org_or_team":"HyperCLOVA X 멀티모달 부서","job_title":"Multimodal MLOps (체험형 인턴)","region":"수도권",
-  "posting":{"url":"https://inthiswork.com/?p=397709","date_or_status":"모집 2026.09.14~09.23, 마감 (공고 재게시 사이트 사본)",
-   "posting_text":"담당업무\n• Kafka 기반 Event Bus와 Airflow를 활용한 학습·평가·서빙 파이프라인 자동화(VLOps) 개발\n• vLLM, HuggingFace, 사내 추론 엔진 등과 여러 평가 프레임워크를 공통 스키마로 연결하는 Omni-Evaluator 개발\n자격요건\n• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분\n• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분\n• Docker/Kubernetes 기반 개발 경험을 보유하신 분\n우대사항\n• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분",
-   "quotes":{"rest_api":"• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분","mlops_pipeline":"• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분","llm":"• Multimodal Model (LLaVA, Qwen, DeepSeek-VL 등) 의 구조, 학습 과정 및 평가에 대한 기본적인 이해를 갖추신 분","docker":"• Docker/Kubernetes 기반 개발 경험을 보유하신 분","kubernetes":"• Docker/Kubernetes 기반 개발 경험을 보유하신 분","airflow":"• Airflow, Argo Workflows 등 오케스트레이션 툴을 활용해 ML 파이프라인 또는 워크플로우 시스템을 개발한 경험을 보유하신 분","kafka":"• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분","llm_evaluation":"• 평가 프레임워크(LMMs-Eval, VLMEvalKit, LM-Eval-Harness 등)를 커스터마이징하거나 신규 벤치마크를 추가한 경험을 보유하신 분","mlops":"• vLLM 등 추론 엔진으로 모델을 서빙하거나 최적화한 경험을 보유하신 분"}},
-  "apply_skills":{"rest_api":2,"mlops_pipeline":2,"llm":2,"docker":2,"kubernetes":2,"airflow":1,"kafka":1,"llm_evaluation":1,"mlops":1},
-  "work_sources":[
-   {"skill_id":"distributed_training","from":"기술 블로그","url":"https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/","date":"2026-08-18","quote":"VLM을 위한 분산 학습 최적화: 텍스트 전용 LLM을 위해 설계된 parallelism 기법이 packing된 멀티모달 시퀀스에서는 아직 올바르게 동작하지 않았습니다."},
-   {"skill_id":"gpu_infra","from":"기술 블로그","url":"https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/","date":"2026-08-18","quote":"학습은 멀티 노드 B200 클러스터에서 expert parallelism(EP) 8, tensor/pipeline/context parallelism(TP/PP/CP) 1, gradient accumulation 128 설정으로 수행했습니다."},
-   {"skill_id":"cuda","from":"기술 블로그","url":"https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/","date":"2026-08-18","quote":"pack 교환은 전용 CUDA stream에서 forward·backward 연산과 겹쳐 수행되며, 각 worker는 이미 로컬에 있는 pack으로 첫 microbatch를 시작합니다."},
-   {"skill_id":"perf_opt","from":"기술 블로그","url":"https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/","date":"2026-08-18","quote":"프로파일링을 통해 멀티모달 학습의 주요 병목이 되는 네 가지 영역을 식별하고, 이 영역들에 최적화 노력을 집중했습니다:"},
-   {"skill_id":"huggingface","from":"기술 블로그","url":"https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/","date":"2026-08-18","quote":"네이티브 구현은 Megatron의 parallelism를 그대로 상속받는 반면, Hugging Face encoder를 분산하려면 별도의 추가 작업이 필요합니다."}],
-  "domain_keywords":["HyperCLOVA X","멀티모달","VLM","MLOps","EvalOps","GPU","분산 학습","LLM"],
-  "caveats":["공고는 공식 채용 사이트가 아니라 재게시 사이트 사본","공고(평가 자동화)와 블로그(사전학습)는 같은 부서, 세부 팀 미확인","블로그는 NVIDIA 개발자 블로그에 NAVER Cloud 저자가 쓴 글","체험형 인턴 공고"]},
-
- {"key":"kakaopay","company":"카카오페이","org_or_team":"AI 플랫폼 조직 (블로그: DevOps팀)","job_title":"MLOps 엔지니어 - AI 플랫폼","region":"수도권",
-  "posting":{"url":"https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372","date_or_status":"2025-10 무렵, 마감 (재게시 사이트 사본; catch.co.kr/NCS/RecruitInfoDetails/530998 동일)",
-   "posting_text":"업무내용\n• MLOps/LLMOps 기반 AI 플랫폼의 아키텍처를 설계, 개발 및 운영해요.\n• AI 모델(ML/LLM)의 학습, 배포, 서빙, 모니터링을 위한 CI/CD 자동화 파이프라인을 구축해요.\n• Kubernetes(K8s) 기반의 확장 가능하고 안정적인 모델 학습 및 추론 인프라를 구축 및 관리해요.\n자격요건\n• Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.\n• CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요.\n우대사항\n• Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.",
-   "quotes":{"mlops":"MLOps, DevOps, SRE 또는 플랫폼 엔지니어링 관련 실무 경험 5년 이상이신 분을 찾고 있어요.","python":"Python, Go, Java 등 하나 이상의 프로그래밍 언어 활용 능력을 갖추고 있으신 분을 찾고 있어요.","docker":"Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.","kubernetes":"Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.","cicd":"CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요.","mlops_pipeline":"AI/ML 워크플로우(데이터 수집/처리, 학습, 평가, 배포)에 대한 기본적인 이해가 있으신 분을 찾고 있어요.","kubeflow":"Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.","mlflow":"Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.","langchain":"LangChain, LlamaIndex, vLLM 등 LLM 애플리케이션/서빙 프레임워크 사용 경험이 있으면 좋아요.","vector_db":"Vector DB (e.g., Milvus, Pinecone, Weaviate) 구축 또는 활용 경험이 있으면 좋아요.","terraform":"Terraform, Ansible 등 IaC(Infrastructure as Code) 도구를 활용한 인프라 관리 경험이 있으면 좋아요.","prometheus":"Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요.","grafana":"Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요.","pytorch":"TensorFlow/PyTorch 등 딥러닝 프레임워크 사용 및 모델 서빙 경험이 있으면 좋아요."}},
-  "apply_skills":{"mlops":2,"python":2,"docker":2,"kubernetes":2,"cicd":2,"mlops_pipeline":2,"kubeflow":1,"mlflow":1,"langchain":1,"vector_db":1,"terraform":1,"prometheus":1,"grafana":1,"pytorch":1},
-  "work_sources":[
-   {"skill_id":"kubeflow","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"AI 전문가인 데이터 사이언티스트는 Kubeflow 파이프라인을 통해 학습부터 모델 등록까지의 반복적인 작업을 자동화할 수 있게 되었습니다."},
-   {"skill_id":"mlflow","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"데이터 사이언티스트가 모델 학습(Training)을 완료하고, 그 결과를 MLflow 모델 레지스트리에 등록하는 것으로 과정이 시작됩니다."},
-   {"skill_id":"kubernetes","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"카카오페이 시스템 대부분이 이미 쿠버네티스 기반이었기 때문에, 운영의 일관성을 확보할 수 있는 가장 자연스러운 선택이었습니다."},
-   {"skill_id":"gpu_infra","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"저희는 고성능 AI 모델 학습을 위해 H200 GPU를 도입했습니다. 하지만 이런 고성능 장비는 CPU가 데이터 처리 속도를 따라가지 못해 오히려 병목이 되는 문제가 발생합니다."},
-   {"skill_id":"distributed_training","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"이를 해결하고, 특히 대규모 분산 학습의 효율을 극대화하기 위해 CPU를 거치지 않고 GPU끼리 직접 통신하는 RDMA 기술과 Infiniband 네트워크 도입을 결정했습니다."},
-   {"skill_id":"serverless","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"knative란 쿠버네티스를 서버리스 플랫폼으로 이용할 수 있는 도구이며, 필요한 순간에만 동적으로 자원을 할당하고 회수하는 서버리스의 핵심적인 역할을 수행합니다."},
-   {"skill_id":"mlops","from":"기술 블로그","url":"https://tech.kakaopay.com/post/ai-platform/","date":"2025-11-12","quote":"저희는 KServe와 Knative를 이용해 자원 효율을 극대화하고 비용을 최적화하는 것을 목표로 했습니다."}],
-  "domain_keywords":["금융","AI 플랫폼","MLOps","LLMOps","모델 서빙","GPU","쿠버네티스"],
-  "caveats":["공고는 'AI 플랫폼' 조직, 블로그 저자는 DevOps팀 — 같은 팀 미확인","공고는 재게시 사이트 사본","경력 5년 이상 공고"]},
-
- {"key":"woowa","company":"우아한형제들","org_or_team":"스토리지서비스팀 (블로그: 클라우드스토리지개발팀)","job_title":"데이터베이스 엔지니어","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/274716","date_or_status":"2025-03 확인, 마감 (원티드)",
-   "posting_text":"• 관계형 데이터베이스 관리 및 운영 (MySQL, PostgreSQL)\n• NoSQL 관리 및 운영 (MongoDB, Redis)\n• AWS 환경 내 데이터 관련 스토리지 운영\n• Query 검수 및 Performance Tuning\n[자격요건] • MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상\n• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분\n• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분\n[우대] • 이기종 간 마이그레이션 경험이 있는 분\n• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력",
-   "quotes":{"mysql":"• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상","mongodb":"• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상","aws":"• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분","gcp":"• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분","linux":"• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분","shell":"• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분","cloud_migration":"• 이기종 간 마이그레이션 경험이 있는 분","python":"• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력","java":"• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력"}},
-  "apply_skills":{"mysql":2,"mongodb":2,"aws":2,"gcp":2,"linux":2,"shell":2,"cloud_migration":1,"python":1,"java":1},
-  "work_sources":[
-   {"skill_id":"python","from":"기술 블로그","url":"https://techblog.woowahan.com/13539/","date":"2023-11-02","quote":"또한 위에서 발생하는 문제점이나 비효율을 개선하기 위해, 간단한 코드(Python, JavaScript 등)를 활용한 자동화 스크립트를"},
-   {"skill_id":"aws_cloudwatch","from":"기술 블로그","url":"https://techblog.woowahan.com/13539/","date":"2023-11-02","quote":"데이터를 수집하기 위해 Boto3, CloudWatch API를 활용하여 Metric 데이터를 수집했습니다."},
-   {"skill_id":"grafana","from":"기술 블로그","url":"https://techblog.woowahan.com/13539/","date":"2023-11-02","quote":"그라파나 메트릭(CPU / Memory / Connection)을 기준으로"},
-   {"skill_id":"aws_rds","from":"기술 블로그","url":"https://techblog.woowahan.com/13539/","date":"2023-11-02","quote":"RDS의 경우 CPU 지표 수치가 상승할수록, 전체 지연 시간(latency)이 상승하고 서비스 지연을 초래하는데요."},
-   {"skill_id":"finops","from":"기술 블로그","url":"https://techblog.woowahan.com/13539/","date":"2023-11-02","quote":"높아진 인프라 비용을 점검하고 낭비되는 부분을 찾아 절감할 필요성을 느꼈습니다."},
-   {"skill_id":"postgresql","from":"기술 블로그","url":"https://techblog.woowahan.com/6550/","date":"2021-12-07","quote":"최근 저희 팀에서는 Aurora MySQL로 운영되고 있던 대량 통계성 DB를 Aurora PostgreSQL로 이관하는 것을 검토중입니다."},
-   {"skill_id":"query_tuning","from":"기술 블로그","url":"https://techblog.woowahan.com/6550/","date":"2021-12-07","quote":"MySQL 환경에서 동작 중인 해당 서비스는 쿼리 개선 작업을 진행하였지만 드라마틱한 효과를 볼 수는 없었습니다."}],
-  "domain_keywords":["DBA","데이터베이스","DB 운영","인프라 비용","모니터링","배달","MySQL"],
-  "caveats":["공고 팀(스토리지서비스팀)과 블로그 팀(클라우드스토리지개발팀)이 다름","블로그는 2021~2023, 공고는 2025","경력 5년 이상 공고"]},
-
- {"key":"daangn","company":"당근","org_or_team":"ML인프라팀 (블로그: 데이터 가치화팀·커뮤니티홈팀)","job_title":"Software Engineer, Machine Learning - ML 인프라","region":"수도권",
-  "posting":{"url":"https://careers.daangn.com/jobs/role/7498021003/","date_or_status":"2026-11-16 기준 열림 (공식 채용 사이트)",
-   "posting_text":"사내 프롬프트 스튜디오와 에이전트 시스템을 지원하는 LLM 라우터를 개발하고 있어요. / 여러 학습 프레임워크를 위한 머신러닝 모델 배포 시스템을 운영/개발하고 있어요. / 파이썬을 주요 언어로 사용하고 있어요. 파이썬 기반의 개발 환경에 익숙하거나, 사용하는 데에 부담이 없는 분이면 잘 맞아요\n우대: ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분",
-   "quotes":{"python":"파이썬을 주요 언어로 사용하고 있어요. 파이썬 기반의 개발 환경에 익숙하거나, 사용하는 데에 부담이 없는 분이면 잘 맞아요","mlops":"ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분","mlops_pipeline":"ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분","llm":"ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분"}},
-  "apply_skills":{"python":2,"mlops":1,"mlops_pipeline":1,"llm":1},
-  "work_sources":[
-   {"skill_id":"mcp","from":"기술 블로그","url":"https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b","date":"2026-08-04","quote":"그래서 실험과 지표, 사용자 행동 이벤트를 조회·생성·수정할 수 있는 인터페이스를 MCP(Model Context Protocol) 형태로 묶었어요. 이게 Experiment MCP예요."},
-   {"skill_id":"ai_agent","from":"기술 블로그","url":"https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b","date":"2026-08-04","quote":"저희 데이터 가치화팀은 모든 팀이 공통으로 쓸 수 있는 기본적인 실험 구성 에이전트를 만들어 두었어요."},
-   {"skill_id":"data_warehouse","from":"기술 블로그","url":"https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b","date":"2026-08-04","quote":"예를 들어 experiment-followup-analysis 스킬은 Experiment MCP로 실험 정보와 결과를 조회하고, BigQuery MCP로 실험 파이프라인 테이블을 직접 쿼리해서, 파이프라인이 계산해 주는 결과 너머의 심층 후속 분석을 수행해요."},
-   {"skill_id":"ab_testing","from":"기술 블로그","url":"https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b","date":"2026-08-04","quote":"어떤 안이 더 나은지 A/B 테스트로 검증할 수 있도록, 실험의 설계부터 결과 분석까지 한곳에서 지원하는 사내 플랫폼이죠."},
-   {"skill_id":"prompt_engineering","from":"기술 블로그","url":"https://medium.com/daangn/%EB%AA%A8%EB%8D%B8%EB%A7%8C-%EB%B0%94%EA%BF%A8%EB%8A%94%EB%8D%B0-llm-%EB%B9%84%EC%9A%A9%EC%9D%B4-3%EB%B0%B0%EA%B0%80-%EB%90%9C-%EC%9D%B4%EC%9C%A0-5ae60ab5108b","date":"2026-10-21","quote":"저희는 프롬프트를 사내 LLM 플랫폼의 템플릿으로 관리하고 코드는 변수 값만 넘겨요. 그래서 플랫폼이 템플릿의 첫 변수 앞에 구분점을 찍도록 고쳤어요."},
-   {"skill_id":"gcp","from":"발표","url":"https://www.youtube.com/watch?v=CfAUzt0zIFM","date":"2025-09-11","quote":"당근마켓은 GCP를 왜, 어떻게 사용하고 있을까요? 인프라 관점에서 GCP를 활용해 본 당근의 이야기를 들려드려요."}],
-  "domain_keywords":["LLM 라우터","모델 서빙","실험플랫폼","MCP","에이전트","GCP","지역 커뮤니티"],
-  "caveats":["블로그 두 편은 ML인프라팀이 아닌 다른 팀 글","GCP 근거는 발표 설명란 문구","Vertex AI·TFX 글은 열지 못해 사용하지 않음","경력 3년 이상(미드 레벨) 공고"]}
+ {
+  "key": "naver",
+  "company": "네이버클라우드",
+  "org_or_team": "HyperCLOVA X 멀티모달 부서",
+  "job_title": "Multimodal MLOps (체험형 인턴)",
+  "region": "수도권",
+  "posting": {
+   "url": "https://inthiswork.com/?p=397709",
+   "date_or_status": "모집 2026.09.14~09.23, 마감 (공고 재게시 사이트 사본)",
+   "posting_text": "담당업무\n• Kafka 기반 Event Bus와 Airflow를 활용한 학습·평가·서빙 파이프라인 자동화(VLOps) 개발\n• vLLM, HuggingFace, 사내 추론 엔진 등과 여러 평가 프레임워크를 공통 스키마로 연결하는 Omni-Evaluator 개발\n자격요건\n• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분\n• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분\n• Docker/Kubernetes 기반 개발 경험을 보유하신 분\n우대사항\n• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분",
+   "quotes": {
+    "rest_api": "• API 서버, 자동화 파이프라인에 대한 이해를 갖추신 분",
+    "mlops_pipeline": "• 데이터전처리→학습→평가→서빙으로 구성된 ML 파이프라인에 대한 이해를 갖추신 분",
+    "llm": "• Multimodal Model (LLaVA, Qwen, DeepSeek-VL 등) 의 구조, 학습 과정 및 평가에 대한 기본적인 이해를 갖추신 분",
+    "docker": "• Docker/Kubernetes 기반 개발 경험을 보유하신 분",
+    "kubernetes": "• Docker/Kubernetes 기반 개발 경험을 보유하신 분",
+    "airflow": "• Airflow, Argo Workflows 등 오케스트레이션 툴을 활용해 ML 파이프라인 또는 워크플로우 시스템을 개발한 경험을 보유하신 분",
+    "kafka": "• Kafka 등 메시지 브로커 또는 Event-Driven Architecture 기반 시스템 개발 경험을 보유하신 분",
+    "llm_evaluation": "• 평가 프레임워크(LMMs-Eval, VLMEvalKit, LM-Eval-Harness 등)를 커스터마이징하거나 신규 벤치마크를 추가한 경험을 보유하신 분",
+    "mlops": "• vLLM 등 추론 엔진으로 모델을 서빙하거나 최적화한 경험을 보유하신 분"
+   }
+  },
+  "apply_skills": {
+   "rest_api": 2,
+   "mlops_pipeline": 2,
+   "llm": 2,
+   "docker": 2,
+   "kubernetes": 2,
+   "airflow": 1,
+   "kafka": 1,
+   "llm_evaluation": 1,
+   "mlops": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "distributed_training",
+    "from": "기술 블로그",
+    "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+    "date": "2026-08-18",
+    "quote": "VLM을 위한 분산 학습 최적화: 텍스트 전용 LLM을 위해 설계된 parallelism 기법이 packing된 멀티모달 시퀀스에서는 아직 올바르게 동작하지 않았습니다."
+   },
+   {
+    "skill_id": "gpu_infra",
+    "from": "기술 블로그",
+    "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+    "date": "2026-08-18",
+    "quote": "학습은 멀티 노드 B200 클러스터에서 expert parallelism(EP) 8, tensor/pipeline/context parallelism(TP/PP/CP) 1, gradient accumulation 128 설정으로 수행했습니다."
+   },
+   {
+    "skill_id": "cuda",
+    "from": "기술 블로그",
+    "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+    "date": "2026-08-18",
+    "quote": "pack 교환은 전용 CUDA stream에서 forward·backward 연산과 겹쳐 수행되며, 각 worker는 이미 로컬에 있는 pack으로 첫 microbatch를 시작합니다."
+   },
+   {
+    "skill_id": "perf_opt",
+    "from": "기술 블로그",
+    "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+    "date": "2026-08-18",
+    "quote": "프로파일링을 통해 멀티모달 학습의 주요 병목이 되는 네 가지 영역을 식별하고, 이 영역들에 최적화 노력을 집중했습니다:"
+   },
+   {
+    "skill_id": "huggingface",
+    "from": "기술 블로그",
+    "url": "https://developer.nvidia.com/ko-kr/blog/how-naver-cloud-accelerates-multimodal-pre-training-with-nvidia-megatron-bridge/",
+    "date": "2026-08-18",
+    "quote": "네이티브 구현은 Megatron의 parallelism를 그대로 상속받는 반면, Hugging Face encoder를 분산하려면 별도의 추가 작업이 필요합니다."
+   }
+  ],
+  "domain_keywords": [
+   "HyperCLOVA X",
+   "멀티모달",
+   "VLM",
+   "MLOps",
+   "EvalOps",
+   "GPU",
+   "분산 학습",
+   "LLM"
+  ],
+  "caveats": [
+   "공고는 공식 채용 사이트가 아니라 재게시 사이트 사본",
+   "공고(평가 자동화)와 블로그(사전학습)는 같은 부서, 세부 팀 미확인",
+   "블로그는 NVIDIA 개발자 블로그에 NAVER Cloud 저자가 쓴 글",
+   "체험형 인턴 공고"
+  ]
+ },
+ {
+  "key": "kakaopay",
+  "company": "카카오페이",
+  "org_or_team": "AI 플랫폼 조직 (블로그: DevOps팀)",
+  "job_title": "MLOps 엔지니어 - AI 플랫폼",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.bzpp.co.kr/biz/businessDetailView/BR251027A00372",
+   "date_or_status": "2025-10 무렵, 마감 (재게시 사이트 사본; catch.co.kr/NCS/RecruitInfoDetails/530998 동일)",
+   "posting_text": "업무내용\n• MLOps/LLMOps 기반 AI 플랫폼의 아키텍처를 설계, 개발 및 운영해요.\n• AI 모델(ML/LLM)의 학습, 배포, 서빙, 모니터링을 위한 CI/CD 자동화 파이프라인을 구축해요.\n• Kubernetes(K8s) 기반의 확장 가능하고 안정적인 모델 학습 및 추론 인프라를 구축 및 관리해요.\n자격요건\n• Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.\n• CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요.\n우대사항\n• Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.",
+   "quotes": {
+    "mlops": "MLOps, DevOps, SRE 또는 플랫폼 엔지니어링 관련 실무 경험 5년 이상이신 분을 찾고 있어요.",
+    "python": "Python, Go, Java 등 하나 이상의 프로그래밍 언어 활용 능력을 갖추고 있으신 분을 찾고 있어요.",
+    "docker": "Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.",
+    "kubernetes": "Docker, Kubernetes 환경에서의 컨테이너 기반 시스템 구축 및 운영 경험이 있으신 분을 찾고 있어요.",
+    "cicd": "CI/CD 도구를 활용한 파이프라인 구축 경험이 있으신 분을 찾고 있어요.",
+    "mlops_pipeline": "AI/ML 워크플로우(데이터 수집/처리, 학습, 평가, 배포)에 대한 기본적인 이해가 있으신 분을 찾고 있어요.",
+    "kubeflow": "Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.",
+    "mlflow": "Kubeflow, MLflow, KServe 등 MLOps 오픈소스 솔루션 구축 및 운영 경험이 있으면 좋아요.",
+    "langchain": "LangChain, LlamaIndex, vLLM 등 LLM 애플리케이션/서빙 프레임워크 사용 경험이 있으면 좋아요.",
+    "vector_db": "Vector DB (e.g., Milvus, Pinecone, Weaviate) 구축 또는 활용 경험이 있으면 좋아요.",
+    "terraform": "Terraform, Ansible 등 IaC(Infrastructure as Code) 도구를 활용한 인프라 관리 경험이 있으면 좋아요.",
+    "prometheus": "Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요.",
+    "grafana": "Prometheus, Grafana 등을 활용한 Observability(모니터링, 로깅) 시스템 구축 경험이 있으면 좋아요.",
+    "pytorch": "TensorFlow/PyTorch 등 딥러닝 프레임워크 사용 및 모델 서빙 경험이 있으면 좋아요."
+   }
+  },
+  "apply_skills": {
+   "mlops": 2,
+   "python": 2,
+   "docker": 2,
+   "kubernetes": 2,
+   "cicd": 2,
+   "mlops_pipeline": 2,
+   "kubeflow": 1,
+   "mlflow": 1,
+   "langchain": 1,
+   "vector_db": 1,
+   "terraform": 1,
+   "prometheus": 1,
+   "grafana": 1,
+   "pytorch": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "kubeflow",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "AI 전문가인 데이터 사이언티스트는 Kubeflow 파이프라인을 통해 학습부터 모델 등록까지의 반복적인 작업을 자동화할 수 있게 되었습니다."
+   },
+   {
+    "skill_id": "mlflow",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "데이터 사이언티스트가 모델 학습(Training)을 완료하고, 그 결과를 MLflow 모델 레지스트리에 등록하는 것으로 과정이 시작됩니다."
+   },
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "카카오페이 시스템 대부분이 이미 쿠버네티스 기반이었기 때문에, 운영의 일관성을 확보할 수 있는 가장 자연스러운 선택이었습니다."
+   },
+   {
+    "skill_id": "gpu_infra",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "저희는 고성능 AI 모델 학습을 위해 H200 GPU를 도입했습니다. 하지만 이런 고성능 장비는 CPU가 데이터 처리 속도를 따라가지 못해 오히려 병목이 되는 문제가 발생합니다."
+   },
+   {
+    "skill_id": "distributed_training",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "이를 해결하고, 특히 대규모 분산 학습의 효율을 극대화하기 위해 CPU를 거치지 않고 GPU끼리 직접 통신하는 RDMA 기술과 Infiniband 네트워크 도입을 결정했습니다."
+   },
+   {
+    "skill_id": "serverless",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "knative란 쿠버네티스를 서버리스 플랫폼으로 이용할 수 있는 도구이며, 필요한 순간에만 동적으로 자원을 할당하고 회수하는 서버리스의 핵심적인 역할을 수행합니다."
+   },
+   {
+    "skill_id": "mlops",
+    "from": "기술 블로그",
+    "url": "https://tech.kakaopay.com/post/ai-platform/",
+    "date": "2025-11-12",
+    "quote": "저희는 KServe와 Knative를 이용해 자원 효율을 극대화하고 비용을 최적화하는 것을 목표로 했습니다."
+   }
+  ],
+  "domain_keywords": [
+   "금융",
+   "AI 플랫폼",
+   "MLOps",
+   "LLMOps",
+   "모델 서빙",
+   "GPU",
+   "쿠버네티스"
+  ],
+  "caveats": [
+   "공고는 'AI 플랫폼' 조직, 블로그 저자는 DevOps팀 — 같은 팀 미확인",
+   "공고는 재게시 사이트 사본",
+   "경력 5년 이상 공고"
+  ],
+  "match": "none"
+ },
+ {
+  "key": "woowa",
+  "company": "우아한형제들",
+  "org_or_team": "스토리지서비스팀 (블로그: 클라우드스토리지개발팀)",
+  "job_title": "데이터베이스 엔지니어",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/274716",
+   "date_or_status": "2025-03 확인, 마감 (원티드)",
+   "posting_text": "• 관계형 데이터베이스 관리 및 운영 (MySQL, PostgreSQL)\n• NoSQL 관리 및 운영 (MongoDB, Redis)\n• AWS 환경 내 데이터 관련 스토리지 운영\n• Query 검수 및 Performance Tuning\n[자격요건] • MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상\n• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분\n• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분\n[우대] • 이기종 간 마이그레이션 경험이 있는 분\n• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력",
+   "quotes": {
+    "mysql": "• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상",
+    "mongodb": "• MySQL 또는 MongoDB 대용량 데이터 운영 업무에 관련된 경력 5년 이상",
+    "aws": "• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분",
+    "gcp": "• AWS, GCP 등 Public Cloud 서비스 운영 경험이 있는 분",
+    "linux": "• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분",
+    "shell": "• 리눅스에 친숙하고 쉘 스크립트 개발 경험이 있는 분",
+    "cloud_migration": "• 이기종 간 마이그레이션 경험이 있는 분",
+    "python": "• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력",
+    "java": "• 기본적인 수준의 프로그래밍 (C, Java, Python, Go 등) 능력"
+   }
+  },
+  "apply_skills": {
+   "mysql": 2,
+   "mongodb": 2,
+   "aws": 2,
+   "gcp": 2,
+   "linux": 2,
+   "shell": 2,
+   "cloud_migration": 1,
+   "python": 1,
+   "java": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "python",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/13539/",
+    "date": "2023-11-02",
+    "quote": "또한 위에서 발생하는 문제점이나 비효율을 개선하기 위해, 간단한 코드(Python, JavaScript 등)를 활용한 자동화 스크립트를"
+   },
+   {
+    "skill_id": "aws_cloudwatch",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/13539/",
+    "date": "2023-11-02",
+    "quote": "데이터를 수집하기 위해 Boto3, CloudWatch API를 활용하여 Metric 데이터를 수집했습니다."
+   },
+   {
+    "skill_id": "grafana",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/13539/",
+    "date": "2023-11-02",
+    "quote": "그라파나 메트릭(CPU / Memory / Connection)을 기준으로"
+   },
+   {
+    "skill_id": "aws_rds",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/13539/",
+    "date": "2023-11-02",
+    "quote": "RDS의 경우 CPU 지표 수치가 상승할수록, 전체 지연 시간(latency)이 상승하고 서비스 지연을 초래하는데요."
+   },
+   {
+    "skill_id": "finops",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/13539/",
+    "date": "2023-11-02",
+    "quote": "높아진 인프라 비용을 점검하고 낭비되는 부분을 찾아 절감할 필요성을 느꼈습니다."
+   },
+   {
+    "skill_id": "postgresql",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/6550/",
+    "date": "2021-12-07",
+    "quote": "최근 저희 팀에서는 Aurora MySQL로 운영되고 있던 대량 통계성 DB를 Aurora PostgreSQL로 이관하는 것을 검토중입니다."
+   },
+   {
+    "skill_id": "query_tuning",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/6550/",
+    "date": "2021-12-07",
+    "quote": "MySQL 환경에서 동작 중인 해당 서비스는 쿼리 개선 작업을 진행하였지만 드라마틱한 효과를 볼 수는 없었습니다."
+   }
+  ],
+  "domain_keywords": [
+   "DBA",
+   "데이터베이스",
+   "DB 운영",
+   "인프라 비용",
+   "모니터링",
+   "배달",
+   "MySQL"
+  ],
+  "caveats": [
+   "공고 팀(스토리지서비스팀)과 블로그 팀(클라우드스토리지개발팀)이 다름",
+   "블로그는 2021~2023, 공고는 2025",
+   "경력 5년 이상 공고"
+  ],
+  "any_of": [
+   [
+    "mysql",
+    "mongodb"
+   ],
+   [
+    "aws",
+    "gcp"
+   ],
+   [
+    "python",
+    "java"
+   ]
+  ]
+ },
+ {
+  "key": "daangn",
+  "company": "당근",
+  "org_or_team": "ML인프라팀 (블로그: 데이터 가치화팀·커뮤니티홈팀)",
+  "job_title": "Software Engineer, Machine Learning - ML 인프라",
+  "region": "수도권",
+  "posting": {
+   "url": "https://careers.daangn.com/jobs/role/7498021003/",
+   "date_or_status": "2026-11-16 기준 열림 (공식 채용 사이트)",
+   "posting_text": "사내 프롬프트 스튜디오와 에이전트 시스템을 지원하는 LLM 라우터를 개발하고 있어요. / 여러 학습 프레임워크를 위한 머신러닝 모델 배포 시스템을 운영/개발하고 있어요. / 파이썬을 주요 언어로 사용하고 있어요. 파이썬 기반의 개발 환경에 익숙하거나, 사용하는 데에 부담이 없는 분이면 잘 맞아요\n우대: ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분",
+   "quotes": {
+    "python": "파이썬을 주요 언어로 사용하고 있어요. 파이썬 기반의 개발 환경에 익숙하거나, 사용하는 데에 부담이 없는 분이면 잘 맞아요",
+    "mlops": "ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분",
+    "mlops_pipeline": "ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분",
+    "llm": "ML 시스템(서빙, 학습 파이프라인 등)이나 LLM 기반 서비스의 흐름을 이해하고 있거나, 빠르게 배우며 실제 문제에 적용해본 분"
+   }
+  },
+  "apply_skills": {
+   "python": 2,
+   "mlops": 1,
+   "mlops_pipeline": 1,
+   "llm": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "mcp",
+    "from": "기술 블로그",
+    "url": "https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b",
+    "date": "2026-08-04",
+    "quote": "그래서 실험과 지표, 사용자 행동 이벤트를 조회·생성·수정할 수 있는 인터페이스를 MCP(Model Context Protocol) 형태로 묶었어요. 이게 Experiment MCP예요."
+   },
+   {
+    "skill_id": "ai_agent",
+    "from": "기술 블로그",
+    "url": "https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b",
+    "date": "2026-08-04",
+    "quote": "저희 데이터 가치화팀은 모든 팀이 공통으로 쓸 수 있는 기본적인 실험 구성 에이전트를 만들어 두었어요."
+   },
+   {
+    "skill_id": "data_warehouse",
+    "from": "기술 블로그",
+    "url": "https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b",
+    "date": "2026-08-04",
+    "quote": "예를 들어 experiment-followup-analysis 스킬은 Experiment MCP로 실험 정보와 결과를 조회하고, BigQuery MCP로 실험 파이프라인 테이블을 직접 쿼리해서, 파이프라인이 계산해 주는 결과 너머의 심층 후속 분석을 수행해요."
+   },
+   {
+    "skill_id": "ab_testing",
+    "from": "기술 블로그",
+    "url": "https://medium.com/daangn/%EC%8B%A4%ED%97%98%EC%9D%84-%EB%8D%94-%ED%8E%B8%ED%95%98%EA%B2%8C-%EC%84%A4%EA%B3%84%ED%95%A0-%EC%88%98-%EC%9E%88%EA%B2%8C-%EB%8B%B9%EA%B7%BC-%EC%8B%A4%ED%97%98%ED%94%8C%EB%9E%AB%ED%8F%BC-%EC%9D%B4%EC%95%BC%EA%B8%B0-3fa344b4391b",
+    "date": "2026-08-04",
+    "quote": "어떤 안이 더 나은지 A/B 테스트로 검증할 수 있도록, 실험의 설계부터 결과 분석까지 한곳에서 지원하는 사내 플랫폼이죠."
+   },
+   {
+    "skill_id": "prompt_engineering",
+    "from": "기술 블로그",
+    "url": "https://medium.com/daangn/%EB%AA%A8%EB%8D%B8%EB%A7%8C-%EB%B0%94%EA%BF%A8%EB%8A%94%EB%8D%B0-llm-%EB%B9%84%EC%9A%A9%EC%9D%B4-3%EB%B0%B0%EA%B0%80-%EB%90%9C-%EC%9D%B4%EC%9C%A0-5ae60ab5108b",
+    "date": "2026-10-21",
+    "quote": "저희는 프롬프트를 사내 LLM 플랫폼의 템플릿으로 관리하고 코드는 변수 값만 넘겨요. 그래서 플랫폼이 템플릿의 첫 변수 앞에 구분점을 찍도록 고쳤어요."
+   },
+   {
+    "skill_id": "gcp",
+    "from": "발표",
+    "url": "https://www.youtube.com/watch?v=CfAUzt0zIFM",
+    "date": "2025-09-11",
+    "quote": "당근마켓은 GCP를 왜, 어떻게 사용하고 있을까요? 인프라 관점에서 GCP를 활용해 본 당근의 이야기를 들려드려요."
+   }
+  ],
+  "domain_keywords": [
+   "LLM 라우터",
+   "모델 서빙",
+   "실험플랫폼",
+   "MCP",
+   "에이전트",
+   "GCP",
+   "지역 커뮤니티"
+  ],
+  "caveats": [
+   "블로그 두 편은 ML인프라팀이 아닌 다른 팀 글",
+   "GCP 근거는 발표 설명란 문구",
+   "Vertex AI·TFX 글은 열지 못해 사용하지 않음",
+   "경력 3년 이상(미드 레벨) 공고"
+  ]
+ }
 ]

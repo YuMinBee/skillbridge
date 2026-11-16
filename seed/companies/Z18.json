@@ -1,0 +1,88 @@
+{
+  "tenant_id": "Z18",
+  "name": "kt cloud(공개 자료 재구성)",
+  "desc": "신입 IT직군 SW개발 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "신입 IT직군 SW개발",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-09-08~09-24 (마감), 입사 1월 · 공식 공고문 이미지 판독: 기술 자격요건·우대 없음 확인. 주의: KT 본사가 아닌 자회사 kt cloud; 블로그 팀(플랫폼엔지니어링팀)은 공고의 SW개발 업무와 맞지만 배치는 입사 후 결정; 공고에 기술 요구 없음(코딩 테스트). 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {},
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "kotlin": 1,
+    "spring": 1,
+    "react": 1,
+    "postgresql": 1,
+    "argocd": 1,
+    "iac": 1
+  },
+  "sources": {
+    "kotlin": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+      "quote": "언어는 Kotlin, 프레임워크는 Spring Boot를 채택했습니다.",
+      "date": "2026-09-22"
+    },
+    "spring": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+      "quote": "Spring Data JPA, Kotlin JDSL",
+      "date": "2026-09-22"
+    },
+    "react": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+      "quote": "기술 스택은 TypeScript · React이며, UI 컴포넌트는 Antd를 사용하되 추후 사내 디자인 시스템으로 전환할 수 있도록 구성했습니다.",
+      "date": "2026-09-22"
+    },
+    "postgresql": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+      "quote": "MCP ─┼──▶ Application ──▶ PostgreSQL / Batch ─┘ (서비스 로직 코어) ──▶ Redis",
+      "date": "2026-09-22"
+    },
+    "argocd": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-devops-mcp-integration",
+      "quote": "이 글에서는 MCP를 활용해 Kubernetes·GitHub·ArgoCD·Slack 등 DevOps 시스템을 AI와 연결하고, kt cloud PLATFORM 환경에 적용하기 위한 구조와 보안 원칙을 다룹니다.",
+      "date": "2026-09-23"
+    },
+    "iac": {
+      "from": "기술 블로그",
+      "url": "https://tech.ktcloud.com/entry/2026-07-ktcloud-proxmox-pulumi-controlplane-deployment",
+      "quote": "이 글에서는 Proxmox VE와 Pulumi를 활용해 ControlPlane 가상화와 IaC 기반 운영 자동화를 구현한 과정을 다룹니다.",
+      "date": "2026-07-10"
+    }
+  },
+  "excluded": [],
+  "any_of": [],
+  "posting_text": "IT직군 SW개발 주요 수행업무: 클라우드 서비스 개발 (Cloud Native, AI, DevOps분야) / 대규모 웹 어플리케이션 및 서버 개발 / 클라우드 자동화 플랫폼 개발. 우대사항: 컴퓨터 공학, 정보통신, AI등 IT관련 전공자. 지원자격: 정규4년제 대학 졸업자 또는 졸업예정자(2026년2월). 근무지 수도권(서울/경기)",
+  "tracks": [],
+  "domain": {
+    "label": "클라우드·플랫폼 엔지니어링",
+    "keywords": [
+      "클라우드",
+      "플랫폼 엔지니어링",
+      "GitOps",
+      "DevOps",
+      "자동화"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "kt cloud IT직군 SW개발 (블로그: 플랫폼엔지니어링팀)",
+    "caveats": [
+      "KT 본사가 아닌 자회사 kt cloud",
+      "블로그 팀(플랫폼엔지니어링팀)은 공고의 SW개발 업무와 맞지만 배치는 입사 후 결정",
+      "공고에 기술 요구 없음(코딩 테스트)"
+    ],
+    "posting_url": "https://cse.snu.ac.kr/ko/community/notice/24235"
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": true,
+  "apply_verified": true,
+  "job_family": "백엔드",
+  "level": "신입"
+}

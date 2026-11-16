@@ -67,20 +67,29 @@ def build(c, tid):
         "requirements": reqs,
         "sources": sources,
         "excluded": [],
+        "any_of": c.get("any_of", []),  # '중 하나 이상 / 또는' 요건: 지원자에게 맞춰 하나만 본다
         "posting_text": p.get("posting_text", ""),
         "tracks": [],
-        "domain": {"label": c["company"].split("(")[0] + " " + c["job_title"].split(" - ")[0][:20],
+        "domain": {"label": "·".join(c.get("domain_keywords", [])[:2]) or c["company"].split("(")[0],
                    "keywords": c.get("domain_keywords", [])[:8],
                    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"},
-        "public_source": {"org": c.get("org_or_team", ""), "caveats": c.get("caveats", []), "posting_url": p["url"]},
+        "public_source": {"org": c.get("org_or_team", c.get("team", "")), "caveats": c.get("caveats", []), "posting_url": p["url"]},
+        # 공고와 실무 근거가 같은 팀인가: same_team / same_dept 이면 목록에, 아니면 직군 통계에만 쓴다
+        "team_match": c.get("match", "company"),
+        "stats_only": c.get("match") not in (None, "same_team", "same_dept", "grad_hire") if "match" in c else c.get("stats_only", False),
+        "apply_none": not apply,
+        "apply_verified": bool(c.get("apply_verified")),  # 공식 상세 공고까지 읽고 기술 요구 없음을 확인함  # 신입 공채처럼 공고에 기술 요구가 없음 → 서류는 코딩·CS 테스트로 평가
         "_gap_only_in_blog": gap,
     }
 
 
 def main():
-    items = []
+    # 같은 회사(key)가 여러 묶음에 있으면 나중 묶음이 이긴다 (예: 같은 팀 공고로 다시 찾은 결과가 예전 짝을 대체)
+    by_key: dict[str, dict] = {}
     for f in sorted(HERE.glob("batch_*.json")):
-        items += json.load(open(f, encoding="utf-8"))
+        for c in json.load(open(f, encoding="utf-8")):
+            by_key[c["key"]] = c
+    items = list(by_key.values())
     existing = {}
     for f in (ROOT / "seed/companies").glob("*.json"):
         d = json.load(open(f, encoding="utf-8"))
@@ -98,6 +107,14 @@ def main():
         if not d["_gap_only_in_blog"]:
             print("SKIP", c["key"], "블로그에만 있는 기술이 없음"); continue
         gap = d.pop("_gap_only_in_blog")
+        old = ROOT / f"seed/companies/{tid}.json"
+        if old.exists():  # 직군은 사람이 정한 값이라 다시 만들어도 유지
+            prev = json.load(open(old, encoding="utf-8"))
+            d["job_family"] = c.get("job_family") or prev.get("job_family", "")
+            d["level"] = c.get("level") or prev.get("level", "미상")  # 새 조사가 연차를 주면 그걸 쓴다
+        else:  # 새로 들어오는 회사: 직군·연차는 조사 결과를 저장할 때 붙여 둔다
+            d["job_family"] = c.get("job_family", "백엔드")
+            d["level"] = c.get("level", "미상")
         if "--write" in sys.argv:
             json.dump(d, open(ROOT / f"seed/companies/{tid}.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
         out.append((tid, c["key"], len(d["apply_requirements"]), len(d["requirements"]), gap))

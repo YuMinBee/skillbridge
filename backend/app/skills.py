@@ -12,6 +12,8 @@ from functools import lru_cache
 from .config import SKILLS_CSV
 
 _ASCII_ALNUM = re.compile(r"[A-Za-z0-9]")
+# 대소문자로만 다른 이름이 있는 별칭: 'React'(프론트엔드) ≠ 'ReAct'(에이전트 기법)
+_CASE_SENSITIVE = {"React"}
 
 
 def _is_ascii(s: str) -> bool:
@@ -38,7 +40,7 @@ class SkillDict:
             post = r"(?![A-Za-z0-9])" if _ASCII_ALNUM.match(name[-1]) else ""
             if len(name) == 1:  # 'R'이 'R&D'에 걸리지 않게
                 post = r"(?![A-Za-z0-9&])"
-            flags = 0 if (_is_ascii(name) and len(name) <= 3) else re.IGNORECASE
+            flags = 0 if (_is_ascii(name) and len(name) <= 3) or name in _CASE_SENSITIVE else re.IGNORECASE
             self._patterns.append((re.compile(pre + re.escape(name) + post, flags), sid))
 
     def name(self, sid: str) -> str:

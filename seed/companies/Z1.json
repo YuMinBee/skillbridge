@@ -78,10 +78,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "[모집분야]\nIT/OT엔지니어링: 전기설계, 통신설계, SW개발\nAI: AI Operator, 최적화, Vision AI, 자율주행 (석사 이상만 지원 가능)\n※ 근무지: 포항/광양(IT/OT엔지니어링), 포항/판교(AI)\n[지원자격]\n학사 학력 이상 보유자\n어학: 토익스피킹 IM3(130점) 또는 OPIc(영어) IM1 이상\n[우대사항]\n생성형 AI 도구를 활용하여 생산성을 높이거나 더 나은 결과물을 만들어 본 경험이 있는 분",
   "tracks": [],
   "domain": {
-    "label": "포스코DX 신입 IT/OT엔지니어링·AI (포항",
+    "label": "철강·플랜트",
     "keywords": [
       "철강",
       "플랜트",
@@ -100,5 +101,11 @@
       "공고(신입 공채)와 글(AX융합연구소)은 팀이 다름"
     ],
     "posting_url": "https://linkareer.com/activity/347063"
-  }
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "신입"
 }

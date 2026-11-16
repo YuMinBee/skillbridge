@@ -1,0 +1,627 @@
+[
+ {
+  "key": "zigbang",
+  "company": "직방",
+  "org_or_team": "호갱노노 BE팀",
+  "job_title": "[호갱노노] Backend 개발자",
+  "region": "수도권",
+  "level": "시니어",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/318850",
+   "date_or_status": "2025-12 (마감), 8년차 이상",
+   "requirements_quotes": [
+    "AWS 등 클라우드 서비스에 대한 이해 및 활용 경험이 있으신 분",
+    "테스트 자동화 및 빌드 자동화 설계·운영 경험이 있으신 분",
+    "비동기 협업 툴(Jira, Slack 등)을 활용해 명확하게 커뮤니케이션할 수 있는 분"
+   ],
+   "preferred_quotes": [
+    "Node.js / TypeScript / JavaScript",
+    "EC2 / ECS / Fargate / Lambda",
+    "RDS / ElastiCache / ElasticSearch / S3 / SQS",
+    "Azure DevOps / Jenkins"
+   ],
+   "posting_text": "호갱노노 BE팀에서 신뢰할 수 있는 아파트 정보를 더욱 편리하게 제공할 백엔드 개발자를 찾습니다. AWS 클라우드 환경에서 안정적이고 확장성 있는 백엔드 서비스 설계 및 개발 / Node.js 기반의 서비스 백엔드 API 설계, 개발, 성능 최적화 / CI/CD 파이프라인 및 데이터 플로우 자동화 구축"
+  },
+  "apply_skills": {
+   "aws": 2,
+   "cicd": 2,
+   "jira": 2,
+   "nodejs": 1,
+   "typescript": 1,
+   "javascript": 1,
+   "aws_ec2": 1,
+   "aws_ecs": 1,
+   "aws_lambda": 1,
+   "aws_rds": 1,
+   "aws_s3": 1,
+   "redis": 1,
+   "elk": 1,
+   "jenkins": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "query_tuning",
+    "from": "기술 블로그",
+    "url": "https://medium.com/zigbang/mysql-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%ED%8A%9C%EB%8B%9D-18e183e9246d",
+    "date": "2023-12-18",
+    "quote": "이번 글에서는 인덱스 성능이 안 나오는 몇몇 사례를 중심으로 SQL의 비효율을 제거하는 과정을 (특히 인덱스 중심으로) 정리해 보도록 하겠습니다."
+   },
+   {
+    "skill_id": "sql",
+    "from": "기술 블로그",
+    "url": "https://medium.com/zigbang/mysql-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%ED%8A%9C%EB%8B%9D-18e183e9246d",
+    "date": "2023-12-18",
+    "quote": "백엔드 개발 업무를 하다보면 데이터베이스에 쿼리하는 일이 잦은데요. 그러다보면 종종 성능을 고려한 SQL을 작성해야하는 고민에 마주하게 됩니다."
+   },
+   {
+    "skill_id": "mysql",
+    "from": "기술 블로그",
+    "url": "https://medium.com/zigbang/mysql-%EC%9D%B8%EB%8D%B1%EC%8A%A4-%ED%8A%9C%EB%8B%9D-18e183e9246d",
+    "date": "2023-12-18",
+    "quote": "스캔량이 인덱스 손익 분기점을 지나면, 테이블 풀스캔보다 인덱스 스캔에서 논리IO 가 더 많이 발생함"
+   }
+  ],
+  "domain_keywords": [
+   "부동산",
+   "아파트",
+   "호갱노노",
+   "프롭테크",
+   "공공 데이터"
+  ],
+  "caveats": [
+   "같은 팀 확인(공고·블로그 모두 '호갱노노 BE팀')",
+   "8년차 이상 시니어 공고",
+   "블로그 2023-12"
+  ]
+ },
+ {
+  "key": "channeltalk",
+  "company": "채널톡(채널코퍼레이션)",
+  "org_or_team": "CRM 마케팅 백엔드",
+  "job_title": "Software Engineer (Backend - CRM)",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/322740",
+   "date_or_status": "2025-11 (마감)",
+   "requirements_quotes": [
+    "문제 해결을 위해 Trade-off를 명확히 이해하고, 당면한 과제에 최적의 도구를 선택할 수 있는 분"
+   ],
+   "preferred_quotes": [
+    "클라우드(GCP, AWS 등) 환경에서의 운영 경험이 있으신 분",
+    "데이터 파이프라인 구축/운영을 실제로 경험했거나 높은 이해도가 있으신 분"
+   ],
+   "posting_text": "채널톡의 새로운 성장 엔진, CRM 마케팅의 표준을 만들 분을 찾습니다. • 비즈니스 목표 달성을 위해 주도적으로 CRM 마케팅 툴을 기획하고 개발합니다. • 고객에게 온사이트/오프사이트 광고가 전달되는 전 과정을 책임집니다. • 한 번에 수백만 건의 메시지를 안정적으로 처리할 수 있도록 확장 가능한(scalable) 구조를 설계하고 고민합니다."
+  },
+  "apply_skills": {
+   "aws": 1,
+   "gcp": 1,
+   "data_pipeline": 1
+  },
+  "any_of": [
+   [
+    "aws",
+    "gcp"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "postgresql",
+    "from": "기술 블로그",
+    "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+    "date": "2026-02-04",
+    "quote": "기본적으로 RDBMS(pSQL), NoSQL(DynamoDB) 등에 저장할 수 있지만, 검색을 위해 OpenSearch를 이용하거나 더 빠른 캐싱을 위해 Redis를 이용하기도 합니다."
+   },
+   {
+    "skill_id": "aws_dynamodb",
+    "from": "기술 블로그",
+    "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+    "date": "2026-02-04",
+    "quote": "기본적으로 RDBMS(pSQL), NoSQL(DynamoDB) 등에 저장할 수 있지만"
+   },
+   {
+    "skill_id": "redis",
+    "from": "기술 블로그",
+    "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+    "date": "2026-02-04",
+    "quote": "더 빠른 캐싱을 위해 Redis를 이용하기도 합니다."
+   },
+   {
+    "skill_id": "data_warehouse",
+    "from": "기술 블로그",
+    "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+    "date": "2026-02-04",
+    "quote": "오늘 이 글에서는 고객 행동 데이터를 보다 정교하게 지원하기 위해 Clickhouse를 도입하게 된 과정을 적어봅니다."
+   },
+   {
+    "skill_id": "data_modeling",
+    "from": "기술 블로그",
+    "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+    "date": "2026-02-04",
+    "quote": "위에서 언급했듯이 이러한 복잡한 대규모 Fact Table에 대한 JOIN은 Starrocks와 같은 시스템이 더욱 잘 지원합니다."
+   }
+  ],
+  "domain_keywords": [
+   "CRM",
+   "마케팅",
+   "광고",
+   "고객 데이터",
+   "B2B SaaS"
+  ],
+  "caveats": [
+   "같은 팀(CRM 마케팅) — 블로그는 팀명 대신 'CRM 마케팅'과 '저희 팀'으로 연결",
+   "신입 공고, 자격요건에 기술 스택 없음"
+  ]
+ },
+ {
+  "key": "devsisters",
+  "company": "데브시스터즈",
+  "org_or_team": "기술본부 데이터엔지니어링셀",
+  "job_title": "Data Platform Software Engineer",
+  "region": "수도권",
+  "level": "경력",
+  "job_family": "데이터 엔지니어·분석",
+  "match": "same_team",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/262459",
+   "date_or_status": "2025-05 (마감), 3년 이상",
+   "requirements_quotes": [
+    "1개 이상의 프로그래밍 언어를 능숙하게 활용할 수 있는 프로그래밍 역량을 보유한 분 (데이터 처리, 요구사항에 맞는 올바른 로직 구현, 효율적인 아키텍처 설계 등)"
+   ],
+   "preferred_quotes": [
+    "데이터 수집/처리/분석: Kafka/Kafka Streams, Spark, Delta Lake, Databricks, AWS(S3, Glue 등), Elastic Stack",
+    "인프라: AWS, Kubernetes, Terraform, Docker, Datadog",
+    "주 언어: Python, Scala, Go"
+   ],
+   "posting_text": "[데이터엔지니어링 셀]은 데브시스터즈의 Data-Driven 문화를 만들기 위한 엔지니어링을 이끄는 팀입니다. • 다양한 게임의 출시와 운영에 맞출 수 있도록, 높은 확장성을 가지는 데이터 플랫폼을 목표로 하고 있습니다. • 최근 5년간 99.999% 이상의 높은 가용률을 유지하고 있는 Kafka 클러스터 운영을 통해 유지되는 신뢰를 기반으로, 중앙화된 로깅 인프라 서비스를 운영합니다."
+  },
+  "apply_skills": {
+   "data_pipeline": 2,
+   "kafka": 1,
+   "spark": 1,
+   "aws_s3": 1,
+   "aws_glue": 1,
+   "elk": 1,
+   "kubernetes": 1,
+   "terraform": 1,
+   "docker": 1,
+   "datadog": 1,
+   "python": 1,
+   "scala": 1,
+   "golang": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_ec2",
+    "from": "기술 블로그",
+    "url": "https://tech.devsisters.com/posts/kafka-streams-keda-scaling/",
+    "date": "2026-09-03",
+    "quote": "AWS EC2 기반으로 운영되던 Log Transformer(Kafka Streams 애플리케이션)를 Kubernetes(이하 k8s)로 마이그레이션하면서"
+   },
+   {
+    "skill_id": "rust",
+    "from": "기술 블로그",
+    "url": "https://tech.devsisters.com/posts/kafka-streams-keda-scaling/",
+    "date": "2026-09-03",
+    "quote": "Scala로 작성된 Log Transformer를 대체할 확장된 역할의 컴포넌트를 Rust로 작성하는 작업도 진행 중입니다."
+   },
+   {
+    "skill_id": "prometheus",
+    "from": "기술 블로그",
+    "url": "https://tech.devsisters.com/posts/kafka-streams-keda-scaling/",
+    "date": "2026-09-03",
+    "quote": "KEDA는 Kafka 외에도 RabbitMQ, AWS SQS, Prometheus metrics 등 다양한 이벤트 소스에 대한 scaler를 제공합니다."
+   },
+   {
+    "skill_id": "kafka",
+    "from": "기술 블로그",
+    "url": "https://tech.devsisters.com/posts/kafka-streams-keda-scaling/",
+    "date": "2026-09-03",
+    "quote": "KEDA의 Kafka scaler는 consumer group의 lag을 직접 조회해 그 값을 기준으로 스케일링합니다."
+   }
+  ],
+  "domain_keywords": [
+   "게임",
+   "로그",
+   "데이터 플랫폼",
+   "쿠키런",
+   "레이크하우스"
+  ],
+  "caveats": [
+   "같은 팀 확인(공고·블로그 모두 '데이터엔지니어링셀')",
+   "경력 3년 이상"
+  ]
+ },
+ {
+  "key": "gangnamunni",
+  "company": "강남언니(힐링페이퍼)",
+  "org_or_team": "검색 플랫폼 팀",
+  "job_title": "검색 플랫폼 개발자",
+  "region": "수도권",
+  "level": "경력",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/197712",
+   "date_or_status": "2024-02 (마감), 3년 이상",
+   "requirements_quotes": [
+    "AWS 또는 Kubernetes 환경에서 개발, 운영 경험이 있으신 분",
+    "Lucene, Solr, Elasticsearch, OpenSearch 등 검색엔진 경험이 있으신 분",
+    "형태소 분석 / 자연어 처리 개발 경험이 있으신 분",
+    "대용량 데이터 분산처리 및 파이프라이닝 경험이나 지식이 있으신 분"
+   ],
+   "preferred_quotes": [
+    "머신러닝/딥러닝에 대한 이해 및 구현 경험",
+    "커뮤니케이션이 원활하고 팀웍을 중요하게 생각하시는 분"
+   ],
+   "posting_text": "- Elasticsearch 기반의 검색 서비스 개발 및 운영 - 검색 결과 평가 모델 개발 및 성능 최적화 - 검색을 위한 데이터 파이프라인 구성, 수집 및 가공 / 색인 개발 및 운영 - 자동 완성, 인기 검색어, 연관 검색어 등 검색 연관 기능 개발"
+  },
+  "apply_skills": {
+   "elk": 2,
+   "aws": 2,
+   "kubernetes": 2,
+   "nlp": 2,
+   "data_pipeline": 2,
+   "machine_learning": 1
+  },
+  "any_of": [
+   [
+    "aws",
+    "kubernetes"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "terraform",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."
+   },
+   {
+    "skill_id": "aws_ec2",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."
+   },
+   {
+    "skill_id": "github_actions",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform과 GitHub Actions를 활용하여 클러스터 구축 과정을 코드로 관리합니다."
+   },
+   {
+    "skill_id": "iac",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform과 GitHub Actions를 활용하여 클러스터 구축 과정을 코드로 관리합니다."
+   }
+  ],
+  "domain_keywords": [
+   "의료",
+   "미용",
+   "검색",
+   "형태소 분석",
+   "색인"
+  ],
+  "caveats": [
+   "같은 팀 확인(공고·블로그 모두 '검색 플랫폼')",
+   "경력 3년 이상, 공고 2024-02"
+  ]
+ },
+ {
+  "key": "kakaostyle",
+  "company": "카카오스타일(지그재그)",
+  "org_or_team": "지그재그서비스BE팀 (전시 시스템)",
+  "job_title": "백엔드 개발자 (전시 시스템)",
+  "region": "수도권",
+  "level": "경력",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/330801",
+   "date_or_status": "마감, 3~6년",
+   "requirements_quotes": [
+    "Kotlin 또는 Java 기반의 서비스 개발 경험이 3년 이상이신 분",
+    "MSA(Microservice Architecture)에 대한 이해도와 실무 적용 경험이 있으신 분",
+    "급격하게 변화하는 AI 트렌드에 관심이 많고, 전통적인 개발/운영 방식에서 벗어나 AI 기반의 새로운 방법을 모색하시는 분"
+   ],
+   "preferred_quotes": [
+    "AWS 기반 인프라 환경에서의 설계 및 운영 경험이 있으신 분",
+    "이커머스 플랫폼이나 상품, 전시, 추천 관련 도메인에 대해 이해도가 있으신 분"
+   ],
+   "posting_text": "이를 위해 지그재그서비스BE팀은 다양한 상품과 기획전, 그리고 맞춤형 추천 콘텐츠가 각 유저들에게 정확하고 빠르게 보여지도록 모든 전시 시스템을 책임지고 있어요. • 지그재그 서비스 내 유저가 직접 마주하는 전시 영역(홈, PLP, 북마크, 찜, 랭킹 등)의 로직에 맞춤형 콘텐츠가 정확하고 빠르게 노출될 수 있도록 설계하고 운영해요."
+  },
+  "apply_skills": {
+   "kotlin": 2,
+   "java": 2,
+   "msa": 2,
+   "gen_ai_use": 2,
+   "aws": 1,
+   "recommender": 1
+  },
+  "any_of": [
+   [
+    "kotlin",
+    "java"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "spring",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2025-03-21-1-domain-driven-hexagonal-architecture-by-example/",
+    "date": "2025-03-21",
+    "quote": "테스트 속도를 저하시키는 @SpringBootTest 를 사용하게 되는 것도 JPA Repository 사용을 위해 JPA 설정을 로드하고 Repository 를 정상 주입하기 위해서입니다."
+   },
+   {
+    "skill_id": "graphql",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2023-11-02-1-null-pointer-exception/",
+    "date": "2023-11-02",
+    "quote": "카카오스타일에서는 GraphQL을 사용하고 있기 때문에 다른 서비스에 요청한 값은 스키마에 따라 반환된다는 것이 보장됩니다."
+   }
+  ],
+  "domain_keywords": [
+   "패션",
+   "커머스",
+   "전시",
+   "추천",
+   "MSA"
+  ],
+  "caveats": [
+   "팀 이름이 조금 다름(블로그 '지그재그 서비스팀·전시BE파트', 공고 '지그재그서비스BE팀')",
+   "GraphQL 글은 전시 UX팀"
+  ]
+ },
+ {
+  "key": "kakaomobility",
+  "company": "카카오모빌리티",
+  "org_or_team": "카카오내비 백엔드",
+  "job_title": "백엔드 개발자 (내비 서비스)",
+  "region": "수도권",
+  "level": "경력",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+   "date_or_status": "2026-09 무렵 (마감), 3년 이상",
+   "requirements_quotes": [
+    "Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분",
+    "RDBMS, NoSQL 스키마 설계 및 활용 경험이 있으신 분",
+    "Docker와 Kubernetes에 대한 개념과 클라우드 인프라에 대한 경험이 있으신 분"
+   ],
+   "preferred_quotes": [
+    "팀워크를 중시하고, 원활한 커뮤니케이션이 가능하신 분"
+   ],
+   "posting_text": "[담당업무] · 카카오내비 서비스의 백엔드 서버 개발, 운영 및 유지보수 · 카카오내비 서비스를 위한 API 설계 및 개발 · 카카오내비 서비스의 성능/기능 개선 및 최적화 [자격요건] - 백엔드 서버 개발 경력 만 3년 이상이신 분 - Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분 - RDBMS, NoSQL 스키마 설계 및 활용 경험이 있으신 분 - Docker와 Kubernetes에 대한 개념과 클라우드 인프라에 대한 경험이 있으신 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "spring": 2,
+   "rest_api": 2,
+   "nosql": 2,
+   "data_modeling": 2,
+   "docker": 2,
+   "kubernetes": 2,
+   "cloud_architecture": 2,
+   "communication": 1
+  },
+  "any_of": [
+   [
+    "java",
+    "kotlin"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "prometheus",
+    "from": "기술 블로그",
+    "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
+    "date": "2025-04-21",
+    "quote": "이러한 모니터링 데이터를 효과적으로 수집, 분석하기 위해 저희는 다양한 내부 시스템과 Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다."
+   },
+   {
+    "skill_id": "grafana",
+    "from": "기술 블로그",
+    "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
+    "date": "2025-04-21",
+    "quote": "Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다."
+   },
+   {
+    "skill_id": "elk",
+    "from": "기술 블로그",
+    "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
+    "date": "2025-04-21",
+    "quote": "Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다."
+   },
+   {
+    "skill_id": "observability",
+    "from": "기술 블로그",
+    "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
+    "date": "2025-04-21",
+    "quote": "시스템 이상 징후나 성능 저하, 특히 예상치 못한 애플리케이션 오류를 Sentry와 같은 도구를 통해 실시간으로 감지하고, Slack이나 카카오톡으로 알림을 받아 장애 발생 초기에 즉각적으로 대응할 수 있습니다."
+   }
+  ],
+  "domain_keywords": [
+   "모빌리티",
+   "내비",
+   "길 안내",
+   "트래픽",
+   "GIS"
+  ],
+  "caveats": [
+   "같은 서비스 백엔드(카카오내비 백엔드 서버) — 정식 팀명은 양쪽 모두 없음",
+   "경력 3년 이상"
+  ]
+ },
+ {
+  "key": "myrealtrip",
+  "company": "마이리얼트립",
+  "org_or_team": "AICX AICC실 (자회사)",
+  "job_title": "AICX Product Engineer 인턴 (채용 연계형)",
+  "region": "수도권",
+  "level": "인턴",
+  "job_family": "AI·ML 엔지니어",
+  "match": "same_dept",
+  "posting": {
+   "url": "https://inthiswork.com/?p=397063",
+   "date_or_status": "2026-09-30 마감",
+   "requirements_quotes": [
+    "Python, JavaScript 등으로 API나 웹 서비스를 만들어본 경험이 있는 분",
+    "다양한 AI 도구를 이미 일상적으로 활용하고 있고, 이것으로 무엇을 만들 수 있을지 궁금해하는 분"
+   ],
+   "preferred_quotes": [
+    "LLM, RAG, AI Agent를 활용해 무언가 만들어본 경험",
+    "Git 기반 협업, 코드 리뷰 경험",
+    "SQL로 데이터를 직접 확인해본 경험"
+   ],
+   "posting_text": "AICC실은 Chat AI, Voice AI, PMO팀으로 구성되어 있습니다. RAG, AI 에이전트 기반 챗봇, 전화망 위에서 실시간으로 대화하는 콜봇, 티켓 시스템까지 옴니채널 풀 라인업을 자체 개발하고 있습니다. LLM, RAG, tool calling을 활용해 챗봇, 콜봇의 기능을 직접 개발합니다. 상담 이력, 해결률, 이관율 같은 데이터를 SQL로 직접 확인하며, 만든 기능의 효과를 검증하고 개선합니다."
+  },
+  "apply_skills": {
+   "python": 2,
+   "javascript": 2,
+   "rest_api": 2,
+   "gen_ai_use": 2,
+   "llm": 1,
+   "rag": 1,
+   "ai_agent": 1,
+   "git": 1,
+   "sql": 1
+  },
+  "any_of": [
+   [
+    "python",
+    "javascript"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "data_analysis",
+    "from": "기술 블로그",
+    "url": "https://medium.com/myrealtrip-product/%EC%9B%94-7%EB%A7%8C-5%EC%B2%9C-%EA%B1%B4-cs-%EB%A7%88%EC%9D%B4%EB%A6%AC%EC%96%BC%ED%8A%B8%EB%A6%BD%EC%9D%B4-%ED%92%80%EC%96%B4%EB%82%B8-%EC%9A%B4%EC%98%81-%EC%9E%90%EB%8F%99%ED%99%94-aicx%EC%9D%98-%EC%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D-9c338156436c",
+    "date": "2026-05-07",
+    "quote": "자동화 후보는 한 달 치 문의 로그를 유형별로 분해해서 골랐습니다."
+   },
+   {
+    "skill_id": "ai_agent",
+    "from": "기술 블로그",
+    "url": "https://medium.com/myrealtrip-product/%EC%9B%94-7%EB%A7%8C-5%EC%B2%9C-%EA%B1%B4-cs-%EB%A7%88%EC%9D%B4%EB%A6%AC%EC%96%BC%ED%8A%B8%EB%A6%BD%EC%9D%B4-%ED%92%80%EC%96%B4%EB%82%B8-%EC%9A%B4%EC%98%81-%EC%9E%90%EB%8F%99%ED%99%94-aicx%EC%9D%98-%EC%9D%BC%ED%95%98%EB%8A%94-%EB%B0%A9%EC%8B%9D-9c338156436c",
+    "date": "2026-05-07",
+    "quote": "그래서 시작점은 “AI 챗봇을 붙인다”가 아니라 “이미 쓰던 환경을 그대로 두고, 그 위에 AI Agent를 얹는다”였습니다."
+   }
+  ],
+  "domain_keywords": [
+   "여행",
+   "CS 자동화",
+   "챗봇",
+   "콜봇",
+   "AICC"
+  ],
+  "caveats": [
+   "같은 부서 수준(AICX — 블로그는 CTO 발표 정리, AICC실 명시 없음)",
+   "채용연계형 인턴"
+  ]
+ },
+ {
+  "key": "socar",
+  "company": "쏘카",
+  "org_or_team": "AI엔지니어링팀 (블로그: 데이터비즈니스본부 AI팀 컴퓨터비전 엔지니어)",
+  "job_title": "AI Engineer",
+  "region": "수도권",
+  "level": "시니어",
+  "job_family": "AI·ML 엔지니어",
+  "match": "same_dept",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/279193",
+   "date_or_status": "수시 채용 (마감), 학사 7년/석사 5년 이상",
+   "requirements_quotes": [
+    "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP",
+    "(LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분",
+    "Pytorch와 같은 트레이닝 프레임워크에 능숙하신 분",
+    "Python / C언어 및 Github 개발 환경에 익숙하신 분"
+   ],
+   "preferred_quotes": [
+    "MLOps (데이터 수집-＞ 가공-＞ 학습 -＞ 평가 -＞ 배포 지원 시스템) 개발 경험이 있으신 분",
+    "AWS 혹은 GCP등 클라우드 플랫폼 사용 경험이 있으신분",
+    "모델 경량화 및 Edge device 배포 경험이 있으신 분"
+   ],
+   "posting_text": "카셰어링 혁신을 위한 Computer Vision 및 LLM 솔루션 개발 및 적용 / 차량 관리 자동화 (파손탐지, 세차검증 등)를 위한 Computer Vision 모델 개발 / VLM/LLM을 활용한 Agentic AI 개발 / Agent 개발 및 배포 표준화를 위한 MLOps 시스템 개발"
+  },
+  "apply_skills": {
+   "computer_vision": 2,
+   "nlp": 2,
+   "llm": 2,
+   "fine_tuning": 2,
+   "rag": 2,
+   "prompt_engineering": 2,
+   "pytorch": 2,
+   "python": 2,
+   "c_lang": 2,
+   "git": 2,
+   "mlops": 1,
+   "aws": 1,
+   "gcp": 1,
+   "edge_ai": 1
+  },
+  "any_of": [
+   [
+    "computer_vision",
+    "nlp"
+   ],
+   [
+    "aws",
+    "gcp"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "deep_learning",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+    "date": "2022-04-18",
+    "quote": "세차 여부를 분류해 주는 모델을 만들고, 분류가 애매한 이미지들을 매니저의 검토가 필요하도록 별도로 Isolate(격리)해주는 모델을 설계했습니다."
+   },
+   {
+    "skill_id": "data_labeling",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+    "date": "2022-04-18",
+    "quote": "분류 레이블은 크게 \"인증 성공\"과 \"인증 보류\" 2개로 나뉘고 구체적으로는 아래처럼 4개로 나뉩니다."
+   },
+   {
+    "skill_id": "data_analysis",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+    "date": "2022-04-18",
+    "quote": "저희 데이터 모델링 팀에서는 2020-2021, 약 2년간 적재된 고객 수행 세차 건 이미지 데이터를 분석하여 세차 여부를 검토하는 4개의 패턴을 발견할 수 있었습니다."
+   },
+   {
+    "skill_id": "machine_learning",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+    "date": "2022-04-18",
+    "quote": "첫 번째 접근은 기본적인 Supervised Classifier 모델이었고, 두 번째 접근은 Image Retrieval 활용하는 방식이었습니다."
+   }
+  ],
+  "domain_keywords": [
+   "카셰어링",
+   "차량",
+   "세차 검증",
+   "파손 탐지",
+   "컴퓨터비전"
+  ],
+  "caveats": [
+   "같은 직무(컴퓨터비전) · 팀은 개편 전후 이름 차이(2022 'AI팀' / 공고 'AI엔지니어링팀')",
+   "블로그 2022, 시니어 공고"
+  ]
+ }
+]

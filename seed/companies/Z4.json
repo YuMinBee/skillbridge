@@ -57,10 +57,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "여러 액션 (실험, 사업 전략, 프로모션 등)의 효과성을 데이터로 검증하고, 도출한 인사이트를 실행 가능한 태스크로 구체화해요.\n자격요건\n데이터 정제, 문제 정의, 인사이트 도출 및 액션 아이템 제시까지 데이터 분석의 전반을 경험한 분을 찾아요.\nSQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.\n우대사항\n실험 설계 (A/B 테스트 등)과 지표에 대한 고민이 깊고, 의사결정 시스템을 설계 및 고도화해본 분이면 더 좋아요.",
   "tracks": [],
   "domain": {
-    "label": "에이블리 데이터 분석가",
+    "label": "패션·커머스",
     "keywords": [
       "패션",
       "커머스",
@@ -78,5 +79,11 @@
       "에이전트 근거는 글 제목뿐이라 llm만 사용"
     ],
     "posting_url": "https://www.wanted.co.kr/wd/262250"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "데이터 엔지니어·분석",
+  "level": "미상"
 }

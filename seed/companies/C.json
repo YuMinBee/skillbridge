@@ -1,5 +1,8 @@
 {
   "tenant_id": "C",
+  "level": "예시",
+  "job_family": "AI·ML 엔지니어",
+  "listed": false,
   "name": "한빛AI랩(가상)",
   "desc": "LLM 서비스 스타트업",
   "region": "수도권",

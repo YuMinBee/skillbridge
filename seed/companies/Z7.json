@@ -99,10 +99,21 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "python",
+      "java",
+      "scala"
+    ],
+    [
+      "aws",
+      "gcp"
+    ]
+  ],
   "posting_text": "Design distributed, high-volume ETL data pipelines that power Sendbird analytics and products\nRequirements\n5+ years of work experience in data engineering and/or building ETL pipelines in production\nWork experience in AWS and/or GCP data pipeline ecosystem\nFluency in several programming languages such as Python, Java, or Scala\nStrong analytic skills related to data models and conducting SQL",
   "tracks": [],
   "domain": {
-    "label": "센드버드 Data Platform Engine",
+    "label": "채팅 API·SaaS",
     "keywords": [
       "채팅 API",
       "SaaS",
@@ -121,5 +132,11 @@
       "경력 5년 이상"
     ],
     "posting_url": "https://www.wanted.co.kr/wd/137065"
-  }
+  },
+  "team_match": "none",
+  "stats_only": true,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "데이터 엔지니어·분석",
+  "level": "시니어"
 }

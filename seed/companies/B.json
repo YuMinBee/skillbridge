@@ -1,5 +1,8 @@
 {
   "tenant_id": "B",
+  "level": "예시",
+  "job_family": "클라우드·인프라·운영",
+  "listed": false,
   "name": "에이원클라우드(가상)",
   "desc": "MSP · 클라우드 운영",
   "region": "대경권",

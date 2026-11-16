@@ -1,5 +1,7 @@
 {
   "tenant_id": "D",
+  "level": "미상",
+  "job_family": "AI·ML 엔지니어",
   "name": "토스증권 ML(공개 자료 재구성)",
   "desc": "증권 · LLM/NLP 엔지니어 · 실제 공개 자료",
   "region": "수도권",

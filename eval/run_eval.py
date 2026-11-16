@@ -19,11 +19,15 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EV = ROOT / "eval"
-PRED = EV / "predictions"
+PRED = EV / "predictions"  # 모델 비교 실행이면 아래에서 predictions_<tag>/로 바뀐다
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--live", action="store_true", help="Bedrock 단계를 실제로 호출 (aws sso login 필요)")
+ap.add_argument("--model", default="", help="추출 모델을 바꿔 비교할 때 (예: Haiku 모델 ID). 결과는 predictions_<tag>/에 따로 저장")
+ap.add_argument("--tag", default="", help="모델 비교용 저장 폴더 이름 (predictions_<tag>/, report_<tag>.md)")
 ARGS = ap.parse_args()
+if ARGS.model:
+    os.environ["MODEL_ID"] = ARGS.model  # config가 읽기 전에 덮는다 (.env보다 우선)
 os.environ["BEDROCK_MOCK"] = "0" if ARGS.live else "1"
 os.environ["DATA_MODE"] = "live"
 sys.path.insert(0, str(ROOT / "backend"))
@@ -33,6 +37,24 @@ from app.pipeline.recommend import _rank, build_path  # noqa: E402
 from app.pipeline.score import STATUS_VALUE, readiness  # noqa: E402
 from app.data import courses  # noqa: E402
 from app.skills import get_dict  # noqa: E402
+from app.adapters import bedrock  # noqa: E402
+
+if ARGS.tag:
+    PRED = EV / f"predictions_{ARGS.tag}"
+
+# 모델 비교: 모든 Bedrock 호출의 토큰·시간을 모은다 (호출부가 log를 안 넘겨도 잡히게)
+USAGE = bedrock.CallLog()
+_orig_converse = bedrock.converse_tool
+
+
+def _logged_converse(*a, log=None, **k):
+    out = _orig_converse(*a, log=log or USAGE, **k)
+    if log is not None and log is not USAGE:  # 호출부 log에도 남고, 합계에도 남게
+        USAGE.calls.append(log.calls[-1])
+    return out
+
+
+bedrock.converse_tool = _logged_converse
 
 
 def jl(name):
@@ -85,12 +107,15 @@ def cached(stage: str, items: list[dict], fn):
     path = PRED / f"{stage}.json"
     if not ARGS.live:
         return json.loads(path.read_text(encoding="utf-8")) if path.exists() else None
-    out, t0 = {}, time.time()
+    out, t0, n0 = {}, time.time(), len(USAGE.calls)
     for it in items:
         out[it["id"]] = fn(it)
+    calls = USAGE.calls[n0:]
     PRED.mkdir(exist_ok=True)
     path.write_text(json.dumps({"_meta": {"at": time.strftime("%Y-%m-%d %H:%M"), "sec": round(time.time() - t0, 1),
-                                          "model": os.getenv("MODEL_ID", "")}, **out}, ensure_ascii=False, indent=1),
+                                          "model": os.getenv("MODEL_ID", ""), "items": len(items),
+                                          "calls": len(calls), "tokens_in": sum(c["in"] for c in calls),
+                                          "tokens_out": sum(c["out"] for c in calls)}, **out}, ensure_ascii=False, indent=1),
                     encoding="utf-8")
     return out
 
@@ -405,8 +430,12 @@ def main():
     R = {"at": time.strftime("%Y-%m-%d %H:%M"), "live": ARGS.live,
          "postings": eval_postings(), "gaps": eval_gaps(), "courses": eval_courses(),
          "baseline": eval_baseline(), "agreement": eval_agreement()}
-    (EV / "results.json").write_text(json.dumps(R, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
-    (EV / "report.md").write_text(report(R), encoding="utf-8")
+    sfx = f"_{ARGS.tag}" if ARGS.tag else ""  # 모델 비교 실행은 원래 보고서를 덮지 않는다
+    R["model"] = os.getenv("MODEL_ID", "")
+    R["usage"] = {"calls": len(USAGE.calls), "tokens_in": sum(c["in"] for c in USAGE.calls),
+                  "tokens_out": sum(c["out"] for c in USAGE.calls), "ms": sum(c["ms"] for c in USAGE.calls)}
+    (EV / f"results{sfx}.json").write_text(json.dumps(R, ensure_ascii=False, indent=1, default=str), encoding="utf-8")
+    (EV / f"report{sfx}.md").write_text(report(R), encoding="utf-8")
     d = next(r for r in R["postings"]["rows"] if r["stage"] == "dict")
     g = next(r for r in R["gaps"]["rows"] if r["stage"] == "dict")
     print(f"공고 추출 F1(사전) {d['f1']:.3f} · 갭 recall(사전) {g['gap_recall']:.1%} · "

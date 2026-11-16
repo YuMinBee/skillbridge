@@ -1,5 +1,5 @@
 {
- "at": "2026-11-16 11:29",
+ "at": "2026-11-16 18:56",
  "live": false,
  "postings": {
   "n": 30,
@@ -64,12 +64,12 @@
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "cert_computer"
+      "skill": "ai_general"
      },
      {
       "id": "ALIO-300068",
       "type": "FN",
-      "skill": "ai_general"
+      "skill": "cert_computer"
      },
      {
       "id": "ALIO-300068",
@@ -211,7 +211,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "english"
      },
      {
       "id": "ALIO-296280",
@@ -221,7 +221,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "english"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-302970",
@@ -236,12 +236,12 @@
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "security"
+      "skill": "networking"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "networking"
+      "skill": "security"
      },
      {
       "id": "ALIO-304449",
@@ -315,7 +315,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "english"
      },
      {
       "id": "ALIO-296280",
@@ -325,7 +325,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "english"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-295014",
@@ -365,12 +365,12 @@
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "security"
+      "skill": "networking"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "networking"
+      "skill": "security"
      },
      {
       "id": "ALIO-297629",
@@ -464,7 +464,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "data_analysis"
+      "skill": "english"
      },
      {
       "id": "ALIO-296280",
@@ -474,7 +474,7 @@
      {
       "id": "ALIO-296280",
       "type": "FN",
-      "skill": "english"
+      "skill": "data_analysis"
      },
      {
       "id": "ALIO-302970",
@@ -494,22 +494,22 @@
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "security"
+      "skill": "networking"
      },
      {
       "id": "ALIO-304425",
       "type": "FN",
-      "skill": "networking"
-     },
-     {
-      "id": "ALIO-297629",
-      "type": "FP",
-      "skill": "cert_network"
+      "skill": "security"
      },
      {
       "id": "ALIO-297629",
       "type": "FP",
       "skill": "cert_security"
+     },
+     {
+      "id": "ALIO-297629",
+      "type": "FP",
+      "skill": "cert_network"
      },
      {
       "id": "ALIO-304449",
@@ -934,11 +934,11 @@
   ],
   "top_wasted": [
    [
-    "SQL",
+    "LLM",
     10
    ],
    [
-    "LLM",
+    "SQL",
     10
    ],
    [
@@ -953,5 +953,12 @@
  },
  "agreement": {
   "available": false
+ },
+ "model": "global.anthropic.claude-sonnet-4-6",
+ "usage": {
+  "calls": 0,
+  "tokens_in": 0,
+  "tokens_out": 0,
+  "ms": 0
  }
 }

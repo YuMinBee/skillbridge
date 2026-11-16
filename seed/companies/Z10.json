@@ -85,10 +85,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "담당업무: LINE의 SNS 기능을 처리하는 Front, Backend 서버 및 스토리지 개발 (LINE 타임라인, 알림센터 등)\n자격요건\nJava 및 Spring Framework 개발이 가능하신 분\n대용량 트래픽 서비스 개발 및 설계에 경험이 있고, 운영 경험이 있으신 분 (2~10년 경험)\n우대사항\nk8s 환경에서 서비스를 개발한 경험이 있으신 분\nKotlin, GO 언어 등의 기타 언어에도 익숙하거나 또는 도입에 거부감이 없으신 분",
   "tracks": [],
   "domain": {
-    "label": "라인플러스 Social Media Platfor",
+    "label": "메신저·소셜",
     "keywords": [
       "메신저",
       "소셜",
@@ -106,5 +107,11 @@
       "블로그 2020, 공고 2021로 오래된 자료"
     ],
     "posting_url": "https://www.theteams.kr/recruit/wanted/26367"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "주니어"
 }

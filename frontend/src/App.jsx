@@ -26,7 +26,7 @@ export default function App() {
 
   useEffect(() => {
     api.meta().then(setMeta).catch(() => setErr("API 서버에 연결하지 못했습니다. 백엔드(포트 8010)가 켜져 있는지 확인하세요."));
-    api.companies().then(setCompanies).catch(() => {});
+    api.companies(true).then(setCompanies).catch(() => {});
     const onHash = () => setTab(hashTab());
     window.addEventListener("hashchange", onHash);
     return () => window.removeEventListener("hashchange", onHash);
@@ -77,7 +77,7 @@ export default function App() {
       </header>
       {err && <p className="err" style={{ marginTop: 16 }}>{err}</p>}
       <div hidden={tab !== "market"}><Market /></div>
-      <div hidden={tab !== "seeker"}><Seeker companies={companies} corpVersion={corpVersion} active={tab === "seeker"} mode={meta?.bedrock} /></div>
+      <div hidden={tab !== "seeker"}><Seeker companies={companies.filter((c) => c.listed !== false)} corpVersion={corpVersion} active={tab === "seeker"} mode={meta?.bedrock} /></div>
       <div hidden={tab !== "corp"}>
         <Corp companies={companies} corpVersion={corpVersion} active={tab === "corp"}
           onChanged={(msg) => { setCorpVersion((v) => v + 1); if (msg) notify(msg); }} />

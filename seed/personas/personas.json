@@ -2,21 +2,21 @@
   {
     "id": "p1",
     "name": "정보통신공학 4학년 (연구실 학부연구생)",
-    "default_company": "A",
+    "default_company": "Z1",
     "weekly_hours": 15,
     "resume": "[학력] OO대학교 정보통신공학과 4학년 (학부연구생)\n[연구·프로젝트]\n- 연구실에서 PyTorch로 객체 탐지 논문을 재현하는 실험을 진행함\n- 졸업작품: Python으로 영상 기반 차량 인식 프로젝트를 개발함\n- 연구실 Linux 서버 관리 업무를 담당함\n- 개인적으로 LLM과 RAG를 짧게 실습해 봄\n[인턴] 여름 인턴 중 AWS를 일부 사용함\n[교육] 데이터베이스 수업 과제로 SQL 사용\n[교육] 임베디드 실습 수업에서 C++ 사용\n[보유기술] Docker"
   },
   {
     "id": "p2",
     "name": "비전공 KDT 클라우드 과정 수료생",
-    "default_company": "B",
+    "default_company": "Y",
     "weekly_hours": 15,
     "resume": "[학력] OO대학교 국어국문학과 졸업 (비전공)\n[교육] K-디지털 트레이닝 클라우드 엔지니어 과정 수료\n- 과정 실습으로 Linux 명령어와 네트워크 이론을 수강함\n- Python 자동화 스크립트를 수업 과제로 작성함\n[프로젝트]\n- 수료 프로젝트: AWS에 웹 서비스를 배포하고 운영함\n- 팀 프로젝트: Docker로 서비스를 컨테이너화하고 SQL로 데이터 모델을 구현함\n[보유기술] Terraform"
   },
   {
     "id": "p3",
     "name": "백엔드 1년차 이직 준비",
-    "default_company": "C",
+    "default_company": "Z10",
     "weekly_hours": 8,
     "resume": "[경력] OO커머스 백엔드 개발자 1년\n- Python으로 실무 API를 개발하고 SQL 쿼리를 작성·튜닝함\n- Docker 이미지로 서비스를 배포함\n- AWS EC2와 RDS로 운영 환경을 구축함\n- 사내 PoC로 LLM과 RAG 기반 문서 검색을 짧게 시험함\n- 장애 대응 당번으로 모니터링 지표를 일부 확인함\n[교육] Kubernetes 스터디 참여"
   }

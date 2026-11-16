@@ -55,8 +55,8 @@
 
 ## 4. 2차 라벨 만드는 법
 
-1. `gold_postings.jsonl`을 `gold_postings_b.jsonl`로 복사합니다.
-2. 각 줄의 `labels`를 `{}`로 비우고 `annotator`를 본인 이름으로 바꿉니다. 1차 라벨은 보지 않습니다.
+1. 라벨을 비워 둔 `gold_postings_b.todo.jsonl`을 `gold_postings_b.jsonl`로 복사합니다. (`gold_postings.jsonl`은 열지 않습니다. 1차 라벨이 보입니다.)
+2. 각 줄의 `annotator`에 본인 이름을 적습니다.
 3. 위 규칙대로 `labels`를 채웁니다. 예: `{"office": "preferred", "excel": "preferred"}`
 4. `.\tasks.ps1 eval`을 실행하면 보고서 5절에 κ가 나옵니다. κ가 0.6 이상이면 합의 가능한 수준입니다.
 5. 두 라벨이 다른 항목은 둘이 의논해 `gold_postings.jsonl`을 고치고, 바꾼 규칙은 이 문서에 추가합니다.

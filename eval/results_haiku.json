@@ -1,0 +1,1119 @@
+{
+ "at": "2026-11-16 18:19",
+ "live": true,
+ "postings": {
+  "n": 30,
+  "n_labels": 51,
+  "labels_by": {
+   "hint": 50,
+   "random": 1
+  },
+  "n_oov": 7,
+  "rows": [
+   {
+    "stage": "dict",
+    "label": "① 별칭 사전만",
+    "available": true,
+    "p": 0.9142857142857143,
+    "r": 0.6274509803921569,
+    "f1": 0.7441860465116279,
+    "tp": 32,
+    "fp": 3,
+    "fn": 19,
+    "req_acc": 0.90625,
+    "f1_hint": 0.7469879518072288,
+    "f1_random": 0.6666666666666666,
+    "clean_fp": 1,
+    "n_clean": 9,
+    "errors": [
+     {
+      "id": "ALIO-305787",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-301495",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-293827",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "cert_computer"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-304482",
+      "type": "FP",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-296639",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-295014",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-301603",
+      "type": "FN",
+      "skill": "cert_data"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
+     },
+     {
+      "id": "ALIO-303972",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_network"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-303957",
+      "type": "FP",
+      "skill": "communication"
+     }
+    ],
+    "f1_ci": [
+     0.6153846153846154,
+     0.8378378378378378
+    ]
+   },
+   {
+    "stage": "llm_dict",
+    "label": "② LLM 추출 + 사전",
+    "available": true,
+    "p": 0.9285714285714286,
+    "r": 0.5098039215686274,
+    "f1": 0.6582278481012658,
+    "tp": 26,
+    "fp": 2,
+    "fn": 25,
+    "req_acc": 0.9615384615384616,
+    "f1_hint": 0.6666666666666666,
+    "f1_random": 0.0,
+    "clean_fp": 0,
+    "n_clean": 9,
+    "errors": [
+     {
+      "id": "ALIO-305787",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-301495",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-293827",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "cert_computer"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296639",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "english"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "paper_research"
+     },
+     {
+      "id": "ALIO-295014",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-302970",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-301603",
+      "type": "FN",
+      "skill": "cert_data"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
+     },
+     {
+      "id": "ALIO-303972",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FP",
+      "skill": "communication"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_network"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304449",
+      "type": "FN",
+      "skill": "english"
+     }
+    ],
+    "f1_ci": [
+     0.5,
+     0.7719298245614036
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.17989417989418,
+      -0.00951293759512939
+     ],
+     "p_le0": 0.9895
+    }
+   },
+   {
+    "stage": "llm_embed",
+    "label": "③ + 임베딩 후보 (top-1)",
+    "available": true,
+    "p": 0.6326530612244898,
+    "r": 0.6078431372549019,
+    "f1": 0.62,
+    "tp": 31,
+    "fp": 18,
+    "fn": 20,
+    "req_acc": 0.9354838709677419,
+    "f1_hint": 0.6391752577319586,
+    "f1_random": 0.0,
+    "clean_fp": 1,
+    "n_clean": 9,
+    "errors": [
+     {
+      "id": "ALIO-305787",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-305787",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-301495",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-301495",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "iac"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "prompt_engineering"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FP",
+      "skill": "llm_evaluation"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "cert_computer"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296639",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-296639",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "english"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "paper_research"
+     },
+     {
+      "id": "ALIO-295014",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-295014",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-302970",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-301603",
+      "type": "FP",
+      "skill": "ab_testing"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
+     },
+     {
+      "id": "ALIO-303972",
+      "type": "FP",
+      "skill": "cuda"
+     },
+     {
+      "id": "ALIO-303972",
+      "type": "FP",
+      "skill": "nlp"
+     },
+     {
+      "id": "ALIO-303972",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FP",
+      "skill": "cuda"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FP",
+      "skill": "nlp"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-297629",
+      "type": "FP",
+      "skill": "langchain"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FP",
+      "skill": "communication"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_network"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-303027",
+      "type": "FP",
+      "skill": "machine_learning"
+     },
+     {
+      "id": "ALIO-303027",
+      "type": "FP",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304449",
+      "type": "FN",
+      "skill": "english"
+     }
+    ],
+    "f1_ci": [
+     0.48717948717948717,
+     0.7244094488188977
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.21220159151193618,
+      -0.0417191152670382
+     ],
+     "p_le0": 0.9965
+    }
+   },
+   {
+    "stage": "llm_full",
+    "label": "④ + LLM 재랭킹 (운영 설정)",
+    "available": true,
+    "p": 0.8205128205128205,
+    "r": 0.6274509803921569,
+    "f1": 0.711111111111111,
+    "tp": 32,
+    "fp": 7,
+    "fn": 19,
+    "req_acc": 0.96875,
+    "f1_hint": 0.7191011235955057,
+    "f1_random": 0.0,
+    "clean_fp": 0,
+    "n_clean": 9,
+    "errors": [
+     {
+      "id": "ALIO-305787",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-301495",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "sre"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FP",
+      "skill": "llm"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_security"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-304989",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FP",
+      "skill": "llm_evaluation"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FP",
+      "skill": "statistics"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "cert_computer"
+     },
+     {
+      "id": "ALIO-300068",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296639",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "data_analysis"
+     },
+     {
+      "id": "ALIO-293317",
+      "type": "FN",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "english"
+     },
+     {
+      "id": "ALIO-296280",
+      "type": "FN",
+      "skill": "paper_research"
+     },
+     {
+      "id": "ALIO-295014",
+      "type": "FN",
+      "skill": "office"
+     },
+     {
+      "id": "ALIO-302970",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-301603",
+      "type": "FP",
+      "skill": "ai_general"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "security"
+     },
+     {
+      "id": "ALIO-304425",
+      "type": "FN",
+      "skill": "networking"
+     },
+     {
+      "id": "ALIO-298259",
+      "type": "FN",
+      "skill": "cert_info_processing"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FP",
+      "skill": "communication"
+     },
+     {
+      "id": "ALIO-293174",
+      "type": "FN",
+      "skill": "cert_network"
+     },
+     {
+      "id": "ALIO-304449",
+      "type": "FN",
+      "skill": "english"
+     }
+    ],
+    "f1_ci": [
+     0.5633802816901408,
+     0.8275862068965517
+    ],
+    "vs_dict": {
+     "ci": [
+      -0.11627906976744184,
+      0.056224899598393385
+     ],
+     "p_le0": 0.768
+    }
+   }
+  ]
+ },
+ "gaps": {
+  "n": 30,
+  "mentions": 177,
+  "oov": 44,
+  "rows": [
+   {
+    "stage": "dict",
+    "label": "① 별칭 사전 + 규칙 판정",
+    "available": true,
+    "gap_recall": 0.9761904761904762,
+    "false_gap": 0.23404255319148937,
+    "status_acc": 0.8,
+    "oov_acc": 0.045454545454545456,
+    "n_oov": 44,
+    "readiness_mae": 14.1,
+    "gap_n": 126,
+    "own_n": 94,
+    "false_gap_ci": [
+     0.1588785046728972,
+     0.3191489361702128
+    ]
+   },
+   {
+    "stage": "llm_dict",
+    "label": "② LLM 추출 + 사전",
+    "available": true,
+    "gap_recall": 0.9841269841269841,
+    "false_gap": 0.10638297872340426,
+    "status_acc": 0.9181818181818182,
+    "oov_acc": 0.6363636363636364,
+    "n_oov": 44,
+    "readiness_mae": 4.466666666666667,
+    "gap_n": 126,
+    "own_n": 94,
+    "false_gap_ci": [
+     0.043010752688172046,
+     0.1797752808988764
+    ],
+    "vs_dict": {
+     "ci": [
+      0.06862745098039216,
+      0.19148936170212766
+     ],
+     "p_le0": 0.0
+    }
+   },
+   {
+    "stage": "llm_embed",
+    "label": "③ + 임베딩 후보 (top-1)",
+    "available": true,
+    "gap_recall": 0.9841269841269841,
+    "false_gap": 0.07446808510638298,
+    "status_acc": 0.9409090909090909,
+    "oov_acc": 0.75,
+    "n_oov": 44,
+    "readiness_mae": 2.8,
+    "gap_n": 126,
+    "own_n": 94,
+    "false_gap_ci": [
+     0.02197802197802198,
+     0.12903225806451613
+    ],
+    "vs_dict": {
+     "ci": [
+      0.0975609756097561,
+      0.22784810126582278
+     ],
+     "p_le0": 0.0
+    }
+   },
+   {
+    "stage": "llm_full",
+    "label": "④ + LLM 재랭킹",
+    "available": true,
+    "gap_recall": 0.9841269841269841,
+    "false_gap": 0.0851063829787234,
+    "status_acc": 0.9318181818181818,
+    "oov_acc": 0.7045454545454546,
+    "n_oov": 44,
+    "readiness_mae": 3.2333333333333334,
+    "gap_n": 126,
+    "own_n": 94,
+    "false_gap_ci": [
+     0.03225806451612903,
+     0.14457831325301204
+    ],
+    "vs_dict": {
+     "ci": [
+      0.08421052631578949,
+      0.21649484536082475
+     ],
+     "p_le0": 0.0
+    }
+   },
+   {
+    "stage": "llm_full_net",
+    "label": "⑤ ④ + 사전 안전망 (운영 설정)",
+    "available": true,
+    "gap_recall": 0.9841269841269841,
+    "false_gap": 0.0851063829787234,
+    "status_acc": 0.9318181818181818,
+    "oov_acc": 0.7045454545454546,
+    "n_oov": 44,
+    "readiness_mae": 3.2333333333333334,
+    "gap_n": 126,
+    "own_n": 94,
+    "false_gap_ci": [
+     0.03225806451612903,
+     0.14457831325301204
+    ],
+    "vs_dict": {
+     "ci": [
+      0.08421052631578949,
+      0.21649484536082475
+     ],
+     "p_le0": 0.0
+    }
+   }
+  ]
+ },
+ "courses": {
+  "skills": 17,
+  "covered": 14,
+  "agg": {
+   "ours": {
+    "hit3": 1.0,
+    "ndcg5": 0.9663545414966979,
+    "p1": 1.0,
+    "n": 14
+   },
+   "catalog_order": {
+    "hit3": 1.0,
+    "ndcg5": 0.853476824875922,
+    "p1": 0.7857142857142857,
+    "n": 14
+   }
+  },
+  "per_skill": [
+   {
+    "skill": "aws",
+    "n": 9,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "가장 쉽게 배우는 AWS, 기초부터 실무까지"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.931,
+     "top1": "가장 쉽게 배우는 AWS, 기초부터 실무까지"
+    }
+   },
+   {
+    "skill": "computer_vision",
+    "n": 2,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[AI 포트폴리오 완성] PyTorch로 구현하는 컴퓨터 비전 로드맵"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[AI 포트폴리오 완성] PyTorch로 구현하는 컴퓨터 비전 로드맵"
+    }
+   },
+   {
+    "skill": "cpp",
+    "n": 3,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[IT 마스터 클래스] C++답게 코딩하자"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[IT 마스터 클래스] C++답게 코딩하자"
+    }
+   },
+   {
+    "skill": "docker",
+    "n": 7,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "가장 쉽게 배우는 도커, 기초부터 실무까지"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.913,
+     "top1": "쿠버네티스도커"
+    }
+   },
+   {
+    "skill": "edge_ai",
+    "n": 2,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "NPU 기반 엣지 컴퓨팅 온디바이스 AI 모델링 개발"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "NPU 기반 엣지 컴퓨팅 온디바이스 AI 모델링 개발"
+    }
+   },
+   {
+    "skill": "kubernetes",
+    "n": 6,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "가장 쉽게 배우는 쿠버네티스, 기초부터 실무까지"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "쿠버네티스도커"
+    }
+   },
+   {
+    "skill": "linux",
+    "n": 6,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[원패스] 리눅스마스터 2급 올인원"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[원패스] 리눅스마스터 2급 올인원"
+    }
+   },
+   {
+    "skill": "llm",
+    "n": 16,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 0.616,
+     "top1": "LLM 파인튜닝 A to Z : 데이터 구축부터 API 배포까지"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.17,
+     "top1": "챗GPT 실무 올인원(문서·리서치·데이터분석)"
+    }
+   },
+   {
+    "skill": "mlops",
+    "n": 5,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "가장 쉽게 배우는 MLOps, 기초부터 ML서비스 실무까지!"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.944,
+     "top1": "가장 쉽게 배우는 MLOps, 기초부터 ML서비스 실무까지!"
+    }
+   },
+   {
+    "skill": "python",
+    "n": 20,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "왕초보도 할 수 있는 파이썬 프로그래밍 : 기초 개념부터 자동 매매봇 구현까지"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.598,
+     "top1": "Python과 SQL을 활용한 텍스트 분석 웹페이지 만들기"
+    }
+   },
+   {
+    "skill": "pytorch",
+    "n": 1,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[AI 포트폴리오 완성] PyTorch로 구현하는 컴퓨터 비전 로드맵"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "[AI 포트폴리오 완성] PyTorch로 구현하는 컴퓨터 비전 로드맵"
+    }
+   },
+   {
+    "skill": "rag",
+    "n": 9,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 0.913,
+     "top1": "자율 제조 공정 개발을 위한 RAG 모델  전문인력 양성"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.507,
+     "top1": "[이스트캠프] AI 휴먼(멀티모달, TTS, STT, 프롬프트 엔지니어링, RAG)"
+    }
+   },
+   {
+    "skill": "ros",
+    "n": 2,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "ROS2를 활용한 AI 로보틱스"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "ROS2를 활용한 AI 로보틱스"
+    }
+   },
+   {
+    "skill": "sql",
+    "n": 9,
+    "ours": {
+     "hit3": true,
+     "ndcg5": 1.0,
+     "top1": "비전공자를 위한 SQL 입문"
+    },
+    "catalog_order": {
+     "hit3": true,
+     "ndcg5": 0.887,
+     "top1": "와우패스! SQL 개발자(SQLD) 합격반(이론+문풀)"
+    }
+   },
+   {
+    "skill": "amazon_bedrock",
+    "n": 0
+   },
+   {
+    "skill": "observability",
+    "n": 0
+   },
+   {
+    "skill": "terraform",
+    "n": 0
+   }
+  ]
+ },
+ "baseline": {
+  "agg": {
+   "company": {
+    "gap_cov": 0.9944444444444444,
+    "apply_cov": 0.9916666666666667,
+    "apply_first": 1.0,
+    "hours": 88.26666666666667,
+    "gap_cov_ci": [
+     0.9833333333333333,
+     1.0
+    ]
+   },
+   "posting": {
+    "gap_cov": 0.5127777777777778,
+    "apply_cov": 0.9916666666666667,
+    "apply_first": 1.0,
+    "hours": 67.43333333333334,
+    "gap_cov_ci": [
+     0.45722222222222225,
+     0.57
+    ]
+   },
+   "diff_gap_cov": {
+    "ci": [
+     0.4272222222222223,
+     0.5344444444444444
+    ],
+    "p_le0": 0.0
+   }
+  },
+  "n": 30,
+  "top_missed": [
+   [
+    "Docker",
+    10
+   ],
+   [
+    "Terraform",
+    7
+   ],
+   [
+    "C++",
+    6
+   ],
+   [
+    "엣지 AI",
+    6
+   ],
+   [
+    "Kubernetes",
+    6
+   ]
+  ],
+  "top_wasted": [
+   [
+    "SQL",
+    10
+   ],
+   [
+    "LLM",
+    10
+   ],
+   [
+    "네트워크",
+    10
+   ],
+   [
+    "PyTorch",
+    10
+   ]
+  ]
+ },
+ "agreement": {
+  "available": false
+ },
+ "model": "global.anthropic.claude-haiku-4-5-20251001-v1:0",
+ "usage": {
+  "calls": 250,
+  "tokens_in": 391330,
+  "tokens_out": 97329,
+  "ms": 407586
+ }
+}

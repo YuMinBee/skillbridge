@@ -1,0 +1,81 @@
+{
+  "tenant_id": "Z21",
+  "name": "LG CNS(공개 자료 재구성)",
+  "desc": "신입 · AI · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "신입 · AI",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-09-05~09-18 (마감). 주의: 확인한 공고 본문에 기술 요구 없음(첨부 이미지 미확인); AI 직무 소개는 영문 페이지만 확인; 근거 일부는 Elastic 고객 사례(LG CNS AI Lab 인용). 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {},
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "elk": 1,
+    "rag": 1,
+    "vector_db": 1,
+    "llm": 1,
+    "ai_agent": 1
+  },
+  "sources": {
+    "elk": {
+      "from": "고객 사례",
+      "url": "https://www.elastic.co/kr/pdf/elastic-success-story-lg-cns-implements-elasticsearch-hybrid-vector-generative-ai-capabilities.pdf",
+      "quote": "LG CNS는 주로 고객사의 데이터를 활용하기 때문에 온프레미스 설치형으로 Elasticsearch를 도입했으며",
+      "date": "2024"
+    },
+    "rag": {
+      "from": "고객 사례",
+      "url": "https://www.elastic.co/kr/pdf/elastic-success-story-lg-cns-implements-elasticsearch-hybrid-vector-generative-ai-capabilities.pdf",
+      "quote": "LG CNS는 검색증강생성(RAG) 시스템 개발 중에 기존 검색 알고리즘이 사용자의 의도를 이해하지 못하는 문제를 해결해야 했습니다.",
+      "date": "2024"
+    },
+    "vector_db": {
+      "from": "고객 사례",
+      "url": "https://www.elastic.co/kr/pdf/elastic-success-story-lg-cns-implements-elasticsearch-hybrid-vector-generative-ai-capabilities.pdf",
+      "quote": "희소 벡터 검색은 검색어의 동의어들이 있는 문서도 함께 검색될 수 있도록 해주며 밀도 벡터 검색은 구어체 문장을 인식하고 의도를 이해하는 데 초점을 맞춘다.",
+      "date": "2024"
+    },
+    "llm": {
+      "from": "직무 소개",
+      "url": "https://www.lgcns.com/en/careers/jobs/AI",
+      "quote": "By using large language models such as OpenAI's GPT and LG's ExaOne",
+      "date": "현행 페이지"
+    },
+    "ai_agent": {
+      "from": "직무 소개",
+      "url": "https://www.lgcns.com/en/careers/jobs/AI",
+      "quote": "We automate work with large-scale language and reasoning models and Agentic AI",
+      "date": "현행 페이지"
+    }
+  },
+  "excluded": [],
+  "any_of": [],
+  "posting_text": "[LG CNS] 2025 하반기 신입사원 채용 모집직무: AI, Robotics (RX), Consulting, Cloud Application Modernization, DX Engineer, Architecture, Smart Factory, Smart Logistics, ERP / 2026년 2월 졸업 예정자 또는 기졸업자 / 국내/해외 학사 이상 학위 보유자 / IT 기본 역량 보유자는 누구나 지원 가능(전공무관) / 서류전형 ▶ 인적성 검사 ▶ 1차 면접 ▶ 2차 면접",
+  "tracks": [],
+  "domain": {
+    "label": "SI·지식 관리",
+    "keywords": [
+      "SI",
+      "지식 관리",
+      "하이브리드 검색",
+      "생성형 AI",
+      "에이전트"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "신입 AI 직무 · 근거: AI연구소 언어 AI Lab·공식 AI 직무 소개",
+    "caveats": [
+      "확인한 공고 본문에 기술 요구 없음(첨부 이미지 미확인)",
+      "AI 직무 소개는 영문 페이지만 확인",
+      "근거 일부는 Elastic 고객 사례(LG CNS AI Lab 인용)"
+    ],
+    "posting_url": "https://cse.snu.ac.kr/ko/community/notice/24207"
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": true,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "신입"
+}

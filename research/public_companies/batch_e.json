@@ -1,96 +1,501 @@
 [
- {"key":"gangnamunni","company":"강남언니(힐링페이퍼)","org_or_team":"AI Foundation 스쿼드 (블로그: DevOps팀·검색 플랫폼)","job_title":"백엔드 개발자 (AI Foundation)","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/394421","date_or_status":"2026-11-16 게시 중 (원티드), 경력 5년 이상",
-   "requirements_quotes":["Go, Python, Kotlin, Java 중 하나 이상의 언어를 능숙하게 사용하시는 분","CI/CD와 클라우드 네이티브 환경을 이해하고, 서비스 개발 및 운영에 활용하실 수 있는 분","로그와 지표를 분석해 운영 장애의 원인을 진단하고 복구와 재발 방지를 주도한 경험이 있으신 분"],
-   "preferred_quotes":[],
-   "posting_text":"AI 엔지니어와 협업해 업무 자동화와 고객 서비스에 필요한 백엔드를 개발해요.\n자격요건\n백엔드 개발 경력이 5년 이상이며, 서비스의 설계부터 출시와 운영까지 담당한 경험이 있으신 분\nGo, Python, Kotlin, Java 중 하나 이상의 언어를 능숙하게 사용하시는 분\nCI/CD와 클라우드 네이티브 환경을 이해하고, 서비스 개발 및 운영에 활용하실 수 있는 분"},
-  "apply_skills":{"golang":2,"python":2,"kotlin":2,"java":2,"cicd":2,"observability":2},
-  "work_sources":[
-   {"skill_id":"terraform","from":"기술 블로그","url":"https://blog.gangnamunni.com/post/os-to-es","date":"2026-04-10","quote":"Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."},
-   {"skill_id":"github_actions","from":"기술 블로그","url":"https://blog.gangnamunni.com/post/os-to-es","date":"2026-04-10","quote":"그래서 Terraform과 GitHub Actions를 활용하여 클러스터 구축 과정을 코드로 관리합니다."},
-   {"skill_id":"load_balancing","from":"기술 블로그","url":"https://blog.gangnamunni.com/post/os-to-es","date":"2026-04-10","quote":"Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."},
-   {"skill_id":"helm","from":"기술 블로그","url":"https://blog.gangnamunni.com/post/gitops-evolution-with-multi-region","date":"2025-08-08","quote":"공통적인 건 Helm Chart로, 특별한 건 Kustomize로! 이 철학이 꽤 잘 먹혔어요."},
-   {"skill_id":"jenkins","from":"기술 블로그","url":"https://blog.gangnamunni.com/post/gitops-evolution-with-multi-region","date":"2025-08-08","quote":"Jenkins와 Argo CD가 3년 전 설정 그대로 안정적으로 돌아가고 있었는데"}],
-  "domain_keywords":["의료","미용","성형","병원","검색","AI 자동화"],
-  "caveats":["공고(AI Foundation)와 블로그(DevOps·검색 플랫폼)는 다른 팀","경력 5년 이상"]},
-
- {"key":"makinarocks","company":"마키나락스","org_or_team":"PE본부 애플리케이션팀 (블로그: Product·Tech)","job_title":"Backend Engineer (AI Platform Application)","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/302164","date_or_status":"마감 (원티드)",
-   "requirements_quotes":["CS 기초 지식(자료구조, 운영체제, 컴퓨터 시스템 아키텍처 등)이 탄탄하고 Git 을 활용한 버전 관리 및 코드 협업 경험이 있는 분","REST API 에 대한 이해가 깊으며, 어플리케이션을 위한 API 및 DB 디자인에 능숙하신 분","Kubernetes 및 컨테이너 환경에서의 애플리케이션 개발 및 운영 경험이 있는 분","Github/Gitlab Action 등을 이용한 CI/CD 기술로 고객에게 서비스를 배포한 경험이 있는 분"],
-   "preferred_quotes":[],
-   "posting_text":"다양한 AI Agent 및 AI 플랫폼 기능을 사용자가 쉽게 활용할 수 있도록 어플리케이션 형태로 구현합니다.\n자격요건\nREST API 에 대한 이해가 깊으며, 어플리케이션을 위한 API 및 DB 디자인에 능숙하신 분\nKubernetes 및 컨테이너 환경에서의 애플리케이션 개발 및 운영 경험이 있는 분\nGithub/Gitlab Action 등을 이용한 CI/CD 기술로 고객에게 서비스를 배포한 경험이 있는 분"},
-  "apply_skills":{"git":2,"rest_api":2,"kubernetes":2,"docker":2,"cicd":2,"github_actions":2},
-  "work_sources":[
-   {"skill_id":"langchain","from":"기술 블로그","url":"https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/","date":"2025-02-11","quote":"이를 위해 LangGraph의 GraphState 개념을 활용하여 각 AI 에이전트가 처리한 데이터를 다른 AI 에이전트가 바로 이해하고 사용할 수 있도록 통합된 데이터 구조를 마련했습니다."},
-   {"skill_id":"ai_agent","from":"기술 블로그","url":"https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/","date":"2025-02-11","quote":"DB에서 실시간 정보를 SQL문으로 가져오는 SQL(DB) 에이전트와 같이"},
-   {"skill_id":"sql","from":"기술 블로그","url":"https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/","date":"2025-02-11","quote":"DB에서 실시간 정보를 SQL문으로 가져오는 SQL(DB) 에이전트와 같이"},
-   {"skill_id":"huggingface","from":"기술 블로그","url":"https://makinarocks.ai/blog/automl%eb%b6%80%ed%84%b0-hugging-face-%eb%b0%b0%ed%8f%ac%ea%b9%8c%ec%a7%80-%eb%8d%94-%ec%89%ac%ec%9b%8c%ec%a7%84-ai-%ea%b0%9c%eb%b0%9c%ea%b3%bc-%ec%9a%b4%ec%98%81/","date":"2024-11-15","quote":"추론 서비스에서 Model Hub 탭을 통해 Hugging Face의 텍스트 생성 모델을 손쉽게 배포할 수 있습니다."},
-   {"skill_id":"postgresql","from":"기술 블로그","url":"https://makinarocks.ai/blog/runway-1-6/","date":"2025-01-10","quote":"Inference Service 로깅 데이터를 Postgres 유형으로 활용할 수 있는 새로운 SDK 기능이 추가되었습니다."}],
-  "domain_keywords":["산업 AI","제조","AI 플랫폼","AI 에이전트","공장","설비"],
-  "caveats":["공고 팀과 블로그 필자 팀 일치 미확인","Runway 글은 제품 업데이트 공지 성격","경력 5년 이상"]},
-
- {"key":"ably","company":"에이블리","org_or_team":"데이터 분석 (블로그: 데이터 분석 챕터·AI 서비스 PO)","job_title":"데이터 분석가","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/262250","date_or_status":"원티드 마감 (demoday.co.kr/recruits/17638 수시 게시)",
-   "requirements_quotes":["SQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.","데이터 정제, 문제 정의, 인사이트 도출 및 액션 아이템 제시까지 데이터 분석의 전반을 경험한 분을 찾아요.","다양한 직군의 동료가 복잡한 분석 결과를 쉽게 이해 및 활용할 수 있도록 명확하게 의사소통할 수 있는 분을 찾아요."],
-   "preferred_quotes":["실험 설계 (A/B 테스트 등)과 지표에 대한 고민이 깊고, 의사결정 시스템을 설계 및 고도화해본 분이면 더 좋아요."],
-   "posting_text":"여러 액션 (실험, 사업 전략, 프로모션 등)의 효과성을 데이터로 검증하고, 도출한 인사이트를 실행 가능한 태스크로 구체화해요.\n자격요건\n데이터 정제, 문제 정의, 인사이트 도출 및 액션 아이템 제시까지 데이터 분석의 전반을 경험한 분을 찾아요.\nSQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.\n우대사항\n실험 설계 (A/B 테스트 등)과 지표에 대한 고민이 깊고, 의사결정 시스템을 설계 및 고도화해본 분이면 더 좋아요."},
-  "apply_skills":{"sql":2,"python":2,"data_analysis":2,"communication":2,"ab_testing":1},
-  "work_sources":[
-   {"skill_id":"llm","from":"기술 블로그","url":"https://brunch.co.kr/@ably-team/59","date":"2026-05-29","quote":"키워드 추출이나 결과 요약, 의도 분류와 같은 상대적으로 가벼운 작업은 경량 모델이 처리하도록 구성했습니다."}],
-  "domain_keywords":["패션","커머스","지표","데이터 분석","A/B 테스트","분석 봇"],
-  "caveats":["같은 직무(데이터 분석 챕터)의 글. 사내 Text2SQL 에이전트(나비) 제작기","에이전트 근거는 글 제목뿐이라 llm만 사용"]},
-
- {"key":"kakaostyle","company":"카카오스타일(지그재그)","org_or_team":"데이터 사이언스팀 (블로그: SRE팀)","job_title":"MLOps 엔지니어","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/343149","date_or_status":"상시 채용 (리멤버), 경력 5년 이상",
-   "requirements_quotes":["ML 모델 배포 및 운영(MLOps) 분야에서 5년 이상의 경력 혹은 이에 준하는 역량을 보유하신 분","Kafka, Airflow, Spark 등을 활용해 대규모 데이터 처리 및 파이프라인을 직접 구축하고 운영해 본 경험이 있으신 분","MLflow, Kubeflow 등 ML 플랫폼을 활용한 실험 관리 및 모델 배포 경험이 있으신 분","데이터 수집 - 전처리 - 학습 - 배포 - 서빙까지 이어지는 ML 파이프라인을 구축하고 자동화해 본 경험이 있으신 분","Python을 기반으로 데이터 처리 및 ML 워크플로우를 개발해 본 경험이 있으신 분"],
-   "preferred_quotes":["CI/CD 기반의 ML 배포 자동화 및 실험-운영 연결 프로세스를 고도화해 본 경험이 있으신 분","LLM 또는 멀티모달 모델을 실제 서비스 환경에서 운영해 본 경험이 있으신 분","데이터 엔지니어링 또는 인프라(SRE/DevOps) 경험을 통해 인프라에 대한 이해도가 있으신 분"],
-   "posting_text":"카카오스타일 서비스 전반의 ML 모델이 안정적으로 운영되도록 확장 가능한 ML 인프라를 설계하고 지속적으로 고도화해요.\n자격요건\nML 모델 배포 및 운영(MLOps) 분야에서 5년 이상의 경력 혹은 이에 준하는 역량을 보유하신 분\nKafka, Airflow, Spark 등을 활용해 대규모 데이터 처리 및 파이프라인을 직접 구축하고 운영해 본 경험이 있으신 분\nMLflow, Kubeflow 등 ML 플랫폼을 활용한 실험 관리 및 모델 배포 경험이 있으신 분"},
-  "apply_skills":{"mlops":2,"kafka":2,"airflow":2,"spark":2,"mlflow":2,"kubeflow":2,"mlops_pipeline":2,"python":2,"cicd":1,"llm":1,"sre":1,"devops":1},
-  "work_sources":[
-   {"skill_id":"kubernetes","from":"기술 블로그","url":"https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/","date":"2022-10-13","quote":"카카오스타일도 처음에는 Kubernetes 의 기본 Cluster Autoscaler(CA) 를 사용했습니다."},
-   {"skill_id":"terraform","from":"기술 블로그","url":"https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/","date":"2022-10-13","quote":"카카오스타일은 Terraform 을 이용해 인프라를 관리하므로 EKS 클러스터를 생성할 때 Karpenter 도 Terraform 코드로 정의하여 함께 생성했습니다."},
-   {"skill_id":"aws_eks","from":"기술 블로그","url":"https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/","date":"2022-10-13","quote":"카카오스타일은 Terraform 을 이용해 인프라를 관리하므로 EKS 클러스터를 생성할 때 Karpenter 도 Terraform 코드로 정의하여 함께 생성했습니다."},
-   {"skill_id":"helm","from":"기술 블로그","url":"https://devblog.kakaostyle.com/ko/2022-03-31-3-build-eks-cluster-with-terraform/","date":"2022-03-31","quote":"저희 실 서비스의 경우는 Terraform이 아니라 Helm Charts를 사용해 어플리케이션을 정의했습니다."}],
-  "domain_keywords":["패션","커머스","추천","개인화","ML 인프라","스트리밍"],
-  "caveats":["공고(데이터 사이언스)와 블로그(SRE) 다른 팀","블로그 2022, 공고 현재","경력 5년 이상"]},
-
- {"key":"yogiyo","company":"요기요(위대한상상)","org_or_team":"AI/ML 팀 (근거: 데이터 조직 고객 사례)","job_title":"Data Scientist (추천 모델링)","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/252644","date_or_status":"마감 (리멤버), 경력 7년 이상",
-   "requirements_quotes":["추천 모델링 경력 3년 이상","온라인 실험 설계 및 분석 역량","Python, SQL 활용 능력"],
-   "preferred_quotes":["PyTorch, TensorFlow 등 ML/DL 프레임워크 활용 경험","Airflow, dbt 등 데이터 파이프라인 프레임워크 사용 경험","SageMaker, MLflow, Kubeflow 등 MLOps 프레임워크 활용 경험"],
-   "posting_text":"추천/ 랭킹 ML모델 개발 / 사용자-가게 간 상호작용 및 다양한 로그 데이터 기반 피처 엔지니어링\n자격요건\n데이터사이언티스트 경력 7년 이상\n추천 모델링 경력 3년 이상\n온라인 실험 설계 및 분석 역량\nPython, SQL 활용 능력"},
-  "apply_skills":{"python":2,"sql":2,"recommender":2,"ab_testing":2,"pytorch":1,"tensorflow":1,"airflow":1,"aws_sagemaker":1,"mlflow":1,"kubeflow":1},
-  "work_sources":[
-   {"skill_id":"data_warehouse","from":"고객 사례","url":"https://cloud.google.com/customers/yogiyo?hl=ko","date":"미표시","quote":"요기요는 실시간 분석이 필요한 현업 담당자들에게 즉각적인 데이터를 제공하기 위해 AlloyDB를 도입하고 BigQuery와 연합 쿼리를 통해 데이터 활용성을 높였습니다."},
-   {"skill_id":"gcp","from":"고객 사례","url":"https://cloud.google.com/customers/yogiyo?hl=ko","date":"미표시","quote":"이제까지 요기요는 BigQuery를 통한 쿼리와 분석 환경은 북미 리전의 구글 클라우드에서 운영되었습니다."},
-   {"skill_id":"postgresql","from":"고객 사례","url":"https://cloud.google.com/customers/yogiyo?hl=ko","date":"미표시","quote":"PostgreSQL 호환성으로 분석 속도, 편의성 확보"}],
-  "domain_keywords":["배달","음식","가게","추천","랭킹","실시간 분석"],
-  "caveats":["근거가 회사 블로그가 아닌 Google Cloud 고객 사례(벤더 자료), 날짜 미표시","공고(추천)와 사례(데이터 플랫폼)는 다른 조직","경력 7년 이상"]},
-
- {"key":"sendbird","company":"센드버드","org_or_team":"Data Platform (발표: 2019 AWS Summit)","job_title":"Data Platform Engineer","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/137065","date_or_status":"마감 (원티드), 경력 5-15년, 영문 공고",
-   "requirements_quotes":["5+ years of work experience in data engineering and/or building ETL pipelines in production","Work experience in AWS and/or GCP data pipeline ecosystem","Fluency in several programming languages such as Python, Java, or Scala","Strong analytic skills related to data models and conducting SQL"],
-   "preferred_quotes":[],
-   "posting_text":"Design distributed, high-volume ETL data pipelines that power Sendbird analytics and products\nRequirements\n5+ years of work experience in data engineering and/or building ETL pipelines in production\nWork experience in AWS and/or GCP data pipeline ecosystem\nFluency in several programming languages such as Python, Java, or Scala\nStrong analytic skills related to data models and conducting SQL"},
-  "apply_skills":{"data_pipeline":2,"aws":2,"gcp":2,"python":2,"java":2,"scala":2,"sql":2,"data_modeling":2},
-  "work_sources":[
-   {"skill_id":"aws_kinesis","from":"발표","url":"https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019","date":"2019","quote":"Kinesis Data Stream and Firehose are awesome but the cost is a burden."},
-   {"skill_id":"aws_lambda","from":"발표","url":"https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019","date":"2019","quote":"Kinesis Data Firehose de-aggregates automatically the records before it delivers them to AWS Lambda"},
-   {"skill_id":"elk","from":"발표","url":"https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019","date":"2019","quote":"Elasticsearch cluster free storage"},
-   {"skill_id":"aws_cloudwatch","from":"발표","url":"https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019","date":"2019","quote":"Cloudwatch scheduled rule can trigger AWS Lambda function"}],
-  "domain_keywords":["채팅 API","SaaS","메시징","로그","검색","ETL"],
-  "caveats":["공고·발표 모두 영어","발표(2019)는 팀·시기가 다름","경력 5년 이상"]},
-
- {"key":"hanati","company":"하나금융티아이","org_or_team":"하나금융융합기술원 Data Scientist (발표: NLP 셀)","job_title":"Data Scientist","region":"미상",
-  "posting":{"url":"https://www.wanted.co.kr/wd/382805","date_or_status":"마감 2026-09-07 (원티드), 석사 + 3년",
-   "requirements_quotes":["Python 활용 가능자"],
-   "preferred_quotes":[],
-   "posting_text":"AI 알고리즘 기반 빅데이터 분석 및 예측 모델 개발 (손님관리, 신용평가, 이상거래탐지, 시장예측 등) / 최신 데이터 분석 기술 기반 알고리즘 고도화\n자격요건\nPython 활용 가능자\n관련 경력 3년 이상의 석사 학위 보유자"},
-  "apply_skills":{"python":2},
-  "work_sources":[
-   {"skill_id":"llm","from":"발표","url":"https://byline.network/2024/11/31-221/","date":"2024-10-29","quote":"콜센터 직원은 상담이 끝난 후 내용을 직접 요약해야 하는데, 거대언어모델(LLM)로 이를 자동화할 수 있도록 현재 기술 검증이 끝나 적용 중"},
-   {"skill_id":"fine_tuning","from":"발표","url":"https://byline.network/2024/11/31-221/","date":"2024-10-29","quote":"잘 학습된 오픈 모델을 가지고 계속 사전학습, 미세조정을 통해 하나금융그룹에 특화되게 튜닝을 하자는 전략으로 진행했다"},
-   {"skill_id":"speech","from":"발표","url":"https://byline.network/2024/11/31-221/","date":"2024-10-29","quote":"상담 내용을 문자로 바꿔 주는 기능(STT)"}],
-  "domain_keywords":["금융","콜센터","상담 요약","신용평가","이상거래탐지","LLM"],
-  "caveats":["근거는 컨퍼런스 발표를 다룬 기사(발표자 직접 인용)","같은 기술원, 다른 셀(공고 DS / 발표 NLP)"]}
+ {
+  "key": "gangnamunni",
+  "company": "강남언니(힐링페이퍼)",
+  "org_or_team": "AI Foundation 스쿼드 (블로그: DevOps팀·검색 플랫폼)",
+  "job_title": "백엔드 개발자 (AI Foundation)",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/394421",
+   "date_or_status": "2026-11-16 게시 중 (원티드), 경력 5년 이상",
+   "requirements_quotes": [
+    "Go, Python, Kotlin, Java 중 하나 이상의 언어를 능숙하게 사용하시는 분",
+    "CI/CD와 클라우드 네이티브 환경을 이해하고, 서비스 개발 및 운영에 활용하실 수 있는 분",
+    "로그와 지표를 분석해 운영 장애의 원인을 진단하고 복구와 재발 방지를 주도한 경험이 있으신 분"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "AI 엔지니어와 협업해 업무 자동화와 고객 서비스에 필요한 백엔드를 개발해요.\n자격요건\n백엔드 개발 경력이 5년 이상이며, 서비스의 설계부터 출시와 운영까지 담당한 경험이 있으신 분\nGo, Python, Kotlin, Java 중 하나 이상의 언어를 능숙하게 사용하시는 분\nCI/CD와 클라우드 네이티브 환경을 이해하고, 서비스 개발 및 운영에 활용하실 수 있는 분"
+  },
+  "apply_skills": {
+   "golang": 2,
+   "python": 2,
+   "kotlin": 2,
+   "java": 2,
+   "cicd": 2,
+   "observability": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "terraform",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."
+   },
+   {
+    "skill_id": "github_actions",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "그래서 Terraform과 GitHub Actions를 활용하여 클러스터 구축 과정을 코드로 관리합니다."
+   },
+   {
+    "skill_id": "load_balancing",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/os-to-es",
+    "date": "2026-04-10",
+    "quote": "Terraform은 인프라(EC2, ALB, Route53, 보안 그룹)의 생성과 변경을 담당합니다."
+   },
+   {
+    "skill_id": "helm",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/gitops-evolution-with-multi-region",
+    "date": "2025-08-08",
+    "quote": "공통적인 건 Helm Chart로, 특별한 건 Kustomize로! 이 철학이 꽤 잘 먹혔어요."
+   },
+   {
+    "skill_id": "jenkins",
+    "from": "기술 블로그",
+    "url": "https://blog.gangnamunni.com/post/gitops-evolution-with-multi-region",
+    "date": "2025-08-08",
+    "quote": "Jenkins와 Argo CD가 3년 전 설정 그대로 안정적으로 돌아가고 있었는데"
+   }
+  ],
+  "domain_keywords": [
+   "의료",
+   "미용",
+   "성형",
+   "병원",
+   "검색",
+   "AI 자동화"
+  ],
+  "caveats": [
+   "공고(AI Foundation)와 블로그(DevOps·검색 플랫폼)는 다른 팀",
+   "경력 5년 이상"
+  ],
+  "any_of": [
+   [
+    "golang",
+    "python",
+    "kotlin",
+    "java"
+   ]
+  ]
+ },
+ {
+  "key": "makinarocks",
+  "company": "마키나락스",
+  "org_or_team": "PE본부 애플리케이션팀 (블로그: Product·Tech)",
+  "job_title": "Backend Engineer (AI Platform Application)",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/302164",
+   "date_or_status": "마감 (원티드)",
+   "requirements_quotes": [
+    "CS 기초 지식(자료구조, 운영체제, 컴퓨터 시스템 아키텍처 등)이 탄탄하고 Git 을 활용한 버전 관리 및 코드 협업 경험이 있는 분",
+    "REST API 에 대한 이해가 깊으며, 어플리케이션을 위한 API 및 DB 디자인에 능숙하신 분",
+    "Kubernetes 및 컨테이너 환경에서의 애플리케이션 개발 및 운영 경험이 있는 분",
+    "Github/Gitlab Action 등을 이용한 CI/CD 기술로 고객에게 서비스를 배포한 경험이 있는 분"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "다양한 AI Agent 및 AI 플랫폼 기능을 사용자가 쉽게 활용할 수 있도록 어플리케이션 형태로 구현합니다.\n자격요건\nREST API 에 대한 이해가 깊으며, 어플리케이션을 위한 API 및 DB 디자인에 능숙하신 분\nKubernetes 및 컨테이너 환경에서의 애플리케이션 개발 및 운영 경험이 있는 분\nGithub/Gitlab Action 등을 이용한 CI/CD 기술로 고객에게 서비스를 배포한 경험이 있는 분"
+  },
+  "apply_skills": {
+   "git": 2,
+   "rest_api": 2,
+   "kubernetes": 2,
+   "docker": 2,
+   "cicd": 2,
+   "github_actions": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "langchain",
+    "from": "기술 블로그",
+    "url": "https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/",
+    "date": "2025-02-11",
+    "quote": "이를 위해 LangGraph의 GraphState 개념을 활용하여 각 AI 에이전트가 처리한 데이터를 다른 AI 에이전트가 바로 이해하고 사용할 수 있도록 통합된 데이터 구조를 마련했습니다."
+   },
+   {
+    "skill_id": "ai_agent",
+    "from": "기술 블로그",
+    "url": "https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/",
+    "date": "2025-02-11",
+    "quote": "DB에서 실시간 정보를 SQL문으로 가져오는 SQL(DB) 에이전트와 같이"
+   },
+   {
+    "skill_id": "sql",
+    "from": "기술 블로그",
+    "url": "https://makinarocks.ai/blog/how-to-deploy-ai-agents-in-industry/",
+    "date": "2025-02-11",
+    "quote": "DB에서 실시간 정보를 SQL문으로 가져오는 SQL(DB) 에이전트와 같이"
+   },
+   {
+    "skill_id": "huggingface",
+    "from": "기술 블로그",
+    "url": "https://makinarocks.ai/blog/automl%eb%b6%80%ed%84%b0-hugging-face-%eb%b0%b0%ed%8f%ac%ea%b9%8c%ec%a7%80-%eb%8d%94-%ec%89%ac%ec%9b%8c%ec%a7%84-ai-%ea%b0%9c%eb%b0%9c%ea%b3%bc-%ec%9a%b4%ec%98%81/",
+    "date": "2024-11-15",
+    "quote": "추론 서비스에서 Model Hub 탭을 통해 Hugging Face의 텍스트 생성 모델을 손쉽게 배포할 수 있습니다."
+   },
+   {
+    "skill_id": "postgresql",
+    "from": "기술 블로그",
+    "url": "https://makinarocks.ai/blog/runway-1-6/",
+    "date": "2025-01-10",
+    "quote": "Inference Service 로깅 데이터를 Postgres 유형으로 활용할 수 있는 새로운 SDK 기능이 추가되었습니다."
+   }
+  ],
+  "domain_keywords": [
+   "산업 AI",
+   "제조",
+   "AI 플랫폼",
+   "AI 에이전트",
+   "공장",
+   "설비"
+  ],
+  "caveats": [
+   "공고 팀과 블로그 필자 팀 일치 미확인",
+   "Runway 글은 제품 업데이트 공지 성격",
+   "경력 5년 이상"
+  ],
+  "match": "none"
+ },
+ {
+  "key": "ably",
+  "company": "에이블리",
+  "org_or_team": "데이터 분석 (블로그: 데이터 분석 챕터·AI 서비스 PO)",
+  "job_title": "데이터 분석가",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/262250",
+   "date_or_status": "원티드 마감 (demoday.co.kr/recruits/17638 수시 게시)",
+   "requirements_quotes": [
+    "SQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.",
+    "데이터 정제, 문제 정의, 인사이트 도출 및 액션 아이템 제시까지 데이터 분석의 전반을 경험한 분을 찾아요.",
+    "다양한 직군의 동료가 복잡한 분석 결과를 쉽게 이해 및 활용할 수 있도록 명확하게 의사소통할 수 있는 분을 찾아요."
+   ],
+   "preferred_quotes": [
+    "실험 설계 (A/B 테스트 등)과 지표에 대한 고민이 깊고, 의사결정 시스템을 설계 및 고도화해본 분이면 더 좋아요."
+   ],
+   "posting_text": "여러 액션 (실험, 사업 전략, 프로모션 등)의 효과성을 데이터로 검증하고, 도출한 인사이트를 실행 가능한 태스크로 구체화해요.\n자격요건\n데이터 정제, 문제 정의, 인사이트 도출 및 액션 아이템 제시까지 데이터 분석의 전반을 경험한 분을 찾아요.\nSQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.\n우대사항\n실험 설계 (A/B 테스트 등)과 지표에 대한 고민이 깊고, 의사결정 시스템을 설계 및 고도화해본 분이면 더 좋아요."
+  },
+  "apply_skills": {
+   "sql": 2,
+   "python": 2,
+   "data_analysis": 2,
+   "communication": 2,
+   "ab_testing": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "llm",
+    "from": "기술 블로그",
+    "url": "https://brunch.co.kr/@ably-team/59",
+    "date": "2026-05-29",
+    "quote": "키워드 추출이나 결과 요약, 의도 분류와 같은 상대적으로 가벼운 작업은 경량 모델이 처리하도록 구성했습니다."
+   }
+  ],
+  "domain_keywords": [
+   "패션",
+   "커머스",
+   "지표",
+   "데이터 분석",
+   "A/B 테스트",
+   "분석 봇"
+  ],
+  "caveats": [
+   "같은 직무(데이터 분석 챕터)의 글. 사내 Text2SQL 에이전트(나비) 제작기",
+   "에이전트 근거는 글 제목뿐이라 llm만 사용"
+  ]
+ },
+ {
+  "key": "kakaostyle",
+  "company": "카카오스타일(지그재그)",
+  "org_or_team": "데이터 사이언스팀 (블로그: SRE팀)",
+  "job_title": "MLOps 엔지니어",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/343149",
+   "date_or_status": "상시 채용 (리멤버), 경력 5년 이상",
+   "requirements_quotes": [
+    "ML 모델 배포 및 운영(MLOps) 분야에서 5년 이상의 경력 혹은 이에 준하는 역량을 보유하신 분",
+    "Kafka, Airflow, Spark 등을 활용해 대규모 데이터 처리 및 파이프라인을 직접 구축하고 운영해 본 경험이 있으신 분",
+    "MLflow, Kubeflow 등 ML 플랫폼을 활용한 실험 관리 및 모델 배포 경험이 있으신 분",
+    "데이터 수집 - 전처리 - 학습 - 배포 - 서빙까지 이어지는 ML 파이프라인을 구축하고 자동화해 본 경험이 있으신 분",
+    "Python을 기반으로 데이터 처리 및 ML 워크플로우를 개발해 본 경험이 있으신 분"
+   ],
+   "preferred_quotes": [
+    "CI/CD 기반의 ML 배포 자동화 및 실험-운영 연결 프로세스를 고도화해 본 경험이 있으신 분",
+    "LLM 또는 멀티모달 모델을 실제 서비스 환경에서 운영해 본 경험이 있으신 분",
+    "데이터 엔지니어링 또는 인프라(SRE/DevOps) 경험을 통해 인프라에 대한 이해도가 있으신 분"
+   ],
+   "posting_text": "카카오스타일 서비스 전반의 ML 모델이 안정적으로 운영되도록 확장 가능한 ML 인프라를 설계하고 지속적으로 고도화해요.\n자격요건\nML 모델 배포 및 운영(MLOps) 분야에서 5년 이상의 경력 혹은 이에 준하는 역량을 보유하신 분\nKafka, Airflow, Spark 등을 활용해 대규모 데이터 처리 및 파이프라인을 직접 구축하고 운영해 본 경험이 있으신 분\nMLflow, Kubeflow 등 ML 플랫폼을 활용한 실험 관리 및 모델 배포 경험이 있으신 분"
+  },
+  "apply_skills": {
+   "mlops": 2,
+   "kafka": 2,
+   "airflow": 2,
+   "spark": 2,
+   "mlflow": 2,
+   "kubeflow": 2,
+   "mlops_pipeline": 2,
+   "python": 2,
+   "cicd": 1,
+   "llm": 1,
+   "sre": 1,
+   "devops": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/",
+    "date": "2022-10-13",
+    "quote": "카카오스타일도 처음에는 Kubernetes 의 기본 Cluster Autoscaler(CA) 를 사용했습니다."
+   },
+   {
+    "skill_id": "terraform",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/",
+    "date": "2022-10-13",
+    "quote": "카카오스타일은 Terraform 을 이용해 인프라를 관리하므로 EKS 클러스터를 생성할 때 Karpenter 도 Terraform 코드로 정의하여 함께 생성했습니다."
+   },
+   {
+    "skill_id": "aws_eks",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2022-10-13-1-karpenter-on-eks/",
+    "date": "2022-10-13",
+    "quote": "카카오스타일은 Terraform 을 이용해 인프라를 관리하므로 EKS 클러스터를 생성할 때 Karpenter 도 Terraform 코드로 정의하여 함께 생성했습니다."
+   },
+   {
+    "skill_id": "helm",
+    "from": "기술 블로그",
+    "url": "https://devblog.kakaostyle.com/ko/2022-03-31-3-build-eks-cluster-with-terraform/",
+    "date": "2022-03-31",
+    "quote": "저희 실 서비스의 경우는 Terraform이 아니라 Helm Charts를 사용해 어플리케이션을 정의했습니다."
+   }
+  ],
+  "domain_keywords": [
+   "패션",
+   "커머스",
+   "추천",
+   "개인화",
+   "ML 인프라",
+   "스트리밍"
+  ],
+  "caveats": [
+   "공고(데이터 사이언스)와 블로그(SRE) 다른 팀",
+   "블로그 2022, 공고 현재",
+   "경력 5년 이상"
+  ]
+ },
+ {
+  "key": "yogiyo",
+  "company": "요기요(위대한상상)",
+  "org_or_team": "AI/ML 팀 (근거: 데이터 조직 고객 사례)",
+  "job_title": "Data Scientist (추천 모델링)",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/252644",
+   "date_or_status": "마감 (리멤버), 경력 7년 이상",
+   "requirements_quotes": [
+    "추천 모델링 경력 3년 이상",
+    "온라인 실험 설계 및 분석 역량",
+    "Python, SQL 활용 능력"
+   ],
+   "preferred_quotes": [
+    "PyTorch, TensorFlow 등 ML/DL 프레임워크 활용 경험",
+    "Airflow, dbt 등 데이터 파이프라인 프레임워크 사용 경험",
+    "SageMaker, MLflow, Kubeflow 등 MLOps 프레임워크 활용 경험"
+   ],
+   "posting_text": "추천/ 랭킹 ML모델 개발 / 사용자-가게 간 상호작용 및 다양한 로그 데이터 기반 피처 엔지니어링\n자격요건\n데이터사이언티스트 경력 7년 이상\n추천 모델링 경력 3년 이상\n온라인 실험 설계 및 분석 역량\nPython, SQL 활용 능력"
+  },
+  "apply_skills": {
+   "python": 2,
+   "sql": 2,
+   "recommender": 2,
+   "ab_testing": 2,
+   "pytorch": 1,
+   "tensorflow": 1,
+   "airflow": 1,
+   "aws_sagemaker": 1,
+   "mlflow": 1,
+   "kubeflow": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "data_warehouse",
+    "from": "고객 사례",
+    "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+    "date": "미표시",
+    "quote": "요기요는 실시간 분석이 필요한 현업 담당자들에게 즉각적인 데이터를 제공하기 위해 AlloyDB를 도입하고 BigQuery와 연합 쿼리를 통해 데이터 활용성을 높였습니다."
+   },
+   {
+    "skill_id": "gcp",
+    "from": "고객 사례",
+    "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+    "date": "미표시",
+    "quote": "이제까지 요기요는 BigQuery를 통한 쿼리와 분석 환경은 북미 리전의 구글 클라우드에서 운영되었습니다."
+   },
+   {
+    "skill_id": "postgresql",
+    "from": "고객 사례",
+    "url": "https://cloud.google.com/customers/yogiyo?hl=ko",
+    "date": "미표시",
+    "quote": "PostgreSQL 호환성으로 분석 속도, 편의성 확보"
+   }
+  ],
+  "domain_keywords": [
+   "배달",
+   "음식",
+   "가게",
+   "추천",
+   "랭킹",
+   "실시간 분석"
+  ],
+  "caveats": [
+   "근거가 회사 블로그가 아닌 Google Cloud 고객 사례(벤더 자료), 날짜 미표시",
+   "공고(추천)와 사례(데이터 플랫폼)는 다른 조직",
+   "경력 7년 이상"
+  ],
+  "match": "none"
+ },
+ {
+  "key": "sendbird",
+  "company": "센드버드",
+  "org_or_team": "Data Platform (발표: 2019 AWS Summit)",
+  "job_title": "Data Platform Engineer",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/137065",
+   "date_or_status": "마감 (원티드), 경력 5-15년, 영문 공고",
+   "requirements_quotes": [
+    "5+ years of work experience in data engineering and/or building ETL pipelines in production",
+    "Work experience in AWS and/or GCP data pipeline ecosystem",
+    "Fluency in several programming languages such as Python, Java, or Scala",
+    "Strong analytic skills related to data models and conducting SQL"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "Design distributed, high-volume ETL data pipelines that power Sendbird analytics and products\nRequirements\n5+ years of work experience in data engineering and/or building ETL pipelines in production\nWork experience in AWS and/or GCP data pipeline ecosystem\nFluency in several programming languages such as Python, Java, or Scala\nStrong analytic skills related to data models and conducting SQL"
+  },
+  "apply_skills": {
+   "data_pipeline": 2,
+   "aws": 2,
+   "gcp": 2,
+   "python": 2,
+   "java": 2,
+   "scala": 2,
+   "sql": 2,
+   "data_modeling": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_kinesis",
+    "from": "발표",
+    "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+    "date": "2019",
+    "quote": "Kinesis Data Stream and Firehose are awesome but the cost is a burden."
+   },
+   {
+    "skill_id": "aws_lambda",
+    "from": "발표",
+    "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+    "date": "2019",
+    "quote": "Kinesis Data Firehose de-aggregates automatically the records before it delivers them to AWS Lambda"
+   },
+   {
+    "skill_id": "elk",
+    "from": "발표",
+    "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+    "date": "2019",
+    "quote": "Elasticsearch cluster free storage"
+   },
+   {
+    "skill_id": "aws_cloudwatch",
+    "from": "발표",
+    "url": "https://www.slideshare.net/awskorea/aws-matthew-han-sendbird-aws-summit-seoul-2019",
+    "date": "2019",
+    "quote": "Cloudwatch scheduled rule can trigger AWS Lambda function"
+   }
+  ],
+  "domain_keywords": [
+   "채팅 API",
+   "SaaS",
+   "메시징",
+   "로그",
+   "검색",
+   "ETL"
+  ],
+  "caveats": [
+   "공고·발표 모두 영어",
+   "발표(2019)는 팀·시기가 다름",
+   "경력 5년 이상"
+  ],
+  "any_of": [
+   [
+    "python",
+    "java",
+    "scala"
+   ],
+   [
+    "aws",
+    "gcp"
+   ]
+  ],
+  "match": "none"
+ },
+ {
+  "key": "hanati",
+  "company": "하나금융티아이",
+  "org_or_team": "하나금융융합기술원 Data Scientist (발표: NLP 셀)",
+  "job_title": "Data Scientist",
+  "region": "미상",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/382805",
+   "date_or_status": "마감 2026-09-07 (원티드), 석사 + 3년",
+   "requirements_quotes": [
+    "Python 활용 가능자"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "AI 알고리즘 기반 빅데이터 분석 및 예측 모델 개발 (손님관리, 신용평가, 이상거래탐지, 시장예측 등) / 최신 데이터 분석 기술 기반 알고리즘 고도화\n자격요건\nPython 활용 가능자\n관련 경력 3년 이상의 석사 학위 보유자"
+  },
+  "apply_skills": {
+   "python": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "llm",
+    "from": "발표",
+    "url": "https://byline.network/2024/11/31-221/",
+    "date": "2024-10-29",
+    "quote": "콜센터 직원은 상담이 끝난 후 내용을 직접 요약해야 하는데, 거대언어모델(LLM)로 이를 자동화할 수 있도록 현재 기술 검증이 끝나 적용 중"
+   },
+   {
+    "skill_id": "fine_tuning",
+    "from": "발표",
+    "url": "https://byline.network/2024/11/31-221/",
+    "date": "2024-10-29",
+    "quote": "잘 학습된 오픈 모델을 가지고 계속 사전학습, 미세조정을 통해 하나금융그룹에 특화되게 튜닝을 하자는 전략으로 진행했다"
+   },
+   {
+    "skill_id": "speech",
+    "from": "발표",
+    "url": "https://byline.network/2024/11/31-221/",
+    "date": "2024-10-29",
+    "quote": "상담 내용을 문자로 바꿔 주는 기능(STT)"
+   }
+  ],
+  "domain_keywords": [
+   "금융",
+   "콜센터",
+   "상담 요약",
+   "신용평가",
+   "이상거래탐지",
+   "LLM"
+  ],
+  "caveats": [
+   "근거는 컨퍼런스 발표를 다룬 기사(발표자 직접 인용)",
+   "같은 기술원, 다른 셀(공고 DS / 발표 NLP)"
+  ]
+ }
 ]

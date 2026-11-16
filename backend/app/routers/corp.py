@@ -9,7 +9,7 @@ from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel, Field
 
 from ..adapters import storage
-from ..data import courses, courses_source, fake_sessions
+from ..data import courses, courses_source, fake_sessions, hidden_ids, seed_companies, stats_only_ids
 from ..pipeline import market
 from ..pipeline.diagnose import effective_requirements
 from ..pipeline.recommend import LONG_HOURS
@@ -39,9 +39,15 @@ def _view(c: dict) -> dict:
 
 
 @router.get("")
-def list_companies():
+def list_companies(all: bool = False):
+    """기본은 실제 기준 회사만. 가상 예시(A·B·C)는 ?all=1 일 때만(기업 콘솔 시연용)."""
+    hidden = hidden_ids() | stats_only_ids()  # 가상 예시 + 팀이 안 맞는 회사(통계 전용)
     return [{"id": c["tenant_id"], "name": c["name"], "desc": c.get("desc", ""), "region": c.get("region"),
-             "job": c.get("job")} for c in storage.list_companies()]
+             "job": c.get("job"), "listed": c["tenant_id"] not in hidden,
+             "job_family": c.get("job_family") or seed_companies().get(c["tenant_id"], {}).get("job_family", "기타"),
+             "job_title": c.get("job_title", ""),
+             "level": c.get("level") or seed_companies().get(c["tenant_id"], {}).get("level", "미상")}
+            for c in storage.list_companies() if all or c["tenant_id"] not in hidden]
 
 
 @router.get("/{tid}")

@@ -10,13 +10,13 @@ from contextlib import contextmanager
 
 from ..adapters import bedrock, storage
 from ..guards import pii
-from ..data import seed_companies
+from ..data import hidden_ids, seed_companies, stats_only_ids
 from ..skills import get_dict
-from . import implies, market, projectfit
+from . import family, implies, market, projectfit
 from .extract import STATUS_LABEL, extract_posting_llm, extract_resume, extract_resume_llm, posting_requirements, \
     requirements_from
 from .recommend import build_path, optimize_order
-from .score import FORMULA, WEIGHT_LABEL, gaps, readiness, status_of
+from .score import FORMULA, WEIGHT_LABEL, gaps, readiness, resolve_any_of, status_of
 
 
 class Trace:
@@ -38,9 +38,18 @@ class Trace:
             self.steps.append(rec)
 
 
-def effective_requirements(company: dict) -> dict[str, int]:
+def effective_requirements(company: dict, status_map: dict | None = None, which: str = "requirements") -> dict[str, int]:
+    """기업 기준. status_map을 주면 'A 또는 B'(any_of) 묶음을 지원자에게 맞춰 하나로 줄인다."""
     ex = set(company.get("excluded", []))
-    return {s: w for s, w in company.get("requirements", {}).items() if s not in ex and w in (1, 2)}
+    reqs = {s: w for s, w in (company.get(which) or {}).items() if s not in ex and w in (1, 2)}
+    if status_map is not None:
+        reqs = resolve_any_of(reqs, any_of(company), status_map)
+    return reqs
+
+
+def any_of(company: dict) -> list[list[str]]:
+    """로컬 DB에 예전 설정이 남아 있어도 seed의 any_of를 쓴다."""
+    return company.get("any_of") or seed_companies().get(company.get("tenant_id"), {}).get("any_of") or []
 
 
 def _usage(*logs) -> dict:
@@ -51,7 +60,25 @@ def _usage(*logs) -> dict:
             "embed_texts": sum(c["in"] for c in calls if c["kind"] == "embed")}
 
 
-def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = True) -> dict:
+def _work_evidence(company: dict, reqs: dict, preqs: dict, fmap: dict) -> dict[str, dict]:
+    """실무에만 있는 스킬의 근거: 이 회사 출처 원문(있으면) + 같은 직군 몇 곳이 실무에서 쓰는지."""
+    fam = {k["skill_id"]: k.get("n_work", 0) for k in fmap.get("skills", [])}
+    fam_ex = {e["skill_id"]: e for e in company.get("_family_evidence", [])}
+    out = {}
+    for sid in reqs:
+        if sid in preqs:
+            continue
+        src = (company.get("sources") or {}).get(sid) or {}
+        if not src.get("quote") and sid in fam_ex:  # 목록에 없는 회사: 같은 직군 회사의 원문
+            ex = next((x for x in fam_ex[sid]["examples"] if x.get("quote")), None)
+            if ex:
+                src = {"quote": ex["quote"], "from": f"{ex['company']} · {ex['from']}", "url": ex.get("url", "")}
+        out[sid] = {"quote": src.get("quote", ""), "from": src.get("from", ""), "url": src.get("url", ""),
+                    "family_n": fmap.get("n", 0), "family_used": fam.get(sid, 0)}
+    return out
+
+
+def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = True, custom: dict | None = None) -> dict:
     sd = get_dict()
     mock = bedrock.mode() == "mock"
     clog = None if mock else bedrock.CallLog()
@@ -60,7 +87,13 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
     fallbacks: list[str] = [bedrock.forced_reason()] if bedrock.forced_reason() else []
     extraction = None
 
-    company = storage.get_company(company_id)
+    if company_id == "custom":  # 목록에 없는 회사: 공고는 붙여 넣은 것, 실무는 같은 직군 회사들로 추정
+        if not custom:
+            raise KeyError(company_id)
+        company = family.custom_company(custom["name"], custom["job_family"], custom["posting_text"],
+                                        storage.list_companies(), effective_requirements)
+    else:
+        company = storage.get_company(company_id)
     if company is None:
         raise KeyError(company_id)
 
@@ -68,7 +101,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
     pool = ThreadPoolExecutor(max_workers=1)
     apply_src = company.get("apply_source", "공고")
     explicit_apply = company.get("apply_requirements")  # 공고가 없는 기업: 현업이 말한 '필수' 항목을 지원 기준으로
-    fut_posting = None if (mock or explicit_apply) else pool.submit(extract_posting_llm, company.get("posting_text", ""), plog)
+    fut_posting = None if (mock or explicit_apply or company.get("apply_none")) else pool.submit(extract_posting_llm, company.get("posting_text", ""), plog)
 
     with tr.step("개인정보 마스킹", "guard.regex_mask" if mock else "guard.regex_mask → bedrock.apply_guardrail(PII)") as s:
         masked, n_pii = pii.mask(resume_text)
@@ -110,8 +143,8 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         s["detail"] = " · ".join(f"{STATUS_LABEL[k]} {v}" for k, v in cnt.items())
 
     with tr.step("기업 실무 기준 조회", f"store.get_company(tenant={company_id})") as s:
-        reqs = effective_requirements(company)
-        s["detail"] = f"{company['name']} · 요구역량 {len(reqs)}개"
+        reqs = effective_requirements(company, status_map)
+        s["detail"] = f"{company['name']} · 요구역량 {len(reqs)}개" + (" · '또는' 묶음 반영" if any_of(company) else "")
 
     with tr.step("시장 기준 조회", "market.rates(region, job)") as s:
         mrate = market.rate_for_company(company)
@@ -131,11 +164,18 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
                 s["tool"] = "rules.posting_requirements (Bedrock 실패 → 폴백)"
         pool.shutdown(wait=False)
         if explicit_apply:
-            preqs = dict(explicit_apply)
+            preqs = resolve_any_of(dict(explicit_apply), any_of(company), status_map)
+        elif company.get("apply_none"):  # 공고에 기술 요구가 없다 (신입 공채: 코딩·CS 테스트로 평가)
+            preqs = {}
+            s["tool"] = "공고에 기술 요구 없음 (코딩·CS 테스트)"
             s["tool"] = "company.apply_requirements (현업 인터뷰 필수 항목)"
         if preqs is None:
             preqs = posting_requirements(company.get("posting_text", ""))
         s["detail"] = f"{apply_src} 요구 {len(preqs)}개 (입사 문턱)"
+
+    if company.get("custom"):  # 실무 기준(추정) = 직군 실무 기준 ∪ 공고 요구
+        for k, w in preqs.items():
+            reqs[k] = max(reqs.get(k, 0), w)
 
     with tr.step("준비도 계산", "rules.readiness × (공고 지원 기준, 기업 실무 기준)") as s:
         score = readiness(reqs, status_map)
@@ -170,13 +210,31 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
 
     with tr.step("다른 기업과 비교", "rules.readiness × 기업") as s:
         others = []
+        hidden = hidden_ids() | stats_only_ids()  # 비교 목록에는 고를 수 있는 회사만
         for c in storage.list_companies():
-            r = effective_requirements(c)
+            if c["tenant_id"] in hidden and c["tenant_id"] != company_id:
+                continue
+            r = effective_requirements(c, status_map)
             g = gaps(r, status_map)
             others.append({"company_id": c["tenant_id"], "name": c["name"], "readiness": readiness(r, status_map),
+                           "job_family": c.get("job_family") or seed_companies().get(c["tenant_id"], {}).get("job_family", "기타"),
+                           "level": c.get("level") or seed_companies().get(c["tenant_id"], {}).get("level", "미상"),
                            "first_task": sd.name(g[0][0]) if g else None, "current": c["tenant_id"] == company_id})
         others.sort(key=lambda x: -x["readiness"])
         s["detail"] = f"{len(others)}개 기업"
+
+    with tr.step("직군 지도", "rules.family_map (직군 회사들의 공고 수요 × 실무 중요도)") as s:
+        fam = family.family_of(company)
+        fmap = family.family_map(fam, storage.list_companies(), status_map, effective_requirements)
+        s["detail"] = f"{fam} {fmap['n']}곳 · 스킬 {len(fmap['skills'])}개"
+
+    custom_out = None
+    if company.get("custom"):
+        with tr.step("실무 기술 예측(참고)", "rules(직군 통계)" if mock else "bedrock.converse(직군 통계 후보 안에서만 선택)") as s:
+            pred = family.predict_work(company, preqs, status_map, log=clog)
+            custom_out = {"family_evidence": company["_family_evidence"], "family_n": company["_family_n"],
+                          "prediction": pred}
+            s["detail"] = f"{len(pred['items'])}개 예측 · {'Bedrock' if pred['mode'] == 'bedrock' else '규칙'} · 점수에는 반영 안 함"
 
     with tr.step("프로젝트 적합도", "rules.projectfit (경험 단위 × 부서 실무 기준 · 도메인 단어)") as s:
         seeds = seed_companies()
@@ -187,7 +245,7 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         pfit = projectfit.assess(masked, status_map, with_domain(company), reqs)
         for o in others:
             c = storage.get_company(o["company_id"])
-            o["project_fit"] = projectfit.best_fit(masked, status_map, with_domain(c), effective_requirements(c))
+            o["project_fit"] = projectfit.best_fit(masked, status_map, with_domain(c), effective_requirements(c, status_map))
         s["detail"] = f"경험 {pfit['n_units']}개 · 가장 맞는 경험 {pfit['best_fit']}점 · {pfit['verdict_label']}"
 
     # 근거 목록: 추천 설명은 이 목록의 ID만 인용할 수 있다
@@ -264,7 +322,11 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
 
     return {
         "company": {"id": company["tenant_id"], "name": company["name"], "desc": company.get("desc", ""),
-                    "job_title": company.get("job_title", ""), "region": company.get("region", "")},
+                    "job_title": company.get("job_title", ""), "region": company.get("region", ""),
+                    "job_family": family.family_of(company) if not company.get("custom") else company["job_family"],
+                    "custom": bool(company.get("custom")), "work_source": company.get("work_source", ""),
+                    "apply_none": bool(company.get("apply_none")),
+                    "apply_verified": bool(company.get("apply_verified")) or bool(seed_companies().get(company.get("tenant_id"), {}).get("apply_verified"))},
         "readiness": score,               # 실무 준비도 (기업 등록 기준)
         "readiness_apply": score_apply,   # 지원 준비도 (공고 기준)
         "formula": FORMULA,
@@ -277,6 +339,9 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         "baseline": baseline,
         "project_fit": pfit,
         "others": others,
+        "family_map": fmap,
+        "custom": custom_out,
+        "work_evidence": _work_evidence(company, reqs, preqs, fmap),
         "evidence": evidence,
         "trace": tr.steps,
         "mode": bedrock.mode(),

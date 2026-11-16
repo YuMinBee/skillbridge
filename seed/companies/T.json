@@ -5,7 +5,7 @@
   "region": "수도권",
   "job": "ai",
   "job_title": "AI Engineer",
-  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 수시 채용 (리멤버), 학사 7년/석사 5년 이상. 주의: 블로그는 AI엔지니어링팀이 아닌 데이터 엔지니어링팀(2020)·데이터프로덕트그룹(2024) 글. 대상 모델(파손탐지·세차)은 공고 업무와 같음; 2020년 글은 지금 스택과 다를 수 있음; 경력 7년(학사) 공고. 2026-11-16 확인.",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 수시 채용 (마감), 학사 7년/석사 5년 이상. 주의: 같은 직무(컴퓨터비전) · 팀은 개편 전후 이름 차이(2022 'AI팀' / 공고 'AI엔지니어링팀'); 블로그 2022, 시니어 공고. 2026-11-16 확인.",
   "apply_source": "공고",
   "apply_requirements": {
     "computer_vision": 2,
@@ -14,7 +14,6 @@
     "fine_tuning": 2,
     "rag": 2,
     "prompt_engineering": 2,
-    "ai_agent": 2,
     "pytorch": 2,
     "python": 2,
     "c_lang": 2,
@@ -32,7 +31,6 @@
     "fine_tuning": 2,
     "rag": 2,
     "prompt_engineering": 2,
-    "ai_agent": 2,
     "pytorch": 2,
     "python": 2,
     "c_lang": 2,
@@ -41,48 +39,41 @@
     "aws": 1,
     "gcp": 1,
     "edge_ai": 1,
-    "kubernetes": 1,
-    "docker": 1,
-    "aws_s3": 1,
-    "data_warehouse": 1,
-    "mysql": 1,
-    "airflow": 1
+    "deep_learning": 1,
+    "data_labeling": 1,
+    "data_analysis": 1,
+    "machine_learning": 1
   },
   "sources": {
     "computer_vision": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
+      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP"
     },
     "nlp": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
+      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP"
     },
     "llm": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
+      "quote": "(LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
     },
     "fine_tuning": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
+      "quote": "(LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
     },
     "rag": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
+      "quote": "(LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
     },
     "prompt_engineering": {
       "from": "공고",
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
-    },
-    "ai_agent": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/279193",
-      "quote": "머신러닝, 딥러닝 모델 혹은 Agentic AI 시스템을 실제 비즈니스에 적용한 경험이 있으신 분"
+      "quote": "(LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분"
     },
     "pytorch": {
       "from": "공고",
@@ -124,65 +115,67 @@
       "url": "https://career.rememberapp.co.kr/job/posting/279193",
       "quote": "공고 본문 참고"
     },
-    "kubernetes": {
+    "deep_learning": {
       "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2020/03/10/ml-model-serving",
-      "quote": "(feat. AWS SQS + Python Application + Kubernetes + Git & Rancher)",
-      "date": "2020-03-10"
+      "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+      "quote": "세차 여부를 분류해 주는 모델을 만들고, 분류가 애매한 이미지들을 매니저의 검토가 필요하도록 별도로 Isolate(격리)해주는 모델을 설계했습니다.",
+      "date": "2022-04-18"
     },
-    "docker": {
+    "data_labeling": {
       "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2020/03/10/ml-model-serving",
-      "quote": "Model Serving : AWS S3 + Agent(Python Application / Docker) + Kubernetes",
-      "date": "2020-03-10"
+      "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+      "quote": "분류 레이블은 크게 \"인증 성공\"과 \"인증 보류\" 2개로 나뉘고 구체적으로는 아래처럼 4개로 나뉩니다.",
+      "date": "2022-04-18"
     },
-    "aws_s3": {
+    "data_analysis": {
       "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
-      "quote": "차량운영정보를 통해 선정된 차량사진을 AWS S3에서 읽어와 차량 오염도 판단 모델을 통해 차량사진의 오염 정도를 판단하고, 그 결과를 BigQuery에 주기적으로 적재 합니다.",
-      "date": "2024-03-12"
+      "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+      "quote": "저희 데이터 모델링 팀에서는 2020-2021, 약 2년간 적재된 고객 수행 세차 건 이미지 데이터를 분석하여 세차 여부를 검토하는 4개의 패턴을 발견할 수 있었습니다.",
+      "date": "2022-04-18"
     },
-    "data_warehouse": {
+    "machine_learning": {
       "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
-      "quote": "AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다.",
-      "date": "2024-03-12"
-    },
-    "mysql": {
-      "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
-      "quote": "AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다.",
-      "date": "2024-03-12"
-    },
-    "airflow": {
-      "from": "기술 블로그",
-      "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
-      "quote": "(1) ~ (4)의 배치 작업을 Airflow를 통해 관리 하고 있습니다.",
-      "date": "2024-03-12"
+      "url": "https://tech.socar.kr/data/2022/04/18/develop-model-classifying-washed-car",
+      "quote": "첫 번째 접근은 기본적인 Supervised Classifier 모델이었고, 두 번째 접근은 Image Retrieval 활용하는 방식이었습니다.",
+      "date": "2022-04-18"
     }
   },
   "excluded": [],
-  "posting_text": "• AI엔지니어링팀은 데이터플랫폼그룹에서 AI관련 업무를 담당하는 조직으로, 카셰어링 비즈니스에서 발생하는 여러 데이터를 분석 및 연구하고, 연구된 기술을 바탕으로 여러 비즈니스 문제를 해결하는 팀입니다.\n• 차량 관리 자동화 (파손탐지, 세차검증 등)를 위한 Computer Vision 모델 개발\n자격요건\n학사 7년 / 석사 5년 이상의 Computer Vision 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분\nPytorch와 같은 트레이닝 프레임워크에 능숙하신 분",
+  "any_of": [
+    [
+      "computer_vision",
+      "nlp"
+    ],
+    [
+      "aws",
+      "gcp"
+    ]
+  ],
+  "posting_text": "카셰어링 혁신을 위한 Computer Vision 및 LLM 솔루션 개발 및 적용 / 차량 관리 자동화 (파손탐지, 세차검증 등)를 위한 Computer Vision 모델 개발 / VLM/LLM을 활용한 Agentic AI 개발 / Agent 개발 및 배포 표준화를 위한 MLOps 시스템 개발",
   "tracks": [],
   "domain": {
-    "label": "쏘카 AI Engineer",
+    "label": "카셰어링·차량",
     "keywords": [
       "카셰어링",
       "차량",
+      "세차 검증",
       "파손 탐지",
-      "세차",
-      "블랙박스",
       "컴퓨터비전"
     ],
     "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
   },
   "public_source": {
-    "org": "데이터플랫폼그룹 AI엔지니어링팀 (블로그: 데이터 엔지니어링팀·데이터프로덕트그룹)",
+    "org": "AI엔지니어링팀 (블로그: 데이터비즈니스본부 AI팀 컴퓨터비전 엔지니어)",
     "caveats": [
-      "블로그는 AI엔지니어링팀이 아닌 데이터 엔지니어링팀(2020)·데이터프로덕트그룹(2024) 글. 대상 모델(파손탐지·세차)은 공고 업무와 같음",
-      "2020년 글은 지금 스택과 다를 수 있음",
-      "경력 7년(학사) 공고"
+      "같은 직무(컴퓨터비전) · 팀은 개편 전후 이름 차이(2022 'AI팀' / 공고 'AI엔지니어링팀')",
+      "블로그 2022, 시니어 공고"
     ],
     "posting_url": "https://career.rememberapp.co.kr/job/posting/279193"
-  }
+  },
+  "team_match": "same_dept",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "시니어"
 }

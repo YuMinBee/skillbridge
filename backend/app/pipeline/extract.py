@@ -150,6 +150,41 @@ def _locate(evidence: str, mention: str, text: str) -> str | None:
     return None
 
 
+# LLM이 문맥으로 추론해도 되는 '개념' 스킬. 나머지(제품·도구·언어 이름)는 원문에 그 이름이나 별칭이 있어야 한다.
+# 예: "문서 검색·재랭킹·LLM 생성" → RAG(개념)는 인정, LangChain(도구)은 이름이 없으니 버림.
+INFERABLE = {
+    "data_analysis", "statistics", "data_visualization", "data_labeling", "ab_testing", "machine_learning",
+    "reinforcement_learning", "recommender", "time_series", "anomaly_detection", "ai_general", "deep_learning",
+    "distributed_training", "computer_vision", "nlp", "llm", "rag", "prompt_engineering", "ai_agent", "fine_tuning",
+    "embedding", "llm_evaluation", "guardrails", "ai_ethics", "cloud_architecture", "multi_cloud", "serverless",
+    "finops", "cloud_migration", "iac", "networking", "gpu_infra", "load_balancing", "backup_dr", "virtualization",
+    "cicd", "devops", "sre", "observability", "mlops", "mlops_monitoring", "feature_store", "mlops_pipeline",
+    "data_pipeline", "data_warehouse", "nosql", "data_modeling", "query_tuning", "rest_api", "msa", "security",
+    "iam_security", "embedded", "edge_ai", "speech", "paper_research", "math", "agile", "communication", "english",
+    "technical_writing", "smart_factory", "defense_domain", "office", "gen_ai_use", "electronics", "game_resource",
+    "rendering_opt", "perf_opt",
+}
+_NS = re.compile(r"[\s·\-_/.]+")
+
+
+def named_in_text(sid: str, mention: str, evidence: str) -> bool:
+    """도구 이름 스킬이 언급·근거 문장에 실제로 적혀 있는가 (별칭 포함, 'torch'처럼 이름 일부도 인정)."""
+    sd = get_dict()
+    if not sd.exists(sid):
+        return False
+    hay = _NS.sub("", f"{mention} {evidence}".lower())
+    men = _NS.sub("", mention.lower())
+    for n in [sd.name(sid), *sd.skills[sid]["aliases"]]:
+        nl = _NS.sub("", n.lower())
+        if men and (men == nl or nl.startswith(men) and len(men) <= 2) or (len(nl) >= 2 and nl in hay):     # 이름·별칭이 그대로 있음 ('C' 같은 한 글자 이름 포함)
+            return True
+        if len(men) >= 3 and men in nl:                    # 이름 일부 ('torch' → PyTorch)
+            return True
+        if 2 <= len(men) <= 5 and men[0] == nl[0] and " " not in mention.strip():  # 줄임말 ('쿠베' → 쿠버네티스)
+            return True
+    return False
+
+
 def extract_resume_llm(text: str, log=None, use_embedding=True, use_llm=True,
                        safety_net=True) -> tuple[dict[str, dict], dict]:
     """→ ({skill_id: {status, evidence, mention, how}}, 통계). 스위치는 평가(eval/run_eval.py) ablation용."""
@@ -168,6 +203,14 @@ def extract_resume_llm(text: str, log=None, use_embedding=True, use_llm=True,
         ms.append({"mention": it["mention"].strip(), "standard_name": (it.get("standard_name") or "").strip(), "evidence": ev,
                    "status": it.get("status") if it.get("status") in RANK else "verify"})
     normalize(ms, log=log, use_embedding=use_embedding, use_llm=use_llm)
+    ungrounded = 0
+    # 임베딩 근접 후보에서 고른 도구 이름은 원문 근거가 있어야 한다 (예: HistGradientBoosting → XGBoost 오탐).
+    # 추출 모델이 문맥을 읽고 직접 표준명을 댄 경우(dict-std, 예: '파드 수 자동 확장' → Kubernetes)는 믿는다.
+    for m in ms:
+        if m.get("how") == "llm":
+            keep = [sid for sid in m["skill_ids"] if sid in INFERABLE or named_in_text(sid, m["mention"], m["evidence"])]
+            ungrounded += len(m["skill_ids"]) - len(keep)
+            m["skill_ids"] = keep
 
     res: dict[str, dict] = {}
     for m in ms:
@@ -183,7 +226,7 @@ def extract_resume_llm(text: str, log=None, use_embedding=True, use_llm=True,
             added += 1
     hows = [m["how"] for m in ms]
     stats = {"mentions": len(raw), "dropped": dropped, "dict": hows.count("dict") + hows.count("dict-std"), "embed_llm": hows.count("llm"),
-             "unmatched": hows.count("none"), "safety_net": added,
+             "unmatched": hows.count("none"), "safety_net": added, "ungrounded_tools": ungrounded,
              "unmatched_mentions": sorted({m["mention"] for m in ms if m["how"] == "none"})[:10]}
     return res, stats
 

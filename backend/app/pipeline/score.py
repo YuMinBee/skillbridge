@@ -24,3 +24,20 @@ def gaps(requirements: dict[str, int], status_map: dict[str, dict]) -> list[tupl
          if status_of(status_map, sid) != "own"]
     g.sort(key=lambda x: (-x[1], STATUS_VALUE[x[2]], x[0]))
     return g
+
+
+def resolve_any_of(requirements: dict[str, int], groups: list[list[str]] | None, status_map: dict[str, dict]) -> dict[str, int]:
+    """'A 또는 B' 요건: 묶음 안에서 가장 잘 갖춘 스킬 하나만 남긴다(동점이면 먼저 적힌 것). 가중치는 묶음의 최댓값."""
+    if not groups:
+        return requirements
+    out = dict(requirements)
+    for g in groups:
+        members = [s for s in g if s in out]
+        if len(members) < 2:
+            continue
+        best = max(members, key=lambda s: (STATUS_VALUE[status_of(status_map, s)], -members.index(s)))
+        w = max(out[s] for s in members)
+        for s in members:
+            out.pop(s)
+        out[best] = w
+    return out

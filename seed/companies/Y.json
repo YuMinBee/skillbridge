@@ -1,117 +1,107 @@
 {
   "tenant_id": "Y",
   "name": "채널톡(채널코퍼레이션)(공개 자료 재구성)",
-  "desc": "Software Engineer (Backend) · 실제 공고 + 기술 블로그",
+  "desc": "Software Engineer (Backend - CRM) · 실제 공고 + 기술 블로그",
   "region": "수도권",
   "job": "cloud",
-  "job_title": "Software Engineer (Backend)",
-  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감일 2026-12-04 (리멤버, 모집 중), 경력 5~15년. 주의: 블로그는 같은 백엔드 직군, 세부 스쿼드 미확인; 경력 5년 이상. 2026-11-16 확인.",
+  "job_title": "Software Engineer (Backend - CRM)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-11 (마감). 주의: 같은 팀(CRM 마케팅) — 블로그는 팀명 대신 'CRM 마케팅'과 '저희 팀'으로 연결; 신입 공고, 자격요건에 기술 스택 없음. 2026-11-16 확인.",
   "apply_source": "공고",
   "apply_requirements": {
-    "java": 2,
-    "golang": 2,
-    "python": 2,
-    "aws": 2,
-    "kubernetes": 2,
-    "communication": 2,
-    "sre": 1
+    "aws": 1,
+    "gcp": 1,
+    "data_pipeline": 1
   },
   "work_source": "공고 + 기술 블로그",
   "requirements": {
-    "java": 2,
-    "golang": 2,
-    "python": 2,
-    "aws": 2,
-    "kubernetes": 2,
-    "communication": 2,
-    "sre": 1,
+    "aws": 1,
+    "gcp": 1,
+    "data_pipeline": 1,
     "postgresql": 1,
     "aws_dynamodb": 1,
-    "elk": 1,
-    "redis": 1
+    "redis": 1,
+    "data_warehouse": 1,
+    "data_modeling": 1
   },
   "sources": {
-    "java": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• Java, Go, Python 등 하나 이상의 언어에 대한 깊이 있는 이해"
-    },
-    "golang": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• Java, Go, Python 등 하나 이상의 언어에 대한 깊이 있는 이해"
-    },
-    "python": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• Java, Go, Python 등 하나 이상의 언어에 대한 깊이 있는 이해"
-    },
     "aws": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• AWS, Kubernetes 등 클라우드 인프라 활용 경험"
-    },
-    "kubernetes": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• AWS, Kubernetes 등 클라우드 인프라 활용 경험"
-    },
-    "communication": {
-      "from": "공고",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• 다양한 팀과 협업하며 커뮤니케이션 리더십을 발휘한 경험"
-    },
-    "sre": {
       "from": "공고(우대)",
-      "url": "https://career.rememberapp.co.kr/job/posting/339770",
-      "quote": "• SRE, 데이터 엔지니어링, 보안 등 특정 영역에서의 전문성"
+      "url": "https://www.wanted.co.kr/wd/322740",
+      "quote": "클라우드(GCP, AWS 등) 환경에서의 운영 경험이 있으신 분"
+    },
+    "gcp": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/322740",
+      "quote": "클라우드(GCP, AWS 등) 환경에서의 운영 경험이 있으신 분"
+    },
+    "data_pipeline": {
+      "from": "공고(우대)",
+      "url": "https://www.wanted.co.kr/wd/322740",
+      "quote": "데이터 파이프라인 구축/운영을 실제로 경험했거나 높은 이해도가 있으신 분"
     },
     "postgresql": {
       "from": "기술 블로그",
       "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
-      "quote": "채널톡의 데이터는 여러 데이터베이스 시스템에 저장합니다. 기본적으로 RDBMS ( pSQL ), NoSQL ( DynamoDB ) 등에 저장할 수 있지만, 검색을 위해 OpenSearch 를 이용하거나 더 빠른 캐싱을 위해 Redis 를 이용하기도 합니다.",
+      "quote": "기본적으로 RDBMS(pSQL), NoSQL(DynamoDB) 등에 저장할 수 있지만, 검색을 위해 OpenSearch를 이용하거나 더 빠른 캐싱을 위해 Redis를 이용하기도 합니다.",
       "date": "2026-02-04"
     },
     "aws_dynamodb": {
       "from": "기술 블로그",
       "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
-      "quote": "기본적으로 RDBMS ( pSQL ), NoSQL ( DynamoDB ) 등에 저장할 수 있지만",
-      "date": "2026-02-04"
-    },
-    "elk": {
-      "from": "기술 블로그",
-      "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
-      "quote": "검색을 위해 OpenSearch 를 이용하거나",
+      "quote": "기본적으로 RDBMS(pSQL), NoSQL(DynamoDB) 등에 저장할 수 있지만",
       "date": "2026-02-04"
     },
     "redis": {
       "from": "기술 블로그",
       "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
-      "quote": "더 빠른 캐싱을 위해 Redis 를 이용하기도 합니다.",
+      "quote": "더 빠른 캐싱을 위해 Redis를 이용하기도 합니다.",
+      "date": "2026-02-04"
+    },
+    "data_warehouse": {
+      "from": "기술 블로그",
+      "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+      "quote": "오늘 이 글에서는 고객 행동 데이터를 보다 정교하게 지원하기 위해 Clickhouse를 도입하게 된 과정을 적어봅니다.",
+      "date": "2026-02-04"
+    },
+    "data_modeling": {
+      "from": "기술 블로그",
+      "url": "https://docs.channel.io/tech-blog/ko/articles/tech-crm-marketing-clickhouse-16084dd4",
+      "quote": "위에서 언급했듯이 이러한 복잡한 대규모 Fact Table에 대한 JOIN은 Starrocks와 같은 시스템이 더욱 잘 지원합니다.",
       "date": "2026-02-04"
     }
   },
   "excluded": [],
-  "posting_text": "주요업무\n• 800만 명이 사용하는 채널톡의 핵심 백엔드 시스템 설계 및 고도화\n• 트래픽 증가에 대응하기 위한 인프라 스케일링 및 시스템 안정화\n자격 요건\n• 백엔드 아키텍처 설계 및 운영 경험 5년 이상\n• Java, Go, Python 등 하나 이상의 언어에 대한 깊이 있는 이해\n• AWS, Kubernetes 등 클라우드 인프라 활용 경험",
+  "any_of": [
+    [
+      "aws",
+      "gcp"
+    ]
+  ],
+  "posting_text": "채널톡의 새로운 성장 엔진, CRM 마케팅의 표준을 만들 분을 찾습니다. • 비즈니스 목표 달성을 위해 주도적으로 CRM 마케팅 툴을 기획하고 개발합니다. • 고객에게 온사이트/오프사이트 광고가 전달되는 전 과정을 책임집니다. • 한 번에 수백만 건의 메시지를 안정적으로 처리할 수 있도록 확장 가능한(scalable) 구조를 설계하고 고민합니다.",
   "tracks": [],
   "domain": {
-    "label": "채널톡 Software Engineer (B",
+    "label": "CRM·마케팅",
     "keywords": [
-      "B2B SaaS",
-      "채팅 상담",
       "CRM",
       "마케팅",
-      "고객",
-      "트래픽"
+      "광고",
+      "고객 데이터",
+      "B2B SaaS"
     ],
     "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
   },
   "public_source": {
-    "org": "백엔드",
+    "org": "CRM 마케팅 백엔드",
     "caveats": [
-      "블로그는 같은 백엔드 직군, 세부 스쿼드 미확인",
-      "경력 5년 이상"
+      "같은 팀(CRM 마케팅) — 블로그는 팀명 대신 'CRM 마케팅'과 '저희 팀'으로 연결",
+      "신입 공고, 자격요건에 기술 스택 없음"
     ],
-    "posting_url": "https://career.rememberapp.co.kr/job/posting/339770"
-  }
+    "posting_url": "https://www.wanted.co.kr/wd/322740"
+  },
+  "team_match": "same_team",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "신입"
 }

@@ -1,0 +1,88 @@
+{
+  "tenant_id": "Z20",
+  "name": "삼성SDS(공개 자료 재구성)",
+  "desc": "채용연계형 인턴 · 소프트웨어 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "채용연계형 인턴 · 소프트웨어",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-02-19~03-05 (마감). 주의: 채용연계형 인턴(실습 중 SW역량테스트로 입사 결정); 3급 신입 상세 공고는 확인 못 함; 실무 근거는 클라우드 플랫폼(2022)·AI연구팀(2025) 글 — 배치 팀은 입사 후 결정. 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {},
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "kubernetes": 1,
+    "jenkins": 1,
+    "flask": 1,
+    "nginx": 1,
+    "rag": 1,
+    "embedding": 1
+  },
+  "sources": {
+    "kubernetes": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/techreport/container-ml.html",
+      "quote": "추가적으로 쿠버네티스 환경에서 Scaling, Auto Healing이 가능하도록 설정하여 안정적인 서비스 제공이 가능합니다.",
+      "date": "2022-03-31"
+    },
+    "jenkins": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/techreport/container-ml.html",
+      "quote": "또한 Jenkins Tool을 활용하여 컨테이너 이미지 생성 및 배포 환경을 구성하고 ML 모델을 컨테이너 에 배포할 수 있게 하였습니다.",
+      "date": "2022-03-31"
+    },
+    "flask": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/techreport/container-ml.html",
+      "quote": "uWSGI, Nginx, Flask를 활용한 파이썬 기반의 표준 이미지와 Nginx, Plumber를 활용한 R 기반의 표준 이미지를 만들어 웹 서비스로 제공 가능한 환경을 자동화 하였습니다.",
+      "date": "2022-03-31"
+    },
+    "nginx": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/techreport/scalable-web-application.html",
+      "quote": "Tomcat, Nginx와 Web, WAS Server Software 등을 컨테이너로 사용할 수 있는 삼성 클라우드 플랫폼",
+      "date": "2022-03-31"
+    },
+    "rag": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/research-blog/samsungsds-kopub-vdr-benchmark.html",
+      "quote": "고품질의 한국어 멀티모달 RAG(Retrieval-Augmented Generation) 평가셋이 존재하지 않았습니다.",
+      "date": "2025-11-17"
+    },
+    "embedding": {
+      "from": "기술 블로그",
+      "url": "https://www.samsungsds.com/kr/research-blog/samsungsds-kopub-vdr-benchmark.html",
+      "quote": "저희 연구팀은 다양한 최신 임베딩 모델들의 각 태스크별 성능을 비교했습니다.",
+      "date": "2025-11-17"
+    }
+  },
+  "excluded": [],
+  "any_of": [],
+  "posting_text": "모집직무 소프트웨어 / 대상학과 컴퓨터공학, 전자전기 등 / 자격요건 ① [학사] 3학년 2학기 ~ 4학년 1학기 재학생 ② GPA 3.0점 이상 / 4.0점 만점 ③ 군복무 완료(병역 필) 또는 면제자 / 선발절차 지원서 접수 → 서류전형/면접전형 → 인턴실습(6주) * 실습 중, SW역량테스트 및 최종면접을 통해 입사 결정",
+  "tracks": [],
+  "domain": {
+    "label": "SI·클라우드 플랫폼",
+    "keywords": [
+      "SI",
+      "클라우드 플랫폼",
+      "컨테이너",
+      "RAG",
+      "생성형 AI"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "소프트웨어 (채용연계형 인턴) · 근거: 클라우드 플랫폼 엔지니어·AI연구팀",
+    "caveats": [
+      "채용연계형 인턴(실습 중 SW역량테스트로 입사 결정)",
+      "3급 신입 상세 공고는 확인 못 함",
+      "실무 근거는 클라우드 플랫폼(2022)·AI연구팀(2025) 글 — 배치 팀은 입사 후 결정"
+    ],
+    "posting_url": "https://kgsa.princeton.edu/wp-content/uploads/sites/454/2025/02/삼성SDS-25년-글로벌-인턴십-모집-안내.pdf"
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": true,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "인턴"
+}

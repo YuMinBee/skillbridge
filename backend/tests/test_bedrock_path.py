@@ -144,7 +144,7 @@ def test_diagnose_bedrock_mode_records_calls(fake):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert r["mode"] == "bedrock" and r["fallbacks"] == []
-    assert len(r["trace"]) == 13
+    assert len(r["trace"]) == 14
     kinds = {c["kind"] for s in r["trace"] for c in s.get("calls", [])}
     assert {"guardrail", "extract", "explain"} <= kinds
     assert r["usage"]["calls"] >= 4
@@ -161,4 +161,4 @@ def test_each_step_falls_back_on_failure(fake, where):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert len(r["fallbacks"]) == 1
-    assert len(r["trace"]) == 13 and r["readiness"] >= 0
+    assert len(r["trace"]) == 14 and r["readiness"] >= 0

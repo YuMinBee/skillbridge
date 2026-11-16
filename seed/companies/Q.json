@@ -120,10 +120,16 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "java",
+      "kotlin"
+    ]
+  ],
   "posting_text": "채널연동개발팀은 대한민국 1위 숙박 플랫폼 여기어때의 판매 확대를 위해 글로벌 OTA, 펜션 에이전시, CMS 등과 커넥트하는 핵심 백엔드 개발팀입니다.\n이런 분과 함께 하고 싶어요\n대용량 트래픽 처리를 위한 시스템 설계 경험이 있는 분\nJava(Kotlin) Spring 기반 대규모 애플리케이션 개발 및 운영 경험이 있는 분\nJPA, Hibernate 등 ORM 사용과 도메인 모델링 경험이 있는 분\nAWS 클라우드 환경(EKS, RDS, ElastiCache) 기반의 인프라 설계 및 운영 경험이 있는 분",
   "tracks": [],
   "domain": {
-    "label": "여기어때 Backend Engineer [채널",
+    "label": "숙박·여행",
     "keywords": [
       "숙박",
       "여행",
@@ -142,5 +148,11 @@
       "경력 0~3년 — 신입·주니어에 가까움"
     ],
     "posting_url": "https://inthiswork.com/archives/391774"
-  }
+  },
+  "team_match": "none",
+  "stats_only": true,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "주니어"
 }

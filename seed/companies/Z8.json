@@ -1,68 +1,108 @@
 {
   "tenant_id": "Z8",
   "name": "하나금융티아이(공개 자료 재구성)",
-  "desc": "Data Scientist · 실제 공고 + 기술 블로그",
-  "region": "미상",
+  "desc": "NLP 연구원 · 실제 공고 + 기술 블로그",
+  "region": "수도권",
   "job": "ai",
-  "job_title": "Data Scientist",
-  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 마감 2026-09-07 (원티드), 석사 + 3년. 주의: 근거는 컨퍼런스 발표를 다룬 기사(발표자 직접 인용); 같은 기술원, 다른 셀(공고 DS / 발표 NLP). 2026-11-16 확인.",
+  "job_title": "NLP 연구원",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-07-06 마감, 경력 3년 이상·석사 이상. 주의: 같은 직무(NLP) · 공고에 'NLP셀' 표기는 없고 기술원+NLP 수준; 상세 요건 일부는 헤드헌팅판; 발표 2024-11. 2026-11-16 확인.",
   "apply_source": "공고",
   "apply_requirements": {
-    "python": 2
+    "nlp": 2,
+    "llm": 2,
+    "deep_learning": 2,
+    "pytorch": 2,
+    "tensorflow": 2,
+    "fine_tuning": 1,
+    "paper_research": 1
   },
   "work_source": "공고 + 기술 블로그",
   "requirements": {
-    "python": 2,
-    "llm": 1,
+    "nlp": 2,
+    "llm": 2,
+    "deep_learning": 2,
+    "pytorch": 2,
+    "tensorflow": 2,
     "fine_tuning": 1,
+    "paper_research": 1,
     "speech": 1
   },
   "sources": {
-    "python": {
+    "nlp": {
       "from": "공고",
-      "url": "https://www.wanted.co.kr/wd/382805",
-      "quote": "Python 활용 가능자"
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "딥러닝 프레임워크(PyTorch, TensorFlow 등) 딥러닝프레임워크 기반 자연어처리 연구개발 경험"
     },
     "llm": {
-      "from": "발표",
-      "url": "https://byline.network/2024/11/31-221/",
-      "quote": "콜센터 직원은 상담이 끝난 후 내용을 직접 요약해야 하는데, 거대언어모델(LLM)로 이를 자동화할 수 있도록 현재 기술 검증이 끝나 적용 중",
-      "date": "2024-10-29"
+      "from": "공고",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "Transformer 아키텍처 및 언어모델(PLM, LLM)에 대한 연구 활용 능력 보유자"
+    },
+    "deep_learning": {
+      "from": "공고",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "딥러닝 프레임워크(PyTorch, TensorFlow 등) 딥러닝프레임워크 기반 자연어처리 연구개발 경험"
+    },
+    "pytorch": {
+      "from": "공고",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "딥러닝 프레임워크(PyTorch, TensorFlow 등) 딥러닝프레임워크 기반 자연어처리 연구개발 경험"
+    },
+    "tensorflow": {
+      "from": "공고",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "딥러닝 프레임워크(PyTorch, TensorFlow 등) 딥러닝프레임워크 기반 자연어처리 연구개발 경험"
     },
     "fine_tuning": {
-      "from": "발표",
-      "url": "https://byline.network/2024/11/31-221/",
-      "quote": "잘 학습된 오픈 모델을 가지고 계속 사전학습, 미세조정을 통해 하나금융그룹에 특화되게 튜닝을 하자는 전략으로 진행했다",
-      "date": "2024-10-29"
+      "from": "공고(우대)",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "대규모 데이터 기반 한국어 PLM/LLM 구축 및 Fine-Tuning 활용 경험 보유자"
+    },
+    "paper_research": {
+      "from": "공고(우대)",
+      "url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320",
+      "quote": "NLP, ML, DL 관련 주요 학회 및 저널 논문 게재 실적 보유자"
     },
     "speech": {
       "from": "발표",
       "url": "https://byline.network/2024/11/31-221/",
-      "quote": "상담 내용을 문자로 바꿔 주는 기능(STT)",
-      "date": "2024-10-29"
+      "quote": "상담 내용을 문자로 바꿔 주는 기능(STT), 금융 문서와 리포트를 요약하는 기능을 예로 들 수 있다.",
+      "date": "2024-11"
     }
   },
   "excluded": [],
-  "posting_text": "AI 알고리즘 기반 빅데이터 분석 및 예측 모델 개발 (손님관리, 신용평가, 이상거래탐지, 시장예측 등) / 최신 데이터 분석 기술 기반 알고리즘 고도화\n자격요건\nPython 활용 가능자\n관련 경력 3년 이상의 석사 학위 보유자",
+  "any_of": [
+    [
+      "pytorch",
+      "tensorflow"
+    ]
+  ],
+  "posting_text": "[하나금융융합기술원] NLP 경력 연구원 채용 / NLP 원천기술 및 응용서비스 연구 개발 - 텍스트 분석, 문서요약, 기계번역 등 NLP 원천기술 연구 / LLM 아키텍처 설계, 대규모 분산학습 연구 및 적용 / 하나금융그룹 특화 언어모델 학습, 최적화 방안 연구",
   "tracks": [],
   "domain": {
-    "label": "하나금융티아이 Data Scientist",
+    "label": "금융·콜센터",
     "keywords": [
       "금융",
       "콜센터",
       "상담 요약",
-      "신용평가",
-      "이상거래탐지",
-      "LLM"
+      "LLM",
+      "NLP"
     ],
     "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
   },
   "public_source": {
-    "org": "하나금융융합기술원 Data Scientist (발표: NLP 셀)",
+    "org": "하나금융융합기술원 NLP셀",
     "caveats": [
-      "근거는 컨퍼런스 발표를 다룬 기사(발표자 직접 인용)",
-      "같은 기술원, 다른 셀(공고 DS / 발표 NLP)"
+      "같은 직무(NLP) · 공고에 'NLP셀' 표기는 없고 기술원+NLP 수준",
+      "상세 요건 일부는 헤드헌팅판",
+      "발표 2024-11"
     ],
-    "posting_url": "https://www.wanted.co.kr/wd/382805"
-  }
+    "posting_url": "https://m.catch.co.kr/NCS/RecruitInfoDetails/558320"
+  },
+  "team_match": "same_dept",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "경력"
 }

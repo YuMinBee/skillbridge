@@ -73,8 +73,10 @@ def _verdict(best: dict | None) -> str:
 def mini_project(company: dict, reqs: dict[str, int], status_map: dict[str, dict]) -> dict:
     """부서 맞춤 미니 프로젝트: 필수 갭을 중심에 두고, 이미 가진 부서 스킬 하나를 발판으로 쓴다."""
     sd = get_dict()
-    gap = [s for s in sorted(reqs, key=lambda s: (-reqs[s], s)) if status_of(status_map, s) != "own"]
-    have = [s for s in sorted(reqs, key=lambda s: (-reqs[s], s)) if status_of(status_map, s) == "own"]
+    soft = {"communication", "english", "technical_writing", "agile", "office", "gen_ai_use"}  # 프로젝트로 보여줄 기술이 아님
+    tech = [s for s in sorted(reqs, key=lambda s: (-reqs[s], s)) if s not in soft]
+    gap = [s for s in tech if status_of(status_map, s) != "own"]
+    have = [s for s in tech if status_of(status_map, s) == "own"]
     skills = (gap[:3] + have[:1]) or list(reqs)[:3]
     src = company.get("sources") or {}
     show = [{"skill": sd.name(s), "what": src[s]["quote"] if s in src else f"{sd.name(s)}를 실제로 쓴 흔적(코드·설정·결과 화면)"}

@@ -1,0 +1,87 @@
+{
+  "tenant_id": "Z22",
+  "name": "SK AX(구 SK C&C)(공개 자료 재구성)",
+  "desc": "신입 · AI/Data Engineering · 실제 공고 + 기술 블로그",
+  "region": "수도권",
+  "job": "cloud",
+  "job_title": "신입 · AI/Data Engineering",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2024-08-29~09-19 (마감) · 공고 이미지 판독. 주의: 2024 하반기 공고(이후 시즌 상세 미확인); 근거는 회사 구축 사례(엔지니어 이름 없음). 2026-11-16 확인.",
+  "apply_source": "공고",
+  "apply_requirements": {},
+  "work_source": "공고 + 기술 블로그",
+  "requirements": {
+    "aws_sagemaker": 1,
+    "kafka": 1,
+    "amazon_bedrock": 1,
+    "ai_agent": 1,
+    "rag": 1,
+    "aws_iam": 1
+  },
+  "sources": {
+    "aws_sagemaker": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3614",
+      "quote": "SK AX는 SKI E&S와 함께 Amazon SageMaker Unified Studio를 중심으로 데이터의 수집·저장부터 분석·AI 활용, 운영 관리까지 하나로 잇는 통합 플랫폼을 설계했습니다.",
+      "date": "2026-07-09"
+    },
+    "kafka": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3614",
+      "quote": "원천 데이터는 AWS DMS와 Amazon MSK 등을 통해 손실 없이 수집해 원본 그대로 저장하고(L0, Lake)",
+      "date": "2026-07-09"
+    },
+    "amazon_bedrock": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3614",
+      "quote": "Amazon Bedrock 기반의 '메타 검색 챗봇'을 연동했습니다.",
+      "date": "2026-07-09"
+    },
+    "ai_agent": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3618",
+      "quote": "에이전트 실행 환경은 Amazon Bedrock AgentCore Runtime을 기반으로 서버리스 방식으로 배포·운영합니다.",
+      "date": "2026-08-10"
+    },
+    "rag": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3618",
+      "quote": "분석 결과는 DynamoDB에 저장해 이후 챗봇 질의 시 RAG 데이터로 활용하며",
+      "date": "2026-08-10"
+    },
+    "aws_iam": {
+      "from": "고객 사례",
+      "url": "https://www.skax.co.kr/case-study/story/3618",
+      "quote": "에이전트는 서버리스로 배포하고, 대화 맥락은 관리형 메모리로 관리하며, 모델 호출은 IAM 기반 접근 제어 안에서 이루어지도록 설계했습니다.",
+      "date": "2026-08-10"
+    }
+  },
+  "excluded": [],
+  "any_of": [],
+  "posting_text": "AI/Data Engineering - AI 기술을 기반으로 솔루션을 개발하고, 솔루션을 활용하여 프로젝트를 수행 - 데이터 수집/처리, 분석 모델링, 모델 평가 및 모델 전개 등 분석 기법을 적용하여 고객의 Digital 경쟁력 강화 / 지원자격: 학사 학위 이상 보유자로, '25년 2월 졸업예정자 및 기졸업자 / 전공무관 / 지원 직무 경력이 만 3년 미만인 분",
+  "tracks": [],
+  "domain": {
+    "label": "SI·데이터 레이크",
+    "keywords": [
+      "SI",
+      "데이터 레이크",
+      "에너지",
+      "생성형 AI",
+      "에이전트"
+    ],
+    "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
+  },
+  "public_source": {
+    "org": "신입 AI/Data Engineering · 근거: SK AX 구축 사례",
+    "caveats": [
+      "2024 하반기 공고(이후 시즌 상세 미확인)",
+      "근거는 회사 구축 사례(엔지니어 이름 없음)"
+    ],
+    "posting_url": "https://www.skcareers.com/Recruit/Detail/R240992"
+  },
+  "team_match": "grad_hire",
+  "stats_only": false,
+  "apply_none": true,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "신입"
+}

@@ -1,77 +1,497 @@
 [
- {"key":"banksalad","company":"뱅크샐러드","org_or_team":"Core Infra팀 데이터 파트 (사례: AI Data Platform팀)","job_title":"데이터 엔지니어","region":"수도권",
-  "posting":{"url":"https://www.yugacrew.com/careertalk/jobs/3014","date_or_status":"2025-11-09 기준 (재게시 사이트 사본)",
-   "requirements_quotes":["Python 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련","Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험","Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험","Aurora MySQL, RDS PostgreSQL 등 대용량 DB 운영 및 최적화 경험","데이터 파이프라인 장애 대응 및 복구 실무 경험"],
-   "preferred_quotes":["DB 쿼리 튜닝 및 인덱스 최적화 경험","AWS, Kubernetes 기반 데이터 인프라 운영 경험","Kafka, Kinesis, Flink 등 실시간 데이터 스트리밍 처리 경험","AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"],
-   "posting_text":"데이터 파트는 데이터의 수집·저장·운영을 담당하며, 데이터 파이프라인 설계, DW 및 데이터 레이크 구축, 데이터 품질 관리, AI·ML/LLMOps 지원까지 전사 데이터 인프라를 총괄합니다.\n자격요건\n데이터 엔지니어링, ETL, 빅데이터 분야 실무 경험 5년 이상\nPython 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련\nLinux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험\nSnowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"},
-  "apply_skills":{"python":2,"java":2,"scala":2,"linux":2,"sql":2,"mysql":2,"postgresql":2,"data_warehouse":2,"aws_redshift":2,"aws_rds":2,"data_pipeline":2,"query_tuning":1,"aws":1,"kubernetes":1,"kafka":1,"aws_kinesis":1,"aws_sagemaker":1,"amazon_bedrock":1,"airflow":1},
-  "work_sources":[
-   {"skill_id":"terraform","from":"고객 사례","url":"https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/","date":"2024-08 전환 이후","quote":"모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며"},
-   {"skill_id":"iac","from":"고객 사례","url":"https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/","date":"2024-08 전환 이후","quote":"모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며"}],
-  "domain_keywords":["마이데이터","핀테크","금융","자산","알림","개인정보"],
-  "caveats":["실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료)","공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름","Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외","공고는 재게시 사이트 사본, 경력 5년 이상"]},
-
- {"key":"hyperconnect","company":"하이퍼커넥트","org_or_team":"AI Lab MLSE팀 (블로그: ML Platform팀)","job_title":"ML Software Engineer","region":"수도권",
-  "posting":{"url":"https://builtin.com/job/ml-software-engineering-team-leader-hyperconnect-ai/7595828","date_or_status":"2025-11-19 내려감 (해외 채용 사이트 미러), 팀 리더 공고",
-   "requirements_quotes":["5년 이상의 소프트웨어(백엔드, 데이터파이프라인, ML 서빙 시스템 등) 설계 및 구현, 운영 등에 대한 경험이 있으신 분","Java, Kotlin, Python, JavaScript, Go 중 세 가지 이상 언어에 능숙하고, 그 외 프로그래밍 언어를 학습하여 사용이 가능하신 분","ML 모델을 서비스에 배포하기 위해, 여러 직군의 이해관계자와 협업할 수 있는 강력한 커뮤니케이션 능력을 갖추신 분"],
-   "preferred_quotes":["추천, 생성형 AI 등 최신 ML 기술을 활용한 어플리케이션 개발 및 프로덕션 운영 경험이 있으신 분","RDBMS 또는 DynamoDB, Cassandra 등 분산 데이터베이스에 대한 이해가 있으신 분","Spark, Flink 등 대용량/실시간 처리를 위한 분산/병렬 시스템 개발 경험이 있으신 분","영어에 능통하신 분"],
-   "posting_text":"(1) ML 모델 기반의 확장성 있는 백엔드 서버를 개발하며, (2) ML 모델 추론을 위한 실시간 데이터 파이프라인을 개발/운영하고, (3) 다른 팀들과 협업하여 공통으로 관리할 수 있는 ML 컴포넌트를 플랫폼화하는 작업까지 수행합니다.\n자격요건\n5년 이상의 소프트웨어(백엔드, 데이터파이프라인, ML 서빙 시스템 등) 설계 및 구현, 운영 등에 대한 경험이 있으신 분\nJava, Kotlin, Python, JavaScript, Go 중 세 가지 이상 언어에 능숙하고, 그 외 프로그래밍 언어를 학습하여 사용이 가능하신 분"},
-  "apply_skills":{"java":2,"kotlin":2,"python":2,"javascript":2,"golang":2,"data_pipeline":2,"mlops":2,"communication":2,"aws_dynamodb":1,"nosql":1,"spark":1,"recommender":1,"english":1},
-  "work_sources":[
-   {"skill_id":"kubernetes","from":"기술 블로그","url":"https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html","date":"2022-12-13","quote":"GPU 노드와 Inferentia 노드 모두 Triton을 이용해서 컴파일 여부만 다른 동일한 모델을 배포하였습니다. 따라서 쿠버네티스 Pod 하나당 스펙을 비교하면 다음과 같습니다."},
-   {"skill_id":"pytorch","from":"기술 블로그","url":"https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html","date":"2022-12-13","quote":"작업 방법은 프레임워크에 따라 다를 수 있는데, 이 포스트에서는 연구에 널리 이용되는 PyTorch를 기준으로 AWS Inferentia 도입 과정을 단계별로 설명드리고자 합니다."},
-   {"skill_id":"aws_ec2","from":"기술 블로그","url":"https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html","date":"2022-12-13","quote":"AWS Inferentia는 2018년 11월에 처음 발표되었고, 2019년 12월에 EC2 인스턴스(inf1)로 출시된 꽤 따끈따끈한 AI 가속기입니다."},
-   {"skill_id":"kafka","from":"기술 블로그","url":"https://hyperconnect.github.io/2023/11/21/ksqldb-for-ml-feature-calculation.html","date":"2023-11-21","quote":"실시간 피쳐 계산 로직은 주로 Apache Flink로 구현하고 있지만, 카프카(Kafka)에서 제공하는 ksqlDB을 통해서도 구현할 수 있습니다."},
-   {"skill_id":"feature_store","from":"기술 블로그","url":"https://hyperconnect.github.io/2023/11/21/ksqldb-for-ml-feature-calculation.html","date":"2023-11-21","quote":"하이퍼커넥트의 인하우스 피쳐스토어 또한 카프카를 통한 업데이트를 지원하고 있습니다"}],
-  "domain_keywords":["영상 채팅","매칭","실시간 추천","모더레이션","모델 서빙","실시간 피처"],
-  "caveats":["공고는 팀 리더(5년 이상) 직무","블로그는 같은 AI Lab의 다른 팀(ML Platform)·팀 미표기 글","블로그 2022~2023, 공고 2025","공고는 해외 채용 사이트 미러"]},
-
- {"key":"socar","company":"쏘카","org_or_team":"데이터플랫폼그룹 AI엔지니어링팀 (블로그: 데이터 엔지니어링팀·데이터프로덕트그룹)","job_title":"AI Engineer","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/279193","date_or_status":"수시 채용 (리멤버), 학사 7년/석사 5년 이상",
-   "requirements_quotes":["학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분","머신러닝, 딥러닝 모델 혹은 Agentic AI 시스템을 실제 비즈니스에 적용한 경험이 있으신 분","Pytorch와 같은 트레이닝 프레임워크에 능숙하신 분","Python / C언어 및 Github 개발 환경에 익숙하신 분"],
-   "preferred_quotes":["MLOps (데이터 수집-＞ 가공-＞ 학습 -＞ 평가 -＞ 배포 지원 시스템) 개발 경험이 있으신 분","AWS 혹은 GCP등 클라우드 플랫폼 사용 경험이 있으신분","모델 경량화 및 Edge device 배포 경험이 있으신 분"],
-   "posting_text":"• AI엔지니어링팀은 데이터플랫폼그룹에서 AI관련 업무를 담당하는 조직으로, 카셰어링 비즈니스에서 발생하는 여러 데이터를 분석 및 연구하고, 연구된 기술을 바탕으로 여러 비즈니스 문제를 해결하는 팀입니다.\n• 차량 관리 자동화 (파손탐지, 세차검증 등)를 위한 Computer Vision 모델 개발\n자격요건\n학사 7년 / 석사 5년 이상의 Computer Vision 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분\nPytorch와 같은 트레이닝 프레임워크에 능숙하신 분"},
-  "apply_skills":{"computer_vision":2,"nlp":2,"llm":2,"fine_tuning":2,"rag":2,"prompt_engineering":2,"ai_agent":2,"pytorch":2,"python":2,"c_lang":2,"git":2,"mlops":1,"aws":1,"gcp":1,"edge_ai":1},
-  "work_sources":[
-   {"skill_id":"kubernetes","from":"기술 블로그","url":"https://tech.socar.kr/data/2020/03/10/ml-model-serving","date":"2020-03-10","quote":"(feat. AWS SQS + Python Application + Kubernetes + Git & Rancher)"},
-   {"skill_id":"docker","from":"기술 블로그","url":"https://tech.socar.kr/data/2020/03/10/ml-model-serving","date":"2020-03-10","quote":"Model Serving : AWS S3 + Agent(Python Application / Docker) + Kubernetes"},
-   {"skill_id":"aws_s3","from":"기술 블로그","url":"https://tech.socar.kr/data/2024/03/12/ai-car-wash","date":"2024-03-12","quote":"차량운영정보를 통해 선정된 차량사진을 AWS S3에서 읽어와 차량 오염도 판단 모델을 통해 차량사진의 오염 정도를 판단하고, 그 결과를 BigQuery에 주기적으로 적재 합니다."},
-   {"skill_id":"data_warehouse","from":"기술 블로그","url":"https://tech.socar.kr/data/2024/03/12/ai-car-wash","date":"2024-03-12","quote":"AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다."},
-   {"skill_id":"mysql","from":"기술 블로그","url":"https://tech.socar.kr/data/2024/03/12/ai-car-wash","date":"2024-03-12","quote":"AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다."},
-   {"skill_id":"airflow","from":"기술 블로그","url":"https://tech.socar.kr/data/2024/03/12/ai-car-wash","date":"2024-03-12","quote":"(1) ~ (4)의 배치 작업을 Airflow를 통해 관리 하고 있습니다."}],
-  "domain_keywords":["카셰어링","차량","파손 탐지","세차","블랙박스","컴퓨터비전"],
-  "caveats":["블로그는 AI엔지니어링팀이 아닌 데이터 엔지니어링팀(2020)·데이터프로덕트그룹(2024) 글. 대상 모델(파손탐지·세차)은 공고 업무와 같음","2020년 글은 지금 스택과 다를 수 있음","경력 7년(학사) 공고"]},
-
- {"key":"zigbang","company":"직방","org_or_team":"백엔드 하우스 서비스 (발표: 데이터엔지니어링팀)","job_title":"백엔드 하우스 서비스 개발자","region":"수도권",
-  "posting":{"url":"https://www.wanted.co.kr/wd/336075","date_or_status":"마감 (원티드), 5년차 이상",
-   "requirements_quotes":["TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분","NestJS, Spring Boot, ASP.NET Core 등 백엔드 프레임워크 개발 경험이 있으신 분","RDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분","AWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분","팀 내 협업을 위한 원활한 커뮤니케이션 역량을 갖추신 분"],
-   "preferred_quotes":[],
-   "posting_text":"직방 부동산 서비스 전반(원룸, 오피스텔, 빌라 등) 및 중개사 대상 서비스의 백엔드 시스템 개발 및 운영 / 마이크로서비스 아키텍처(MSA) 기반의 API 서비스 설계 및 구현\n자격요건\n5년 이상의 백엔드 개발 경력 또는 그에 준하는 실무 경험을 보유하신 분\nTypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분\nRDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분\nAWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분"},
-  "apply_skills":{"typescript":2,"csharp":2,"java":2,"kotlin":2,"python":2,"golang":2,"spring":2,"redis":2,"aws":2,"gcp":2,"azure":2,"communication":2},
-  "work_sources":[
-   {"skill_id":"aws_eks","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"k8s로 많이 나오고 많은 기능을 활용하기 위해 eks로 결정"},
-   {"skill_id":"kubernetes","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"EKS(kubernetes on aws) 에서 DataPlatform 운영 since 2019.8"},
-   {"skill_id":"terraform","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"- CI/CD - Terraform"},
-   {"skill_id":"nginx","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"ingress-nginx - k8s를 통한 service 기초"},
-   {"skill_id":"spark","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"spark-operator - DW batch 핵심"},
-   {"skill_id":"airflow","from":"발표","url":"https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846","date":"2022-06","quote":"어느날 airflow장애발생"}],
-  "domain_keywords":["부동산","원룸","오피스텔","중개사","배치","이벤트"],
-  "caveats":["가장 약한 짝: 공고(백엔드)와 발표(데이터엔지니어링팀 데이터 플랫폼)는 팀과 직무가 다름","발표 2022, 공고 이후","경력 5년 이상"]},
-
- {"key":"ridi","company":"리디","org_or_team":"개발센터 데이터 엔지니어링 파트","job_title":"ML & Data Engineer","region":"수도권",
-  "posting":{"url":"https://career.rememberapp.co.kr/job/posting/278079","date_or_status":"리멤버 경력직 공고",
-   "requirements_quotes":["5년 이상의 소프트웨어(데이터 파이프라인, ML 서빙 시스템 등) 설계 및 운영 경험이 있으신 분","ML 모델을 서비스에 배포하기 위해 여러 직군과 협업할 수 있는 커뮤니케이션 역량이 있으신 분","Python 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분"],
-   "preferred_quotes":["AWS/GCP 등 클라우드 환경에서 대규모 데이터 인프라 설계 경험이 있으신 분","Hadoop MR, Hive, Spark 등 분산 처리 기술 관련 개발 경험이 있으신 분","대용량 로그/이벤트 기반 추천·검색 시스템 구축 경험이 있으신 분"],
-   "posting_text":"• 리디의 다양한 제품에서 쌓인 데이터를 Feature Store로 관리하고, 다양한 직관과 가설을 통해 추천 시스템 모델을 학습합니다.\n• ML 모델을 배치 및 실시간 환경에 맞게 Triton Inference Server 등에 배포합니다.\n자격요건\n5년 이상의 소프트웨어(데이터 파이프라인, ML 서빙 시스템 등) 설계 및 운영 경험이 있으신 분\nPython 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분"},
-  "apply_skills":{"python":2,"spark":2,"pandas":2,"airflow":2,"pytorch":2,"data_pipeline":2,"mlops":2,"communication":2,"aws":1,"gcp":1,"hadoop":1,"recommender":1},
-  "work_sources":[
-   {"skill_id":"aws_sagemaker","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"그중 관리형 MLOps 플랫폼인 AWS SageMaker 가 우리의 모든 요구사항을 충족할 수 있다고 판단하여, 개념 증명(PoC) 후 도입을 시작했습니다."},
-   {"skill_id":"aws_eks","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"학습 및 추론 실행 – bazel , EKS"},
-   {"skill_id":"kubernetes","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"로컬 이미지 빌드 및 EKS Job 실행에 사용하는 bazel docker, k8s rule 이 deprecated 됨"},
-   {"skill_id":"docker","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"도커 이미지 배포 – bazel , ECR"},
-   {"skill_id":"datadog","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"모니터링 및 디버깅 – Kibana, K9s, Datadog"},
-   {"skill_id":"elk","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"모니터링 및 디버깅 – Kibana, K9s, Datadog"},
-   {"skill_id":"kafka","from":"기술 블로그","url":"https://ridicorp.com/story/mlops-platform-ridi/","date":"2024-08-20","quote":"리디는 사용자 로그를 Kafka를 통해 실시간으로 전송 하고 있기 때문에, 이를 활용한 파이프라인을 구성할 수 있습니다."}],
-  "domain_keywords":["웹툰","웹소설","콘텐츠 추천","개인화","실시간 추론","A/B 테스트"],
-  "caveats":["가장 강한 짝: 공고와 블로그가 같은 업무 범위(추천 MLOps). 공고에 파트 이름이 없어 같은 팀은 추정","블로그는 web.archive.org 스냅샷으로 확인","경력 5년 이상"]}
+ {
+  "key": "banksalad",
+  "company": "뱅크샐러드",
+  "org_or_team": "Core Infra팀 데이터 파트 (사례: AI Data Platform팀)",
+  "job_title": "데이터 엔지니어",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.yugacrew.com/careertalk/jobs/3014",
+   "date_or_status": "2025-11-09 기준 (재게시 사이트 사본)",
+   "requirements_quotes": [
+    "Python 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련",
+    "Linux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험",
+    "Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험",
+    "Aurora MySQL, RDS PostgreSQL 등 대용량 DB 운영 및 최적화 경험",
+    "데이터 파이프라인 장애 대응 및 복구 실무 경험"
+   ],
+   "preferred_quotes": [
+    "DB 쿼리 튜닝 및 인덱스 최적화 경험",
+    "AWS, Kubernetes 기반 데이터 인프라 운영 경험",
+    "Kafka, Kinesis, Flink 등 실시간 데이터 스트리밍 처리 경험",
+    "AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"
+   ],
+   "posting_text": "데이터 파트는 데이터의 수집·저장·운영을 담당하며, 데이터 파이프라인 설계, DW 및 데이터 레이크 구축, 데이터 품질 관리, AI·ML/LLMOps 지원까지 전사 데이터 인프라를 총괄합니다.\n자격요건\n데이터 엔지니어링, ETL, 빅데이터 분야 실무 경험 5년 이상\nPython 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련\nLinux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험\nSnowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"
+  },
+  "apply_skills": {
+   "python": 2,
+   "java": 2,
+   "scala": 2,
+   "linux": 2,
+   "sql": 2,
+   "mysql": 2,
+   "postgresql": 2,
+   "data_warehouse": 2,
+   "aws_redshift": 2,
+   "aws_rds": 2,
+   "data_pipeline": 2,
+   "query_tuning": 1,
+   "aws": 1,
+   "kubernetes": 1,
+   "kafka": 1,
+   "aws_kinesis": 1,
+   "aws_sagemaker": 1,
+   "amazon_bedrock": 1,
+   "airflow": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "terraform",
+    "from": "고객 사례",
+    "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
+    "date": "2024-08 전환 이후",
+    "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며"
+   },
+   {
+    "skill_id": "iac",
+    "from": "고객 사례",
+    "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
+    "date": "2024-08 전환 이후",
+    "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며"
+   }
+  ],
+  "domain_keywords": [
+   "마이데이터",
+   "핀테크",
+   "금융",
+   "자산",
+   "알림",
+   "개인정보"
+  ],
+  "caveats": [
+   "실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료)",
+   "공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름",
+   "Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외",
+   "공고는 재게시 사이트 사본, 경력 5년 이상"
+  ],
+  "any_of": [
+   [
+    "python",
+    "java",
+    "scala"
+   ],
+   [
+    "mysql",
+    "postgresql"
+   ],
+   [
+    "data_warehouse",
+    "aws_redshift"
+   ]
+  ]
+ },
+ {
+  "key": "hyperconnect",
+  "company": "하이퍼커넥트",
+  "org_or_team": "AI Lab MLSE팀 (블로그: ML Platform팀)",
+  "job_title": "ML Software Engineer",
+  "region": "수도권",
+  "posting": {
+   "url": "https://builtin.com/job/ml-software-engineering-team-leader-hyperconnect-ai/7595828",
+   "date_or_status": "2025-11-19 내려감 (해외 채용 사이트 미러), 팀 리더 공고",
+   "requirements_quotes": [
+    "5년 이상의 소프트웨어(백엔드, 데이터파이프라인, ML 서빙 시스템 등) 설계 및 구현, 운영 등에 대한 경험이 있으신 분",
+    "Java, Kotlin, Python, JavaScript, Go 중 세 가지 이상 언어에 능숙하고, 그 외 프로그래밍 언어를 학습하여 사용이 가능하신 분",
+    "ML 모델을 서비스에 배포하기 위해, 여러 직군의 이해관계자와 협업할 수 있는 강력한 커뮤니케이션 능력을 갖추신 분"
+   ],
+   "preferred_quotes": [
+    "추천, 생성형 AI 등 최신 ML 기술을 활용한 어플리케이션 개발 및 프로덕션 운영 경험이 있으신 분",
+    "RDBMS 또는 DynamoDB, Cassandra 등 분산 데이터베이스에 대한 이해가 있으신 분",
+    "Spark, Flink 등 대용량/실시간 처리를 위한 분산/병렬 시스템 개발 경험이 있으신 분",
+    "영어에 능통하신 분"
+   ],
+   "posting_text": "(1) ML 모델 기반의 확장성 있는 백엔드 서버를 개발하며, (2) ML 모델 추론을 위한 실시간 데이터 파이프라인을 개발/운영하고, (3) 다른 팀들과 협업하여 공통으로 관리할 수 있는 ML 컴포넌트를 플랫폼화하는 작업까지 수행합니다.\n자격요건\n5년 이상의 소프트웨어(백엔드, 데이터파이프라인, ML 서빙 시스템 등) 설계 및 구현, 운영 등에 대한 경험이 있으신 분\nJava, Kotlin, Python, JavaScript, Go 중 세 가지 이상 언어에 능숙하고, 그 외 프로그래밍 언어를 학습하여 사용이 가능하신 분"
+  },
+  "apply_skills": {
+   "java": 2,
+   "kotlin": 2,
+   "python": 2,
+   "javascript": 2,
+   "golang": 2,
+   "data_pipeline": 2,
+   "mlops": 2,
+   "communication": 2,
+   "aws_dynamodb": 1,
+   "nosql": 1,
+   "spark": 1,
+   "recommender": 1,
+   "english": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html",
+    "date": "2022-12-13",
+    "quote": "GPU 노드와 Inferentia 노드 모두 Triton을 이용해서 컴파일 여부만 다른 동일한 모델을 배포하였습니다. 따라서 쿠버네티스 Pod 하나당 스펙을 비교하면 다음과 같습니다."
+   },
+   {
+    "skill_id": "pytorch",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html",
+    "date": "2022-12-13",
+    "quote": "작업 방법은 프레임워크에 따라 다를 수 있는데, 이 포스트에서는 연구에 널리 이용되는 PyTorch를 기준으로 AWS Inferentia 도입 과정을 단계별로 설명드리고자 합니다."
+   },
+   {
+    "skill_id": "aws_ec2",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2022/12/13/infra-cost-optimization-with-aws-inferentia.html",
+    "date": "2022-12-13",
+    "quote": "AWS Inferentia는 2018년 11월에 처음 발표되었고, 2019년 12월에 EC2 인스턴스(inf1)로 출시된 꽤 따끈따끈한 AI 가속기입니다."
+   },
+   {
+    "skill_id": "kafka",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2023/11/21/ksqldb-for-ml-feature-calculation.html",
+    "date": "2023-11-21",
+    "quote": "실시간 피쳐 계산 로직은 주로 Apache Flink로 구현하고 있지만, 카프카(Kafka)에서 제공하는 ksqlDB을 통해서도 구현할 수 있습니다."
+   },
+   {
+    "skill_id": "feature_store",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2023/11/21/ksqldb-for-ml-feature-calculation.html",
+    "date": "2023-11-21",
+    "quote": "하이퍼커넥트의 인하우스 피쳐스토어 또한 카프카를 통한 업데이트를 지원하고 있습니다"
+   }
+  ],
+  "domain_keywords": [
+   "영상 채팅",
+   "매칭",
+   "실시간 추천",
+   "모더레이션",
+   "모델 서빙",
+   "실시간 피처"
+  ],
+  "caveats": [
+   "공고는 팀 리더(5년 이상) 직무",
+   "블로그는 같은 AI Lab의 다른 팀(ML Platform)·팀 미표기 글",
+   "블로그 2022~2023, 공고 2025",
+   "공고는 해외 채용 사이트 미러"
+  ]
+ },
+ {
+  "key": "socar",
+  "company": "쏘카",
+  "org_or_team": "데이터플랫폼그룹 AI엔지니어링팀 (블로그: 데이터 엔지니어링팀·데이터프로덕트그룹)",
+  "job_title": "AI Engineer",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/279193",
+   "date_or_status": "수시 채용 (리멤버), 학사 7년/석사 5년 이상",
+   "requirements_quotes": [
+    "학사 7년 / 석사 5년 이상의 Computer Vision (classification, object detection, segmentation, recognition) 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분",
+    "머신러닝, 딥러닝 모델 혹은 Agentic AI 시스템을 실제 비즈니스에 적용한 경험이 있으신 분",
+    "Pytorch와 같은 트레이닝 프레임워크에 능숙하신 분",
+    "Python / C언어 및 Github 개발 환경에 익숙하신 분"
+   ],
+   "preferred_quotes": [
+    "MLOps (데이터 수집-＞ 가공-＞ 학습 -＞ 평가 -＞ 배포 지원 시스템) 개발 경험이 있으신 분",
+    "AWS 혹은 GCP등 클라우드 플랫폼 사용 경험이 있으신분",
+    "모델 경량화 및 Edge device 배포 경험이 있으신 분"
+   ],
+   "posting_text": "• AI엔지니어링팀은 데이터플랫폼그룹에서 AI관련 업무를 담당하는 조직으로, 카셰어링 비즈니스에서 발생하는 여러 데이터를 분석 및 연구하고, 연구된 기술을 바탕으로 여러 비즈니스 문제를 해결하는 팀입니다.\n• 차량 관리 자동화 (파손탐지, 세차검증 등)를 위한 Computer Vision 모델 개발\n자격요건\n학사 7년 / 석사 5년 이상의 Computer Vision 혹은 NLP (LLM fine-tuning, RAG, Prompt Engineering) 관련 모델 개발 경험이 있으신 분\nPytorch와 같은 트레이닝 프레임워크에 능숙하신 분"
+  },
+  "apply_skills": {
+   "computer_vision": 2,
+   "nlp": 2,
+   "llm": 2,
+   "fine_tuning": 2,
+   "rag": 2,
+   "prompt_engineering": 2,
+   "ai_agent": 2,
+   "pytorch": 2,
+   "python": 2,
+   "c_lang": 2,
+   "git": 2,
+   "mlops": 1,
+   "aws": 1,
+   "gcp": 1,
+   "edge_ai": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2020/03/10/ml-model-serving",
+    "date": "2020-03-10",
+    "quote": "(feat. AWS SQS + Python Application + Kubernetes + Git & Rancher)"
+   },
+   {
+    "skill_id": "docker",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2020/03/10/ml-model-serving",
+    "date": "2020-03-10",
+    "quote": "Model Serving : AWS S3 + Agent(Python Application / Docker) + Kubernetes"
+   },
+   {
+    "skill_id": "aws_s3",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
+    "date": "2024-03-12",
+    "quote": "차량운영정보를 통해 선정된 차량사진을 AWS S3에서 읽어와 차량 오염도 판단 모델을 통해 차량사진의 오염 정도를 판단하고, 그 결과를 BigQuery에 주기적으로 적재 합니다."
+   },
+   {
+    "skill_id": "data_warehouse",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
+    "date": "2024-03-12",
+    "quote": "AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다."
+   },
+   {
+    "skill_id": "mysql",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
+    "date": "2024-03-12",
+    "quote": "AWS RDS(MySQL) 에 적재된 차량 운영 데이터를 BigQuery 에 주기적으로 적재 합니다."
+   },
+   {
+    "skill_id": "airflow",
+    "from": "기술 블로그",
+    "url": "https://tech.socar.kr/data/2024/03/12/ai-car-wash",
+    "date": "2024-03-12",
+    "quote": "(1) ~ (4)의 배치 작업을 Airflow를 통해 관리 하고 있습니다."
+   }
+  ],
+  "domain_keywords": [
+   "카셰어링",
+   "차량",
+   "파손 탐지",
+   "세차",
+   "블랙박스",
+   "컴퓨터비전"
+  ],
+  "caveats": [
+   "블로그는 AI엔지니어링팀이 아닌 데이터 엔지니어링팀(2020)·데이터프로덕트그룹(2024) 글. 대상 모델(파손탐지·세차)은 공고 업무와 같음",
+   "2020년 글은 지금 스택과 다를 수 있음",
+   "경력 7년(학사) 공고"
+  ],
+  "any_of": [
+   [
+    "aws",
+    "gcp"
+   ]
+  ]
+ },
+ {
+  "key": "zigbang",
+  "company": "직방",
+  "org_or_team": "백엔드 하우스 서비스 (발표: 데이터엔지니어링팀)",
+  "job_title": "백엔드 하우스 서비스 개발자",
+  "region": "수도권",
+  "posting": {
+   "url": "https://www.wanted.co.kr/wd/336075",
+   "date_or_status": "마감 (원티드), 5년차 이상",
+   "requirements_quotes": [
+    "TypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분",
+    "NestJS, Spring Boot, ASP.NET Core 등 백엔드 프레임워크 개발 경험이 있으신 분",
+    "RDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분",
+    "AWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분",
+    "팀 내 협업을 위한 원활한 커뮤니케이션 역량을 갖추신 분"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "직방 부동산 서비스 전반(원룸, 오피스텔, 빌라 등) 및 중개사 대상 서비스의 백엔드 시스템 개발 및 운영 / 마이크로서비스 아키텍처(MSA) 기반의 API 서비스 설계 및 구현\n자격요건\n5년 이상의 백엔드 개발 경력 또는 그에 준하는 실무 경험을 보유하신 분\nTypeScript, C#, Java, Kotlin, Python, Go 중 1개 이상의 언어를 능숙하게 다루시는 분\nRDBMS 및 Redis 등 데이터베이스 설계 및 운영 경험을 보유하신 분\nAWS, GCP, Azure 등 클라우드 서비스 활용 경험이 있으신 분"
+  },
+  "apply_skills": {
+   "typescript": 2,
+   "csharp": 2,
+   "java": 2,
+   "kotlin": 2,
+   "python": 2,
+   "golang": 2,
+   "spring": 2,
+   "redis": 2,
+   "aws": 2,
+   "gcp": 2,
+   "azure": 2,
+   "communication": 2
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_eks",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "k8s로 많이 나오고 많은 기능을 활용하기 위해 eks로 결정"
+   },
+   {
+    "skill_id": "kubernetes",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "EKS(kubernetes on aws) 에서 DataPlatform 운영 since 2019.8"
+   },
+   {
+    "skill_id": "terraform",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "- CI/CD - Terraform"
+   },
+   {
+    "skill_id": "nginx",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "ingress-nginx - k8s를 통한 service 기초"
+   },
+   {
+    "skill_id": "spark",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "spark-operator - DW batch 핵심"
+   },
+   {
+    "skill_id": "airflow",
+    "from": "발표",
+    "url": "https://www.slideshare.net/slideshow/lessons-from-operating-data-platform-on-kuberneteseks/252159846",
+    "date": "2022-06",
+    "quote": "어느날 airflow장애발생"
+   }
+  ],
+  "domain_keywords": [
+   "부동산",
+   "원룸",
+   "오피스텔",
+   "중개사",
+   "배치",
+   "이벤트"
+  ],
+  "caveats": [
+   "가장 약한 짝: 공고(백엔드)와 발표(데이터엔지니어링팀 데이터 플랫폼)는 팀과 직무가 다름",
+   "발표 2022, 공고 이후",
+   "경력 5년 이상"
+  ],
+  "any_of": [
+   [
+    "typescript",
+    "csharp",
+    "java",
+    "kotlin",
+    "python",
+    "golang"
+   ],
+   [
+    "aws",
+    "gcp",
+    "azure"
+   ]
+  ]
+ },
+ {
+  "key": "ridi",
+  "company": "리디",
+  "org_or_team": "개발센터 데이터 엔지니어링 파트",
+  "job_title": "ML & Data Engineer",
+  "region": "수도권",
+  "posting": {
+   "url": "https://career.rememberapp.co.kr/job/posting/278079",
+   "date_or_status": "리멤버 경력직 공고",
+   "requirements_quotes": [
+    "5년 이상의 소프트웨어(데이터 파이프라인, ML 서빙 시스템 등) 설계 및 운영 경험이 있으신 분",
+    "ML 모델을 서비스에 배포하기 위해 여러 직군과 협업할 수 있는 커뮤니케이션 역량이 있으신 분",
+    "Python 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분"
+   ],
+   "preferred_quotes": [
+    "AWS/GCP 등 클라우드 환경에서 대규모 데이터 인프라 설계 경험이 있으신 분",
+    "Hadoop MR, Hive, Spark 등 분산 처리 기술 관련 개발 경험이 있으신 분",
+    "대용량 로그/이벤트 기반 추천·검색 시스템 구축 경험이 있으신 분"
+   ],
+   "posting_text": "• 리디의 다양한 제품에서 쌓인 데이터를 Feature Store로 관리하고, 다양한 직관과 가설을 통해 추천 시스템 모델을 학습합니다.\n• ML 모델을 배치 및 실시간 환경에 맞게 Triton Inference Server 등에 배포합니다.\n자격요건\n5년 이상의 소프트웨어(데이터 파이프라인, ML 서빙 시스템 등) 설계 및 운영 경험이 있으신 분\nPython 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분"
+  },
+  "apply_skills": {
+   "python": 2,
+   "spark": 2,
+   "pandas": 2,
+   "airflow": 2,
+   "pytorch": 2,
+   "data_pipeline": 2,
+   "mlops": 2,
+   "communication": 2,
+   "aws": 1,
+   "gcp": 1,
+   "hadoop": 1,
+   "recommender": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_sagemaker",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "그중 관리형 MLOps 플랫폼인 AWS SageMaker 가 우리의 모든 요구사항을 충족할 수 있다고 판단하여, 개념 증명(PoC) 후 도입을 시작했습니다."
+   },
+   {
+    "skill_id": "aws_eks",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "학습 및 추론 실행 – bazel , EKS"
+   },
+   {
+    "skill_id": "kubernetes",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "로컬 이미지 빌드 및 EKS Job 실행에 사용하는 bazel docker, k8s rule 이 deprecated 됨"
+   },
+   {
+    "skill_id": "docker",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "도커 이미지 배포 – bazel , ECR"
+   },
+   {
+    "skill_id": "datadog",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "모니터링 및 디버깅 – Kibana, K9s, Datadog"
+   },
+   {
+    "skill_id": "elk",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "모니터링 및 디버깅 – Kibana, K9s, Datadog"
+   },
+   {
+    "skill_id": "kafka",
+    "from": "기술 블로그",
+    "url": "https://ridicorp.com/story/mlops-platform-ridi/",
+    "date": "2024-08-20",
+    "quote": "리디는 사용자 로그를 Kafka를 통해 실시간으로 전송 하고 있기 때문에, 이를 활용한 파이프라인을 구성할 수 있습니다."
+   }
+  ],
+  "domain_keywords": [
+   "웹툰",
+   "웹소설",
+   "콘텐츠 추천",
+   "개인화",
+   "실시간 추론",
+   "A/B 테스트"
+  ],
+  "caveats": [
+   "가장 강한 짝: 공고와 블로그가 같은 업무 범위(추천 MLOps). 공고에 파트 이름이 없어 같은 팀은 추정",
+   "블로그는 web.archive.org 스냅샷으로 확인",
+   "경력 5년 이상"
+  ],
+  "any_of": [
+   [
+    "aws",
+    "gcp"
+   ]
+  ]
+ }
 ]

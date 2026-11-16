@@ -78,10 +78,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "주요업무: Java platform 기반의 Front/Back office 웹 서비스 개발 / 룰 기반 최소 비용으로 빠르게 고객의 주문을 배송할 수 있는 방법을 찾기 위한 최적 알고리즘 도입\n자격요건\nJava 및 Spring 프레임웍을 이용한 Web Application 개발 경험하신 분\n프로그래밍 경력 6년 이상인 분\nGit 버전 관리 시스템 사용 경험하신 분\n관계형 데이터베이스 경험하신 분",
   "tracks": [],
   "domain": {
-    "label": "쿠팡 백엔드 개발자",
+    "label": "주문·배송",
     "keywords": [
       "주문",
       "배송",
@@ -99,5 +100,11 @@
       "경력 6년 이상"
     ],
     "posting_url": "https://www.wanted.co.kr/wd/367805"
-  }
+  },
+  "team_match": "none",
+  "stats_only": true,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "시니어"
 }

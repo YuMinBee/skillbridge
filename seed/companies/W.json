@@ -113,10 +113,16 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "kotlin",
+      "java"
+    ]
+  ],
   "posting_text": "주요 업무\n수십만 명이 매일 3시간씩 체류하는 제타의 서비스를 개발하고 운영합니다.\nA/B 테스트 환경, 로그 파이프라인 설계 및 구현을 통한 데이터 기반 의사결정을 지원합니다.\n필수 역량\n3년 이상 Spring(Kotlin 혹은 Java) 서비스를 운영한 경험, 혹은 그에 준하는 지식이 있으신 분\nRDB, NoSQL 및 In-memory DB에 대한 이해와 사용 경험이 있으신 분",
   "tracks": [],
   "domain": {
-    "label": "스캐터랩 Backend Engineer (제타",
+    "label": "AI 엔터테인먼트·챗봇",
     "keywords": [
       "AI 엔터테인먼트",
       "챗봇",
@@ -135,5 +141,11 @@
       "경력 3년 이상"
     ],
     "posting_url": "https://www.scatterlab.co.kr/ko/o/123249"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "경력"
 }

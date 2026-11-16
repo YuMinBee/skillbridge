@@ -50,10 +50,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "API Gateway 플랫폼을 운영하고 진화시켜요. 직접 만든 다양한 게이트웨이를 운영하면서, mTLS·E2E 암호화·헤더 처리 같은 토스만의 요구사항을 풀어요.\n이런 분과 함께하고 싶어요\n프레임워크 설정이 실제로 어떻게 동작하는지 이해하고, 필요하면 GC 로그나 스레드 덤프까지 열어보는 깊게 파고드는 분이면 좋아요.\n대규모 트래픽을 받는 시스템을 운영해본 경험이 있는 분이면 좋아요.\n부하 테스트로 시스템의 한계를 측정하고, 병목 지점을 개선해본 경험이 있는 분이면 좋아요.",
   "tracks": [],
   "domain": {
-    "label": "토스 Server Developer (Se",
+    "label": "금융·핀테크",
     "keywords": [
       "금융",
       "핀테크",
@@ -72,5 +73,11 @@
       "perf_opt 매핑은 느슨함"
     ],
     "posting_url": "https://toss.im/career/job-detail?gh_jid=4071145003"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "미상"
 }

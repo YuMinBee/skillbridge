@@ -92,10 +92,16 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "java",
+      "kotlin"
+    ]
+  ],
   "posting_text": "• 놀유니버스 엔터BE 조직은 국민 티켓예매 서비스인 NOL 티켓을 담당합니다.\n주요업무\n• NOL 티켓의 Back Office 및 예매시스템 개발을 합니다.\n자격 요건\n• 백엔드 개발 경력 4년 이상 또는 그에 준하는 실력을 갖춘 분\n• Java(or Kotlin)기반의 API 설계/개발 및 운영이 가능하신 분\n• 기초 컴퓨터 과학 지식(자료구조, 알고리즘, 운영체제, 네트워크 등)을 보유하신 분\n우대사항\n• Cloud 환경 서비스 운영 경험이 있으신 분\n• ASP.NET MVC 개발 경험 있으신 분",
   "tracks": [],
   "domain": {
-    "label": "놀유니버스 Software Engineer, B",
+    "label": "티켓·예매",
     "keywords": [
       "티켓",
       "예매",
@@ -114,5 +120,11 @@
       "경력 4년 이상 공고"
     ],
     "posting_url": "https://career.rememberapp.co.kr/job/posting/260536"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "경력"
 }

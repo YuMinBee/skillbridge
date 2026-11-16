@@ -1,0 +1,244 @@
+[
+ {
+  "key": "woowa",
+  "company": "우아한형제들",
+  "org_or_team": "AI프로덕트팀",
+  "job_title": "데이터엔지니어링 (데이터서비스 AI)",
+  "region": "수도권",
+  "level": "시니어",
+  "job_family": "데이터 엔지니어·분석",
+  "match": "same_team",
+  "posting": {
+   "url": "https://career.woowahan.com/w1/recruits/R2609008",
+   "date_or_status": "2026-09-09 게시 (상시), 5년 이상",
+   "requirements_quotes": [
+    "대규모 데이터 파이프라인을 설계, 개발, 운영해 본 경험이 필요해요.",
+    "Python 기반의 백엔드 서비스 및 API를 설계, 개발, 운영해 본 경험을 중요하게 봐요.",
+    "Kubernetes 및 Cloud 환경에서 서비스를 개발, 배포, 운영해 본 경험이 필요해요."
+   ],
+   "preferred_quotes": [
+    "LLM 또는 AI Agent를 활용한 서비스 개발·운영 경험",
+    "실제 사용자 문제를 기반으로 AI·Agent 평가 데이터셋과 품질 지표를 설계하고 평가 과정을 자동화해 본 경험",
+    "RAG(검색 증강 생성), VectorDB, Elasticsearch 등 검색 및 데이터 활용 시스템 구축 경험",
+    "LLMOps·MLOps 또는 AI 서비스의 평가·모니터링 환경 구축 경험"
+   ],
+   "posting_text": "AI프로덕트팀은 AI 기술을 실제 서비스와 업무에 적용해 고객과 구성원의 문제를 해결하는 AI 프로덕트를 개발하고 운영합니다. AI Agent를 중심으로 LLM(대규모 언어 모델), 멀티모달 등 최신 AI 모델과 LLMOps(LLM 운영) 기술을 활용하며, 사내 지식과 데이터로 실제 업무까지 수행하는 '물어보새', 고객 데이터로 마케팅과 비즈니스 의사결정을 돕는 '배민360'을 만들고 있습니다."
+  },
+  "apply_skills": {
+   "data_pipeline": 2,
+   "python": 2,
+   "rest_api": 2,
+   "kubernetes": 2,
+   "llm": 1,
+   "ai_agent": 1,
+   "llm_evaluation": 1,
+   "rag": 1,
+   "vector_db": 1,
+   "elk": 1,
+   "mlops": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "data_labeling",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/25888/",
+    "date": "2026-03-20",
+    "quote": "방대한 리뷰 데이터를 LLM-as-a-Judge 방식을 통해 신속하고 일관성 있게 자동으로 어노테이션(automatic annotation)하였습니다."
+   },
+   {
+    "skill_id": "fine_tuning",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/25888/",
+    "date": "2026-03-20",
+    "quote": "우리 서비스의 도메인 지식을 이미 갖춘 모델을 활용함으로써, 처음부터 학습하는 비용을 줄이고 파인튜닝만으로도 높은 성능을 확보할 수 있었습니다."
+   },
+   {
+    "skill_id": "ab_testing",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/25888/",
+    "date": "2026-03-20",
+    "quote": "개인화 리랭킹을 적용하는 온라인 실험을 진행한 결과, CTR은 기존의 상승폭을 유지하면서도 CVR이 큰 폭으로 개선되어"
+   },
+   {
+    "skill_id": "mcp",
+    "from": "기술 블로그",
+    "url": "https://techblog.woowahan.com/23273/",
+    "date": "2025-10-15",
+    "quote": "(3) 실시간 정보, MCP 서버로 연결하다"
+   }
+  ],
+  "domain_keywords": [
+   "배달",
+   "리뷰",
+   "추천",
+   "사내 데이터 에이전트",
+   "AI 프로덕트"
+  ],
+  "caveats": [
+   "같은 팀(AI프로덕트팀), 직무는 관련(블로그는 ML/LLM 모델링, 공고는 AI 데이터 엔지니어링)",
+   "블로그 25888은 추천프로덕트팀 공저, 물어보새 글은 BADA팀",
+   "5년 이상"
+  ]
+ },
+ {
+  "key": "daangn",
+  "company": "당근",
+  "org_or_team": "커뮤니티 홈팀",
+  "job_title": "Software Engineer, Backend (채용전환형 인턴) - 커뮤니티",
+  "region": "수도권",
+  "level": "인턴",
+  "job_family": "백엔드",
+  "match": "same_team",
+  "posting": {
+   "url": "https://about.daangn.com?gh_jid=8201151003",
+   "date_or_status": "2026-11-16 게시, 12-06 마감 예정 (공식 채용 사이트)",
+   "requirements_quotes": [
+    "직접 개발한 서비스를 배포·운영하여 실제 사용자를 확보해 본 분",
+    "서버 애플리케이션을 설계하고 구현·운영해 본 분"
+   ],
+   "preferred_quotes": [
+    "Claude Code, Codex 같은 코딩 에이전트로 자신만의 AI 워크플로를 만들어 일하는 분",
+    "서버앱: Kotlin, Spring with Jakarta Servlet, Exposed",
+    "데이터 저장소: MySQL, Redis, BigQuery",
+    "검색과 임베딩: OpenSearch, Gemini",
+    "AI: Spring AI와 OpenAI SDK 기반 LLM 연동, AI 에이전트(Node.js, TypeScript), Python과 Go 기반 추천 엔진"
+   ],
+   "posting_text": "커뮤니티 홈팀은 커뮤니티실의 다양한 서비스와 이웃들의 이야기가 만나는 커뮤니티 탭을 만들어요. 모임, 카페, 아파트, 동네생활에 쌓이는 수많은 이야기와 활동 중에서 각자에게 의미 있는 것을 발견할 수 있도록 도와요. 필수: 직접 개발한 서비스를 배포·운영하여 실제 사용자를 확보해 본 분 / 서버 애플리케이션을 설계하고 구현·운영해 본 분"
+  },
+  "apply_skills": {
+   "rest_api": 2,
+   "kotlin": 1,
+   "spring": 1,
+   "mysql": 1,
+   "redis": 1,
+   "data_warehouse": 1,
+   "elk": 1,
+   "embedding": 1,
+   "llm": 1,
+   "ai_agent": 1,
+   "recommender": 1,
+   "gen_ai_use": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "prompt_engineering",
+    "from": "기술 블로그",
+    "url": "https://medium.com/p/5ae60ab5108b",
+    "date": "2026-10-21",
+    "quote": "저희는 프롬프트를 사내 LLM 플랫폼의 템플릿으로 관리하고 코드는 변수 값만 넘겨요."
+   },
+   {
+    "skill_id": "finops",
+    "from": "기술 블로그",
+    "url": "https://medium.com/p/5ae60ab5108b",
+    "date": "2026-10-21",
+    "quote": "고친 뒤 주제 분류의 히트율은 95% 안팎으로 올랐고, 요청당 비용은 약 5분의 1로 줄었어요."
+   }
+  ],
+  "domain_keywords": [
+   "지역 커뮤니티",
+   "피드",
+   "추천",
+   "동네생활",
+   "LLM"
+  ],
+  "caveats": [
+   "같은 팀·같은 직무(커뮤니티홈팀 백엔드 개발자 글) · 채용전환형 인턴",
+   "팀 기술 스택은 우대로 셈('써 보지 않았더라도 괜찮아요')"
+  ]
+ },
+ {
+  "key": "hyperconnect",
+  "company": "하이퍼커넥트",
+  "org_or_team": "Match Group AI 팀",
+  "job_title": "Machine Learning Engineer (Match Group AI)",
+  "region": "수도권",
+  "level": "미상",
+  "job_family": "AI·ML 엔지니어",
+  "match": "same_team",
+  "posting": {
+   "url": "https://jobs.lever.co/matchgroup/2196948b-9338-4943-acba-cb529335ed16",
+   "date_or_status": "2026-08 게시 중 (영문 공고, 연차 표기 없음)",
+   "requirements_quotes": [
+    "Depth in AI/ML: A solid foundation in AI/ML with deep knowledge in at least one domain, backed by project experience in which you applied it.",
+    "Data Literacy: You use exploratory data analysis to find the statistical properties and patterns in the data, and let what you find shape how you approach the problem.",
+    "ML Frameworks and Tooling: Proficiency in Python and frameworks such as PyTorch, TensorFlow, or JAX, and the ability to pick up new AI/ML tools quickly as the field moves.",
+    "Professional Working Proficiency in English: Able to conduct business meetings and participate in complex discussions without requiring assistance."
+   ],
+   "preferred_quotes": [
+    "Research Track Record: Publications at top-tier AI/ML venues (NeurIPS, ICLR, ICML, ACL, RecSys, KDD, CVPR) or awards in related competitions.",
+    "Experimentation and Causal Analysis: Designing A/B tests, defining target KPIs, and using causal analysis and SQL-based analysis to turn data into decisions.",
+    "ML Systems Engineering: Software engineering capability to build the AI/ML systems around your models, such as training pipelines and serving systems."
+   ],
+   "posting_text": "Match Group AI (MG AI) is the central tech organization that drives innovation across Match Group's global portfolio, including Tinder, Hinge, Azar, Pairs, Match, BLK, and more. The MG AI team's role is to apply cutting-edge AI to some of the hardest challenges along that journey, across diverse domains (e.g., Recommendation, Trust & Safety, Profile Enhancement). ML Engineers at MG AI own the model and the metric it optimizes."
+  },
+  "apply_skills": {
+   "machine_learning": 2,
+   "data_analysis": 2,
+   "python": 2,
+   "pytorch": 2,
+   "tensorflow": 2,
+   "jax": 2,
+   "english": 2,
+   "paper_research": 1,
+   "ab_testing": 1,
+   "sql": 1,
+   "mlops_pipeline": 1
+  },
+  "any_of": [
+   [
+    "pytorch",
+    "tensorflow",
+    "jax"
+   ]
+  ],
+  "work_sources": [
+   {
+    "skill_id": "edge_ai",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2026/01/23/On-device-Face-Verification-Pipeline-Optimization.html",
+    "date": "2026-01-23",
+    "quote": "이번 포스트에서는 안드로이드 온디바이스(on-device) 사진 추천 기술에 사용되는 얼굴 식별(Face Verification) 파이프라인을 최적화하는 과정에서의 주요 경험을 공유하고자 합니다."
+   },
+   {
+    "skill_id": "computer_vision",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2026/01/23/On-device-Face-Verification-Pipeline-Optimization.html",
+    "date": "2026-01-23",
+    "quote": "ML 모델을 이용하여 (1) 얼굴이 있는 직사각형 영역(bounding box)을 찾아내고, (2) 눈/코/입술/귀 등 중요한 이목구비 위치(landmark)를 찾아냅니다."
+   },
+   {
+    "skill_id": "embedding",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2026/01/23/On-device-Face-Verification-Pipeline-Optimization.html",
+    "date": "2026-01-23",
+    "quote": "ML 모델을 이용하여 (1) 얼굴 이미지에서 고유한 임베딩(Embedding) 벡터를 생성하고, (2) 이를 이미 계산해둔 기준 임베딩과 비교하여 유사도를 구합니다."
+   },
+   {
+    "skill_id": "recommender",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2026/01/23/On-device-Face-Verification-Pipeline-Optimization.html",
+    "date": "2026-01-23",
+    "quote": "그중 하나로, 사용자의 갤러리에 저장된 수천 장의 사진 중 프로필에 적합한 사진을 추천하는 AI 기술을 연구하고 있습니다."
+   },
+   {
+    "skill_id": "perf_opt",
+    "from": "기술 블로그",
+    "url": "https://hyperconnect.github.io/2026/01/23/On-device-Face-Verification-Pipeline-Optimization.html",
+    "date": "2026-01-23",
+    "quote": "저희는 모델을 변경하지 않고도 각 연산의 배치 방식과 실행 구조를 개선함으로써, 안드로이드 얼굴 식별 파이프라인에서 응답시간 37% 단축, 처리량 530% 개선이라는 성능 향상을 이끌어낼 수 있었습니다."
+   }
+  ],
+  "domain_keywords": [
+   "데이팅 앱",
+   "영상 채팅",
+   "추천",
+   "Trust & Safety",
+   "온디바이스"
+  ],
+  "caveats": [
+   "같은 팀(Match Group AI), 직무는 관련(블로그는 ML 시스템 최적화, 공고는 MLE)",
+   "영문 공고, 연차 표기 없음"
+  ]
+ }
+]

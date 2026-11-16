@@ -85,10 +85,16 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "java",
+      "kotlin"
+    ]
+  ],
   "posting_text": "자격요건\n• Java(kotlin), Spring 기반의 웹 애플리케이션 개발 및 운영 경험이 있는 분\n• 트러블 슈팅 및 성능 개선 경험이 있는 분\n• Server, Network, DB 등 IT기술 전반에 대한 이해가 있는 분\n• 관련 경력 5년 이상인 분\n우대사항\n• MSA 기반 설계 및 개발 경험 또는 레거시 시스템을 MSA로 전환 경험이 있는 분\n• 컨테이너 오케스트레이션(Kubernetes 등) 구축 및 설계 경험이 있는 분",
   "tracks": [],
   "domain": {
-    "label": "카카오뱅크 서비스 아키텍트",
+    "label": "은행·금융",
     "keywords": [
       "은행",
       "금융",
@@ -107,5 +113,11 @@
       "경력 5년 이상"
     ],
     "posting_url": "https://www.wanted.co.kr/wd/349922"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "시니어"
 }

@@ -29,7 +29,7 @@ nlp,자연어처리,자연어처리,자연어처리|자연어 처리,NLP|Natural
 llm,LLM,생성형AI,대규모 언어모델|대규모 언어 모델|거대언어모델|LLM API,LLM|Large Language Model|GPT,,,0
 rag,RAG,생성형AI,검색 증강 생성|검색증강생성,RAG|Retrieval-Augmented Generation,,,0
 prompt_engineering,프롬프트 엔지니어링,생성형AI,프롬프트 엔지니어링|프롬프트 설계,Prompt Engineering,,,0
-ai_agent,AI 에이전트,생성형AI,AI 에이전트|에이전트 개발|멀티 에이전트,AI Agent|Agentic,,,0
+ai_agent,AI 에이전트,생성형AI,AI 에이전트|에이전트 개발|멀티 에이전트|도구 호출,AI Agent|Agentic|LLM Agent|Function Calling|Tool Use|Tool Calling,,,0
 langchain,LangChain,생성형AI,랭체인,LangChain|LangGraph,,,0
 llamaindex,LlamaIndex,생성형AI,라마인덱스,LlamaIndex,,,0
 huggingface,Hugging Face,생성형AI,허깅페이스,Hugging Face|HuggingFace|Transformers,,,0

@@ -1,106 +1,91 @@
 {
   "tenant_id": "Z12",
   "name": "카카오모빌리티(공개 자료 재구성)",
-  "desc": "서버 개발자 (계약직, 신입 가능) · 실제 공고 + 기술 블로그",
+  "desc": "백엔드 개발자 (내비 서비스) · 실제 공고 + 기술 블로그",
   "region": "수도권",
   "job": "ai",
-  "job_title": "서버 개발자 (계약직, 신입 가능)",
-  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-10-16~ 상시모집, 계약직 6개월, 졸업 예정자 가능. 주의: 블로그 두 편은 다른 팀(같은 회사); 공고 주요업무가 모니터링인데 자격요건에 모니터링 도구가 없다는 점이 갭의 핵심; 신입·졸업예정자 지원 가능한 계약직 — 취준생 예시로 적합. 2026-11-16 확인.",
+  "job_title": "백엔드 개발자 (내비 서비스)",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2026-09 무렵 (마감), 3년 이상. 주의: 같은 서비스 백엔드(카카오내비 백엔드 서버) — 정식 팀명은 양쪽 모두 없음; 경력 3년 이상. 2026-11-16 확인.",
   "apply_source": "공고",
   "apply_requirements": {
-    "python": 2,
     "java": 2,
-    "mlops_pipeline": 1,
-    "data_pipeline": 1,
-    "kubernetes": 1,
-    "gcp": 1,
-    "airflow": 1,
-    "docker": 1,
-    "cicd": 1,
-    "llm": 1,
-    "rag": 1,
-    "ai_agent": 1
+    "kotlin": 2,
+    "spring": 2,
+    "rest_api": 2,
+    "nosql": 2,
+    "data_modeling": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "cloud_architecture": 2,
+    "communication": 1
   },
   "work_source": "공고 + 기술 블로그",
   "requirements": {
-    "python": 2,
     "java": 2,
-    "mlops_pipeline": 1,
-    "data_pipeline": 1,
-    "kubernetes": 1,
-    "gcp": 1,
-    "airflow": 1,
-    "docker": 1,
-    "cicd": 1,
-    "llm": 1,
-    "rag": 1,
-    "ai_agent": 1,
+    "kotlin": 2,
+    "spring": 2,
+    "rest_api": 2,
+    "nosql": 2,
+    "data_modeling": 2,
+    "docker": 2,
+    "kubernetes": 2,
+    "cloud_architecture": 2,
+    "communication": 1,
     "prometheus": 1,
     "grafana": 1,
     "elk": 1,
-    "spring": 1,
-    "prompt_engineering": 1
+    "observability": 1
   },
   "sources": {
-    "python": {
-      "from": "공고",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Python 또는 Java를 활용하여 직접 코드를 작성하고 프로그램 또는 서비스를 개발해본 경험이 있으신 분"
-    },
     "java": {
       "from": "공고",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Python 또는 Java를 활용하여 직접 코드를 작성하고 프로그램 또는 서비스를 개발해본 경험이 있으신 분"
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분"
     },
-    "mlops_pipeline": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
+    "kotlin": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분"
+    },
+    "spring": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분"
+    },
+    "rest_api": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분"
+    },
+    "nosql": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "RDBMS, NoSQL 스키마 설계 및 활용 경험이 있으신 분"
+    },
+    "data_modeling": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
       "quote": "공고 본문 참고"
     },
-    "data_pipeline": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "데이터 파이프라인 설계 및 ETL 개발 경험이 있으신 분"
+    "docker": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Docker와 Kubernetes에 대한 개념과 클라우드 인프라에 대한 경험이 있으신 분"
     },
     "kubernetes": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분"
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "Docker와 Kubernetes에 대한 개념과 클라우드 인프라에 대한 경험이 있으신 분"
     },
-    "gcp": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분"
+    "cloud_architecture": {
+      "from": "공고",
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "공고 본문 참고"
     },
-    "airflow": {
+    "communication": {
       "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분"
-    },
-    "docker": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분"
-    },
-    "cicd": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분"
-    },
-    "llm": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "LLM, RAG, AI Agent 등 AI 관련 프로젝트 경험이 있으신 분"
-    },
-    "rag": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "LLM, RAG, AI Agent 등 AI 관련 프로젝트 경험이 있으신 분"
-    },
-    "ai_agent": {
-      "from": "공고(우대)",
-      "url": "https://linkareer.com/activity/345804",
-      "quote": "LLM, RAG, AI Agent 등 AI 관련 프로젝트 경험이 있으신 분"
+      "url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918",
+      "quote": "팀워크를 중시하고, 원활한 커뮤니케이션이 가능하신 분"
     },
     "prometheus": {
       "from": "기술 블로그",
@@ -111,7 +96,7 @@
     "grafana": {
       "from": "기술 블로그",
       "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
-      "quote": "저희는 다양한 내부 시스템과 Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다.",
+      "quote": "Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다.",
       "date": "2025-04-21"
     },
     "elk": {
@@ -120,41 +105,45 @@
       "quote": "Prometheus, Grafana, Kibana 등의 오픈소스 도구들을 적극 활용하고 있습니다.",
       "date": "2025-04-21"
     },
-    "spring": {
+    "observability": {
       "from": "기술 블로그",
       "url": "https://developers.kakaomobility.com/techblogs/kakao-navi-stability.html",
-      "quote": "스프링 부트(Spring Boot) 환경에서는 이러한 웜업 로직을 매우 간편하게 적용할 수 있는 방법을 제공합니다. 가장 대표적인 방법은 ApplicationRunner 인터페이스를 구현한 컴포넌트를 만드는 것입니다.",
+      "quote": "시스템 이상 징후나 성능 저하, 특히 예상치 못한 애플리케이션 오류를 Sentry와 같은 도구를 통해 실시간으로 감지하고, Slack이나 카카오톡으로 알림을 받아 장애 발생 초기에 즉각적으로 대응할 수 있습니다.",
       "date": "2025-04-21"
-    },
-    "prompt_engineering": {
-      "from": "기술 블로그",
-      "url": "https://developers.kakaomobility.com/techblogs/ai-agent-admin-and-ai-gateway.html",
-      "quote": "작성한 프롬프트는 Playground에서 즉시 테스트할 수 있습니다.",
-      "date": "2026-07-22"
     }
   },
   "excluded": [],
-  "posting_text": "[담당업무]\n- 대규모 서비스의 통합 모니터링 시스템 개발 및 고도화\n- 로그/메트릭/알람 등 다양한 데이터를 활용한 장애 탐지 및 원인 분석 기능 개발\n- LLM 및 AI 기술을 활용한 장애 분석·대응 자동화 봇 개발\n[자격요건]\n- 컴퓨터 관련 학과 졸업생 및 졸업 예정자이신 분\n- Python 또는 Java를 활용하여 직접 코드를 작성하고 프로그램 또는 서비스를 개발해본 경험이 있으신 분\n[우대사항]\n- Kubernetes, GCP, Airflow, Docker, CI/CD 등 개발 환경 경험이 있으신 분\n- LLM, RAG, AI Agent 등 AI 관련 프로젝트 경험이 있으신 분",
+  "any_of": [
+    [
+      "java",
+      "kotlin"
+    ]
+  ],
+  "posting_text": "[담당업무] · 카카오내비 서비스의 백엔드 서버 개발, 운영 및 유지보수 · 카카오내비 서비스를 위한 API 설계 및 개발 · 카카오내비 서비스의 성능/기능 개선 및 최적화 [자격요건] - 백엔드 서버 개발 경력 만 3년 이상이신 분 - Java/Kotlin Spring 기반 웹/애플리케이션/REST API 개발 경험이 있으신 분 - RDBMS, NoSQL 스키마 설계 및 활용 경험이 있으신 분 - Docker와 Kubernetes에 대한 개념과 클라우드 인프라에 대한 경험이 있으신 분",
   "tracks": [],
   "domain": {
-    "label": "카카오모빌리티 서버 개발자 (계약직, 신입 가능)",
+    "label": "모빌리티·내비",
     "keywords": [
       "모빌리티",
       "내비",
-      "모니터링",
-      "장애 탐지",
+      "길 안내",
       "트래픽",
-      "LLM"
+      "GIS"
     ],
     "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
   },
   "public_source": {
-    "org": "통합 모니터링 서버 개발 (블로그: 카카오내비 백엔드·AI Gateway)",
+    "org": "카카오내비 백엔드",
     "caveats": [
-      "블로그 두 편은 다른 팀(같은 회사)",
-      "공고 주요업무가 모니터링인데 자격요건에 모니터링 도구가 없다는 점이 갭의 핵심",
-      "신입·졸업예정자 지원 가능한 계약직 — 취준생 예시로 적합"
+      "같은 서비스 백엔드(카카오내비 백엔드 서버) — 정식 팀명은 양쪽 모두 없음",
+      "경력 3년 이상"
     ],
-    "posting_url": "https://linkareer.com/activity/345804"
-  }
+    "posting_url": "https://job.incruit.com/entry/jobpost.asp?job=2609100003918"
+  },
+  "team_match": "same_team",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "백엔드",
+  "level": "경력"
 }

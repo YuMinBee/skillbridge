@@ -1,0 +1,344 @@
+[
+ {
+  "key": "naver_grad",
+  "company": "네이버(팀네이버 신입 공채)",
+  "org_or_team": "팀네이버 Tech 직군 공채",
+  "job_title": "Tech 신입 공채 (SW개발)",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "백엔드",
+  "match": "grad_hire",
+  "posting": {
+   "url": "https://recruit.navercorp.com/micro/teamnaver2025/tech",
+   "date_or_status": "2025-03-05~03-17 (마감) · 공식 보도자료 · 공식 채용 마이크로사이트(직무 상세): 기술 자격요건·우대 없음 확인",
+   "requirements_quotes": [
+    "2026년 2월 이내 대학(원) 졸업 예정이거나 경력 1년 이하라면 누구나 전공과 관계없이 지원할 수 있다.",
+    "▲Tech 직군은 온라인 코딩/CS테스트, 기술 역량 인터뷰, 종합 역량 인터뷰 등을 통해 최종 합격자를 선발한다."
+   ],
+   "preferred_quotes": [],
+   "posting_text": "네이버·네이버클라우드·네이버페이·스노우 4개 법인 전 직군 공개 채용. 2026년 2월 이내 대학(원) 졸업 예정이거나 경력 1년 이하라면 누구나 전공과 관계없이 지원할 수 있다. ▲Tech 직군은 온라인 코딩/CS테스트, 기술 역량 인터뷰, 종합 역량 인터뷰 등을 통해 최종 합격자를 선발한다."
+  },
+  "apply_skills": {},
+  "work_sources": [
+   {
+    "skill_id": "kubernetes",
+    "from": "발표",
+    "url": "https://d2.naver.com/helloworld/3517874",
+    "date": "2026-11-11",
+    "quote": "Socket.IO와 n3r 기반의 소켓 서버를 자체 구축하면서, 여러 Pod 사이의 이벤트 전달과 안정적인 연결 유지를 위한 설계와 검증 과정, 운영 경험을 정리해 공유합니다. / n3r  = 네이버 사내 쿠버네티스 기반 컨테이너 플랫폼"
+   },
+   {
+    "skill_id": "sre",
+    "from": "발표",
+    "url": "https://d2.naver.com/helloworld/6523094",
+    "date": "2026-11-11",
+    "quote": "Kubernetes 상에서 가상 인프라 장애를 통해 시스템을 사전에 검증하고 장애를 예방하는 기술을 소개합니다."
+   },
+   {
+    "skill_id": "airflow",
+    "from": "기술 블로그",
+    "url": "https://d2.naver.com/helloworld/4452165",
+    "date": "2026-09-01",
+    "quote": "저희 팀은 데이터 입수 플랫폼의 배치 워크플로를 Airflow 2.10.2로 운영하고 있습니다."
+   },
+   {
+    "skill_id": "python",
+    "from": "기술 블로그",
+    "url": "https://d2.naver.com/helloworld/4452165",
+    "date": "2026-09-01",
+    "quote": "이 글은 그 PoC 과정에서 Python의 멀티프로세싱 방식 중 하나인 fork로 인해 발생한 문제를 발견해 해결하고 기여한 과정을 다루는 시리즈의 1편입니다."
+   },
+   {
+    "skill_id": "hadoop",
+    "from": "기술 블로그",
+    "url": "https://d2.naver.com/helloworld/7314597",
+    "date": "2026-09-21",
+    "quote": "네이버의 사내 Hadoop 플랫폼 C3는 HDFS, YARN, Hive, Spark 등 다양한 컴포넌트가 한데 묶여 동작하는 대규모 데이터 플랫폼입니다."
+   },
+   {
+    "skill_id": "spark",
+    "from": "기술 블로그",
+    "url": "https://d2.naver.com/helloworld/7314597",
+    "date": "2026-09-21",
+    "quote": "Hive뿐 아니라 Spark, Trino, 그리고 각종 사내 배치 파이프라인이 이 HMS에 \"이 테이블의 스키마가 뭐야?\", \"이 파티션은 어디에 있어?\"를 묻습니다."
+   },
+   {
+    "skill_id": "gpu_infra",
+    "from": "발표",
+    "url": "https://d2.naver.com/helloworld/9994827",
+    "date": "2026-11-16",
+    "quote": "SNOW의 16개 Image AI 서비스에서 응답 속도와 안정성을 높이면서, H100 환산 약 67장의 GPU 자원을 절감한 경험을 공유합니다."
+   }
+  ],
+  "domain_keywords": [
+   "포털",
+   "대규모 트래픽",
+   "사내 쿠버네티스",
+   "데이터 플랫폼",
+   "AI 서빙"
+  ],
+  "caveats": [
+   "신입 공채라 배치 팀은 입사 후 결정됨 — 실무 근거는 네이버 여러 팀의 D2 글",
+   "공고에 기술 요구 없음(코딩/CS 테스트로 평가)"
+  ],
+  "apply_verified": true
+ },
+ {
+  "key": "kakao_grad",
+  "company": "카카오(신입크루 공채)",
+  "org_or_team": "카카오 Tech 신입크루 공채",
+  "job_title": "테크 직군 신입크루 공채",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "백엔드",
+  "match": "grad_hire",
+  "posting": {
+   "url": "https://careers.kakao.com/jobs/P-14207",
+   "date_or_status": "2025-09-08~09-28 (마감), 입사 2026-01-05 · 공식 채용 상세(테크 공통): 기술 자격요건·우대 없음 확인",
+   "requirements_quotes": [
+    "입사 예정일 기준 근무 가능하신 분(졸업예정자 포함)",
+    "코딩 테스트(테크 직군) 1차 : 10.11(토) 2차 : 10.26(일)"
+   ],
+   "preferred_quotes": [],
+   "posting_text": "모집 회사 카카오, 카카오게임즈, 카카오모빌리티, 카카오뱅크, 카카오엔터테인먼트, 카카오페이. 모집 분야 테크, 서비스비즈, 디자인, 스태프. 지원 자격 입사 예정일 기준 근무 가능하신 분(졸업예정자 포함). 코딩 테스트(테크 직군) 1차 : 10.11(토) 2차 : 10.26(일)"
+  },
+  "apply_skills": {},
+  "work_sources": [
+   {
+    "skill_id": "postgresql",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/816",
+    "date": "2026-03-13",
+    "quote": "운영 환경과 동일한 DB 사용 (H2 데이터베이스 → PostgreSQL)"
+   },
+   {
+    "skill_id": "docker",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/816",
+    "date": "2026-03-13",
+    "quote": "실행 환경 통일 및 컨테이너화 (Docker 기반)"
+   },
+   {
+    "skill_id": "git",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/816",
+    "date": "2026-03-13",
+    "quote": "저희는 총 수백 개의 PR과 수백 건의 리뷰를 거치며 이 과정을 반복했습니다."
+   },
+   {
+    "skill_id": "mongodb",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/815",
+    "date": "2026-03-13",
+    "quote": "특히 MongoDB 파트에서 이 감각이 크게 와닿았는데, ref로만 관계를 선언하면 처음엔 깔끔하지만 화면 요구사항이 커지는 순간 조회가 복잡해지고"
+   },
+   {
+    "skill_id": "mysql",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/815",
+    "date": "2026-03-13",
+    "quote": "MySQL의 고가용성(HA) 아키텍처, PostgreSQL의 PK 구조, 그리고 스토리지와 컴퓨팅 계층이 분리된 클라우드 네이티브 DB(Neon) 등을 학습하며"
+   },
+   {
+    "skill_id": "rag",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/815",
+    "date": "2026-03-13",
+    "quote": "또한 RAG를 통해 할루시네이션을 정성적으로 줄이는 것이 아니라, 문서를 청킹하고 유사 벡터를 검색해 증강시키는 '구조적 통제’로 해결할 수 있음을 배웠습니다."
+   },
+   {
+    "skill_id": "mcp",
+    "from": "기술 블로그",
+    "url": "https://tech.kakao.com/posts/815",
+    "date": "2026-03-13",
+    "quote": "MCP를 통해 우리 내부 시스템의 고유 기능과 데이터를 AI가 호출할 수 있는 함수(Tool) 형태로 노출함으로써, AI의 한계를 기업의 시스템 자원으로 극복하는 '원격 Function Calling’의 개념을 체득했습니다."
+   }
+  ],
+  "domain_keywords": [
+   "메신저",
+   "플랫폼",
+   "대규모 트래픽",
+   "신입 온보딩",
+   "AI 협업"
+  ],
+  "caveats": [
+   "실무 근거는 바로 이 공채로 입사한 2026 신입 크루가 쓴 온보딩 글(가장 직접적인 신입 근거)",
+   "공고에 기술 요구 없음(코딩 테스트로 평가)"
+  ],
+  "apply_verified": true
+ },
+ {
+  "key": "ktcloud",
+  "company": "kt cloud",
+  "org_or_team": "kt cloud IT직군 SW개발 (블로그: 플랫폼엔지니어링팀)",
+  "job_title": "신입 IT직군 SW개발",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "백엔드",
+  "match": "grad_hire",
+  "posting": {
+   "url": "https://cse.snu.ac.kr/ko/community/notice/24235",
+   "date_or_status": "2025-09-08~09-24 (마감), 입사 1월 · 공식 공고문 이미지 판독: 기술 자격요건·우대 없음 확인",
+   "requirements_quotes": [
+    "l정규4년제 대학 졸업자 또는 졸업예정자(2026년2월)",
+    "•IT직군의 경우AI역량검사/AI면접 전형 시 코딩 테스트가 포함되어 있습니다."
+   ],
+   "preferred_quotes": [
+    "•컴퓨터 공학,정보통신, AI등IT관련 전공자"
+   ],
+   "posting_text": "IT직군 SW개발 주요 수행업무: 클라우드 서비스 개발 (Cloud Native, AI, DevOps분야) / 대규모 웹 어플리케이션 및 서버 개발 / 클라우드 자동화 플랫폼 개발. 우대사항: 컴퓨터 공학, 정보통신, AI등 IT관련 전공자. 지원자격: 정규4년제 대학 졸업자 또는 졸업예정자(2026년2월). 근무지 수도권(서울/경기)"
+  },
+  "apply_skills": {},
+  "work_sources": [
+   {
+    "skill_id": "kotlin",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+    "date": "2026-09-22",
+    "quote": "언어는 Kotlin, 프레임워크는 Spring Boot를 채택했습니다."
+   },
+   {
+    "skill_id": "spring",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+    "date": "2026-09-22",
+    "quote": "Spring Data JPA, Kotlin JDSL"
+   },
+   {
+    "skill_id": "react",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+    "date": "2026-09-22",
+    "quote": "기술 스택은 TypeScript · React이며, UI 컴포넌트는 Antd를 사용하되 추후 사내 디자인 시스템으로 전환할 수 있도록 구성했습니다."
+   },
+   {
+    "skill_id": "postgresql",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-boilerplate-ai-coding-standards",
+    "date": "2026-09-22",
+    "quote": "MCP ─┼──▶ Application ──▶ PostgreSQL / Batch ─┘ (서비스 로직 코어) ──▶ Redis"
+   },
+   {
+    "skill_id": "argocd",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-09-ktcloud-devops-mcp-integration",
+    "date": "2026-09-23",
+    "quote": "이 글에서는 MCP를 활용해 Kubernetes·GitHub·ArgoCD·Slack 등 DevOps 시스템을 AI와 연결하고, kt cloud PLATFORM 환경에 적용하기 위한 구조와 보안 원칙을 다룹니다."
+   },
+   {
+    "skill_id": "iac",
+    "from": "기술 블로그",
+    "url": "https://tech.ktcloud.com/entry/2026-07-ktcloud-proxmox-pulumi-controlplane-deployment",
+    "date": "2026-07-10",
+    "quote": "이 글에서는 Proxmox VE와 Pulumi를 활용해 ControlPlane 가상화와 IaC 기반 운영 자동화를 구현한 과정을 다룹니다."
+   }
+  ],
+  "domain_keywords": [
+   "클라우드",
+   "플랫폼 엔지니어링",
+   "GitOps",
+   "DevOps",
+   "자동화"
+  ],
+  "caveats": [
+   "KT 본사가 아닌 자회사 kt cloud",
+   "블로그 팀(플랫폼엔지니어링팀)은 공고의 SW개발 업무와 맞지만 배치는 입사 후 결정",
+   "공고에 기술 요구 없음(코딩 테스트)"
+  ],
+  "apply_verified": true
+ },
+ {
+  "key": "lguplus",
+  "company": "LG유플러스",
+  "org_or_team": "신입 DevOps (사례: IPTV 사업부문 DevOps 팀)",
+  "job_title": "신입 DevOps",
+  "region": "수도권",
+  "level": "신입",
+  "job_family": "클라우드·인프라·운영",
+  "match": "same_dept",
+  "posting": {
+   "url": "https://cse.snu.ac.kr/ko/community/notice/23884",
+   "date_or_status": "2025-04-27 마감 · 공식 공고문 이미지 판독 (원문 오타 그대로)",
+   "requirements_quotes": [
+    "2. 협업 툴 사용 경험 ex) JIRA, Confluence 등",
+    "3. Jenkins, Git, CodeDeploy 와 같은 CI/CD 환경에 대한 경험",
+    "4. Docker, Kubernets 등 가상화, 컨테이너 환경에 대한 이해"
+   ],
+   "preferred_quotes": [
+    "2. AWS, Azure 등 클라우드 관련 자격증 보유",
+    "3. SpringBoot나 Django와 같은 프레임워크로 개발했던 경험",
+    "4. Terrform, Ansible, Packer, Cloud Formation 등 IaC 도구 경험"
+   ],
+   "posting_text": "DevOps [이런 업무를 수행하실 분을 찾아요.] 1. 신규 서비스에 대한 인프라 구축 및 운영 2. 자사 내 클라우드 마이그레이션 프로젝트 설계/구축/운영 3. 자동화 및 개발 효율성을 높여줄 수 있는 도구 개발(언어무관) [이런 경험/역량을 보유하신 분을 찾아요.] 2. 협업 툴 사용 경험 ex) JIRA, Confluence 등 3. Jenkins, Git, CodeDeploy 와 같은 CI/CD 환경에 대한 경험 4. Docker, Kubernets 등 가상화, 컨테이너 환경에 대한 이해 우대사항 2. AWS, Azure 등 클라우드 관련 자격증 보유 3. SpringBoot나 Django와 같은 프레임워크로 개발했던 경험 4. Terrform, Ansible, Packer, Cloud Formation 등 IaC 도구 경험"
+  },
+  "apply_skills": {
+   "jira": 2,
+   "jenkins": 2,
+   "git": 2,
+   "cicd": 2,
+   "docker": 2,
+   "kubernetes": 2,
+   "aws_cert": 1,
+   "spring": 1,
+   "django": 1,
+   "terraform": 1,
+   "ansible": 1,
+   "aws_cloudformation": 1,
+   "iac": 1
+  },
+  "work_sources": [
+   {
+    "skill_id": "aws_eks",
+    "from": "고객 사례",
+    "url": "https://aws.amazon.com/ko/blogs/tech/lg-uplus-eks-cluster-version-upgrade-with-zero-downtime/",
+    "date": "2023-07-14",
+    "quote": "LG U+ IPTV 사업부문 DevOps 팀(이하 DevOps 팀)은 마이크로서비스 아키텍처를 채택하고, 미디어 서비스의 특징인 순간적인 트래픽 급증에 대응할 수 있도록 워크로드를 Amazon EKS로 이관하기로 결정했습니다."
+   },
+   {
+    "skill_id": "terraform",
+    "from": "고객 사례",
+    "url": "https://aws.amazon.com/ko/blogs/tech/lg-uplus-eks-cluster-version-upgrade-with-zero-downtime/",
+    "date": "2023-07-14",
+    "quote": "DevOps팀은 인프라는 Terraform, 어플리케이션은 ArgoCD를 사용하여 GitOps 배포 파이프라인을 구축하였습니다."
+   },
+   {
+    "skill_id": "argocd",
+    "from": "고객 사례",
+    "url": "https://aws.amazon.com/ko/blogs/tech/lg-uplus-eks-cluster-version-upgrade-with-zero-downtime/",
+    "date": "2023-07-14",
+    "quote": "많은 수의 어플리케이션과 애드온을 신규 클러스터에 동일하게 배포하는 데에는 ArgoCD의 App of apps 패턴이 큰 도움이 되었습니다."
+   },
+   {
+    "skill_id": "kubernetes",
+    "from": "고객 사례",
+    "url": "https://aws.amazon.com/ko/blogs/tech/lg-uplus-eks-cluster-version-upgrade-with-zero-downtime/",
+    "date": "2023-07-14",
+    "quote": "DevOps팀은 이 방식을 기반으로 내부적으로 많은 검증을 거친 뒤 지난 2023년 3월 Amazon EKS 클러스터 버전 1.21에서 1.24로 마이너 버전 3개를 한번에 무중단으로 업데이트하는 것에 성공하였습니다."
+   },
+   {
+    "skill_id": "msa",
+    "from": "고객 사례",
+    "url": "https://aws.amazon.com/ko/blogs/tech/lg-uplus-eks-cluster-version-upgrade-with-zero-downtime/",
+    "date": "2023-07-14",
+    "quote": "LG U+ IPTV 사업부문 DevOps 팀(이하 DevOps 팀)은 마이크로서비스 아키텍처를 채택하고"
+   }
+  ],
+  "domain_keywords": [
+   "통신",
+   "IPTV",
+   "미디어",
+   "트래픽",
+   "DevOps"
+  ],
+  "caveats": [
+   "공고문 이미지를 직접 판독(오타 'Kubernets'·'Terrform' 원문 그대로)",
+   "실무 사례는 2023년 IPTV DevOps 팀(AWS 기술 블로그)"
+  ],
+  "any_of": [
+   [
+    "spring",
+    "django"
+   ]
+  ]
+ }
+]

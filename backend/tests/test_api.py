@@ -157,3 +157,56 @@ def test_project_units_skip_skill_lists():
     from app.pipeline.projectfit import units
     u = units("[보유기술] Docker, Python\n- 졸업작품: 쇼핑몰 백엔드 개발\n  REST API 설계\n[학력] OO대")
     assert u == ["- 졸업작품: 쇼핑몰 백엔드 개발 REST API 설계"]
+
+
+def test_tool_names_need_grounding():
+    from app.pipeline.extract import named_in_text
+    assert named_in_text("pytorch", "torch", "torch로 학습")                       # 이름 일부
+    assert named_in_text("kubernetes", "쿠베", "쿠베 기초 강의를 수강함")              # 줄임말
+    assert named_in_text("c_lang", "C", "C 기반 큐 구현")                            # 한 글자 이름
+    assert not named_in_text("langchain", "문서 검색", "문서 검색, 재랭킹, LLM 생성")  # 도구 이름이 없음
+    assert not named_in_text("xgboost", "HistGradientBoosting", "HistGradientBoosting 추천 모델")
+
+
+def test_any_of_keeps_best_member():
+    from app.pipeline.score import resolve_any_of
+    st = {"python": {"status": "own"}}
+    r = resolve_any_of({"python": 2, "java": 2, "sql": 1}, [["python", "java"]], st)
+    assert r == {"python": 2, "sql": 1}                                             # Python 있으면 Java는 갭 아님
+    assert resolve_any_of({"python": 2, "java": 2}, [["python", "java"]], {}) == {"python": 2}
+
+
+def test_fictional_companies_hidden_from_list(client):
+    ids = [c["id"] for c in client.get("/api/companies").json()]
+    assert "A" not in ids and "Z12" in ids
+    assert "A" in [c["id"] for c in client.get("/api/companies?all=1").json()]
+    r = client.post("/api/diagnose", json={"resume_text": "Python으로 서비스 개발", "company_id": "Z12"}).json()
+    assert not {"A", "B", "C"} & {o["company_id"] for o in r["others"]}
+    fm = r["family_map"]
+    assert fm["family"] == "백엔드" and fm["n"] > 5 and fm["skills"]
+    assert all(0 <= k["x"] <= 1 and 0 <= k["y"] <= 1 for k in fm["skills"])
+
+
+def test_custom_company_uses_posting_and_family(client):
+    """목록에 없는 회사: 지원 기준은 붙여 넣은 공고, 실무는 같은 직군 회사들로 추정, 예측은 점수와 분리."""
+    posting = "자격요건\n- Java 또는 Kotlin 기반 서버 개발 경험\n- Spring 프레임워크 사용 경험\n우대사항\n- AWS 사용 경험"
+    body = {"resume_text": "Java와 Spring으로 게시판 서버를 개발함", "company_id": "custom",
+            "custom": {"name": "삼성전자 SW개발", "job_family": "백엔드", "posting_text": posting}}
+    r = client.post("/api/diagnose", json=body).json()
+    assert r["company"]["custom"] and r["company"]["name"] == "삼성전자 SW개발"
+    assert "spring" in {b["skill_id"] for b in r["baseline"]["posting_requirements"]}
+    assert r["custom"]["family_n"] > 5 and r["custom"]["family_evidence"]
+    pred = r["custom"]["prediction"]["items"]
+    assert pred and all(p["skill_id"] not in {b["skill_id"] for b in r["baseline"]["posting_requirements"]} for p in pred)
+    assert client.post("/api/diagnose", json={**body, "custom": {**body["custom"], "posting_text": ""}}).status_code == 400
+    assert client.post("/api/diagnose", json={**body, "custom": None}).status_code == 400
+
+
+def test_family_map_hidden_work_skills(client):
+    """공고에는 거의 없는데 실무 기준엔 있는 스킬(숨은 실무 역량)이 직군 지도에 잡힌다."""
+    r = client.post("/api/diagnose", json={"resume_text": "Python으로 모델 개발", "company_id": "T"}).json()
+    fm = r["family_map"]
+    hidden = [k for k in fm["skills"] if k["x"] == 0 and k["y"] > 0]
+    assert hidden, "실무에만 있는 스킬이 있어야 함"
+    py = next(k for k in fm["skills"] if k["skill_id"] == "python")
+    assert py["need"] == 0  # 보유 → 부족도 0

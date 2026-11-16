@@ -78,10 +78,11 @@
     }
   },
   "excluded": [],
+  "any_of": [],
   "posting_text": "확장 가능한 Agent 환경 구축 방법론, 초고품질 데이터 필터링 시스템, RLHF·RLVR·OPD 등 최신 학습 기법을 활용해 세계 최고 수준의 사후 학습 기술 개발을 주도합니다.\n필수 사항\nLLM/VLM post-training/fine-tuning을 수행하여 특정 문제에서 최고 성능을 달성해본 경험\nFoundation Model 개발 트렌드에 대한 이해도\nML과 NLP 토픽으로 국제 학회에서 출판 기록 (1저자 혹은 교신저자)\n우대 사항\nAgent Harness를 설계하여 모델 학습을 위한 데이터 합성을 수행해본 경험\nLLM/VLM을 위한 데이터 수집, 생성, 정제등을 수행해 본 경험",
   "tracks": [],
   "domain": {
-    "label": "업스테이지 AI Research Engineer",
+    "label": "파운데이션 모델·사후 학습",
     "keywords": [
       "파운데이션 모델",
       "사후 학습",
@@ -100,5 +101,11 @@
       "석사·논문 요구 공고"
     ],
     "posting_url": "https://careers.upstage.ai/ko/o/194876"
-  }
+  },
+  "team_match": "none",
+  "stats_only": true,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "AI·ML 엔지니어",
+  "level": "시니어"
 }

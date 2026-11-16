@@ -5,7 +5,7 @@
   "region": "수도권",
   "job": "cloud",
   "job_title": "데이터 엔지니어",
-  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-11-09 기준 (재게시 사이트 사본). 주의: 실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료); 공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름; Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외; 공고는 재게시 사이트 사본, 경력 5년 이상. 2026-11-16 확인.",
+  "data_note": "기업이 직접 등록한 기준이 아닙니다. 지원 기준은 실제 채용 공고, 실무 기준은 같은 회사의 기술 블로그·발표에서 확인한 기술로 재구성했습니다. 블로그에서 확인한 기술은 중요도를 알 수 없어 '우대'로 두었습니다. 공고: 2025-11 기준, 5년 이상. 주의: 같은 직무(데이터 엔지니어) · 팀 이름은 개편 전후로 다름(Core Infra Data 파트 / Core Data팀·Data Engineering팀); 블로그 2021·2023, 5년 이상. 2026-11-16 확인.",
   "apply_source": "공고",
   "apply_requirements": {
     "python": 2,
@@ -16,8 +16,6 @@
     "mysql": 2,
     "postgresql": 2,
     "data_warehouse": 2,
-    "aws_redshift": 2,
-    "aws_rds": 2,
     "data_pipeline": 2,
     "query_tuning": 1,
     "aws": 1,
@@ -38,8 +36,6 @@
     "mysql": 2,
     "postgresql": 2,
     "data_warehouse": 2,
-    "aws_redshift": 2,
-    "aws_rds": 2,
     "data_pipeline": 2,
     "query_tuning": 1,
     "aws": 1,
@@ -49,8 +45,11 @@
     "aws_sagemaker": 1,
     "amazon_bedrock": 1,
     "airflow": 1,
-    "terraform": 1,
-    "iac": 1
+    "spark": 1,
+    "aws_athena": 1,
+    "aws_s3": 1,
+    "aws_glue": 1,
+    "helm": 1
   },
   "sources": {
     "python": {
@@ -92,16 +91,6 @@
       "from": "공고",
       "url": "https://www.yugacrew.com/careertalk/jobs/3014",
       "quote": "Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"
-    },
-    "aws_redshift": {
-      "from": "공고",
-      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
-      "quote": "Snowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험"
-    },
-    "aws_rds": {
-      "from": "공고",
-      "url": "https://www.yugacrew.com/careertalk/jobs/3014",
-      "quote": "Aurora MySQL, RDS PostgreSQL 등 대용량 DB 운영 및 최적화 경험"
     },
     "data_pipeline": {
       "from": "공고",
@@ -148,42 +137,74 @@
       "url": "https://www.yugacrew.com/careertalk/jobs/3014",
       "quote": "AWS SageMaker, Bedrock, Airflow 등 ML/LLMOps 운영 경험"
     },
-    "terraform": {
-      "from": "고객 사례",
-      "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
-      "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며",
-      "date": "2024-08 전환 이후"
+    "spark": {
+      "from": "기술 블로그",
+      "url": "https://corp.banksalad.com/blog/tech/datapipe/",
+      "quote": "PySpark 작업은 `PySparkOperator`라는 Airflow operator를 구현하여 실행합니다.",
+      "date": "2023-06-05"
     },
-    "iac": {
-      "from": "고객 사례",
-      "url": "https://www.snowflake.com/ko/customers/all-customers/case-study/banksalad/",
-      "quote": "모든 파이프라인 정의는 테라폼(Terraform)을 활용한 IaC 코드로 관리되어 리뷰 후 반영되며",
-      "date": "2024-08 전환 이후"
+    "aws_athena": {
+      "from": "기술 블로그",
+      "url": "https://corp.banksalad.com/blog/tech/datapipe/",
+      "quote": "수집된 데이터는 S3, Glue 기반 데이터 레이크에 적재되, Athena, Spark를 통해 데이터 분석에 사용됩니다.",
+      "date": "2023-06-05"
+    },
+    "aws_s3": {
+      "from": "기술 블로그",
+      "url": "https://corp.banksalad.com/blog/tech/datapipe/",
+      "quote": "수집된 데이터는 S3, Glue 기반 데이터 레이크에 적재되, Athena, Spark를 통해 데이터 분석에 사용됩니다.",
+      "date": "2023-06-05"
+    },
+    "aws_glue": {
+      "from": "기술 블로그",
+      "url": "https://corp.banksalad.com/blog/tech/the-starting-of-datadiscoveryplatform-era-in-banksalad/",
+      "quote": "ap-northeast-2에 있는 AWS Glue 테이블들이 ingest되어 `datahub-rest` 로 보냅니다.",
+      "date": "2021-09-15"
+    },
+    "helm": {
+      "from": "기술 블로그",
+      "url": "https://corp.banksalad.com/blog/tech/the-starting-of-datadiscoveryplatform-era-in-banksalad/",
+      "quote": "저희는 데이터 분석 환경 용도로 별도로 구축된 k8s를 사용하고 있어 Datahub Helm을 참조하며 배포했습니다.",
+      "date": "2021-09-15"
     }
   },
   "excluded": [],
-  "posting_text": "데이터 파트는 데이터의 수집·저장·운영을 담당하며, 데이터 파이프라인 설계, DW 및 데이터 레이크 구축, 데이터 품질 관리, AI·ML/LLMOps 지원까지 전사 데이터 인프라를 총괄합니다.\n자격요건\n데이터 엔지니어링, ETL, 빅데이터 분야 실무 경험 5년 이상\nPython 또는 JVM 기반 언어(Java, Scala) 중 하나 이상 숙련\nLinux 환경 이해 및 SQL, RDBMS (MySQL, PostgreSQL 등) 심화 경험\nSnowflake/Redshift/Databricks 등 DW 또는 Data Lake 구축 경험",
+  "any_of": [
+    [
+      "python",
+      "java",
+      "scala"
+    ],
+    [
+      "mysql",
+      "postgresql"
+    ]
+  ],
+  "posting_text": "Core Infra팀은 뱅크샐러드의 핵심 기술 인프라와 시스템을 운영하는 팀으로, DevOps, SRE, Data 파트로 구성되어 있습니다. 전사 데이터 인프라 및 플랫폼 구축·운영 / 데이터 파이프라인(ETL/ELT) 설계 및 최적화 / 데이터 레이크 및 DW 설계·구축·운영 (Snowflake, Redshift 등)",
   "tracks": [],
   "domain": {
-    "label": "뱅크샐러드 데이터 엔지니어",
+    "label": "핀테크·마이데이터",
     "keywords": [
-      "마이데이터",
       "핀테크",
+      "마이데이터",
       "금융",
-      "자산",
-      "알림",
-      "개인정보"
+      "데이터 레이크",
+      "자산"
     ],
     "note": "조사에서 뽑은 도메인 단어 (프로젝트 적합도용)"
   },
   "public_source": {
-    "org": "Core Infra팀 데이터 파트 (사례: AI Data Platform팀)",
+    "org": "Core Infra팀 Data 파트 (블로그: Data Engineering팀·Core Data팀)",
     "caveats": [
-      "실무 출처가 회사 블로그가 아니라 Snowflake 고객 사례(벤더 자료)",
-      "공고 팀(Core Infra 데이터)과 사례 팀(AI Data Platform) 이름이 다름",
-      "Spark·EKS·Glue·Athena는 2024년 전환 전 구조라 제외",
-      "공고는 재게시 사이트 사본, 경력 5년 이상"
+      "같은 직무(데이터 엔지니어) · 팀 이름은 개편 전후로 다름(Core Infra Data 파트 / Core Data팀·Data Engineering팀)",
+      "블로그 2021·2023, 5년 이상"
     ],
     "posting_url": "https://www.yugacrew.com/careertalk/jobs/3014"
-  }
+  },
+  "team_match": "same_dept",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "데이터 엔지니어·분석",
+  "level": "시니어"
 }

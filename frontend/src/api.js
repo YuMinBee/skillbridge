@@ -49,12 +49,13 @@ export const api = {
   quality: () => req("GET", "/api/quality"),
   personas: () => req("GET", "/api/personas"),
   diagnose: (body) => req("POST", "/api/diagnose", body),
-  diagnosePdf: (file, companyId, hours) => {
+  diagnosePdf: (file, companyId, hours, custom) => {
     const f = new FormData();
     f.append("file", file); f.append("company_id", companyId); f.append("weekly_hours", String(hours));
+    if (custom) { f.append("custom_name", custom.name); f.append("custom_family", custom.job_family); f.append("custom_posting", custom.posting_text); }
     return req("POST", "/api/diagnose/pdf", f, true);
   },
-  companies: () => req("GET", "/api/companies"),
+  companies: (all = false) => req("GET", `/api/companies${all ? "?all=1" : ""}`),
   company: (id) => req("GET", `/api/companies/${id}`),
   putRequirements: (id, requirements) => req("PUT", `/api/companies/${id}/requirements`, { requirements }),
   putTracks: (id, tracks) => req("PUT", `/api/companies/${id}/tracks`, { tracks }),

@@ -65,3 +65,14 @@ def market_postings() -> list[dict]:
 @lru_cache(maxsize=1)
 def fake_sessions() -> list[dict]:
     return _read_jsonl(SEED / "sessions" / "fake_sessions.jsonl")
+
+
+def hidden_ids() -> set[str]:
+    """목록에서 숨기는 가상 예시 회사 (seed에 "listed": false). 통계에도 넣지 않는다. 직접 고르면 진단은 된다."""
+    return {tid for tid, d in seed_companies().items() if d.get("listed") is False}
+
+
+def stats_only_ids() -> set[str]:
+    """공고와 실무 근거의 팀이 맞지 않는 회사 (seed에 "stats_only": true).
+    고르는 목록에는 안 나오고, '같은 직군 N곳 중 M곳이 실무에서 씀' 같은 직군 통계에만 쓴다."""
+    return {tid for tid, d in seed_companies().items() if d.get("stats_only")}

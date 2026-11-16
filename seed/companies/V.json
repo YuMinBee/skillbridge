@@ -148,10 +148,16 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "aws",
+      "gcp"
+    ]
+  ],
   "posting_text": "• 리디의 다양한 제품에서 쌓인 데이터를 Feature Store로 관리하고, 다양한 직관과 가설을 통해 추천 시스템 모델을 학습합니다.\n• ML 모델을 배치 및 실시간 환경에 맞게 Triton Inference Server 등에 배포합니다.\n자격요건\n5년 이상의 소프트웨어(데이터 파이프라인, ML 서빙 시스템 등) 설계 및 운영 경험이 있으신 분\nPython 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분",
   "tracks": [],
   "domain": {
-    "label": "리디 ML & Data Engineer",
+    "label": "웹툰·웹소설",
     "keywords": [
       "웹툰",
       "웹소설",
@@ -170,5 +176,11 @@
       "경력 5년 이상"
     ],
     "posting_url": "https://career.rememberapp.co.kr/job/posting/278079"
-  }
+  },
+  "team_match": "company",
+  "stats_only": false,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "MLOps·AI 플랫폼",
+  "level": "시니어"
 }

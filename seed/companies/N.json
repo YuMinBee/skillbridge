@@ -148,10 +148,20 @@
     }
   },
   "excluded": [],
+  "any_of": [
+    [
+      "java",
+      "kotlin"
+    ],
+    [
+      "aws",
+      "gcp"
+    ]
+  ],
   "posting_text": "데이터 백엔드 개발자는 각종 AI, 머신러닝, 최적화 모델을 수행하는 백엔드 시스템을 개발하고 관리합니다.\n주요업무\n• 컬리 앱/웹에 AI/머신러닝/최적화 기반 서비스 구현/운영\n자격 요건\n• 유관경력 6년 이상이신 분\n• Java 혹은 Kotlin / MySQL / Spring Boot 프레임워크를 이용한 개발 경험, 또는 이에 준하는 실력을 보유하신 분\n• Kafka 기반 비동기 처리 역량을 보유하신 분\n• AWS/GCP 클라우드, Container/K8s 관련 지식, 경험을 보유하신 분",
   "tracks": [],
   "domain": {
-    "label": "컬리 데이터 백엔드 개발자",
+    "label": "신선식품·커머스",
     "keywords": [
       "신선식품",
       "커머스",
@@ -169,5 +179,11 @@
       "경력 6년 이상 공고"
     ],
     "posting_url": "https://career.rememberapp.co.kr/job/posting/279400"
-  }
+  },
+  "team_match": "none",
+  "stats_only": true,
+  "apply_none": false,
+  "apply_verified": false,
+  "job_family": "MLOps·AI 플랫폼",
+  "level": "시니어"
 }
