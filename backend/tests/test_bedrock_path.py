@@ -52,6 +52,13 @@ class FakeClient:
         if name == "submit_links":
             # 첫 후보 밖의 ID를 일부러 고른다 → 거부되어야 함
             return self._tool(name, {"items": [{"i": 0, "skill_id": "not_a_candidate"}]})
+        if name == "submit_bridges":
+            ids = kw["toolConfig"]["tools"][0]["toolSpec"]["inputSchema"]["json"]["properties"]["items"]["items"]["properties"]["skill_id"]["enum"]
+            self.bridge_ids = ids
+            return self._tool(name, {"items": [
+                {"skill_id": ids[0], "evidence": "PyTorch로 객체 탐지 모델을 개발함", "reason": "직접 개발"},  # 원문에 있음 → 인정
+                {"skill_id": ids[-1], "evidence": "대규모 추천 시스템을 운영함", "reason": "지어냄"},  # 원문에 없음 → 버림
+            ]})
         if name == "submit_explanations":
             steps = [int(x.split("]")[0]) for x in user.split("[단계 ")[1:]]
             bad = self.explain_bad > 0
@@ -144,7 +151,7 @@ def test_diagnose_bedrock_mode_records_calls(fake):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert r["mode"] == "bedrock" and r["fallbacks"] == []
-    assert len(r["trace"]) == 14
+    assert len(r["trace"]) == 15
     kinds = {c["kind"] for s in r["trace"] for c in s.get("calls", [])}
     assert {"guardrail", "extract", "explain"} <= kinds
     assert r["usage"]["calls"] >= 4
@@ -161,4 +168,24 @@ def test_each_step_falls_back_on_failure(fake, where):
     storage.init(force=True)
     r = diagnose.run(RESUME, "A", 10, log=False)
     assert len(r["fallbacks"]) == 1
-    assert len(r["trace"]) == 14 and r["readiness"] >= 0
+    assert len(r["trace"]) == 15 and r["readiness"] >= 0
+
+
+def test_bridge_links_only_quoted_concept_skills(fake):
+    """경험 연결: 원문에 있는 문장만 인정(검증 필요, 0.5), 도구 이름은 후보에 넣지 않는다."""
+    from app.pipeline import bridge
+    fc = fake()
+    targets = ["computer_vision", "kubernetes", "terraform", "recommender"]
+    st, links = bridge.link(RESUME, {}, targets, {})
+    assert fc.bridge_ids == ["computer_vision", "recommender"]  # 개념 스킬만 (Kubernetes·Terraform은 추측 금지)
+    assert [x["skill_id"] for x in links] == ["computer_vision"] and st["computer_vision"]["status"] == "verify"
+    assert "recommender" not in st  # 지어낸 근거는 버림
+
+
+def test_bridge_similar_tool_needs_owned_sibling():
+    from app.pipeline import bridge
+    st, added = bridge.similar({"mysql": {"status": "own", "evidence": "MySQL로 설계"},
+                                "jenkins": {"status": "part", "evidence": "강의"}},
+                               ["postgresql", "github_actions", "kubernetes"])
+    assert added == [("postgresql", "mysql")] and st["postgresql"]["status"] == "part"
+    assert "github_actions" not in st  # 부분인 도구로는 올리지 않는다

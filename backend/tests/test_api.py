@@ -6,7 +6,7 @@ def test_market(client):
 
 def test_personas_match_demo_statuses(client):
     """데모 HTML의 예시 지원자 상태가 이력서 텍스트 추출로 재현되는지."""
-    r = client.post("/api/diagnose", json={"persona_id": "p1", "company_id": "A", "weekly_hours": 15}).json()
+    r = client.post("/api/diagnose", json={"persona_id": "t1", "company_id": "A", "weekly_hours": 15}).json()
     st = {s["skill_id"]: s["status"] for s in r["skills_found"]}
     assert st["python"] == st["pytorch"] == st["computer_vision"] == st["linux"] == "own"
     assert st["docker"] == "verify"
@@ -15,7 +15,7 @@ def test_personas_match_demo_statuses(client):
 
 
 def test_corp_change_updates_diagnosis_immediately(client):
-    body = {"persona_id": "p1", "company_id": "A", "weekly_hours": 15}
+    body = {"persona_id": "t1", "company_id": "A", "weekly_hours": 15}
     before = client.post("/api/diagnose", json=body).json()
     reqs = client.get("/api/companies/A").json()["requirements"]
     reqs["edge_ai"] = 0  # 제외
@@ -26,14 +26,14 @@ def test_corp_change_updates_diagnosis_immediately(client):
 
 
 def test_baseline_shows_missed_and_unnecessary(client):
-    r = client.post("/api/diagnose", json={"persona_id": "p1", "company_id": "A", "weekly_hours": 15}).json()
+    r = client.post("/api/diagnose", json={"persona_id": "t1", "company_id": "A", "weekly_hours": 15}).json()
     b = r["baseline"]
     assert "엣지 AI" in b["missed"]
     assert b["readiness_posting"] != b["readiness_company"]
 
 
 def test_trace_and_evidence_citations(client):
-    r = client.post("/api/diagnose", json={"persona_id": "p2", "company_id": "B", "weekly_hours": 15}).json()
+    r = client.post("/api/diagnose", json={"persona_id": "t2", "company_id": "B", "weekly_hours": 15}).json()
     assert len(r["trace"]) >= 8
     for st in r["path"]["steps"]:
         assert st["evidence_ids"] and all(e in r["evidence"] for e in st["evidence_ids"])
@@ -85,7 +85,7 @@ def test_simulator_levers_and_tracks(client):
 
 def test_session_log_keeps_only_status_codes(client):
     from app.adapters import storage
-    client.post("/api/diagnose", json={"company_id": "C", "persona_id": "p3"})
+    client.post("/api/diagnose", json={"company_id": "C", "persona_id": "t3"})
     profs = storage.profiles_for("C")
     assert profs and all(set(p.values()) <= {"own", "part", "verify"} for p in profs)
 
@@ -101,7 +101,7 @@ def test_supply_endpoint(client):
 
 def test_path_puts_apply_tier_before_work_tier(client):
     """공고(지원 기준) 갭을 먼저, 기업 실무 기준 갭을 나중에. 공고에만 있는 스킬도 경로에 들어간다."""
-    r = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}).json()
+    r = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "t1"}).json()
     tiers = [s["tier"] for s in r["path"]["steps"]]
     assert tiers == sorted(tiers, key=lambda t: t != "apply")          # apply가 전부 앞
     preq = {p["skill_id"] for p in r["baseline"]["posting_requirements"]}

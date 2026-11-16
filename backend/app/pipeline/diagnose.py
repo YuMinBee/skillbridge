@@ -12,7 +12,7 @@ from ..adapters import bedrock, storage
 from ..guards import pii
 from ..data import hidden_ids, seed_companies, stats_only_ids
 from ..skills import get_dict
-from . import family, implies, market, projectfit
+from . import bridge, family, implies, market, projectfit
 from .extract import STATUS_LABEL, extract_posting_llm, extract_resume, extract_resume_llm, posting_requirements, \
     requirements_from
 from .recommend import build_path, optimize_order
@@ -173,6 +173,26 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
             preqs = posting_requirements(company.get("posting_text", ""))
         s["detail"] = f"{apply_src} 요구 {len(preqs)}개 (입사 문턱)"
 
+    # 연결되는 경험: 이름이 없어 '없음'이던 요구 기술을 비슷한 도구·이력서 경험으로 다시 본다 (인정은 최대 0.5)
+    with tr.step("연결되는 경험", "rules.similar (대체 도구)" if mock else "rules.similar → bedrock.converse(개념 스킬만, 원문 인용 검증)") as s:
+        groups = [m for g in (any_of(company) or []) for m in g]
+        targets = sorted(set(reqs) | set(preqs) | set(groups),
+                         key=lambda k: (-(preqs.get(k, 0) * 2 + reqs.get(k, 0)), k))
+        status_map, sim = bridge.similar(status_map, targets)
+        links = []
+        if not mock:
+            try:
+                status_map, links = bridge.link(masked, status_map, targets, {k: sd.name(k) for k in targets}, log=clog)
+            except bedrock.BedrockError as e:
+                fallbacks.append(f"경험 연결: {e}")
+                s["tool"] = "rules.similar (Bedrock 실패 → 규칙만)"
+        if sim or links:  # 상태가 바뀌었으니 '또는' 묶음 선택을 다시 한다
+            reqs = effective_requirements(company, status_map)
+            if explicit_apply:
+                preqs = resolve_any_of(dict(explicit_apply), any_of(company), status_map)
+        s["detail"] = (f"비슷한 도구 {len(sim)}" + (f" ({', '.join(f'{sd.name(a)} ← {sd.name(b)}' for a, b in sim)})" if sim else "")
+                       + f" · 경험 연결 {len(links)}" + (f" ({', '.join(sd.name(x['skill_id']) for x in links)})" if links else ""))
+
     if company.get("custom"):  # 실무 기준(추정) = 직군 실무 기준 ∪ 공고 요구
         for k, w in preqs.items():
             reqs[k] = max(reqs.get(k, 0), w)
@@ -308,11 +328,19 @@ def run(resume_text: str, company_id: str, weekly_hours: int = 10, log: bool = T
         ev = status_map.get(sid, {}).get("evidence")
         if ev and status_map[sid].get("implied_by"):
             ev = f"{sd.name(status_map[sid]['implied_by'])} 근거로 인정: {ev}"
+        if status_map.get(sid, {}).get("similar_to"):
+            ev = f"비슷한 도구 {sd.name(status_map[sid]['similar_to'])} 경험: {ev}"
+        bridge_note = None
+        if status_map.get(sid, {}).get("similar_to"):
+            bridge_note = {"type": "similar", "label": f"비슷한 도구: {sd.name(status_map[sid]['similar_to'])}"}
+        elif status_map.get(sid, {}).get("how") == "link":
+            bridge_note = {"type": "link", "label": "연결되는 경험", "reason": status_map[sid].get("linked", ""),
+                           "evidence": status_map[sid].get("evidence", "")}
         tiers = [lab for lab, src in (("지원", preqs), ("실무", reqs)) if sid in src]
         matrix.append({"skill_id": sid, "name": sd.name(sid), "weight": w, "weight_label": WEIGHT_LABEL[w],
                        "tier": "apply" if sid in preqs else "work", "tier_label": "·".join(tiers),
                        "weight_apply": preqs.get(sid), "weight_work": reqs.get(sid),
-                       "status": st, "status_label": STATUS_LABEL[st],
+                       "status": st, "status_label": STATUS_LABEL[st], "bridge": bridge_note,
                        "evidence": ev or (f"{'공고' if sid in preqs else '기업'} 요구 · 시장 언급률 {mrate.get(sid, 0):.0f}%"
                                           if st == "miss" else "-"),
                        "market_pct": round(mrate.get(sid, 0), 1)})

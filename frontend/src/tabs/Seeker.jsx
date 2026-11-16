@@ -20,7 +20,7 @@ export default function Seeker({ companies, corpVersion, active, mode }) {
   const [personas, setPersonas] = useState([]);
   const [pid, setPid] = useState("");
   const [text, setText] = useState("");
-  const [cid, setCid] = useState("Z1");
+  const [cid, setCid] = useState("S"); // 시연 기본: 첫 예시 지원자의 기본 회사와 같게
   const [hours, setHours] = useState(10); // 입력칸은 뺐다: 기간 표시('약 N주')에만 쓰는 기본값
   const [res, setRes] = useState(null);
   const [shown, setShown] = useState(0); // trace 진행 표시
@@ -454,9 +454,11 @@ function ApplyCard({ r }) {
             return (
               <li key={m.skill_id}>
                 <div className="cl-h"><b>{m.name}</b>{m.weight_apply === 2 && <span className="w">필수</span>}
-                  {m.status !== "miss" && <StatusChip status={m.status}>{m.status_label}</StatusChip>}
+                  <GapStatus m={m} />
                   {/* 회색 보조 정보는 커서를 올렸을 때만 이름 옆에 띄운다 */}
-                  {st && <span className="cl-tip">{lk ? <a href={lk.href} target="_blank" rel="noopener noreferrer" className="cl-link">{st.title} ↗</a> : st.title}</span>}</div>
+                  {(st || m.bridge?.reason) && <span className="cl-tip">
+                    {m.bridge?.reason && <span className="tip-why">{m.bridge.reason}</span>}
+                    {st && (lk ? <a href={lk.href} target="_blank" rel="noopener noreferrer" className="cl-link">{st.title} ↗</a> : st.title)}</span>}</div>
               </li>
             );
           })}
@@ -484,8 +486,9 @@ function WorkCard({ r }) {
             return (
               <li key={m.skill_id} title={tip}>
                 <div className="cl-h"><b>{m.name}</b>
-                  {m.status !== "miss" && <StatusChip status={m.status}>{m.status_label}</StatusChip>}
-                  {(e.from || e.family_used > 0) && <span className="cl-tip">
+                  <GapStatus m={m} />
+                  {(e.from || e.family_used > 0 || m.bridge?.reason) && <span className="cl-tip">
+                    {m.bridge?.reason && <span className="tip-why">{m.bridge.reason}</span>}
                     {e.family_n > 0 && e.family_used > 0 && <>같은 직군 {e.family_n}곳 중 {e.family_used}곳이 실무에서 써요</>}
                     {e.family_n > 0 && e.family_used > 0 && e.from && " · "}
                     {e.url ? <a className="cl-link" href={e.url} target="_blank" rel="noopener noreferrer">{srcLabel(e.from)} ↗</a>
@@ -498,6 +501,12 @@ function WorkCard({ r }) {
       {have.length > 0 && <div className="have"><small>이미 있어요</small>{have.map((m) => <span key={m.skill_id} className="chip st-own">{m.name}</span>)}</div>}
     </div>
   );
+}
+
+// 부족한 기술의 상태 칩: 이름은 없지만 비슷한 도구·이력서 경험으로 연결되면 그걸 먼저 보여 준다 (인정은 0.5까지)
+function GapStatus({ m }) {
+  if (m.bridge) return <span className={`chip bridge ${m.bridge.type}`}>{m.bridge.label}</span>;
+  return m.status !== "miss" ? <StatusChip status={m.status}>{m.status_label}</StatusChip> : null;
 }
 
 const WEIGHT_TXT = { 2: "필수", 1: "우대" };

@@ -2,7 +2,7 @@
 from app.pipeline import coach
 
 
-def _statuses(client, persona="p1", company="A"):
+def _statuses(client, persona="t1", company="A"):
     r = client.post("/api/diagnose", json={"company_id": company, "persona_id": persona}).json()
     return {s["skill_id"]: s["status"] for s in r["skills_found"]}
 

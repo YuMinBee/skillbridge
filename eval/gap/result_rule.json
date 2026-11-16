@@ -1,0 +1,547 @@
+{
+ "mode": "rule",
+ "companies": 10,
+ "blog_skills": 111,
+ "blog_only": 67,
+ "ratio": 0.6036036036036037,
+ "ci95": [
+  0.5135135135135135,
+  0.6875
+ ],
+ "per_company_median": 0.6666666666666666,
+ "rows": [
+  {
+   "key": "banksalad",
+   "company": "뱅크샐러드",
+   "match": "same_dept",
+   "posting": [
+    "airflow",
+    "amazon_bedrock",
+    "aws",
+    "aws_kinesis",
+    "aws_redshift",
+    "aws_sagemaker",
+    "data_pipeline",
+    "data_warehouse",
+    "devops",
+    "java",
+    "kafka",
+    "kubernetes",
+    "linux",
+    "mysql",
+    "postgresql",
+    "python",
+    "query_tuning",
+    "scala",
+    "sql",
+    "sre"
+   ],
+   "blog": [
+    "airflow",
+    "aws_athena",
+    "aws_glue",
+    "aws_s3",
+    "data_analysis",
+    "data_pipeline",
+    "data_visualization",
+    "data_warehouse",
+    "golang",
+    "helm",
+    "kubernetes",
+    "msa",
+    "mysql",
+    "networking",
+    "spark",
+    "sql",
+    "statistics"
+   ],
+   "in_both": [
+    "airflow",
+    "aws_athena",
+    "aws_glue",
+    "aws_s3",
+    "data_pipeline",
+    "data_warehouse",
+    "helm",
+    "kubernetes",
+    "mysql",
+    "sql"
+   ],
+   "blog_only": [
+    "data_analysis",
+    "data_visualization",
+    "golang",
+    "msa",
+    "networking",
+    "spark",
+    "statistics"
+   ],
+   "posting_only": [
+    "amazon_bedrock",
+    "aws",
+    "aws_kinesis",
+    "aws_redshift",
+    "aws_sagemaker",
+    "devops",
+    "java",
+    "kafka",
+    "linux",
+    "postgresql",
+    "python",
+    "query_tuning",
+    "scala",
+    "sre"
+   ]
+  },
+  {
+   "key": "hyperconnect",
+   "company": "하이퍼커넥트",
+   "match": "same_team",
+   "posting": [
+    "data_analysis",
+    "edge_ai",
+    "jax",
+    "python",
+    "pytorch",
+    "sql",
+    "tensorflow"
+   ],
+   "blog": [
+    "ai_general",
+    "edge_ai",
+    "embedding",
+    "java",
+    "kotlin",
+    "machine_learning",
+    "mlops_pipeline",
+    "networking",
+    "perf_opt",
+    "security",
+    "tensorflow"
+   ],
+   "in_both": [
+    "edge_ai",
+    "machine_learning",
+    "tensorflow"
+   ],
+   "blog_only": [
+    "ai_general",
+    "embedding",
+    "java",
+    "kotlin",
+    "mlops_pipeline",
+    "networking",
+    "perf_opt",
+    "security"
+   ],
+   "posting_only": [
+    "data_analysis",
+    "jax",
+    "python",
+    "pytorch",
+    "sql"
+   ]
+  },
+  {
+   "key": "socar",
+   "company": "쏘카",
+   "match": "same_dept",
+   "posting": [
+    "ai_agent",
+    "aws",
+    "c_lang",
+    "computer_vision",
+    "fine_tuning",
+    "gcp",
+    "git",
+    "llm",
+    "mlops",
+    "nlp",
+    "prompt_engineering",
+    "python",
+    "pytorch",
+    "rag"
+   ],
+   "blog": [
+    "computer_vision",
+    "data_modeling",
+    "deep_learning",
+    "paper_research"
+   ],
+   "in_both": [
+    "computer_vision",
+    "deep_learning"
+   ],
+   "blog_only": [
+    "data_modeling",
+    "paper_research"
+   ],
+   "posting_only": [
+    "ai_agent",
+    "aws",
+    "c_lang",
+    "fine_tuning",
+    "gcp",
+    "git",
+    "llm",
+    "mlops",
+    "nlp",
+    "prompt_engineering",
+    "python",
+    "pytorch",
+    "rag"
+   ]
+  },
+  {
+   "key": "channeltalk",
+   "company": "채널톡(채널코퍼레이션)",
+   "match": "same_team",
+   "posting": [
+    "aws",
+    "data_pipeline",
+    "gcp"
+   ],
+   "blog": [
+    "aws_dynamodb",
+    "data_pipeline",
+    "data_warehouse",
+    "elk",
+    "nosql",
+    "postgresql",
+    "redis",
+    "statistics"
+   ],
+   "in_both": [
+    "aws_dynamodb",
+    "data_pipeline"
+   ],
+   "blog_only": [
+    "data_warehouse",
+    "elk",
+    "nosql",
+    "postgresql",
+    "redis",
+    "statistics"
+   ],
+   "posting_only": [
+    "aws",
+    "gcp"
+   ]
+  },
+  {
+   "key": "devsisters",
+   "company": "데브시스터즈",
+   "match": "same_team",
+   "posting": [
+    "aws",
+    "aws_glue",
+    "aws_s3",
+    "datadog",
+    "docker",
+    "golang",
+    "kafka",
+    "kubernetes",
+    "python",
+    "scala",
+    "spark",
+    "terraform"
+   ],
+   "blog": [
+    "argocd",
+    "aws",
+    "aws_ec2",
+    "helm",
+    "kafka",
+    "kubernetes",
+    "prometheus",
+    "rust",
+    "scala"
+   ],
+   "in_both": [
+    "aws",
+    "aws_ec2",
+    "helm",
+    "kafka",
+    "kubernetes",
+    "scala"
+   ],
+   "blog_only": [
+    "argocd",
+    "prometheus",
+    "rust"
+   ],
+   "posting_only": [
+    "aws_glue",
+    "aws_s3",
+    "datadog",
+    "docker",
+    "golang",
+    "python",
+    "spark",
+    "terraform"
+   ]
+  },
+  {
+   "key": "gangnamunni",
+   "company": "강남언니(힐링페이퍼)",
+   "match": "same_team",
+   "posting": [
+    "aws",
+    "data_pipeline",
+    "deep_learning",
+    "elk",
+    "kubernetes",
+    "machine_learning",
+    "nlp"
+   ],
+   "blog": [
+    "airflow",
+    "aws",
+    "aws_cloudwatch",
+    "aws_ec2",
+    "aws_s3",
+    "datadog",
+    "elk",
+    "github_actions",
+    "grafana",
+    "load_balancing",
+    "networking",
+    "nlp",
+    "observability",
+    "prometheus",
+    "security",
+    "terraform"
+   ],
+   "in_both": [
+    "aws",
+    "aws_cloudwatch",
+    "aws_ec2",
+    "aws_s3",
+    "elk",
+    "nlp"
+   ],
+   "blog_only": [
+    "airflow",
+    "datadog",
+    "github_actions",
+    "grafana",
+    "load_balancing",
+    "networking",
+    "observability",
+    "prometheus",
+    "security",
+    "terraform"
+   ],
+   "posting_only": [
+    "data_pipeline",
+    "deep_learning",
+    "kubernetes",
+    "machine_learning"
+   ]
+  },
+  {
+   "key": "kakaostyle",
+   "company": "카카오스타일(지그재그)",
+   "match": "same_team",
+   "posting": [
+    "aws",
+    "java",
+    "kotlin",
+    "msa"
+   ],
+   "blog": [
+    "aws_lambda",
+    "git",
+    "graphql",
+    "java",
+    "jenkins",
+    "kotlin",
+    "kubernetes",
+    "msa",
+    "nodejs",
+    "redis",
+    "rest_api",
+    "serverless",
+    "typescript"
+   ],
+   "in_both": [
+    "aws_lambda",
+    "java",
+    "kotlin",
+    "msa"
+   ],
+   "blog_only": [
+    "git",
+    "graphql",
+    "jenkins",
+    "kubernetes",
+    "nodejs",
+    "redis",
+    "rest_api",
+    "serverless",
+    "typescript"
+   ],
+   "posting_only": [
+    "aws"
+   ]
+  },
+  {
+   "key": "hanati",
+   "company": "하나금융티아이",
+   "match": "same_dept",
+   "posting": [
+    "deep_learning",
+    "distributed_training",
+    "fine_tuning",
+    "llm",
+    "nlp",
+    "paper_research",
+    "pytorch",
+    "tensorflow"
+   ],
+   "blog": [
+    "ai_general",
+    "data_analysis",
+    "fine_tuning",
+    "gen_ai_use",
+    "llm",
+    "networking",
+    "nlp",
+    "security",
+    "speech"
+   ],
+   "in_both": [
+    "fine_tuning",
+    "llm",
+    "nlp"
+   ],
+   "blog_only": [
+    "ai_general",
+    "data_analysis",
+    "gen_ai_use",
+    "networking",
+    "security",
+    "speech"
+   ],
+   "posting_only": [
+    "deep_learning",
+    "distributed_training",
+    "paper_research",
+    "pytorch",
+    "tensorflow"
+   ]
+  },
+  {
+   "key": "kakaomobility",
+   "company": "카카오모빌리티",
+   "match": "same_team",
+   "posting": [
+    "docker",
+    "java",
+    "kotlin",
+    "kubernetes",
+    "nosql",
+    "rest_api",
+    "spring"
+   ],
+   "blog": [
+    "data_visualization",
+    "elk",
+    "grafana",
+    "java",
+    "networking",
+    "observability",
+    "prometheus",
+    "security",
+    "spring"
+   ],
+   "in_both": [
+    "java",
+    "spring"
+   ],
+   "blog_only": [
+    "data_visualization",
+    "elk",
+    "grafana",
+    "networking",
+    "observability",
+    "prometheus",
+    "security"
+   ],
+   "posting_only": [
+    "docker",
+    "kotlin",
+    "kubernetes",
+    "nosql",
+    "rest_api"
+   ]
+  },
+  {
+   "key": "lguplus",
+   "company": "LG유플러스",
+   "match": "same_dept",
+   "posting": [
+    "ansible",
+    "aws",
+    "azure",
+    "cicd",
+    "cloud_migration",
+    "devops",
+    "django",
+    "docker",
+    "git",
+    "iac",
+    "jenkins",
+    "jira",
+    "virtualization"
+   ],
+   "blog": [
+    "argocd",
+    "aws",
+    "aws_cloudformation",
+    "aws_eks",
+    "data_labeling",
+    "devops",
+    "git",
+    "helm",
+    "iac",
+    "kubernetes",
+    "load_balancing",
+    "msa",
+    "networking",
+    "observability",
+    "terraform"
+   ],
+   "in_both": [
+    "argocd",
+    "aws",
+    "aws_cloudformation",
+    "devops",
+    "git",
+    "iac"
+   ],
+   "blog_only": [
+    "aws_eks",
+    "data_labeling",
+    "helm",
+    "kubernetes",
+    "load_balancing",
+    "msa",
+    "networking",
+    "observability",
+    "terraform"
+   ],
+   "posting_only": [
+    "ansible",
+    "azure",
+    "cicd",
+    "cloud_migration",
+    "django",
+    "docker",
+    "jenkins",
+    "jira",
+    "virtualization"
+   ]
+  }
+ ]
+}

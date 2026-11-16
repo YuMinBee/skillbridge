@@ -31,12 +31,12 @@
 
 | 경로 | 내용 |
 |---|---|
-| `backend/app/` | FastAPI. `pipeline/`(extract·normalize·implies·score·projectfit·recommend·diagnose·coach·market·simulate·supply·digital), `adapters/`(bedrock·athena·kb·storage[SQLite/DynamoDB]), `routers/`(market·diagnose·corp·coach), `guards/`(pii, limits: 샌드박스·IP/시간당 상한) |
+| `backend/app/` | FastAPI. `pipeline/`(extract·normalize·implies·**bridge**·score·projectfit·recommend·diagnose·**family**·coach·market·simulate·supply·digital), `adapters/`(bedrock·athena·kb·storage[SQLite/DynamoDB]), `routers/`(market·diagnose·corp·coach), `guards/`(pii, limits: 샌드박스·IP/시간당 상한) |
 | `frontend/src/` | React + Vite. 탭: 시장 분석(Market·Digital·SupplyMap·Quality), 취준생 진단, 기업 콘솔(Corp·Simulator) |
 | `data/skills.csv` | 스킬 사전 171개 (한·영 별칭) |
-| `seed/` | 기업 A~H(가상 3·공개 재구성 1·현업 청취 4), 예시 지원자, 기업 문서(`corp-docs/{A,B,C}`), 실데이터 공고(`market/postings_live.jsonl`, 잡알리오 11,637건), 고용24 과정 |
+| `seed/` | 기업 50곳: A~C 가상(목록에서 숨김) · D·I~Z24 공개 공고+기술 블로그 재구성(`research/public_companies/`의 batch_*.json → `build_companies.py`) · E~H 현업 청취. 예시 지원자 p1~p3(직군별 시연용) + t1~t3(테스트 전용), 기업 문서(`corp-docs/{A,B,C}`), 실데이터 공고(`market/postings_live.jsonl`, 잡알리오 11,637건), 고용24 과정 |
 | `collectors/` | 고용24·잡알리오 수집기 (키 필요) |
-| `eval/` | 정답셋, `run_eval.py`, 저장된 Bedrock 예측(`predictions/`), 결과(`report.md`·`results.json`), 라벨 규칙(`LABELING.md`), 설문(`SURVEY.md`) |
+| `eval/` | 정답셋, `run_eval.py`(`--model`·`--tag`로 모델 비교), 저장된 Bedrock 예측(`predictions/`, `predictions_haiku/`·`_sonnet/`), 결과(`report.md`·`results.json`), 라벨 규칙(`LABELING.md`), 설문(`SURVEY.md`), `sensitivity.py`(가중치 민감도), `bridge_eval.py`(연결되는 경험 오인정률), `gap/`(블로그 vs 공고 갭 측정) |
 | `infra/` | `template.yaml`(CloudFormation: Lambda 함수 URL, Glue, Athena), `deploy.py`, `build_kb.py`(Bedrock KB + S3 Vectors) |
 
 ## 실행
@@ -44,7 +44,7 @@
 ```powershell
 .\tasks.ps1 setup          # .venv, npm install, .env 생성 (.env.example 복사 → 값 채우기)
 .\tasks.ps1 run            # API :8010 + 웹 :5173
-.\tasks.ps1 test           # pytest 72개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
+.\tasks.ps1 test           # pytest 80개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
 .\tasks.ps1 eval           # AWS 없이, 저장된 예측으로 eval/report.md 재생성
 ```
 
@@ -52,7 +52,7 @@
 - `DATA_MODE=live`이면 실데이터(공고·과정)를 쓴다.
 - AWS 실호출 전에 `aws sso login --profile kosa`로 로그인한다. 윈도우에서 aws가 PATH에 없으면 `& "C:\Program Files\Amazon\AWSCLIV2\aws.exe"`로 실행한다.
 
-## 현재 상태 (2026-11-10)
+## 현재 상태 (2026-11-16)
 
 | 마일스톤 | 상태 |
 |---|---|
@@ -63,7 +63,10 @@
 | 공개 배포 가드 | ✅ 방문자 샌드박스(기업 설정 원본 보호), IP당 분당 8회, 시간당 Bedrock 상한 → 규칙 엔진, Lambda 동시 실행 3, DynamoDB 저장소 |
 | 현업 청취 반영 | ✅ 기업 E~H(멘토 경유 실제 부서 기준), 상하위 스킬 보완(`pipeline/implies.py`), **프로젝트 적합도**(`pipeline/projectfit.py`). 경계값·도메인 단어는 멘토링에서 검증 필요 |
 | 학습 코치 에이전트 | ✅ `pipeline/coach.py`: Converse 도구 선택 루프(도구 5개), tenant 고정, 과정 인용 검증, 규칙 플래너 폴백 |
-| M6 배포 | ✅ 2026-11-16 배포: https://fazwtcf7omav34gdiahcgvds3m0zyafv.lambda-url.ap-northeast-2.on.aws/ · DynamoDB · Athena 집계 확인(로컬과 일치) · KB `AQXJTFLOCI`(S3 Vectors, tenant 격리 검증) · 시연 키 없음(모두 Bedrock), IP당 분당 8 · 시간당 20 · 동시 2 |
+| 진단 화면 (11-16) | ✅ 직군 3개(AI·ML·백엔드·데이터) → 회사 선택, 경력·시니어 기본 숨김. 결과 = ① 서류(공고) ② 실무(면접부터) ③ 할 일 순서(고용24·공식 문서 링크) ④ 내 프로젝트 + 같은 직군 회사, 코치는 오른쪽 고정. ①② 보조 정보는 커서 올리면 표시 |
+| 목록에 없는 회사 (11-16) | ✅ 공고 붙여 넣기 → 서류는 공고로, 실무는 같은 직군 통계로 추정, Bedrock 예측은 참고(점수 미반영). `pipeline/family.py` |
+| 연결되는 경험 (11-16) | ✅ 공고 단어로 안 쓴 이력서도 읽기: 비슷한 도구(보유일 때만) → 0.5, 개념 스킬만 Bedrock이 이력서 문장 인용해 연결 → 0.5. `pipeline/bridge.py`. 정답 '없음'에 잘못 준 비율 5.3%(구간 0~13%) |
+| M6 배포 | ✅ 2026-11-16 배포(같은 날 재배포, DynamoDB 회사 50곳으로 갱신): https://fazwtcf7omav34gdiahcgvds3m0zyafv.lambda-url.ap-northeast-2.on.aws/ · DynamoDB · Athena 집계 확인(로컬과 일치) · KB `AQXJTFLOCI`(S3 Vectors, tenant 격리 검증) · 시연 키 없음(모두 Bedrock), IP당 분당 8 · 시간당 20 · 동시 2 |
 
 평가 핵심 숫자 (`eval/report.md`). 발표에 쓰는 값이라 바뀌면 README·SCORECARD·DEMO_SCRIPT도 같이 고친다.
 
@@ -71,16 +74,22 @@
 - 이력서: 보유 역량을 갭으로 잘못 본 비율 23.4% → **7.4%** (감소폭 구간 +9.8~+22.5%p, 유의), 사전에 없는 표기 정확도 4.5% → 77.3%
 - 가상 기업 시나리오에서 입사 후 실무 갭 커버율 **99.4%**(지원→실무 경로) vs 공고만 볼 때 51.3% (차이 구간 +42.7~+53.4%p, 유의). 과정 Hit@3 100%
 - 무작위 표본 열(정답 1개)의 F1 0.000은 착시다. 이 열은 없는 스킬을 지어내는지 보는 용도다.
+- **공고와 실무의 갭(핵심 근거)**: 같은 팀 블로그 원문을 Bedrock으로 뽑아 그 팀 공고와 비교 → 블로그 기술 68개 중 31개(**45.6%**, 구간 31.9~60.0%)가 공고에 없음, 10개 회사. `eval/gap/`. 예전 34%·25%·기술별 100%는 조사 지시가 편향돼 **쓰지 않는다**
+- 모델 비교(`report_haiku.md`·`report_sonnet.md`): 공고 F1 Haiku 0.711 vs Sonnet 0.809(차이 구간 −0.012~+0.209, 유의 아님). 이력서 오탐률 둘 다 8.5%, Haiku가 1.7배 빠르고 비용 1/3
+- 가중치 민감도(`sensitivity.py`): 필수 1.5~3이면 점수 평균 ±1.5점·회사 순위 상관 0.98, 할 일 순서 불변. 부분·검증 0.5가 가장 민감(±6점)
+- 데이터 한계: 잡알리오는 **공공기관** 공고라 민간 IT 진단의 시장 근거로는 어색함. 민간 공고 API(사람인·로켓펀치) 승인 대기 중
 
 ## 다음 할 일
 
 | 우선 | 일 | 담당 | 방법 |
 |---|---|---|---|
-| 1 | 배포 주소로 화면 점검(프로젝트 적합도 카드, 현업 E~H), 코드를 바꾸면 `python infra/deploy.py --yes`로 다시 배포 | 변유민 | 스택 삭제는 해커톤 끝난 뒤 팀장 승인 후 |
-| 2 | 2차 라벨 30건 → `eval/gold_postings_b.jsonl` 푸시 (`run_eval.py`가 κ를 자동 계산) | 김채희 | `eval/LABELING.md` 4절 |
-| 3 | 슬라이드 8장 이내 + 리허설 2회 | 변유민·이승연 | DEMO_SCRIPT.md |
+| 1 | 2차 라벨 30건 → `eval/gold_postings_b.jsonl` 푸시 (`run_eval.py`가 κ를 자동 계산) | 김채희 | `eval/LABELING.md` 4절. **빈 시트 `gold_postings_b.todo.jsonl`에서 시작, 1차 라벨 파일은 열지 않기** |
+| 2 | 슬라이드 8장 이내 + 리허설 2회. 메시지: 갭은 있다(45.6%) → 공개 자료로는 여기까지 → 기업이 표시해야 한다 | 변유민·이승연 | DEMO_SCRIPT.md, DECISIONS.md(예상 질문 근거) |
+| 3 | 민간 공고 API 승인되면 수집기 연결(키는 `.env`의 `ROCKETPUNCH_API_KEY`·사람인, Lambda에 넣지 않음). 19일까지 안 되면 할 일 순서의 잡알리오 시장 적합도를 같은 직군 회사 통계로 교체 | 변유민 | — |
 | 4 | 설문 5명 이상 + 시연 영상 `docs/demo.mp4` | 이승연 | `eval/SURVEY.md`, 배포 주소 |
-| 5 | (선택) 현업 인터뷰 한 줄, RELATED_WORK.md → 차별점 슬라이드 1장 | — | SCORECARD 2·3절 |
+| 5 | 시장 분석·기업 콘솔 탭을 핵심 메시지 중심으로 축소 | — | 멘토링 뒤 결정 |
+
+배포: 코드를 바꾸면 `python infra/deploy.py --yes`. 회사 seed를 바꿨으면 DynamoDB 회사 항목도 갱신해야 한다(`init()`은 새 회사만 넣음). 스택 삭제는 해커톤 끝난 뒤 팀장 승인 후.
 
 ## 협업
 

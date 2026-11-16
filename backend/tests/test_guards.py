@@ -20,8 +20,8 @@ def test_sandbox_isolates_company_edits(client):
     assert _reqs(client) == base            # 원본 그대로
     assert _reqs(client, SB2) == base       # 다른 방문자에게 안 보임
     # 진단도 그 방문자 기준으로 돈다
-    d1 = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}, headers={"X-Sandbox": SB1}).json()
-    d0 = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}).json()
+    d1 = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "t1"}, headers={"X-Sandbox": SB1}).json()
+    d0 = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "t1"}).json()
     assert {m["skill_id"] for m in d1["matrix"] if m["weight_work"]} == set(new)   # 실무 기준 = 그 방문자 사본
     assert {m["skill_id"] for m in d0["matrix"] if m["weight_work"]} == set(base)
     # 초기화는 그 방문자 사본만
@@ -64,7 +64,7 @@ def test_limiter_windows():
 def test_middleware_429_and_budget_fallback(client, monkeypatch):
     from app.guards import limits
     monkeypatch.setattr(limits, "limiter", limits.Limiter(per_min=1, per_hour=1000))
-    body = {"company_id": "A", "persona_id": "p1"}
+    body = {"company_id": "A", "persona_id": "t1"}
     assert client.post("/api/diagnose", json=body).status_code == 200
     r = client.post("/api/diagnose", json=body)
     assert r.status_code == 429 and "1분" in r.json()["detail"]
@@ -166,7 +166,7 @@ def test_demo_key_gates_bedrock(client, monkeypatch):
     monkeypatch.setattr(config, "DEMO_KEY", "demo-secret-123456")
     m = client.get("/api/meta").json()
     assert m["bedrock"] == "mock" and m["public_mock"] is True
-    d = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "p1"}).json()
+    d = client.post("/api/diagnose", json={"company_id": "A", "persona_id": "t1"}).json()
     assert d["mode"] == "mock" and any("공개 방문자" in f for f in d["fallbacks"])
     m = client.get("/api/meta", headers={"X-Demo-Key": "demo-secret-123456"}).json()
     assert m["public_mock"] is False and m["bedrock"] == bedrock.configured_mode()

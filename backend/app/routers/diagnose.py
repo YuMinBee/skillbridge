@@ -30,7 +30,7 @@ class DiagnoseIn(BaseModel):
 
 @router.get("/personas")
 def list_personas():
-    return personas()
+    return [p for p in personas() if not p.get("test_only")]  # t1~t3은 회귀 테스트 전용
 
 
 def _run(text: str, company_id: str, hours: int, custom: CustomIn | None = None):

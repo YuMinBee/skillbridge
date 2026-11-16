@@ -1,0 +1,62 @@
+{
+ "syn-A01": [],
+ "syn-A02": [],
+ "syn-A03": [],
+ "syn-A04": [],
+ "syn-A05": [],
+ "syn-A06": [],
+ "syn-A07": [],
+ "syn-A08": [],
+ "syn-A09": [],
+ "syn-A10": [],
+ "syn-B01": [],
+ "syn-B02": [],
+ "syn-B03": [],
+ "syn-B04": [],
+ "syn-B05": [],
+ "syn-B06": [],
+ "syn-B07": [],
+ "syn-B08": [],
+ "syn-B09": [],
+ "syn-B10": [],
+ "syn-C01": [],
+ "syn-C02": [
+  {
+   "skill_id": "llm",
+   "evidence": "인턴 기간 동안 AWS 베드락 기반 데이터 수집기를 구축하고 운영했습니다.",
+   "reason": "AWS Bedrock은 LLM 서비스를 제공하는 플랫폼이며, 이를 기반으로 데이터 수집기를 직접 구축하고 운영한 경험이 있음."
+  }
+ ],
+ "syn-C03": [
+  {
+   "skill_id": "llm",
+   "evidence": "팀 프로젝트에서 RAG를 사용해 배포 자동화 스크립트를 구현했습니다.",
+   "reason": "RAG(Retrieval-Augmented Generation)는 LLM 기반 기술로, 지원자가 직접 구현한 경험이 있음."
+  }
+ ],
+ "syn-C04": [
+  {
+   "skill_id": "rag",
+   "evidence": "팀 프로젝트에서 리트리버 기반 QA를 사용해 불량 검출 서비스를 구현했습니다.",
+   "reason": "리트리버 기반 QA는 RAG의 핵심 구성 요소로, 지원자가 직접 구현한 경험이 있음."
+  }
+ ],
+ "syn-C05": [
+  {
+   "skill_id": "rag",
+   "evidence": "인턴 기간 동안 GPT 계열 모델 기반 사내 검색 도구를 구축하고 운영했습니다.",
+   "reason": "GPT 모델과 검색 도구의 조합은 RAG(Retrieval-Augmented Generation) 시스템의 전형적인 구현 방식이며, 직접 구축하고 운영한 경험이 있음."
+  }
+ ],
+ "syn-C06": [
+  {
+   "skill_id": "llm",
+   "evidence": "인턴 기간 동안 검색 증강 생성 기반 사내 검색 도구를 구축하고 운영했습니다.",
+   "reason": "검색 증강 생성(RAG)은 LLM을 활용한 기술이며, 사내 검색 도구 구축·운영을 직접 수행했음을 보여줍니다."
+  }
+ ],
+ "syn-C07": [],
+ "syn-C08": [],
+ "syn-C09": [],
+ "syn-C10": []
+}
