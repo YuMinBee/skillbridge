@@ -103,8 +103,7 @@ def test_analyze_job_end_to_end(client, monkeypatch):
 
 
 def test_analyze_recommends_only_catalog_courses(client, monkeypatch):
-    from app.data import courses
-    titles = {c["id"]: c["title"] for c in courses()}
+    titles = {k: v["title"] for k, v in verifier.course_catalog().items()}  # 기존 카탈로그 + RAG 코퍼스(고용24)
     s = _run(client, monkeypatch)
     for r in s["result"]["recommendations"]:
         if r["course"]:
@@ -230,3 +229,12 @@ def test_quantified_result_includes_metric_decimals():
     assert q.search("평가 Macro-F1을 약 0.726에서 0.756으로 높였습니다")
     assert q.search("응답 시간이 820ms에서 140ms로")
     assert not q.search("열심히 노력해 좋은 결과를 얻었습니다")
+
+
+def test_rag_keyword_search_finds_future_courses():
+    from datetime import date
+    from app.rag import retrieve as R
+    hits = R.search("쿠버네티스", 3, config="bm25", kinds=["course"])
+    assert hits and all(h["kind"] == "course" for h in hits)
+    assert all(not h["meta"].get("start") or h["meta"]["start"] >= date.today().isoformat() for h in hits)  # 이미 개강한 과정 제외
+    assert R.tokens("쿠버네티스 Docker") == ["쿠버", "버네", "네티", "티스", "쿠버네", "버네티", "네티스", "docker"]

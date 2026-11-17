@@ -288,7 +288,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
             recos = rt.recommend(out["result"]["gaps"], out["result"]["strengths"], state["family"], log=log)
             row["impl"] = "T2"
         else:
-            recos = _fallback_recommend(out["result"], cites)
+            recos = _fallback_recommend(out["result"], cites, log=log)
             row["impl"] = "임시(규칙)"
         out["result"]["recommendations"] = recos
 
@@ -305,18 +305,39 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
     return out
 
 
-def _fallback_recommend(result: dict, cites: Cites) -> list[dict]:
-    """T2 과제 추천이 들어오기 전 임시: 갭 → 카탈로그 과정 + 결과물 과제, 가장 약한 경험 → STAR 보완 과제."""
-    from ..data import courses
+def find_course(name: str, log=None) -> dict | None:
+    """부족한 역량 → 고용24 과정 (RAG). Bedrock 모드는 실험으로 고른 조합(rag.retrieve.BEST), 아니면 키워드(BM25).
+    앞으로 개강하는 과정만. 검색 결과가 없으면 기존 카탈로그 규칙으로."""
+    from ..rag import retrieve as R
+    try:
+        hits = R.search(name, 1, config="best" if bedrock.mode() == "bedrock" else "bm25", kinds=["course"], log=log)
+    except bedrock.BedrockError:
+        hits = R.search(name, 1, config="bm25", kinds=["course"])
+    if hits:
+        h = hits[0]
+        m = h.get("meta", {})
+        return {"id": h["doc_id"], "title": h["title"], "provider": m.get("provider", ""), "url": h.get("url"),
+                "hours": m.get("hours"), "start": m.get("start"), "end": m.get("end"), "region": m.get("region", ""),
+                "via": "rag"}
+    return None
+
+
+def _fallback_recommend(result: dict, cites: Cites, log=None) -> list[dict]:
+    """T2 과제 추천이 들어오기 전 임시: 갭 → 고용24 과정(RAG 검색) + 결과물 과제, 가장 약한 경험 → STAR 보완 과제."""
     recos = []
     for g in result["gaps"][:MAX_RECO - 1]:
-        course, alt = _pick_course(g["id"], "전국")
-        c = course or alt
+        c = find_course(g["name"], log=log) if g["status"] != "verify" else None  # 이름만 있는 역량은 입문 과정 대신 증거 남기기
+        if c is None and g["status"] != "verify":
+            course, alt = _pick_course(g["id"], "전국")
+            c = course or alt
         cn = []
         co = None
         if c:
-            cn = [cites.add("course", c["title"], f"{c['provider']} · {c['hours']}시간 · {c['region']}", c.get("url"), c["id"])]
-            co = {"id": c["id"], "name": c["title"], "hours": c["hours"], "url": c.get("url")}
+            when = f"{c['start']} 개강" if c.get("start") else (f"{c['hours']}시간" if c.get("hours") else "")
+            cn = [cites.add("course", c["title"], " · ".join(x for x in [c.get("provider"), when, c.get("region")] if x),
+                            c.get("url") or c.get("link"), c["id"])]
+            co = {"id": c["id"], "name": c["title"], "hours": c.get("hours"), "start": c.get("start"),
+                  "url": c.get("url") or c.get("link")}
         if g["id"].startswith("cert_"):
             task = f"'{g['name']}' 시험 일정을 확인하고 취득 계획 세우기 (공고에서 요구하는 자격증)"
         elif g["id"] in SOFT:
