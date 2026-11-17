@@ -11,3 +11,6 @@ build/
 
 # RAG 실험 임베딩 캐시
 eval/trust/cache/
+
+# 개인 테스트 결과 (scripts/try_mine.py) — 개인 자료라 커밋 금지
+eval/private/
