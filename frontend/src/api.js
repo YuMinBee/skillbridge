@@ -63,5 +63,8 @@ export const api = {
   simulate: (id, requirements, assumeTracks) => req("POST", `/api/companies/${id}/simulate`, { requirements, assume_tracks: assumeTracks }),
   insights: (id) => req("GET", `/api/companies/${id}/insights`),
   reset: () => req("POST", "/api/reset"),
+  families: () => req("GET", "/api/families"),
+  analyze: (body) => req("POST", "/api/analyze", body),
+  job: (id) => req("GET", `/api/jobs/${encodeURIComponent(id)}`),
   coach: (companyId, question, statuses) => req("POST", "/api/coach", { company_id: companyId, question, statuses }),
 };

@@ -48,27 +48,52 @@ class Cites:
         return n
 
 
-# ── ② 임시: 같은 직군 공고 기준 (T2의 NCS 검색이 들어오면 practice 기준이 추가된다) ──
-def family_apply_requirements(job_family: str, status_map: dict) -> tuple[dict, dict]:
+# ── ② 지원 기준: 공개 공고 두 출처를 반반 (T2의 NCS 검색이 들어오면 실무 기준이 추가된다) ──
+# private = 민간 IT 회사 공개 채용 공고(seed, 원문·링크 보존) · public = 잡알리오 공공기관 정보통신(NCS) 실공고
+# 건수가 많은 잡알리오가 결과를 덮지 않도록 출처별 평균을 따로 낸 뒤 반반으로 합친다.
+FAMILY_RE = {"backend": r"개발|전산|정보시스템|소프트웨어|SW|웹|서버|정보화|백엔드",
+             "ai_ml": r"인공지능|AI|머신러닝|딥러닝|LLM", "data": r"데이터|통계|분석"}
+PUBLIC_MIN = 20                     # 직군에 맞는 잡알리오 공고가 이보다 적으면 정보통신 전체를 기준으로
+APPLY_MIN, APPLY_MUST = 0.10, 0.30  # 합친 수요(가중치/2의 평균)가 이 값 이상이면 기준, 이상이면 필수
+
+
+def posting_pool(job_family: str) -> dict:
+    import re
+    from ..data import market_postings
     keys = FAMILIES[job_family]
     hidden = hidden_ids()
-    comps = [c for c in seed_companies().values()
-             if c["tenant_id"] not in hidden and any(k in family_of(c) for k in keys) and c.get("posting_text")]
-    tot: dict[str, float] = {}
-    hit: dict[str, int] = {}
-    for c in comps:
-        req = c.get("apply_requirements") or posting_requirements(c["posting_text"])
-        req = resolve_any_of(req, c.get("any_of") or [], status_map)
-        for s, w in req.items():
-            tot[s] = tot.get(s, 0) + w
-            hit[s] = hit.get(s, 0) + 1
-    n = max(1, len(comps))
-    reqs = {}
-    for s, t in tot.items():
-        y = t / (2 * n)
-        if y >= APPLY_MIN:
-            reqs[s] = 2 if y >= APPLY_MUST else 1
-    return reqs, {"n": len(comps), "hit": hit}
+    priv = []
+    for c in seed_companies().values():
+        if c["tenant_id"] in hidden or not c.get("posting_text") or not any(k in family_of(c) for k in keys):
+            continue
+        priv.append({"title": f"{c['name']} 채용 공고", "text": c["posting_text"],
+                     "url": (c.get("public_source") or {}).get("posting_url"),
+                     "req": resolve_any_of(c.get("apply_requirements") or posting_requirements(c["posting_text"]),
+                                           c.get("any_of") or [], {})})
+    it = [p for p in market_postings() if p.get("job") == "public" and any("정보통신" in n for n in p.get("ncs", []))]
+    pat = re.compile(FAMILY_RE[job_family])
+    pub = [p for p in it if pat.search(p["title"] + " " + p.get("text", "")[:400])]
+    pub_scope = FAMILY_LABEL[job_family]
+    if len(pub) < PUBLIC_MIN:
+        pub, pub_scope = it, "정보통신 전체"
+    pub = [{"title": f"{p['company']} · {p['title']}", "text": p.get("text", ""), "url": p.get("url"),
+            "req": posting_requirements(p.get("text", ""))} for p in pub]
+    return {"private": priv, "public": pub, "public_scope": pub_scope}
+
+
+def pooled_requirements(pool: dict) -> tuple[dict, dict]:
+    rates: dict[str, list[float]] = {}
+    srcs = [k for k in ("private", "public") if pool[k]]
+    for k in srcs:
+        tot: dict[str, float] = {}
+        for p in pool[k]:
+            for sid, w in p["req"].items():
+                tot[sid] = tot.get(sid, 0) + w
+        for sid, t in tot.items():
+            rates.setdefault(sid, []).append(t / (2 * len(pool[k])))
+    y = {sid: sum(v) / len(srcs) for sid, v in rates.items()} if srcs else {}
+    reqs = {sid: (2 if v >= APPLY_MUST else 1) for sid, v in y.items() if v >= APPLY_MIN}
+    return reqs, y
 
 
 def _quote_in(text: str, name: str, aliases: list[str]) -> str | None:
@@ -152,12 +177,15 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
 
     with stage("retriever", llm=True) as row:
         status_map = state.get("status", {})
+        pool = None
         if state["posting"]:
             reqs = posting_requirements(state["posting"])
             src = "붙여 넣은 공고"
         else:
-            reqs, fam = family_apply_requirements(state["family"], status_map)
-            src = f"같은 직군({FAMILY_LABEL[state['family']]}) 공개 공고 {fam['n']}건"
+            pool = posting_pool(state["family"])
+            reqs, demand = pooled_requirements(pool)
+            src = (f"{FAMILY_LABEL[state['family']]} 공개 공고: 민간 {len(pool['private'])}건 + "
+                   f"잡알리오 {pool['public_scope']} {len(pool['public'])}건 (출처별 평균 반반)")
         state["reqs"] = reqs
         retr = _optional("retriever")
         practice = None
@@ -168,11 +196,26 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         gl = []
         for sid, w, st in score_gaps(reqs, status_map):
             ent = sd.skills.get(sid)
-            q = _quote_in(state["posting"], sd.name(sid), (ent or {}).get("aliases", [])) if state["posting"] else None
-            n = cites.add("posting", src, q or f"{src}에서 '{sd.name(sid)}'를 {'필수' if w == 2 else '우대'} 기준으로 셈",
-                          doc_id=f"posting:{sid}")
+            aliases = (ent or {}).get("aliases", [])
+            if state["posting"]:
+                q = _quote_in(state["posting"], sd.name(sid), aliases)
+                n = cites.add("posting", src, q or f"붙여 넣은 공고에서 '{sd.name(sid)}' 언급", doc_id=f"posting:{sid}")
+                ns = [n]
+            else:
+                ns = []
+                for k in ("private", "public"):  # 출처마다 실제 공고 문장 1개씩 인용
+                    for p in pool[k]:
+                        if sid in p["req"]:
+                            q = _quote_in(p["text"], sd.name(sid), aliases)
+                            if q:
+                                ns.append(cites.add("posting", p["title"], q, p["url"], doc_id=p["url"] or p["title"]))
+                                break
+                hit = {k: sum(1 for p in pool[k] if sid in p["req"]) for k in ("private", "public")}
+                ns.append(cites.add("posting_stats", "공고 집계",
+                                    f"민간 {len(pool['private'])}건 중 {hit['private']}건, 잡알리오 {len(pool['public'])}건 중 "
+                                    f"{hit['public']}건이 '{sd.name(sid)}'를 요구 (수요 {demand[sid]:.2f})", doc_id=f"stats:{sid}"))
             gl.append({"id": sid, "name": sd.name(sid), "status": st, "status_label": STATUS_LABEL[st],
-                       "weight": w, "cites": [n]})
+                       "weight": w, "cites": ns})
         out["result"]["gaps"] = gl
         row.update(source=src, n_requirements=len(reqs), practice="NCS 기준 대기(T2)" if practice is None else "NCS")
 
