@@ -38,5 +38,6 @@ switch ($Task) {
   "eval-live" { & $Py (Join-Path $Root "eval\run_eval.py") --live }       # aws sso login --profile kosa 후
   "mine" { & $Py (Join-Path $Root "scripts\try_mine.py") }               # 내 자료(.env의 MY_DOCS·MY_GITHUB)로 분석, Bedrock
   "mine-free" { & $Py (Join-Path $Root "scripts\try_mine.py") --mock }   # 같은 것을 규칙 엔진으로(0원)
-  default { Write-Host "사용법: .\tasks.ps1 setup | seed | collect | smoke | run | api | web | test | eval | eval-live | mine | mine-free" }
+  "report" { & $Py (Join-Path $Root "scripts\report.py"); Invoke-Item (Get-ChildItem (Join-Path $Root "eval\private\report_*.pdf") | Sort-Object Name | Select-Object -Last 1).FullName }  # 최근 결과 → PDF 열기
+  default { Write-Host "사용법: .\tasks.ps1 setup | seed | collect | smoke | run | api | web | test | eval | eval-live | mine | mine-free | report" }
 }

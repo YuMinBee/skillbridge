@@ -223,3 +223,10 @@ def test_github_readmes_with_fake_api():
     assert [i["repo"] for i in items] == ["a"]  # 포크 제외
     assert "본문" in items[0]["text"] and "<img" not in items[0]["text"] and "code" not in items[0]["text"]
     assert gh.parse("https://github.com/YuMinBee/Coma") == ("YuMinBee", "Coma")
+
+
+def test_quantified_result_includes_metric_decimals():
+    q = star._QUANT
+    assert q.search("평가 Macro-F1을 약 0.726에서 0.756으로 높였습니다")
+    assert q.search("응답 시간이 820ms에서 140ms로")
+    assert not q.search("열심히 노력해 좋은 결과를 얻었습니다")
