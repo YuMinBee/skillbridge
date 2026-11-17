@@ -51,7 +51,7 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <h1>역량다리</h1>
-          <p>내 경험의 강점을 <b>STAR</b>로 진단하고, <b>근거가 붙은</b> 과제를 추천합니다.</p>
+          
           <div className="tools">
             {meta && (
               <>

@@ -97,10 +97,6 @@ export default function Analyze({ active }) {
 
   return (
     <section className="view">
-      <p className="lead">
-        이력서를 넣으면 <b>기업 역량면접 방식(STAR)</b>으로 경험의 강점을 보고, 공개 공고 기준과 비교해 <b>근거가 붙은 과제</b>를 추천합니다.
-        모든 판정에는 출처가 붙고, 근거를 확인하지 못하면 추천하지 않습니다. 채용 합불 판단에 쓰지 않습니다.
-      </p>
       <div className="grid-side">
         <div className="panel no-print">
           <h2>내 경험 넣기</h2>
@@ -108,13 +104,11 @@ export default function Analyze({ active }) {
           {mode === "pdf" && (
             <>
               <input type="file" accept="application/pdf,.pdf" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-              <p className="hint">글자를 읽기만 하고 파일은 저장하지 않습니다. 이름·연락처는 자동으로 가립니다.
-                이력서가 없으면 <button className="linkbtn" onClick={() => setMode("template")}>템플릿으로 쓰기</button>.</p>
+              <p className="hint">이력서가 없으면 <button className="linkbtn" onClick={() => setMode("template")}>템플릿으로 쓰기</button></p>
             </>
           )}
           {mode === "template" && (
             <div className="tpl">
-              <p className="hint">경험 하나에 네 칸입니다. 기업 역량면접(STAR)과 같은 순서라 자소서·면접 답변으로도 쓸 수 있어요.</p>
               {exps.map((e, i) => (
                 <fieldset key={i} className="tpl-exp">
                   <legend>경험 {i + 1}</legend>
@@ -148,11 +142,11 @@ export default function Analyze({ active }) {
             </>
           )}
           <details>
-            <summary className="hint">직군 직접 고르기 (기본: 이력서 스킬로 자동 추정)</summary>
+            <summary className="hint">직군 (기본: 자동)</summary>
             <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
           </details>
           <details>
-            <summary className="hint">지원할 공고 붙여 넣기 (선택) · 없으면 같은 직군 공개 공고(민간 + 잡알리오) 기준</summary>
+            <summary className="hint">지원할 공고 (선택)</summary>
             <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
           </details>
           <button className="btn" disabled={!ready || running} onClick={submit}>
@@ -163,13 +157,12 @@ export default function Analyze({ active }) {
         </div>
 
         <div className="stack">
-          {!job && <div className="panel"><p className="empty">왼쪽에 이력서를 넣고 분석을 시작하세요. 창을 닫아도 서버에서 계속 분석합니다.</p></div>}
+          {!job && <div className="panel"><p className="empty">이력서를 넣고 분석을 시작하세요</p></div>}
           {job?.status === "failed" && <p className="err">분석 실패: {job.error}</p>}
           {res && (
             <>
               <div className="row no-print">
                 <button className="btn ghost sm" onClick={() => window.print()}>PDF로 저장</button>
-                <span className="hint">브라우저 인쇄 창에서 'PDF로 저장'을 고르세요. 분석 결과와 근거 목록이 함께 들어갑니다.</span>
               </div>
               <Summary job={job} />
               <div className="an-main">
@@ -186,6 +179,7 @@ export default function Analyze({ active }) {
           )}
         </div>
       </div>
+      <p className="hint foot">채용 합불 판단에 쓰지 않습니다 · 파일과 이력서 원문은 저장하지 않습니다</p>
     </section>
   );
 }
@@ -212,13 +206,13 @@ function Summary({ job }) {
   return (
     <div className="an-sum">
       <div className="panel"><h3>강점 경험</h3><div className="big num">{strong}<small> / {s.length}</small></div>
-        <p className="hint">STAR 4칸이 원문으로 확인된 경험</p></div>
+        </div>
       <div className="panel"><h3>지원 준비도{r.job_family ? ` · ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
-        <p className="hint">{r.job_family?.inferred ? "직군은 스킬로 자동 추정 · " : ""}공개 공고 기준 · 규칙 계산</p></div>
+        </div>
       <div className="panel"><h3>실무 준비도</h3><div className="big num">{r.readiness.practice ?? "—"}</div>
-        <p className="hint">{r.readiness.practice == null ? "NCS 기준 연결 준비 중" : "NCS 기준"}</p></div>
+        {r.readiness.practice == null && <p className="hint">준비 중</p>}</div>
       <div className="panel"><h3>이번 분석 비용</h3><div className="big num">{usd(job.cost?.usd)}</div>
-        <p className="hint">{job.mode === "bedrock" ? "Bedrock" : "규칙 엔진(0원)"} · 근거 {job.citations.length}개</p></div>
+        </div>
     </div>
   );
 }
@@ -230,8 +224,7 @@ const Cite = ({ ns, onCite }) => (ns || []).map((n) => (
 function Strengths({ list, onCite }) {
   return (
     <div className="panel">
-      <h2>① 경험별 강점 (STAR)</h2>
-      <p className="hint">칸마다 이력서 원문 문장을 그대로 붙였습니다. 원문에서 찾지 못한 칸은 비워 둡니다. 점수는 규칙(칸 4 + 수치 0.5 + 내 역할 0.5)으로만 냅니다.</p>
+      <h2>① 강점 (STAR)</h2>
       {!list.length && <p className="empty">경험 단락을 찾지 못했습니다.</p>}
       {list.map((e) => {
         const [lab, cls] = LEVEL[e.level];
@@ -260,7 +253,7 @@ function Strengths({ list, onCite }) {
 function Gaps({ list, onCite }) {
   return (
     <div className="panel">
-      <h2>② 기준 대비 갭</h2>
+      <h2>② 부족한 역량</h2>
       {!list.length ? <p className="hint">기준에 비어 있는 역량이 없습니다.</p> : (
         <ul className="an-gaps">
           {list.map((g) => (
@@ -281,7 +274,7 @@ function Recos({ list, onCite }) {
         {list.map((r) => (
           <li key={r.rank} className={r.abstained ? "abst" : ""}>
             {r.abstained ? (
-              <><b>추천하지 않음</b><p className="hint">{r.abstain_reason || "근거를 확인하지 못했습니다."} 근거 없는 추천은 내보내지 않습니다.</p></>
+              <><b>추천하지 않음</b><p className="hint">{r.abstain_reason || "근거 없음"}</p></>
             ) : (
               <>
                 <p><b>{r.task}</b></p>
@@ -312,7 +305,7 @@ function Cost({ job }) {
               <div className="track"><div className="fill" style={{ width: `${(v / max) * 100}%` }} /></div><span className="v num">{usd(v)}</span></div>
           ))}
         </div>
-      ) : <p className="hint">규칙 엔진으로 돌아 Bedrock 비용이 없습니다.</p>}
+      ) : <p className="hint">0원 (규칙 엔진)</p>}
     </div>
   );
 }
@@ -328,7 +321,7 @@ function Evidence({ c, total, verify }) {
           {c.quote && <blockquote>{c.quote}</blockquote>}
           {c.url && <a href={c.url} target="_blank" rel="noreferrer">원문 열기</a>}
         </>
-      ) : <p className="hint">[번호]를 누르면 그 판정의 근거 원문이 여기에 뜹니다. 근거 {total}개.</p>}
+      ) : <p className="hint">[번호]를 누르면 근거가 보입니다</p>}
       {verify && (
         <div className="hint">
           <b>검증</b> {verify.passed ? "✓ 통과" : `· ${verify.removed.length}개 제거`}
