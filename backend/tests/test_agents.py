@@ -1,0 +1,125 @@
+"""T1: STAR 강점 진단 · 검증 · 비용 · 작업(job) API (docs/pivot/T1_SUPERVISOR.md 완료 기준)."""
+import json
+
+import pytest
+
+from app import config
+from app.adapters import bedrock
+from app.agents import cost, star, verifier
+
+FULL = ("[프로젝트] 식당 예약 API\n"
+        "동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다. 저는 예약 API 설계를 맡았습니다. "
+        "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다. 그 결과 중복 예약이 월 12건에서 0건이 되었습니다.")
+INFLATED = "[스터디] 데이터 분석\n혁신적으로 스터디를 주도했습니다. 열정적으로 참여했습니다."
+RESUME = "이름: 홍길동\n연락처 010-1234-5678\n" + FULL + "\n\n" + INFLATED + "\n[보유기술] Java, Spring Boot, MySQL"
+
+
+def test_star_full_experience_is_strong():
+    (e,), meta = star.diagnose(FULL, use_llm=False)
+    assert meta["mode"] == "rule"
+    assert all(s["present"] for s in e["slots"].values())
+    assert e["slots"]["R"]["quantified"] and e["my_role_clear"]
+    assert e["level"] == "strong" and e["score"] == star.MAX_SCORE
+
+
+def test_star_inflated_words_without_action_are_weak():
+    (e,), _ = star.diagnose(INFLATED, use_llm=False)
+    assert e["inflated"] and e["level"] == "weak" and e["score"] <= star.INFLATED_CAP
+
+
+def test_star_skips_skill_and_education_lines():
+    exps = star.split_experiences("[학력] OO대학교\n[교육] 부트캠프 6개월 수료\n[보유기술] Java, Docker\n" + FULL)
+    assert [e["title"].split(" · ")[0] for e in exps] == ["프로젝트"]
+
+
+def test_star_llm_quotes_must_exist_in_resume(monkeypatch):
+    def fake(system, user, tool, schema, **kw):
+        assert tool == "submit_star"
+        return {"experiences": [{"title": "예약 API", "text": FULL.split("\n", 1)[1],
+                                 "S": "동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다.",
+                                 "T": "팀장으로서 전체 일정을 총괄했습니다.",           # 원문에 없음 → 버림
+                                 "A": "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다.",
+                                 "R": "응답 속도를 80% 개선했습니다."}]}             # 원문에 없음 → 버림
+    monkeypatch.setattr(bedrock, "converse_tool", fake)
+    (e,), meta = star.diagnose(FULL, use_llm=True)
+    assert meta["mode"] == "bedrock" and meta["dropped_quotes"] == 2
+    assert e["slots"]["S"]["present"] and e["slots"]["A"]["present"]
+    assert not e["slots"]["T"]["present"] and not e["slots"]["R"]["present"]
+    assert e["level"] != "strong"  # 지어낸 결과로 점수가 오르지 않는다
+
+
+def test_star_llm_failure_falls_back_to_rules(monkeypatch):
+    def boom(*a, **k):
+        raise bedrock.BedrockError("x")
+    monkeypatch.setattr(bedrock, "converse_tool", boom)
+    res, meta = star.diagnose(FULL, use_llm=True)
+    assert meta["mode"] == "rule" and res[0]["level"] == "strong"
+
+
+def test_verifier_drops_fake_course_and_unquoted_evidence():
+    result = {"strengths": [], "gaps": [],
+              "recommendations": [{"rank": 1, "target": "docker", "course": {"id": "NOPE-1", "name": "없는 과정"},
+                                   "cites": [1, 2], "abstained": False}]}
+    cites = [{"n": 1, "kind": "resume", "doc_id": "resume", "quote": "이력서에 없는 문장입니다"},
+             {"n": 2, "kind": "course", "doc_id": "NOPE-1", "quote": "x"}]
+    result, alive, rep = verifier.verify(result, cites, FULL)
+    r = result["recommendations"][0]
+    assert r["course"] is None and r["abstained"] and alive == []
+    assert not rep["passed"]
+
+
+def test_cost_meter_sums_by_agent():
+    log = bedrock.CallLog()
+    m = cost.Meter(log, budget=1.0)
+    m.start("star"); log.add("star", "global.anthropic.claude-sonnet-4-6", 10, 1000, 200); m.stop("star")
+    m.start("recommend"); log.add("x", "global.anthropic.claude-haiku-4-5-20251001-v1:0", 10, 2000, 100); m.stop("recommend")
+    s = m.summary()
+    assert s["input_tokens"] == 3000 and s["output_tokens"] == 300
+    assert abs(s["usd"] - sum(s["by_agent"].values())) < 1e-9
+    assert s["by_agent"]["star"] == pytest.approx((1000 * 3 + 200 * 15) / 1e6)
+    assert not m.over_budget()
+
+
+def _run(client, monkeypatch, **body):
+    monkeypatch.setenv("JOB_SYNC", "1")
+    j = client.post("/api/analyze", json={"resume": RESUME, "job_family": "backend", **body})
+    assert j.status_code == 200
+    return client.get(f"/api/jobs/{j.json()['job_id']}").json()
+
+
+def test_analyze_job_end_to_end(client, monkeypatch):
+    s = _run(client, monkeypatch)
+    assert s["status"] == "done"
+    assert [p["agent"] for p in s["progress"]] == ["guard", "star", "skills", "retriever", "recommend", "verifier", "cost"]
+    assert all(p["status"] == "done" for p in s["progress"])
+    res = s["result"]
+    assert {e["level"] for e in res["strengths"]} == {"strong", "weak"}
+    assert res["gaps"] and res["recommendations"] and s["verify"]["passed"]
+    n_alive = {c["n"] for c in s["citations"]}
+    assert all(set(r["cites"]) <= n_alive for r in res["recommendations"])
+    assert s["cost"]["usd"] == pytest.approx(sum(s["cost"]["by_agent"].values()))
+    dump = json.dumps(s, ensure_ascii=False)
+    assert "홍길동" not in dump and "010-1234-5678" not in dump  # 개인정보는 접수 즉시 가린다
+
+
+def test_analyze_recommends_only_catalog_courses(client, monkeypatch):
+    from app.data import courses
+    titles = {c["id"]: c["title"] for c in courses()}
+    s = _run(client, monkeypatch)
+    for r in s["result"]["recommendations"]:
+        if r["course"]:
+            assert titles[r["course"]["id"]] == r["course"]["name"]
+
+
+def test_analyze_budget_exceeded_uses_rules(client, monkeypatch):
+    monkeypatch.setattr(config, "JOB_BUDGET_USD", 0.0)
+    s = _run(client, monkeypatch)
+    assert s["status"] == "done"
+    assert any(p.get("note") == "예산 초과 → 규칙 엔진" for p in s["progress"])
+
+
+def test_analyze_validation(client):
+    assert client.post("/api/analyze", json={"resume": RESUME, "job_family": "hardware"}).status_code == 400
+    assert client.post("/api/analyze", json={"resume": "짧음", "job_family": "backend"}).status_code == 422
+    assert client.get("/api/jobs/j_000000000000").status_code == 404
+    assert client.get("/api/jobs/../etc").status_code == 404

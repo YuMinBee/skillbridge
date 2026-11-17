@@ -65,7 +65,7 @@
 ```powershell
 .\tasks.ps1 setup          # .venv, npm install, .env 생성 (.env.example 복사 → 값 채우기)
 .\tasks.ps1 run            # API :8010 + 웹 :5173
-.\tasks.ps1 test           # pytest 80개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
+.\tasks.ps1 test           # pytest 91개 통과가 기준 (GitHub Actions CI도 같은 것을 돌림)
 .\tasks.ps1 eval           # AWS 없이, 저장된 예측으로 eval/report.md 재생성
 ```
 
