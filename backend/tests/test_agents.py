@@ -151,3 +151,18 @@ def test_family_inferred_when_auto(client, monkeypatch):
 def test_pdf_rejects_non_pdf(client):
     r = client.post("/api/analyze/pdf", files={"file": ("cv.txt", b"hello", "text/plain")})
     assert r.status_code == 400
+
+
+def test_guardrail_midword_address_false_positive_is_undone():
+    before = "동아리 행사 예약을 맡았습니다. 주소: 대구 북구 침산로 12. 홍길동님과 협업"
+    after = "[주소]리 행사 예약을 맡았습니다. 주소: [주소]. [이름]님과 협업"
+    fixed, k = bedrock.undo_midword_address(before, after)
+    assert k == 1
+    assert fixed.startswith("동아리 행사")          # 단어 중간 오탐은 되돌림
+    assert "침산로" not in fixed and "[주소]." in fixed  # 번지 있는 진짜 주소는 그대로 가림
+    assert "홍길동" not in fixed                     # 이름은 되돌리지 않음
+
+
+def test_guardrail_known_false_positive_word_is_undone():
+    fixed, k = bedrock.undo_midword_address("동아리 행사를 열었습니다", "[주소] 행사를 열었습니다")
+    assert fixed == "동아리 행사를 열었습니다" and k == 1
