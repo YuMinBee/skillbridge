@@ -10,4 +10,4 @@ frontend/dist/
 build/
 
 # RAG 실험 임베딩 캐시
-eval/rag/cache/
+eval/trust/cache/

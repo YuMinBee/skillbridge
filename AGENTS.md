@@ -5,24 +5,24 @@
 
 ## ⚠️ 2026-11-17 전면 수정 중: 먼저 읽을 것
 
-멘토링 후 방향을 바꿨다. **근거로 답하는 취업 역량 RAG**: 공개·공식 자료에서만 인용하고, 근거가 없으면 답하지 않으며, 그 신뢰도를 LLM 단독·단순 RAG와 비교해 숫자로 보여 준다. 기업이 입력한 기준과 기술 블로그는 더 이상 쓰지 않는다.
+멘토링 후 방향을 바꿨다. **"웹 GPT·Claude에 '역량 분석하고 과제 추천해 줘'라고 하면 여기까지다. 같은 Claude를 AWS 안에서 시스템으로 돌리면 ○○% 정확도로 강점을 진단하고 근거가 붙은 과제를 추천한다."** 기능: ① 강점 진단(STAR, 원문 인용) → ② 역량 연결(NCS, RAG) → ③ 과제 추천(NCS 근거 + 고용24 과정). 발표는 문제 → 숫자 → 근거 → 기술 순서. 기업이 입력한 기준과 기술 블로그는 더 이상 쓰지 않는다. 새 평가는 `eval/trust/`.
 
 - 계획: [docs/pivot/PLAN.md](docs/pivot/PLAN.md) · 트랙 간 계약과 파일 소유: [docs/pivot/CONTRACTS.md](docs/pivot/CONTRACTS.md)
 - 네 명이 각자 Claude Code를 돌린다. **자기 트랙 문서의 "Claude에게 줄 첫 지시"를 그대로 붙여 넣고 시작한다.**
 
 | 트랙 | 담당 | 브랜치 | 문서 |
 |---|---|---|---|
-| T1 슈퍼바이저·비용·작업(job) | 변유민 | `t1-supervisor` | [T1_SUPERVISOR.md](docs/pivot/T1_SUPERVISOR.md) |
-| T2 검색(RAG) 실험 | 김승제 | `t2-rag` | [T2_RAG.md](docs/pivot/T2_RAG.md) |
-| T3 코퍼스·정답셋·생성 평가 | 김채희 | `t3-data-eval` | [T3_DATA_EVAL.md](docs/pivot/T3_DATA_EVAL.md) |
-| T4 화면·시연 | 이승연 | `t4-frontend` | [T4_FRONTEND.md](docs/pivot/T4_FRONTEND.md) |
+| T1 STAR 진단·슈퍼바이저·검증·비용·job·발표 | 변유민 | `t1-supervisor` | [T1_SUPERVISOR.md](docs/pivot/T1_SUPERVISOR.md) |
+| T2 RAG 검색·과제 추천·조합 실험 | 김승제 | `t2-rag` | [T2_RAG.md](docs/pivot/T2_RAG.md) |
+| T3 코퍼스·정답셋·웹 방식 비교 평가 (**가장 급함**) | 김채희 | `t3-data-eval` | [T3_DATA_EVAL.md](docs/pivot/T3_DATA_EVAL.md) |
+| T4 화면·웹 Claude 캡처·블라인드 설문·영상 | 이승연 | `t4-frontend` | [T4_FRONTEND.md](docs/pivot/T4_FRONTEND.md) |
 
 병렬 작업 규칙
 1. 시작 전 `git pull origin main`, 자기 브랜치에서만 작업, PR로 main에 합친다. 하루 한 번 이상 main을 자기 브랜치에 merge한다.
-2. **CONTRACTS.md 6절의 내 파일만 고친다.** 공유 파일(AGENTS.md, CONTRACTS.md, requirements.txt, config.py, main.py)은 그 파일만 바꾸는 작은 PR로 올리고 팀 채팅에 알린다.
+2. **CONTRACTS.md 7절의 내 파일만 고친다.** 공유 파일(AGENTS.md, CONTRACTS.md, requirements.txt, config.py, main.py)은 그 파일만 바꾸는 작은 PR로 올리고 팀 채팅에 알린다.
 3. 다른 트랙이 아직 없으면 `docs/pivot/fixtures/`나 임시 구현으로 진행한다. 기다리지 않는다.
 4. 아래 "반드시 지킬 규칙"은 그대로 유효하다. 특히 키는 `.env`에만 두고, AWS 리소스는 팀장 승인 뒤에만 바꾼다. **이 레포는 공개 레포다.**
-5. 아래 "현재 상태"·"평가 핵심 숫자"는 수정 전 버전의 기록이다. 새 숫자는 `eval/rag/`에 쌓는다.
+5. 아래 "현재 상태"·"평가 핵심 숫자"는 수정 전 버전의 기록이다. 새 숫자는 `eval/trust/`에 쌓는다.
 
 ## 프로젝트 한 줄 (수정 전)
 

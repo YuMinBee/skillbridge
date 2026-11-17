@@ -1,18 +1,232 @@
-{"_example": "화면 개발용 예시. 실제 결과 아님",
- "job_id": "j_example1", "status": "done", "case": "C2",
- "progress": [{"agent": "supervisor", "status": "done", "ms": 640},
-              {"agent": "retriever", "status": "done", "ms": 1210},
-              {"agent": "course", "status": "done", "ms": 90},
-              {"agent": "verifier", "status": "done", "ms": 980},
-              {"agent": "cost", "status": "done", "ms": 3}],
- "answer": {"text": "(예시) 백엔드 신입 실무 기준에는 요구사항 확인과 데이터 입출력 구현이 포함됩니다 [1]. 이를 다루는 과정으로 카탈로그의 (예시 과정)이 있습니다 [2].",
-            "abstained": false, "abstain_reason": null,
-            "sentences": [{"text": "(예시) 백엔드 신입 실무 기준에는 요구사항 확인과 데이터 입출력 구현이 포함됩니다.", "cites": [1], "grounded": true},
-                          {"text": "이를 다루는 과정으로 카탈로그의 (예시 과정)이 있습니다.", "cites": [2], "grounded": true}]},
- "citations": [{"n": 1, "doc_id": "ncs-example-01", "title": "(예시) NCS 응용SW엔지니어링 · 수행준거", "url": "https://www.ncs.go.kr", "quote": "(예시 근거 문장)"},
-               {"n": 2, "doc_id": "course-example-01", "title": "(예시 과정)", "url": "https://www.work24.go.kr", "quote": "(예시 과정 설명)"}],
- "cost": {"input_tokens": 5200, "output_tokens": 640, "usd": 0.0091,
-          "by_agent": {"supervisor": 0.0012, "retriever": 0.0004, "course": 0.0, "verifier": 0.0075}},
- "trace": [{"agent": "supervisor", "model": "haiku-4.5", "ms": 640, "in": 900, "out": 120},
-           {"agent": "retriever", "model": "titan-embed-v2", "ms": 1210, "in": 30, "out": 0},
-           {"agent": "verifier", "model": "haiku-4.5", "ms": 980, "in": 4270, "out": 520}]}
+{
+ "_example": "화면 개발용 예시. 실제 결과 아님. 숫자를 발표에 쓰지 말 것",
+ "job_id": "j_example1",
+ "status": "done",
+ "progress": [
+  {
+   "agent": "star",
+   "status": "done",
+   "ms": 2100
+  },
+  {
+   "agent": "retriever",
+   "status": "done",
+   "ms": 900
+  },
+  {
+   "agent": "recommend",
+   "status": "done",
+   "ms": 1300
+  },
+  {
+   "agent": "verifier",
+   "status": "done",
+   "ms": 950
+  },
+  {
+   "agent": "cost",
+   "status": "done",
+   "ms": 3
+  }
+ ],
+ "result": {
+  "strengths": [
+   {
+    "exp_id": "e1",
+    "title": "(예시) 팀 프로젝트: 식당 예약 API",
+    "slots": {
+     "S": {
+      "quote": "(예시) 동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다",
+      "present": true
+     },
+     "T": {
+      "quote": "(예시) 저는 예약 API 설계를 맡았습니다",
+      "present": true
+     },
+     "A": {
+      "quote": "(예시) Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다",
+      "present": true
+     },
+     "R": {
+      "quote": "(예시) 중복 예약이 월 12건에서 0건이 되었습니다",
+      "present": true,
+      "quantified": true
+     }
+    },
+    "my_role_clear": true,
+    "score": 5.0,
+    "level": "strong",
+    "competencies": [
+     "problem_solving",
+     "backend_api"
+    ],
+    "missing_hint": null
+   },
+   {
+    "exp_id": "e2",
+    "title": "(예시) 데이터 분석 스터디",
+    "slots": {
+     "S": {
+      "quote": null,
+      "present": false
+     },
+     "T": {
+      "quote": null,
+      "present": false
+     },
+     "A": {
+      "quote": "(예시) 혁신적으로 스터디를 주도했습니다",
+      "present": true
+     },
+     "R": {
+      "quote": null,
+      "present": false,
+      "quantified": false
+     }
+    },
+    "my_role_clear": false,
+    "score": 1.0,
+    "level": "weak",
+    "competencies": [],
+    "missing_hint": "상황·과제·결과가 드러나지 않음. '주도'의 구체적 행동이 없음"
+   }
+  ],
+  "gaps": [
+   {
+    "id": "ncs:requirements",
+    "name": "(예시) 요구사항 확인",
+    "status": "part",
+    "cites": [
+     3
+    ]
+   },
+   {
+    "id": "docker",
+    "name": "Docker",
+    "status": "miss",
+    "cites": [
+     4
+    ]
+   }
+  ],
+  "recommendations": [
+   {
+    "rank": 1,
+    "target": "docker",
+    "why": "(예시) 실무 기준에 컨테이너 배포가 있으나 이력서에 경험이 없음 [4]",
+    "task": "(예시) 예약 API를 Docker로 묶어 배포하고 README에 실행 방법을 쓰기 [4]",
+    "course": {
+     "id": "example-course",
+     "name": "(예시 과정)",
+     "hours": 40,
+     "url": "https://www.work24.go.kr"
+    },
+    "cites": [
+     4,
+     5
+    ],
+    "abstained": false
+   },
+   {
+    "rank": 2,
+    "target": "ncs:requirements",
+    "why": "(예시) 스터디 경험의 결과가 없음 [2]",
+    "task": "(예시) 스터디 결과를 숫자로 정리하기 [3]",
+    "course": null,
+    "cites": [
+     2,
+     3
+    ],
+    "abstained": false
+   }
+  ],
+  "readiness": {
+   "apply": 72,
+   "practice": 58
+  }
+ },
+ "citations": [
+  {
+   "n": 1,
+   "kind": "resume",
+   "doc_id": "resume",
+   "title": "이력서",
+   "url": null,
+   "quote": "(예시) 중복 예약이 월 12건에서 0건이 되었습니다"
+  },
+  {
+   "n": 2,
+   "kind": "resume",
+   "doc_id": "resume",
+   "title": "이력서",
+   "url": null,
+   "quote": "(예시) 혁신적으로 스터디를 주도했습니다"
+  },
+  {
+   "n": 3,
+   "kind": "ncs_unit",
+   "doc_id": "ncs-example-01",
+   "title": "(예시) NCS 응용SW엔지니어링 · 요구사항 확인",
+   "url": "https://www.ncs.go.kr",
+   "quote": "(예시 수행준거)"
+  },
+  {
+   "n": 4,
+   "kind": "ncs_unit",
+   "doc_id": "ncs-example-02",
+   "title": "(예시) NCS 응용SW엔지니어링 · 애플리케이션 배포",
+   "url": "https://www.ncs.go.kr",
+   "quote": "(예시 수행준거)"
+  },
+  {
+   "n": 5,
+   "kind": "course",
+   "doc_id": "course-example",
+   "title": "(예시 과정)",
+   "url": "https://www.work24.go.kr",
+   "quote": "(예시 과정 설명)"
+  }
+ ],
+ "cost": {
+  "input_tokens": 9800,
+  "output_tokens": 1700,
+  "usd": 0.031,
+  "by_agent": {
+   "star": 0.018,
+   "retriever": 0.0004,
+   "recommend": 0.007,
+   "verifier": 0.0056,
+   "cost": 0.0
+  }
+ },
+ "trace": [
+  {
+   "agent": "star",
+   "model": "sonnet-4.6",
+   "ms": 2100,
+   "in": 3100,
+   "out": 900
+  },
+  {
+   "agent": "retriever",
+   "model": "titan-embed-v2",
+   "ms": 900,
+   "in": 60,
+   "out": 0
+  },
+  {
+   "agent": "recommend",
+   "model": "haiku-4.5",
+   "ms": 1300,
+   "in": 3600,
+   "out": 500
+  },
+  {
+   "agent": "verifier",
+   "model": "haiku-4.5",
+   "ms": 950,
+   "in": 3040,
+   "out": 300
+  }
+ ]
+}

@@ -1,7 +1,0 @@
-{"_example": "화면 개발용 예시. 실제 결과 아님. 숫자를 발표에 쓰지 말 것",
- "_meta": {"at": null, "n": 0, "split": "test"},
- "systems": {
-  "llm_only":  {"faithfulness": [0.5, 0.4, 0.6], "citation_precision": null, "abstain_acc": [0.3, 0.2, 0.4], "fake_course_rate": [0.2, 0.1, 0.3], "usd_per_q": 0.002, "p95_ms": 4000},
-  "naive_rag": {"faithfulness": [0.7, 0.6, 0.8], "citation_precision": [0.6, 0.5, 0.7], "abstain_acc": [0.5, 0.4, 0.6], "fake_course_rate": [0.1, 0.0, 0.2], "usd_per_q": 0.004, "p95_ms": 5000},
-  "ours":      {"faithfulness": [0.9, 0.85, 0.95], "citation_precision": [0.9, 0.85, 0.95], "abstain_acc": [0.9, 0.8, 0.95], "fake_course_rate": [0.0, 0.0, 0.0], "usd_per_q": 0.009, "p95_ms": 9000}},
- "by_case": {}}

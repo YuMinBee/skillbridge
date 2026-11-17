@@ -1,12 +1,213 @@
-{"_example": "화면 개발용 예시. 실제 결과 아님",
- "job_id": "j_example2", "status": "done", "case": "C7",
- "progress": [{"agent": "supervisor", "status": "done", "ms": 600},
-              {"agent": "retriever", "status": "done", "ms": 1100},
-              {"agent": "verifier", "status": "done", "ms": 700},
-              {"agent": "cost", "status": "done", "ms": 2}],
- "answer": {"text": "질문하신 과정은 고용24 카탈로그에서 찾을 수 없어 답하지 않았습니다.",
-            "abstained": true, "abstain_reason": "not_in_catalog", "sentences": []},
- "citations": [],
- "cost": {"input_tokens": 2100, "output_tokens": 90, "usd": 0.0026,
-          "by_agent": {"supervisor": 0.0010, "retriever": 0.0002, "verifier": 0.0014}},
- "trace": []}
+{
+ "_example": "화면 개발용 예시. 실제 결과 아님. 숫자를 발표에 쓰지 말 것",
+ "job_id": "j_example2",
+ "status": "done",
+ "progress": [
+  {
+   "agent": "star",
+   "status": "done",
+   "ms": 2100
+  },
+  {
+   "agent": "retriever",
+   "status": "done",
+   "ms": 900
+  },
+  {
+   "agent": "recommend",
+   "status": "done",
+   "ms": 1300
+  },
+  {
+   "agent": "verifier",
+   "status": "done",
+   "ms": 950
+  },
+  {
+   "agent": "cost",
+   "status": "done",
+   "ms": 3
+  }
+ ],
+ "result": {
+  "strengths": [
+   {
+    "exp_id": "e1",
+    "title": "(예시) 팀 프로젝트: 식당 예약 API",
+    "slots": {
+     "S": {
+      "quote": "(예시) 동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다",
+      "present": true
+     },
+     "T": {
+      "quote": "(예시) 저는 예약 API 설계를 맡았습니다",
+      "present": true
+     },
+     "A": {
+      "quote": "(예시) Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다",
+      "present": true
+     },
+     "R": {
+      "quote": "(예시) 중복 예약이 월 12건에서 0건이 되었습니다",
+      "present": true,
+      "quantified": true
+     }
+    },
+    "my_role_clear": true,
+    "score": 5.0,
+    "level": "strong",
+    "competencies": [
+     "problem_solving",
+     "backend_api"
+    ],
+    "missing_hint": null
+   },
+   {
+    "exp_id": "e2",
+    "title": "(예시) 데이터 분석 스터디",
+    "slots": {
+     "S": {
+      "quote": null,
+      "present": false
+     },
+     "T": {
+      "quote": null,
+      "present": false
+     },
+     "A": {
+      "quote": "(예시) 혁신적으로 스터디를 주도했습니다",
+      "present": true
+     },
+     "R": {
+      "quote": null,
+      "present": false,
+      "quantified": false
+     }
+    },
+    "my_role_clear": false,
+    "score": 1.0,
+    "level": "weak",
+    "competencies": [],
+    "missing_hint": "상황·과제·결과가 드러나지 않음. '주도'의 구체적 행동이 없음"
+   }
+  ],
+  "gaps": [
+   {
+    "id": "ncs:requirements",
+    "name": "(예시) 요구사항 확인",
+    "status": "part",
+    "cites": [
+     3
+    ]
+   },
+   {
+    "id": "docker",
+    "name": "Docker",
+    "status": "miss",
+    "cites": [
+     4
+    ]
+   }
+  ],
+  "recommendations": [
+   {
+    "rank": 1,
+    "target": "(예시) 양자컴퓨팅",
+    "why": null,
+    "task": null,
+    "course": null,
+    "cites": [],
+    "abstained": true,
+    "abstain_reason": "NCS 기준과 고용24 카탈로그에서 근거를 찾지 못해 추천하지 않음"
+   }
+  ],
+  "readiness": {
+   "apply": 72,
+   "practice": 58
+  }
+ },
+ "citations": [
+  {
+   "n": 1,
+   "kind": "resume",
+   "doc_id": "resume",
+   "title": "이력서",
+   "url": null,
+   "quote": "(예시) 중복 예약이 월 12건에서 0건이 되었습니다"
+  },
+  {
+   "n": 2,
+   "kind": "resume",
+   "doc_id": "resume",
+   "title": "이력서",
+   "url": null,
+   "quote": "(예시) 혁신적으로 스터디를 주도했습니다"
+  },
+  {
+   "n": 3,
+   "kind": "ncs_unit",
+   "doc_id": "ncs-example-01",
+   "title": "(예시) NCS 응용SW엔지니어링 · 요구사항 확인",
+   "url": "https://www.ncs.go.kr",
+   "quote": "(예시 수행준거)"
+  },
+  {
+   "n": 4,
+   "kind": "ncs_unit",
+   "doc_id": "ncs-example-02",
+   "title": "(예시) NCS 응용SW엔지니어링 · 애플리케이션 배포",
+   "url": "https://www.ncs.go.kr",
+   "quote": "(예시 수행준거)"
+  },
+  {
+   "n": 5,
+   "kind": "course",
+   "doc_id": "course-example",
+   "title": "(예시 과정)",
+   "url": "https://www.work24.go.kr",
+   "quote": "(예시 과정 설명)"
+  }
+ ],
+ "cost": {
+  "input_tokens": 9800,
+  "output_tokens": 1700,
+  "usd": 0.031,
+  "by_agent": {
+   "star": 0.018,
+   "retriever": 0.0004,
+   "recommend": 0.007,
+   "verifier": 0.0056,
+   "cost": 0.0
+  }
+ },
+ "trace": [
+  {
+   "agent": "star",
+   "model": "sonnet-4.6",
+   "ms": 2100,
+   "in": 3100,
+   "out": 900
+  },
+  {
+   "agent": "retriever",
+   "model": "titan-embed-v2",
+   "ms": 900,
+   "in": 60,
+   "out": 0
+  },
+  {
+   "agent": "recommend",
+   "model": "haiku-4.5",
+   "ms": 1300,
+   "in": 3600,
+   "out": 500
+  },
+  {
+   "agent": "verifier",
+   "model": "haiku-4.5",
+   "ms": 950,
+   "in": 3040,
+   "out": 300
+  }
+ ]
+}
