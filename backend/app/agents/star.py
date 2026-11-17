@@ -87,11 +87,14 @@ def split_experiences(text: str) -> list[dict]:
 
 
 def locate(quote: str | None, text: str) -> str | None:
-    """인용이 원문에 실제로 있는지. 공백 차이만 허용한다. 없으면 None."""
+    """인용이 원문에 실제로 있는지. 공백·줄바꿈 차이만 허용한다(PDF는 문장 중간에서 줄이 바뀜). 없으면 None."""
     q = _norm(quote or "")
     if len(q) < 4:
         return None
-    return q if q in _norm(text) else None
+    if q in _norm(text):
+        return q
+    tight = lambda s: re.sub(r"\s+", "", s)  # noqa: E731  글자는 하나도 다르면 안 된다
+    return q if tight(q) in tight(text) else None
 
 
 def _rule_slots(text: str) -> dict:
@@ -192,3 +195,45 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
 
 def _rule(resume: str) -> list[dict]:
     return [_build(e, _rule_slots(e["text"])) for e in split_experiences(resume)]
+
+
+# ── 우리 STAR 템플릿으로 쓴 경우 ─────────────────────────────────
+# 사용자가 칸을 직접 나눠 썼으므로 '어느 칸인가'는 판정하지 않는다. 대신 각 칸의 **질**을 같은 규칙으로 본다:
+# 행동(A)에 구체적 행동 동사가 있는가, 결과(R)에 결과·숫자가 있는가, 꾸미는 말뿐인가. 너무 짧은 칸(5자 미만)은 없음으로 본다.
+MIN_SLOT = 5
+
+
+def compose(template: list[dict], skills: str = "") -> str:
+    """템플릿 → 이력서 본문(인용·검증용). 칸 문장이 그대로 들어간다."""
+    parts = []
+    for e in template:
+        body = " ".join(_end(e.get(k, "")) for k in SLOTS if (e.get(k) or "").strip())
+        parts.append(f"[{e.get('title') or '경험'}]\n{body}")
+    if skills.strip():
+        parts.append(f"[보유기술] {skills.strip()}")
+    return "\n\n".join(parts)
+
+
+def _end(s: str) -> str:
+    s = _norm(s)
+    return s if s.endswith((".", "!", "?", "다", "함", "음")) else s + "."
+
+
+def from_template(template: list[dict], resume: str) -> list[dict]:
+    out = []
+    for i, e in enumerate(template):
+        slots = {}
+        for k in SLOTS:
+            t = _norm(e.get(k) or "")
+            if len(t) < MIN_SLOT:
+                slots[k] = None
+                continue
+            if k == "A" and not _A.search(_INFLATED.sub("", t)):
+                slots[k] = t  # 칸은 채웠지만 구체적 행동이 없으면 score()의 꾸밈 규칙이 상한을 건다
+            elif k == "R" and not (_R.search(t) or _QUANT.search(t)):
+                slots[k] = None  # '열심히 했다'처럼 결과가 아닌 문장은 결과로 치지 않는다
+                continue
+            slots[k] = locate(t, resume) or locate(_end(t), resume)
+        text = " ".join(v for v in slots.values() if v) or (e.get("title") or "")
+        out.append(_build({"exp_id": f"e{i + 1}", "title": e.get("title") or f"경험 {i + 1}", "text": text}, slots))
+    return out

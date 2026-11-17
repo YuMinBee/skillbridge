@@ -7,6 +7,7 @@
 """
 import importlib
 import time
+from functools import lru_cache
 from contextlib import contextmanager
 
 from ..adapters import bedrock
@@ -96,6 +97,23 @@ def pooled_requirements(pool: dict) -> tuple[dict, dict]:
     return reqs, y
 
 
+@lru_cache(maxsize=8)
+def _pooled(job_family: str):
+    pool = posting_pool(job_family)
+    return pool, *pooled_requirements(pool)
+
+
+def infer_family(status_map: dict) -> tuple[str, dict]:
+    """이력서 스킬이 각 직군 공고 기준과 얼마나 겹치는지(보유·부분·검증 필요를 가중치로 셈) → 가장 높은 직군.
+    점수 = Σ(기준 가중치 × 상태값) / Σ기준 가중치 (준비도와 같은 식). 동점이면 백엔드 → AI·ML → 데이터 순."""
+    scores = {}
+    for f in FAMILIES:
+        _, reqs, _ = _pooled(f)
+        scores[f] = readiness(reqs, status_map) if reqs else 0
+    best = max(FAMILIES, key=lambda f: scores[f])
+    return best, scores
+
+
 def _quote_in(text: str, name: str, aliases: list[str]) -> str | None:
     keys = [k.lower() for k in [name, *aliases] if k]
     for s in sentences(text):
@@ -111,7 +129,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
     progress = [{"agent": a, "status": "queued", "ms": None} for a in AGENTS]
     cites = Cites()
     sd = get_dict()
-    state: dict = {"resume": payload["resume"], "family": payload["job_family"], "posting": payload.get("posting") or ""}
+    state: dict = {"resume": payload.get("resume", ""), "family": payload["job_family"], "posting": payload.get("posting") or ""}
     out: dict = {"result": {"strengths": [], "gaps": [], "recommendations": [], "readiness": {"apply": None, "practice": None}},
                  "notes": []}
 
@@ -143,18 +161,41 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
 
     # guard: 정규식은 접수 때 끝났다. 여기서는 Guardrail(Bedrock 모드)만
     with stage("guard", llm=True) as row:
-        masked, n = pii.mask(state["resume"])
+        tpl = payload.get("template")
+        if tpl:  # 칸마다 표시를 붙여 한 번에 가린 뒤 다시 나눈다 (Guardrail 호출 1회)
+            lines = [f"<<{i}{k}>> {' '.join((e.get(k) or '').split())}" for i, e in enumerate(tpl) for k in ("title", *star.SLOTS)]
+            lines.append(f"<<skills>> {' '.join((payload.get('skills') or '').split())}")
+            marked = "\n".join(lines)
+            text = marked
+        else:
+            text = state["resume"]
+        masked, n = pii.mask(text)
         if bedrock.mode() == "bedrock" and GUARDRAIL_ID:
             try:
                 masked, n2 = bedrock.guardrail_mask(masked, log=log)
                 n += n2
             except bedrock.BedrockError as e:
                 row["note"] = f"Guardrail 실패 → 정규식만 ({str(e)[:60]})"
-        state["resume"] = masked
+        if tpl:
+            import re as _re
+            back = [dict() for _ in tpl]
+            skills = ""
+            for m in _re.finditer(r"^<<(\d+)(title|S|T|A|R)>> ?(.*)$|^<<skills>> ?(.*)$", masked, _re.M):
+                if m.group(4) is not None:
+                    skills = m.group(4)
+                elif int(m.group(1)) < len(back):
+                    back[int(m.group(1))][m.group(2)] = m.group(3)
+            state["template"] = back
+            state["resume"] = star.compose(back, skills)
+        else:
+            state["resume"] = masked
         row["masked"] = n
 
     with stage("star", llm=True) as row:
-        strengths, meta = star.diagnose(state["resume"], log=log)
+        if state.get("template"):
+            strengths, meta = star.from_template(state["template"], state["resume"]), {"mode": "template"}
+        else:
+            strengths, meta = star.diagnose(state["resume"], log=log)
         out["result"]["strengths"] = strengths
         row.update(mode=meta["mode"], dropped_quotes=meta.get("dropped_quotes", 0))
         for e in strengths:
@@ -177,13 +218,18 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
 
     with stage("retriever", llm=True) as row:
         status_map = state.get("status", {})
+        if state["family"] in (None, "", "auto"):
+            state["family"], fam_scores = infer_family(status_map)
+            out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]],
+                                           "inferred": True, "scores": fam_scores}
+        else:
+            out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]], "inferred": False}
         pool = None
         if state["posting"]:
             reqs = posting_requirements(state["posting"])
             src = "붙여 넣은 공고"
         else:
-            pool = posting_pool(state["family"])
-            reqs, demand = pooled_requirements(pool)
+            pool, reqs, demand = _pooled(state["family"])
             src = (f"{FAMILY_LABEL[state['family']]} 공개 공고: 민간 {len(pool['private'])}건 + "
                    f"잡알리오 {pool['public_scope']} {len(pool['public'])}건 (출처별 평균 반반)")
         state["reqs"] = reqs

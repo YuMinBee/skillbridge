@@ -123,3 +123,31 @@ def test_analyze_validation(client):
     assert client.post("/api/analyze", json={"resume": "짧음", "job_family": "backend"}).status_code == 422
     assert client.get("/api/jobs/j_000000000000").status_code == 404
     assert client.get("/api/jobs/../etc").status_code == 404
+
+
+def test_template_input_scores_slot_quality(client, monkeypatch):
+    monkeypatch.setenv("JOB_SYNC", "1")
+    body = {"experiences": [
+        {"title": "예약 API", "S": "동아리 예약이 엑셀이라 중복이 잦았습니다", "T": "저는 예약 API 설계를 맡았습니다",
+         "A": "Spring Boot로 API를 만들고 락으로 동시성 문제를 막았습니다", "R": "중복 예약이 월 12건에서 0건이 되었습니다"},
+        {"title": "스터디", "A": "혁신적으로 스터디를 주도했습니다", "R": "열심히 했습니다 010-1234-5678"}],
+        "skills": "Java, Spring Boot"}
+    j = client.post("/api/analyze", json=body).json()
+    s = client.get(f"/api/jobs/{j['job_id']}").json()
+    assert s["status"] == "done"
+    a, b = s["result"]["strengths"]
+    assert a["level"] == "strong"
+    assert b["level"] == "weak" and not b["slots"]["R"]["present"]  # '열심히 했습니다'는 결과가 아니다
+    assert "010-1234-5678" not in json.dumps(s, ensure_ascii=False)
+    assert s["result"]["job_family"]["inferred"] is True
+
+
+def test_family_inferred_when_auto(client, monkeypatch):
+    s = _run(client, monkeypatch, job_family="auto")
+    jf = s["result"]["job_family"]
+    assert jf["inferred"] and jf["id"] in ("backend", "ai_ml", "data") and set(jf["scores"]) == {"backend", "ai_ml", "data"}
+
+
+def test_pdf_rejects_non_pdf(client):
+    r = client.post("/api/analyze/pdf", files={"file": ("cv.txt", b"hello", "text/plain")})
+    assert r.status_code == 400

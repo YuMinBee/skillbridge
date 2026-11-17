@@ -27,9 +27,27 @@ const load = () => { try { return localStorage.getItem(KEY) || ""; } catch { ret
 const save = (v) => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch { /* noop */ } };
 const usd = (v) => (v == null ? "—" : `$${v.toFixed(v < 0.01 ? 4 : 3)}`);
 
+const QUESTIONS = [
+  ["S", "상황", "어떤 문제나 불편이 있었나요?", "예) 동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다"],
+  ["T", "과제", "그중 내가 맡은 일·목표는 무엇이었나요?", "예) 저는 예약 API 설계를 맡았습니다"],
+  ["A", "행동", "내가 직접 한 일을 구체적으로 (도구·방법)", "예) Spring Boot로 API를 만들고 락으로 동시성 문제를 막았습니다"],
+  ["R", "결과", "무엇이 바뀌었나요? 숫자가 있으면 좋아요", "예) 중복 예약이 월 12건에서 0건이 되었습니다"],
+];
+const blankExp = () => ({ title: "", S: "", T: "", A: "", R: "" });
+const EXAMPLE_TPL = [
+  { title: "식당 예약 API", S: "동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다", T: "저는 예약 API 설계를 맡았습니다",
+    A: "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다", R: "중복 예약이 월 12건에서 0건이 되었습니다" },
+  { title: "데이터 분석 스터디", S: "", T: "", A: "혁신적으로 스터디를 주도했습니다", R: "열심히 참여했습니다" },
+];
+const MODES = [["pdf", "이력서 PDF"], ["template", "템플릿으로 쓰기"], ["text", "글 붙여 넣기"]];
+
 export default function Analyze({ active }) {
   const [families, setFamilies] = useState([["backend", "백엔드"], ["ai_ml", "AI·ML"], ["data", "데이터"]]);
-  const [family, setFamily] = useState("backend");
+  const [family, setFamily] = useState("auto");
+  const [mode, setMode] = useState("pdf");
+  const [file, setFile] = useState(null);
+  const [exps, setExps] = useState([blankExp()]);
+  const [skills, setSkills] = useState("");
   const [resume, setResume] = useState("");
   const [posting, setPosting] = useState("");
   const [jobId, setJobId] = useState(load);
@@ -58,13 +76,20 @@ export default function Analyze({ active }) {
     return () => { stop = true; clearTimeout(timer.current); };
   }, [jobId, active]);
 
+  const ready = mode === "pdf" ? !!file : mode === "template" ? exps.some((e) => e.S || e.T || e.A || e.R) : resume.trim().length >= 20;
+
   const submit = async () => {
     setErr(""); setJob(null); setSel(null);
     try {
-      const { job_id } = await api.analyze({ resume, job_family: family, posting: posting || null });
+      const base = { job_family: family, posting: posting || null };
+      const { job_id } = mode === "pdf" ? await api.analyzePdf(file, family, posting)
+        : mode === "template" ? await api.analyze({ ...base, experiences: exps, skills })
+          : await api.analyze({ ...base, resume });
       save(job_id); setJobId(job_id);
     } catch (e) { setErr(e.message); }
   };
+
+  const setExp = (i, k, v) => setExps((xs) => xs.map((x, j) => (j === i ? { ...x, [k]: v } : x)));
 
   const running = job && (job.status === "queued" || job.status === "running");
   const cites = useMemo(() => Object.fromEntries((job?.citations || []).map((c) => [c.n, c])), [job]);
@@ -78,20 +103,59 @@ export default function Analyze({ active }) {
       </p>
       <div className="grid-side">
         <div className="panel no-print">
-          <h2>1 · 직군</h2>
-          <Seg label="직군" value={family} options={families} onChange={setFamily} />
-          <h2>2 · 이력서 / 경험</h2>
-          <textarea value={resume} onChange={(e) => setResume(e.target.value)} rows={12}
-            placeholder="경험을 문단이나 글머리표로 붙여 넣으세요. 이름·연락처는 자동으로 가립니다." />
-          <div className="row">
-            <button className="btn ghost sm" onClick={() => setResume(EXAMPLE)}>예시 넣기</button>
-            <span className="hint">{resume.length.toLocaleString()} / 8,000자</span>
-          </div>
+          <h2>내 경험 넣기</h2>
+          <Seg label="입력 방식" value={mode} options={MODES} onChange={setMode} />
+          {mode === "pdf" && (
+            <>
+              <input type="file" accept="application/pdf,.pdf" onChange={(e) => setFile(e.target.files?.[0] || null)} />
+              <p className="hint">글자를 읽기만 하고 파일은 저장하지 않습니다. 이름·연락처는 자동으로 가립니다.
+                이력서가 없으면 <button className="linkbtn" onClick={() => setMode("template")}>템플릿으로 쓰기</button>.</p>
+            </>
+          )}
+          {mode === "template" && (
+            <div className="tpl">
+              <p className="hint">경험 하나에 네 칸입니다. 기업 역량면접(STAR)과 같은 순서라 자소서·면접 답변으로도 쓸 수 있어요.</p>
+              {exps.map((e, i) => (
+                <fieldset key={i} className="tpl-exp">
+                  <legend>경험 {i + 1}</legend>
+                  <input type="text" value={e.title} onChange={(ev) => setExp(i, "title", ev.target.value)}
+                    placeholder="경험 이름 (예: 팀 프로젝트 · 식당 예약 API)" maxLength={60} />
+                  {QUESTIONS.map(([k, l, q, ph]) => (
+                    <label key={k} className="fld"><span><b className="num">{k}</b> {l} · {q}</span>
+                      <textarea rows={2} value={e[k]} onChange={(ev) => setExp(i, k, ev.target.value)} placeholder={ph} maxLength={k === "A" ? 1000 : 600} />
+                    </label>
+                  ))}
+                  {exps.length > 1 && <button className="btn ghost sm" onClick={() => setExps((xs) => xs.filter((_, j) => j !== i))}>이 경험 빼기</button>}
+                </fieldset>
+              ))}
+              <div className="row">
+                {exps.length < 8 && <button className="btn ghost sm" onClick={() => setExps((xs) => [...xs, blankExp()])}>+ 경험 추가</button>}
+                <button className="btn ghost sm" onClick={() => { setExps(EXAMPLE_TPL); setSkills("Java, Spring Boot, MySQL, Redis"); }}>예시 채우기</button>
+              </div>
+              <label className="fld">가진 기술 (쉼표로)
+                <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="Java, Spring Boot, MySQL" maxLength={500} />
+              </label>
+            </div>
+          )}
+          {mode === "text" && (
+            <>
+              <textarea value={resume} onChange={(e) => setResume(e.target.value)} rows={12}
+                placeholder="경험을 문단이나 글머리표로 붙여 넣으세요. 이름·연락처는 자동으로 가립니다." />
+              <div className="row">
+                <button className="btn ghost sm" onClick={() => setResume(EXAMPLE)}>예시 넣기</button>
+                <span className="hint">{resume.length.toLocaleString()}자</span>
+              </div>
+            </>
+          )}
           <details>
-            <summary className="hint">공고 붙여 넣기 (선택) · 없으면 같은 직군 공개 공고 기준</summary>
+            <summary className="hint">직군 직접 고르기 (기본: 이력서 스킬로 자동 추정)</summary>
+            <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
+          </details>
+          <details>
+            <summary className="hint">지원할 공고 붙여 넣기 (선택) · 없으면 같은 직군 공개 공고(민간 + 잡알리오) 기준</summary>
             <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
           </details>
-          <button className="btn" disabled={resume.trim().length < 20 || running} onClick={submit}>
+          <button className="btn" disabled={!ready || running} onClick={submit}>
             {running ? "분석 중…" : "분석 시작"}
           </button>
           {err && <p className="err">{err}</p>}
@@ -149,8 +213,8 @@ function Summary({ job }) {
     <div className="an-sum">
       <div className="panel"><h3>강점 경험</h3><div className="big num">{strong}<small> / {s.length}</small></div>
         <p className="hint">STAR 4칸이 원문으로 확인된 경험</p></div>
-      <div className="panel"><h3>지원 준비도</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
-        <p className="hint">공개 공고 기준 · 규칙 계산</p></div>
+      <div className="panel"><h3>지원 준비도{r.job_family ? ` · ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
+        <p className="hint">{r.job_family?.inferred ? "직군은 스킬로 자동 추정 · " : ""}공개 공고 기준 · 규칙 계산</p></div>
       <div className="panel"><h3>실무 준비도</h3><div className="big num">{r.readiness.practice ?? "—"}</div>
         <p className="hint">{r.readiness.practice == null ? "NCS 기준 연결 준비 중" : "NCS 기준"}</p></div>
       <div className="panel"><h3>이번 분석 비용</h3><div className="big num">{usd(job.cost?.usd)}</div>
