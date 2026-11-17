@@ -681,3 +681,4 @@ details.rest summary{cursor:pointer;font-size:13px;color:var(--muted)}
 .tpl-exp textarea{min-height:52px}
 .linkbtn{font:inherit;border:0;background:none;color:var(--accent);padding:0;cursor:pointer;text-decoration:underline}
 .hint.foot{text-align:center;margin-top:8px}
+.pdfpick input[type=file]{margin-top:2px}

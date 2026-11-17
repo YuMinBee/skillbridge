@@ -20,6 +20,7 @@ STRONG_MIN, OK_MIN = 4.0, 2.5   # strong: 4점 이상 + A·R 있음 / ok: 2.5점
 MAX_SCORE = 4 * SLOT_POINT + QUANT_POINT + ROLE_POINT
 
 SLOTS = ("S", "T", "A", "R")
+MAX_LLM_CHARS = 16_000   # 자소서+포트폴리오를 함께 넣을 수 있게 (이전 8,000)
 SLOT_LABEL = {"S": "상황", "T": "과제", "A": "행동", "R": "결과"}
 
 # ── 문장 패턴 (MOCK 판정 + 수치·역할·꾸밈 판정은 Bedrock 모드에서도 이 규칙을 쓴다) ──
@@ -148,7 +149,7 @@ def _build(exp: dict, slots: dict) -> dict:
             "missing_hint": sc["missing_hint"]}
 
 
-_SYS = """너는 기업 역량면접(행동사건면접) 평가자다. 이력서의 각 경험을 STAR로 나눈다.
+_SYS = """너는 기업 역량면접(행동사건면접) 평가자다. 지원자의 자기소개서·포트폴리오·이력서에서 경험을 찾아 STAR로 나눈다.
 규칙:
 - 경험마다 S(상황·문제), T(맡은 과제·목표), A(내가 한 구체적 행동), R(결과) 칸을 채운다.
 - 각 칸에는 이력서 원문 문장을 **글자 그대로** 복사한다. 고치거나 요약하거나 합치지 않는다.
@@ -170,8 +171,8 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
     use_llm = (bedrock.mode() == "bedrock") if use_llm is None else use_llm
     if use_llm:
         try:
-            out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:8000]}\n</이력서>", "submit_star", _SCHEMA,
-                                        log=log, kind="star", max_tokens=3000)
+            out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:MAX_LLM_CHARS]}\n</이력서>", "submit_star", _SCHEMA,
+                                        log=log, kind="star", max_tokens=4000)
             res, dropped = [], 0
             for i, e in enumerate(out.get("experiences", [])[:12]):
                 text = locate(e.get("text"), resume)

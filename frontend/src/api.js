@@ -65,9 +65,11 @@ export const api = {
   reset: () => req("POST", "/api/reset"),
   families: () => req("GET", "/api/families"),
   analyze: (body) => req("POST", "/api/analyze", body),
-  analyzePdf: (file, family, posting) => {
+  analyzePdf: (docs, family, posting) => {
     const f = new FormData();
-    f.append("file", file); f.append("job_family", family || "auto");
+    if (docs.essay) f.append("essay", docs.essay);
+    if (docs.portfolio) f.append("portfolio", docs.portfolio);
+    f.append("job_family", family || "auto");
     if (posting) f.append("posting", posting);
     return req("POST", "/api/analyze/pdf", f, true);
   },

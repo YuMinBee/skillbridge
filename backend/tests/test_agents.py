@@ -166,3 +166,9 @@ def test_guardrail_midword_address_false_positive_is_undone():
 def test_guardrail_known_false_positive_word_is_undone():
     fixed, k = bedrock.undo_midword_address("동아리 행사를 열었습니다", "[주소] 행사를 열었습니다")
     assert fixed == "동아리 행사를 열었습니다" and k == 1
+
+
+def test_pdf_requires_essay_or_portfolio(client):
+    assert client.post("/api/analyze/pdf", data={"job_family": "auto"}).status_code == 400
+    r = client.post("/api/analyze/pdf", files={"essay": ("a.txt", b"x", "text/plain")})
+    assert r.status_code == 400

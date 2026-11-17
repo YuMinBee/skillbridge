@@ -300,7 +300,9 @@ def _fallback_recommend(result: dict, cites: Cites) -> list[dict]:
         if c:
             cn = [cites.add("course", c["title"], f"{c['provider']} · {c['hours']}시간 · {c['region']}", c.get("url"), c["id"])]
             co = {"id": c["id"], "name": c["title"], "hours": c["hours"], "url": c.get("url")}
-        if g["id"] in SOFT:
+        if g["id"].startswith("cert_"):
+            task = f"'{g['name']}' 시험 일정을 확인하고 취득 계획 세우기 (공고에서 요구하는 자격증)"
+        elif g["id"] in SOFT:
             task = f"'{g['name']}'이(가) 드러난 경험 하나를 골라 STAR로 다시 쓰기(누구와, 무엇을 조율했고, 결과가 어땠는지)"
         elif g["status"] == "verify":
             task = f"이력서에 '{g['name']}'로 무엇을 했는지 한 문장 이상 쓰기. 없으면 작은 결과물을 만들어 링크"

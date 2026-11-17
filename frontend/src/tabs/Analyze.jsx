@@ -1,5 +1,6 @@
-// 역량 분석 (T4 · docs/pivot/T4_FRONTEND.md). 이력서 → job 접수 → 진행 상태 → ① 강점(STAR) ② 갭 ③ 추천 → 근거 패널 → 비용.
+// 역량 분석 (T4 · docs/pivot/T4_FRONTEND.md). 자기소개서·포트폴리오 PDF → job 접수 → 진행 상태 → ① 강점(STAR) ② 갭 ③ 추천 → 근거 → 비용.
 // job_id는 localStorage에 둔다: 탭을 닫았다 열어도 서버에서 끝난 결과를 이어서 본다.
+// (글 붙여 넣기·STAR 템플릿 입력은 2026-11-17 화면에서 내림. API(/api/analyze)는 남아 있음)
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api.js";
 import { Seg, StatusChip } from "../ui.jsx";
@@ -10,45 +11,27 @@ const STAGE = {
 };
 const SLOT = [["S", "상황"], ["T", "과제"], ["A", "행동"], ["R", "결과"]];
 const LEVEL = { strong: ["강점", "st-own"], ok: ["보통", "st-part"], weak: ["약함", "st-miss"] };
-const KIND = { resume: "내 이력서", posting: "공고", course: "고용24 과정", ncs_unit: "NCS 능력단위", ncs_basic: "NCS 직업기초능력" };
+const KIND = { resume: "내 문서", posting: "공고", posting_stats: "공고 집계", course: "고용24 과정", ncs_unit: "NCS 능력단위", ncs_basic: "NCS 직업기초능력" };
 const KEY = "analyzeJob";
-const EXAMPLE = `[프로젝트] 식당 예약 API
-동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다. 저는 예약 API 설계를 맡았습니다. Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다. 그 결과 중복 예약이 월 12건에서 0건이 되었습니다.
-
-[스터디] 데이터 분석
-혁신적으로 스터디를 주도했습니다. 열정적으로 참여했습니다.
-
-[프로젝트]
-- Redis로 인기 상품 목록을 캐싱해 응답 속도를 개선함
-- Docker로 서버를 컨테이너화하고 GitHub Actions로 CI/CD를 구성해 배포함
-[보유기술] Java, Spring Boot, MySQL, Redis, Docker`;
 
 const load = () => { try { return localStorage.getItem(KEY) || ""; } catch { return ""; } };
 const save = (v) => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch { /* noop */ } };
 const usd = (v) => (v == null ? "—" : `$${v.toFixed(v < 0.01 ? 4 : 3)}`);
 
-const QUESTIONS = [
-  ["S", "상황", "어떤 문제나 불편이 있었나요?", "예) 동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다"],
-  ["T", "과제", "그중 내가 맡은 일·목표는 무엇이었나요?", "예) 저는 예약 API 설계를 맡았습니다"],
-  ["A", "행동", "내가 직접 한 일을 구체적으로 (도구·방법)", "예) Spring Boot로 API를 만들고 락으로 동시성 문제를 막았습니다"],
-  ["R", "결과", "무엇이 바뀌었나요? 숫자가 있으면 좋아요", "예) 중복 예약이 월 12건에서 0건이 되었습니다"],
-];
-const blankExp = () => ({ title: "", S: "", T: "", A: "", R: "" });
-const EXAMPLE_TPL = [
-  { title: "식당 예약 API", S: "동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다", T: "저는 예약 API 설계를 맡았습니다",
-    A: "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다", R: "중복 예약이 월 12건에서 0건이 되었습니다" },
-  { title: "데이터 분석 스터디", S: "", T: "", A: "혁신적으로 스터디를 주도했습니다", R: "열심히 참여했습니다" },
-];
-const MODES = [["pdf", "이력서 PDF"], ["template", "템플릿으로 쓰기"], ["text", "글 붙여 넣기"]];
+function PdfPick({ label, file, onPick }) {
+  return (
+    <label className="fld pdfpick">{label}
+      <input type="file" accept="application/pdf,.pdf" onChange={(e) => onPick(e.target.files?.[0] || null)} />
+      {file && <span className="hint">{file.name} · {(file.size / 1024 / 1024).toFixed(1)}MB</span>}
+    </label>
+  );
+}
 
 export default function Analyze({ active }) {
   const [families, setFamilies] = useState([["backend", "백엔드"], ["ai_ml", "AI·ML"], ["data", "데이터"]]);
   const [family, setFamily] = useState("auto");
-  const [mode, setMode] = useState("pdf");
-  const [file, setFile] = useState(null);
-  const [exps, setExps] = useState([blankExp()]);
-  const [skills, setSkills] = useState("");
-  const [resume, setResume] = useState("");
+  const [essay, setEssay] = useState(null);
+  const [portfolio, setPortfolio] = useState(null);
   const [posting, setPosting] = useState("");
   const [jobId, setJobId] = useState(load);
   const [job, setJob] = useState(null);
@@ -76,20 +59,13 @@ export default function Analyze({ active }) {
     return () => { stop = true; clearTimeout(timer.current); };
   }, [jobId, active]);
 
-  const ready = mode === "pdf" ? !!file : mode === "template" ? exps.some((e) => e.S || e.T || e.A || e.R) : resume.trim().length >= 20;
-
   const submit = async () => {
     setErr(""); setJob(null); setSel(null);
     try {
-      const base = { job_family: family, posting: posting || null };
-      const { job_id } = mode === "pdf" ? await api.analyzePdf(file, family, posting)
-        : mode === "template" ? await api.analyze({ ...base, experiences: exps, skills })
-          : await api.analyze({ ...base, resume });
+      const { job_id } = await api.analyzePdf({ essay, portfolio }, family, posting);
       save(job_id); setJobId(job_id);
     } catch (e) { setErr(e.message); }
   };
-
-  const setExp = (i, k, v) => setExps((xs) => xs.map((x, j) => (j === i ? { ...x, [k]: v } : x)));
 
   const running = job && (job.status === "queued" || job.status === "running");
   const cites = useMemo(() => Object.fromEntries((job?.citations || []).map((c) => [c.n, c])), [job]);
@@ -100,47 +76,9 @@ export default function Analyze({ active }) {
       <div className="grid-side">
         <div className="panel no-print">
           <h2>내 경험 넣기</h2>
-          <Seg label="입력 방식" value={mode} options={MODES} onChange={setMode} />
-          {mode === "pdf" && (
-            <>
-              <input type="file" accept="application/pdf,.pdf" onChange={(e) => setFile(e.target.files?.[0] || null)} />
-              <p className="hint">이력서가 없으면 <button className="linkbtn" onClick={() => setMode("template")}>템플릿으로 쓰기</button></p>
-            </>
-          )}
-          {mode === "template" && (
-            <div className="tpl">
-              {exps.map((e, i) => (
-                <fieldset key={i} className="tpl-exp">
-                  <legend>경험 {i + 1}</legend>
-                  <input type="text" value={e.title} onChange={(ev) => setExp(i, "title", ev.target.value)}
-                    placeholder="경험 이름 (예: 팀 프로젝트 · 식당 예약 API)" maxLength={60} />
-                  {QUESTIONS.map(([k, l, q, ph]) => (
-                    <label key={k} className="fld"><span><b className="num">{k}</b> {l} · {q}</span>
-                      <textarea rows={2} value={e[k]} onChange={(ev) => setExp(i, k, ev.target.value)} placeholder={ph} maxLength={k === "A" ? 1000 : 600} />
-                    </label>
-                  ))}
-                  {exps.length > 1 && <button className="btn ghost sm" onClick={() => setExps((xs) => xs.filter((_, j) => j !== i))}>이 경험 빼기</button>}
-                </fieldset>
-              ))}
-              <div className="row">
-                {exps.length < 8 && <button className="btn ghost sm" onClick={() => setExps((xs) => [...xs, blankExp()])}>+ 경험 추가</button>}
-                <button className="btn ghost sm" onClick={() => { setExps(EXAMPLE_TPL); setSkills("Java, Spring Boot, MySQL, Redis"); }}>예시 채우기</button>
-              </div>
-              <label className="fld">가진 기술 (쉼표로)
-                <input type="text" value={skills} onChange={(e) => setSkills(e.target.value)} placeholder="Java, Spring Boot, MySQL" maxLength={500} />
-              </label>
-            </div>
-          )}
-          {mode === "text" && (
-            <>
-              <textarea value={resume} onChange={(e) => setResume(e.target.value)} rows={12}
-                placeholder="경험을 문단이나 글머리표로 붙여 넣으세요. 이름·연락처는 자동으로 가립니다." />
-              <div className="row">
-                <button className="btn ghost sm" onClick={() => setResume(EXAMPLE)}>예시 넣기</button>
-                <span className="hint">{resume.length.toLocaleString()}자</span>
-              </div>
-            </>
-          )}
+          <PdfPick label="자기소개서 PDF" file={essay} onPick={setEssay} />
+          <PdfPick label="포트폴리오 PDF" file={portfolio} onPick={setPortfolio} />
+          <p className="hint">하나만 있어도 됩니다 · 합쳐서 5MB 이하</p>
           <details>
             <summary className="hint">직군 (기본: 자동)</summary>
             <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
@@ -149,7 +87,7 @@ export default function Analyze({ active }) {
             <summary className="hint">지원할 공고 (선택)</summary>
             <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
           </details>
-          <button className="btn" disabled={!ready || running} onClick={submit}>
+          <button className="btn" disabled={!(essay || portfolio) || running} onClick={submit}>
             {running ? "분석 중…" : "분석 시작"}
           </button>
           {err && <p className="err">{err}</p>}
@@ -157,7 +95,7 @@ export default function Analyze({ active }) {
         </div>
 
         <div className="stack">
-          {!job && <div className="panel"><p className="empty">이력서를 넣고 분석을 시작하세요</p></div>}
+          {!job && <div className="panel"><p className="empty">자기소개서나 포트폴리오를 넣고 분석을 시작하세요</p></div>}
           {job?.status === "failed" && <p className="err">분석 실패: {job.error}</p>}
           {res && (
             <>
