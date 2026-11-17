@@ -172,3 +172,54 @@ def test_pdf_requires_essay_or_portfolio(client):
     assert client.post("/api/analyze/pdf", data={"job_family": "auto"}).status_code == 400
     r = client.post("/api/analyze/pdf", files={"essay": ("a.txt", b"x", "text/plain")})
     assert r.status_code == 400
+
+
+def test_star_llm_experiences_as_json_string(monkeypatch):
+    item = {"title": "예약 API", "anchor": None, "S": None, "T": None,
+            "A": "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다.", "R": None}
+    monkeypatch.setattr(bedrock, "converse_tool", lambda *a, **k: {"experiences": json.dumps([item, "잡음"], ensure_ascii=False)})
+    res, meta = star.diagnose(FULL, use_llm=True)
+    assert meta["mode"] == "bedrock" and len(res) == 1 and res[0]["slots"]["A"]["present"]
+
+
+def test_star_salvages_truncated_json_string():
+    full = json.dumps([{"title": "a", "A": "x"}, {"title": "b", "A": "y"}], ensure_ascii=False)
+    assert [e["title"] for e in star._salvage(full[:-15])] == ["a"]
+    assert star._salvage("깨진 문자열") == []
+
+
+def test_docs_endpoint_reads_markdown_and_rejects_other_types(client, monkeypatch):
+    monkeypatch.setenv("JOB_SYNC", "1")
+    md = ("# 노션 포트폴리오\n![img](a.png)\n" + FULL).encode()
+    r = client.post("/api/analyze/docs", files=[("files", ("notion.md", md, "text/markdown"))])
+    assert r.status_code == 200
+    s = client.get(f"/api/jobs/{r.json()['job_id']}").json()
+    assert s["status"] == "done" and s["result"]["strengths"][0]["level"] == "strong"
+    assert client.post("/api/analyze/docs", files=[("files", ("a.hwp", b"x", "application/octet-stream"))]).status_code == 400
+    assert client.post("/api/analyze/docs", data={"github": "not a valid/url/here"}).status_code == 400
+    assert client.post("/api/analyze/docs", data={}).status_code == 400
+
+
+def test_github_readmes_with_fake_api():
+    import io as _io
+    from app.adapters import github as gh
+
+    class Resp(_io.BytesIO):
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *a):
+            return False
+
+    def opener(req, timeout=10):
+        u = req.full_url
+        if u.endswith("/repos?per_page=100&sort=pushed"):
+            return Resp(json.dumps([{"name": "a", "full_name": "u/a", "fork": False, "private": False, "html_url": "h/a", "description": "d"},
+                                    {"name": "f", "full_name": "u/f", "fork": True, "private": False}]).encode())
+        if u.endswith("/u/a/readme"):
+            return Resp("# A\n<img src=x>\n[링크](http://x)\n```code```\n본문".encode())
+        raise OSError("404")
+    items = gh.readmes("github.com/u", opener=opener)
+    assert [i["repo"] for i in items] == ["a"]  # 포크 제외
+    assert "본문" in items[0]["text"] and "<img" not in items[0]["text"] and "code" not in items[0]["text"]
+    assert gh.parse("https://github.com/YuMinBee/Coma") == ("YuMinBee", "Coma")

@@ -6,6 +6,7 @@ STAR(상황·과제·행동·결과)는 기업 역량면접(행동사건면접, 
 - 점수·수준은 아래 규칙 상수로만 계산한다(AGENTS 규칙 8). 같은 칸이면 같은 점수다.
 - BEDROCK_MOCK=1이거나 호출이 실패하면 같은 형식을 문장 패턴 규칙으로 낸다.
 """
+import json
 import re
 
 from ..adapters import bedrock
@@ -20,6 +21,7 @@ STRONG_MIN, OK_MIN = 4.0, 2.5   # strong: 4점 이상 + A·R 있음 / ok: 2.5점
 MAX_SCORE = 4 * SLOT_POINT + QUANT_POINT + ROLE_POINT
 
 SLOTS = ("S", "T", "A", "R")
+MAX_EXP = 8               # 화면에 보여 줄 경험 수 상한
 MAX_LLM_CHARS = 16_000   # 자소서+포트폴리오를 함께 넣을 수 있게 (이전 8,000)
 SLOT_LABEL = {"S": "상황", "T": "과제", "A": "행동", "R": "결과"}
 
@@ -152,18 +154,20 @@ def _build(exp: dict, slots: dict) -> dict:
 _SYS = """너는 기업 역량면접(행동사건면접) 평가자다. 지원자의 자기소개서·포트폴리오·이력서에서 경험을 찾아 STAR로 나눈다.
 규칙:
 - 경험마다 S(상황·문제), T(맡은 과제·목표), A(내가 한 구체적 행동), R(결과) 칸을 채운다.
-- 각 칸에는 이력서 원문 문장을 **글자 그대로** 복사한다. 고치거나 요약하거나 합치지 않는다.
+- 각 칸에는 이력서 원문에서 그 칸의 핵심 문장 **하나만 글자 그대로** 복사한다. 고치거나 요약하거나 여러 문장을 합치지 않는다.
 - 원문에 그 칸에 해당하는 문장이 없으면 null. 추측해서 채우지 않는다.
 - '혁신적으로 주도했다'처럼 꾸미는 말만 있고 무엇을 했는지 없으면 A는 null이다.
-- 기술 목록·학력·자격증 줄은 경험이 아니다."""
+- 기술 목록·학력·자격증·연락처 줄, README의 기능 목록·설치법·폴더 구조는 경험이 아니다.
+- 경험은 프로젝트·연구·활동 또는 자기소개서 문항 하나를 한 단위로 묶는다. 같은 프로젝트의 여러 줄은 하나로. 최대 8개.
+- 문서 머리말([자기소개서], [GitHub · 레포] 등)이 어느 문서의 경험인지 알려 준다."""
 
 _SCHEMA = {"type": "object", "properties": {"experiences": {"type": "array", "items": {
     "type": "object", "properties": {
         "title": {"type": "string", "description": "경험 이름(짧게)"},
-        "text": {"type": "string", "description": "이 경험에 해당하는 원문 구간(그대로)"},
+        "anchor": {"type": "string", "description": "이 경험의 첫 문장(원문 그대로, 짧게)"},
         "S": {"type": ["string", "null"]}, "T": {"type": ["string", "null"]},
         "A": {"type": ["string", "null"]}, "R": {"type": ["string", "null"]}},
-    "required": ["title", "text", "S", "T", "A", "R"]}}}, "required": ["experiences"]}
+    "required": ["title", "anchor", "S", "T", "A", "R"]}, "maxItems": MAX_EXP}}, "required": ["experiences"]}
 
 
 def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool | None = None) -> tuple[list[dict], dict]:
@@ -172,20 +176,26 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
     if use_llm:
         try:
             out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:MAX_LLM_CHARS]}\n</이력서>", "submit_star", _SCHEMA,
-                                        log=log, kind="star", max_tokens=4000)
+                                        log=log, kind="star", max_tokens=8000)
             res, dropped = [], 0
-            for i, e in enumerate(out.get("experiences", [])[:12]):
-                text = locate(e.get("text"), resume)
-                if text is None:  # 경험 구간 자체가 원문에 없으면 지어낸 경험 → 버림
-                    dropped += 1
-                    continue
+            exps = out.get("experiences", [])
+            if isinstance(exps, str):  # 모델이 배열을 JSON 문자열로 주는 경우가 있다(길면 끝이 잘림)
+                exps = _salvage(exps)
+            if not isinstance(exps, list):
+                exps = []
+            for i, e in enumerate(x for x in exps[:MAX_EXP] if isinstance(x, dict)):
+                e = {k: (v if isinstance(v, str) or v is None else None) for k, v in e.items()}
                 slots = {}
                 for k in SLOTS:
                     q = locate(e.get(k), resume)
                     if e.get(k) and q is None:
                         dropped += 1  # 원문에 없는 인용 → 버림
                     slots[k] = q
-                # 칸이 모두 비어도 남긴다: 약한 경험을 숨기지 않고 '약함'으로 보여 준다
+                anchor = locate(e.get("anchor"), resume)
+                if anchor is None and not any(slots.values()):  # 원문에서 하나도 확인 안 되면 지어낸 경험 → 버림
+                    dropped += 1
+                    continue
+                text = " ".join(dict.fromkeys(v for v in [anchor, *slots.values()] if v))
                 res.append(_build({"exp_id": f"e{i + 1}", "title": e.get("title") or text[:24], "text": text}, slots))
             if res:
                 return res, {"mode": "bedrock", "dropped_quotes": dropped}
@@ -194,8 +204,28 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
     return _rule(resume), {"mode": "rule", "dropped_quotes": 0}
 
 
+def _salvage(s: str) -> list:
+    """JSON 배열 문자열 → 리스트. 끝이 잘렸으면 완성된 객체까지만 살린다."""
+    try:
+        v = json.loads(s)
+        return v if isinstance(v, list) else []
+    except ValueError:
+        pass
+    dec, out, i = json.JSONDecoder(), [], s.find("{")
+    while i != -1:
+        try:
+            obj, end = dec.raw_decode(s, i)
+        except ValueError:
+            break
+        out.append(obj)
+        i = s.find("{", end)
+    return out
+
+
 def _rule(resume: str) -> list[dict]:
-    return [_build(e, _rule_slots(e["text"])) for e in split_experiences(resume)]
+    out = [_build(e, _rule_slots(e["text"])) for e in split_experiences(resume)]
+    out = [e for e in out if any(s["present"] for s in e["slots"].values()) or e["inflated"]]
+    return out[:MAX_EXP]
 
 
 # ── 우리 STAR 템플릿으로 쓴 경우 ─────────────────────────────────

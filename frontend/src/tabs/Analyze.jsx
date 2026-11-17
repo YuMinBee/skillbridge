@@ -6,7 +6,7 @@ import { api } from "../api.js";
 import { Seg, StatusChip } from "../ui.jsx";
 
 const STAGE = {
-  guard: "개인정보 가리기", star: "① 강점 진단 (STAR)", skills: "스킬 추출", retriever: "② 역량 기준 찾기",
+  collect: "GitHub 읽기", guard: "개인정보 가리기", star: "① 강점 진단 (STAR)", skills: "스킬 추출", retriever: "② 역량 기준 찾기",
   recommend: "③ 과제 추천", verifier: "근거 검증", cost: "비용 계산",
 };
 const SLOT = [["S", "상황"], ["T", "과제"], ["A", "행동"], ["R", "결과"]];
@@ -18,20 +18,32 @@ const load = () => { try { return localStorage.getItem(KEY) || ""; } catch { ret
 const save = (v) => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch { /* noop */ } };
 const usd = (v) => (v == null ? "—" : `$${v.toFixed(v < 0.01 ? 4 : 3)}`);
 
-function PdfPick({ label, file, onPick }) {
+const ACCEPT = ".pdf,.docx,.md,.txt,application/pdf";
+
+function DocPick({ files, onPick }) {
+  const add = (list) => onPick([...files, ...Array.from(list || [])].slice(0, 4));
   return (
-    <label className="fld pdfpick">{label}
-      <input type="file" accept="application/pdf,.pdf" onChange={(e) => onPick(e.target.files?.[0] || null)} />
-      {file && <span className="hint">{file.name} · {(file.size / 1024 / 1024).toFixed(1)}MB</span>}
-    </label>
+    <div className="fld">
+      <label className="fld pdfpick">자소서 · 포트폴리오 · CV · 노션 내보내기
+        <input type="file" multiple accept={ACCEPT} onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+      </label>
+      {files.length > 0 && (
+        <ul className="doclist">
+          {files.map((f, i) => (
+            <li key={i}><span>{f.name}</span><span className="hint num">{(f.size / 1024 / 1024).toFixed(1)}MB</span>
+              <button className="linkbtn" onClick={() => onPick(files.filter((_, j) => j !== i))} aria-label={`${f.name} 빼기`}>빼기</button></li>
+          ))}
+        </ul>
+      )}
+    </div>
   );
 }
 
 export default function Analyze({ active }) {
   const [families, setFamilies] = useState([["backend", "백엔드"], ["ai_ml", "AI·ML"], ["data", "데이터"]]);
   const [family, setFamily] = useState("auto");
-  const [essay, setEssay] = useState(null);
-  const [portfolio, setPortfolio] = useState(null);
+  const [files, setFiles] = useState([]);
+  const [github, setGithub] = useState("");
   const [posting, setPosting] = useState("");
   const [jobId, setJobId] = useState(load);
   const [job, setJob] = useState(null);
@@ -62,7 +74,7 @@ export default function Analyze({ active }) {
   const submit = async () => {
     setErr(""); setJob(null); setSel(null);
     try {
-      const { job_id } = await api.analyzePdf({ essay, portfolio }, family, posting);
+      const { job_id } = await api.analyzeDocs(files, github, family, posting);
       save(job_id); setJobId(job_id);
     } catch (e) { setErr(e.message); }
   };
@@ -76,9 +88,11 @@ export default function Analyze({ active }) {
       <div className="grid-side">
         <div className="panel no-print">
           <h2>내 경험 넣기</h2>
-          <PdfPick label="자기소개서 PDF" file={essay} onPick={setEssay} />
-          <PdfPick label="포트폴리오 PDF" file={portfolio} onPick={setPortfolio} />
-          <p className="hint">하나만 있어도 됩니다 · 합쳐서 5MB 이하</p>
+          <DocPick files={files} onPick={setFiles} />
+          <label className="fld">GitHub (선택)
+            <input type="text" value={github} onChange={(e) => setGithub(e.target.value)} placeholder="아이디 또는 github.com/아이디/레포" maxLength={150} />
+          </label>
+          <p className="hint">PDF·Word·노션(md) 4개까지, 합쳐서 5MB · GitHub는 공개 레포 README만 읽습니다</p>
           <details>
             <summary className="hint">직군 (기본: 자동)</summary>
             <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
@@ -87,7 +101,7 @@ export default function Analyze({ active }) {
             <summary className="hint">지원할 공고 (선택)</summary>
             <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
           </details>
-          <button className="btn" disabled={!(essay || portfolio) || running} onClick={submit}>
+          <button className="btn" disabled={!(files.length || github.trim()) || running} onClick={submit}>
             {running ? "분석 중…" : "분석 시작"}
           </button>
           {err && <p className="err">{err}</p>}
@@ -145,10 +159,12 @@ function Summary({ job }) {
     <div className="an-sum">
       <div className="panel"><h3>강점 경험</h3><div className="big num">{strong}<small> / {s.length}</small></div>
         </div>
-      <div className="panel"><h3>지원 준비도{r.job_family ? ` · ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
-        </div>
-      <div className="panel"><h3>실무 준비도</h3><div className="big num">{r.readiness.practice ?? "—"}</div>
-        {r.readiness.practice == null && <p className="hint">준비 중</p>}</div>
+      <div className="panel"><h3>강점 직군</h3><div className="big">{r.job_family?.ranking?.[0]?.label ?? "—"}</div>
+        {r.job_family?.ranking && (
+          <ol className="rank">{r.job_family.ranking.map((x) => <li key={x.id}><span>{x.label}</span><span className="num">{x.score}</span></li>)}</ol>
+        )}</div>
+      <div className="panel"><h3>준비도{r.job_family ? ` · ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
+        <p className="hint">공개 공고 기준</p></div>
       <div className="panel"><h3>이번 분석 비용</h3><div className="big num">{usd(job.cost?.usd)}</div>
         </div>
     </div>

@@ -1,17 +1,17 @@
 """분석 접수. CONTRACTS.md 5절.
 
 입력 세 가지 (모두 같은 job으로 간다)
-- POST /api/analyze/pdf : 자기소개서·포트폴리오 PDF (글자만 읽고 파일은 저장하지 않음) ← 화면의 기본 입력
+- POST /api/analyze/docs : 자소서·포트폴리오·CV(PDF·docx)·노션 내보내기(md·txt) + GitHub 주소 ← 화면의 기본 입력
+                           (파일은 글자만 읽고 저장하지 않음. GitHub는 공개 README만, job 안에서 읽음)
 - POST /api/analyze      : {"experiences": [{title,S,T,A,R}], "skills": "..."} 우리 STAR 템플릿으로 쓴 경우
                            또는 {"resume": "..."} 글 붙여 넣기
 직군(job_family)은 안 보내면 이력서 스킬로 추정한다("auto").
 """
-import io
-
 from fastapi import APIRouter, File, Form, HTTPException, UploadFile
 from pydantic import BaseModel, Field
 
-from ..adapters import jobs
+from ..adapters import docs, jobs
+from ..adapters import github as gh_mod
 from ..agents.supervisor import FAMILIES, FAMILY_LABEL
 from ..guards import pii
 
@@ -75,44 +75,56 @@ def analyze(body: AnalyzeIn):
     return _submit({"resume": masked, "job_family": fam, "posting": posting, "source": "text"})
 
 
-DOC_LABEL = {"essay": "자기소개서", "portfolio": "포트폴리오", "file": "문서"}
-MAX_DOC_CHARS = 10_000   # 문서 하나에서 읽는 글자 수 상한 (Bedrock 입력 비용 상한)
+MAX_FILES = 4
 
 
-async def _pdf_text(f: UploadFile) -> str:
-    if not (f.filename or "").lower().endswith(".pdf"):
-        raise HTTPException(400, "PDF 파일만 올릴 수 있습니다")
-    raw = await f.read()
-    if len(raw) > MAX_PDF:
-        raise HTTPException(400, "PDF는 5MB 이하만 올릴 수 있습니다 (이미지가 많으면 '최소 크기'로 다시 저장)")
-    from pypdf import PdfReader
-    try:
-        text = "\n".join((pg.extract_text() or "") for pg in PdfReader(io.BytesIO(raw)).pages)
-    except Exception:
-        raise HTTPException(400, "PDF를 읽지 못했습니다")
-    return text.strip()[:MAX_DOC_CHARS]  # 파일은 메모리에서도 바로 버린다
+async def _read_docs(files: list[UploadFile]) -> list[str]:
+    """→ ["[문서 이름] + 본문", ...]. 합쳐서 5MB(Lambda 함수 URL 요청 상한 6MB). 파일은 메모리에서도 바로 버린다."""
+    if len(files) > MAX_FILES:
+        raise HTTPException(400, f"문서는 {MAX_FILES}개까지 올릴 수 있습니다")
+    parts, total = [], 0
+    for f in files:
+        raw = await f.read()
+        total += len(raw)
+        if total > MAX_PDF:
+            raise HTTPException(400, "문서는 합쳐서 5MB 이하만 올릴 수 있습니다 (이미지가 많으면 '최소 크기'로 다시 저장)")
+        try:
+            t = docs.text_of(f.filename or "", raw)
+        except docs.DocError as e:
+            raise HTTPException(400, str(e))
+        if len(t) >= 20:
+            name = (f.filename or "문서").rsplit(".", 1)[0][:40]
+            parts.append(f"[{name}]\n{t}")
+    return parts
+
+
+@router.post("/analyze/docs")
+async def analyze_docs(files: list[UploadFile] = File(default=[]), github: str = Form(""),
+                       job_family: str = Form("auto"), posting: str = Form("")):
+    """자소서·포트폴리오·CV(PDF·docx)·노션 내보내기(md·txt) 여러 개 + GitHub 아이디/레포 주소. 하나 이상."""
+    fam = _family(job_family)
+    gh = github.strip()
+    if gh:
+        try:
+            gh_mod.parse(gh)
+        except gh_mod.GithubError as e:
+            raise HTTPException(400, str(e))
+    parts = await _read_docs(files)
+    if not parts and not gh:
+        raise HTTPException(400, "자소서·포트폴리오 문서나 GitHub 주소를 하나 이상 넣어 주세요")
+    masked, _ = pii.mask("\n\n".join(parts))
+    return _submit({"resume": masked, "github": gh, "job_family": fam, "posting": posting[:8000],
+                    "source": "+".join(filter(None, ["docs" if parts else "", "github" if gh else ""]))})
 
 
 @router.post("/analyze/pdf")
 async def analyze_pdf(essay: UploadFile | None = File(None), portfolio: UploadFile | None = File(None),
-                      file: UploadFile | None = File(None), job_family: str = Form("auto"), posting: str = Form("")):
-    """자기소개서·포트폴리오 PDF(하나 이상). 문서마다 [자기소개서]·[포트폴리오] 머리말을 붙여 한 본문으로 분석한다."""
-    fam = _family(job_family)
-    docs = {k: f for k, f in (("essay", essay), ("portfolio", portfolio), ("file", file)) if f is not None}
-    if not docs:
+                      job_family: str = Form("auto"), posting: str = Form("")):
+    """(이전 화면 호환) 자기소개서·포트폴리오 PDF."""
+    files = [f for f in (essay, portfolio) if f is not None]
+    if not files:
         raise HTTPException(400, "자기소개서나 포트폴리오 PDF를 하나 이상 올려 주세요")
-    parts, total = [], 0
-    for k, f in docs.items():
-        total += f.size or 0
-        if total > MAX_PDF:  # 배포(Lambda 함수 URL)는 요청 하나가 6MB를 넘을 수 없다
-            raise HTTPException(400, "PDF는 합쳐서 5MB 이하만 올릴 수 있습니다 (이미지가 많으면 '최소 크기'로 다시 저장)")
-        t = await _pdf_text(f)
-        if len(t) >= 20:
-            parts.append(f"[{DOC_LABEL[k]}]\n{t}")
-    if not parts:
-        raise HTTPException(400, "PDF에서 글자를 읽지 못했습니다 (스캔 이미지 PDF는 지원하지 않음)")
-    masked, _ = pii.mask("\n\n".join(parts))
-    return _submit({"resume": masked, "job_family": fam, "posting": posting[:8000], "source": "+".join(docs)})
+    return await analyze_docs(files=files, github="", job_family=job_family, posting=posting)
 
 
 @router.get("/jobs/{job_id}")

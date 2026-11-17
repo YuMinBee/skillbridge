@@ -22,7 +22,7 @@ from ..pipeline.score import gaps as score_gaps, readiness, resolve_any_of
 from ..skills import get_dict, sentences
 from . import cost, star, verifier
 
-AGENTS = ["guard", "star", "skills", "retriever", "recommend", "verifier", "cost"]
+AGENTS = ["collect", "guard", "star", "skills", "retriever", "recommend", "verifier", "cost"]
 FAMILIES = {"backend": ("백엔드",), "ai_ml": ("AI·ML", "MLOps"), "data": ("데이터",)}
 FAMILY_LABEL = {"backend": "백엔드", "ai_ml": "AI·ML", "data": "데이터"}
 APPLY_MIN, APPLY_MUST = 0.25, 0.5   # 같은 직군 공고에서 평균 가중치/2가 이 값 이상이면 기준, 이상이면 필수
@@ -159,6 +159,21 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
             row["ms"] = round((time.perf_counter() - t0) * 1000)
             emit()
 
+    # collect: GitHub 공개 README (job 안에서 읽어 접수 응답을 늦추지 않는다). 실패해도 문서만으로 계속
+    if payload.get("github"):
+        with stage("collect") as row:
+            from ..adapters import github as gh
+            try:
+                items = gh.readmes(payload["github"])
+                row["repos"] = [it["repo"] for it in items]
+                if items:
+                    state["resume"] = "\n\n".join(filter(None, [state["resume"], gh.as_document(items)]))
+                    state["github_urls"] = {it["repo"]: it["url"] for it in items}
+            except gh.GithubError as e:
+                row["note"] = str(e)
+    else:
+        progress[:] = [p for p in progress if p["agent"] != "collect"]
+
     # guard: 정규식은 접수 때 끝났다. 여기서는 Guardrail(Bedrock 모드)만
     with stage("guard", llm=True) as row:
         tpl = payload.get("template")
@@ -216,14 +231,16 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         state["status"] = status_map
         row["n_skills"] = len(status_map)
 
-    with stage("retriever", llm=True) as row:
+    with stage("retriever", llm=_optional("retriever") is not None) as row:
         status_map = state.get("status", {})
-        if state["family"] in (None, "", "auto"):
-            state["family"], fam_scores = infer_family(status_map)
-            out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]],
-                                           "inferred": True, "scores": fam_scores}
-        else:
-            out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]], "inferred": False}
+        best, fam_scores = infer_family(status_map)  # 직군마다 공고 기준 준비도 → 강점 직군 순위
+        inferred = state["family"] in (None, "", "auto")
+        if inferred:
+            state["family"] = best
+        ranking = [{"id": f, "label": FAMILY_LABEL[f], "score": fam_scores[f]}
+                   for f in sorted(FAMILIES, key=lambda f: -fam_scores[f])]
+        out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]],
+                                       "inferred": inferred, "scores": fam_scores, "ranking": ranking}
         pool = None
         if state["posting"]:
             reqs = posting_requirements(state["posting"])
@@ -265,7 +282,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         out["result"]["gaps"] = gl
         row.update(source=src, n_requirements=len(reqs), practice="NCS 기준 대기(T2)" if practice is None else "NCS")
 
-    with stage("recommend", llm=True) as row:
+    with stage("recommend", llm=_optional("recommend_task") is not None) as row:
         rt = _optional("recommend_task")
         if rt and hasattr(rt, "recommend"):
             recos = rt.recommend(out["result"]["gaps"], out["result"]["strengths"], state["family"], log=log)
@@ -312,7 +329,8 @@ def _fallback_recommend(result: dict, cites: Cites) -> list[dict]:
                       "why": f"지원 기준에 '{g['name']}'이(가) 있으나 이력서 상태는 '{g['status_label']}'",
                       "task": task,
                       "course": co, "cites": g["cites"] + cn, "abstained": False})
-    weak = [e for e in result["strengths"] if e["level"] != "strong" and e.get("missing_hint")]
+    weak = [e for e in result["strengths"] if e["level"] != "strong" and e.get("missing_hint")
+            and any(s.get("cite") for s in e["slots"].values())]  # 인용할 문장이 있는 경험만 (근거 없는 추천 방지)
     if weak:
         e = min(weak, key=lambda x: x["score"])
         q = next((s["cite"] for s in e["slots"].values() if s.get("cite")), None)
