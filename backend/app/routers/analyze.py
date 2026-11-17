@@ -12,7 +12,7 @@ from pydantic import BaseModel, Field
 
 from ..adapters import docs, jobs
 from ..adapters import github as gh_mod
-from ..agents.supervisor import FAMILIES, FAMILY_LABEL
+from ..agents.supervisor import FAMILIES, FAMILY_LABEL, SECTORS
 from ..guards import pii
 
 router = APIRouter(prefix="/api")
@@ -33,6 +33,7 @@ class AnalyzeIn(BaseModel):
     experiences: list[ExpIn] | None = Field(default=None, max_length=8)
     skills: str = Field(default="", max_length=500)
     job_family: str = "auto"
+    sector: str = "private"   # private(민간 기업) | public(공공기관) — 요구가 달라 섞지 않는다
     posting: str | None = Field(default=None, max_length=8000)
 
 
@@ -41,11 +42,22 @@ def families():
     return [{"id": k, "label": FAMILY_LABEL[k]} for k in FAMILIES]
 
 
+@router.get("/sectors")
+def sectors():
+    return [{"id": k, "label": v} for k, v in SECTORS.items()]
+
+
 def _family(f: str | None) -> str:
     f = f or "auto"
     if f != "auto" and f not in FAMILIES:
         raise HTTPException(400, f"job_family는 auto 또는 {list(FAMILIES)} 중 하나")
     return f
+
+
+def _sector(s: str | None) -> str:
+    if (s or "private") not in SECTORS:
+        raise HTTPException(400, f"sector는 {list(SECTORS)} 중 하나")
+    return s or "private"
 
 
 def _submit(payload: dict) -> dict:
@@ -67,12 +79,13 @@ def analyze(body: AnalyzeIn):
         if not exps:
             raise HTTPException(400, "경험 칸을 하나 이상 채워 주세요")
         return _submit({"template": exps, "skills": pii.mask(body.skills)[0], "job_family": fam, "posting": posting,
+                        "sector": _sector(body.sector),
                         "source": "template"})
     text = (body.resume or "").strip()
     if len(text) < 20:
         raise HTTPException(422, "이력서 내용이 너무 짧습니다 (20자 이상)")
     masked, _ = pii.mask(text)  # 원문은 접수 즉시 정규식으로 가린다. job에는 저장하지 않는다
-    return _submit({"resume": masked, "job_family": fam, "posting": posting, "source": "text"})
+    return _submit({"resume": masked, "job_family": fam, "posting": posting, "sector": _sector(body.sector), "source": "text"})
 
 
 MAX_FILES = 4
@@ -100,7 +113,7 @@ async def _read_docs(files: list[UploadFile]) -> list[str]:
 
 @router.post("/analyze/docs")
 async def analyze_docs(files: list[UploadFile] = File(default=[]), github: str = Form(""),
-                       job_family: str = Form("auto"), posting: str = Form("")):
+                       job_family: str = Form("auto"), sector: str = Form("private"), posting: str = Form("")):
     """자소서·포트폴리오·CV(PDF·docx)·노션 내보내기(md·txt) 여러 개 + GitHub 아이디/레포 주소. 하나 이상."""
     fam = _family(job_family)
     gh = github.strip()
@@ -113,7 +126,7 @@ async def analyze_docs(files: list[UploadFile] = File(default=[]), github: str =
     if not parts and not gh:
         raise HTTPException(400, "자소서·포트폴리오 문서나 GitHub 주소를 하나 이상 넣어 주세요")
     masked, _ = pii.mask("\n\n".join(parts))
-    return _submit({"resume": masked, "github": gh, "job_family": fam, "posting": posting[:8000],
+    return _submit({"resume": masked, "github": gh, "job_family": fam, "posting": posting[:8000], "sector": _sector(sector),
                     "source": "+".join(filter(None, ["docs" if parts else "", "github" if gh else ""]))})
 
 
@@ -124,7 +137,7 @@ async def analyze_pdf(essay: UploadFile | None = File(None), portfolio: UploadFi
     files = [f for f in (essay, portfolio) if f is not None]
     if not files:
         raise HTTPException(400, "자기소개서나 포트폴리오 PDF를 하나 이상 올려 주세요")
-    return await analyze_docs(files=files, github="", job_family=job_family, posting=posting)
+    return await analyze_docs(files=files, github="", job_family=job_family, sector="private", posting=posting)
 
 
 @router.get("/jobs/{job_id}")

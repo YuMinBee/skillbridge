@@ -58,6 +58,14 @@ PUBLIC_MIN = 20                     # 직군에 맞는 잡알리오 공고가 �
 APPLY_MIN, APPLY_MUST = 0.10, 0.30  # 합친 수요(가중치/2의 평균)가 이 값 이상이면 기준, 이상이면 필수
 
 
+@lru_cache(maxsize=1)
+def _gongchae() -> tuple:
+    import json
+    from ..config import SEED
+    f = SEED / "market" / "gongchae_it.jsonl"
+    return tuple(json.loads(x) for x in f.read_text(encoding="utf-8").splitlines() if x.strip()) if f.exists() else ()
+
+
 def posting_pool(job_family: str) -> dict:
     import re
     from ..data import market_postings
@@ -71,8 +79,13 @@ def posting_pool(job_family: str) -> dict:
                      "url": (c.get("public_source") or {}).get("posting_url"),
                      "req": resolve_any_of(c.get("apply_requirements") or posting_requirements(c["posting_text"]),
                                            c.get("any_of") or [], {})})
-    it = [p for p in market_postings() if p.get("job") == "public" and any("정보통신" in n for n in p.get("ncs", []))]
     pat = re.compile(FAMILY_RE[job_family])
+    # 고용24 공채속보(민간 기업 IT 직무, collectors/work24_gongchae.py). 직무명으로 직군을 나눈다
+    for g in _gongchae():
+        if pat.search(g["position"]):
+            priv.append({"title": f"{g['company']} · {g['position']} (고용24 공채속보)", "text": g["text"], "url": g.get("url"),
+                         "req": posting_requirements(g["text"])})
+    it = [p for p in market_postings() if p.get("job") == "public" and any("정보통신" in n for n in p.get("ncs", []))]
     pub = [p for p in it if pat.search(p["title"] + " " + p.get("text", "")[:400])]
     pub_scope = FAMILY_LABEL[job_family]
     if len(pub) < PUBLIC_MIN:
@@ -82,9 +95,13 @@ def posting_pool(job_family: str) -> dict:
     return {"private": priv, "public": pub, "public_scope": pub_scope}
 
 
-def pooled_requirements(pool: dict) -> tuple[dict, dict]:
+SECTORS = {"private": "민간 기업", "public": "공공기관"}
+
+
+def pooled_requirements(pool: dict, sector: str = "private") -> tuple[dict, dict]:
+    """고른 분야(민간·공공) 공고만으로 수요(가중치/2의 평균)를 낸다. 두 분야는 요구가 달라 섞지 않는다."""
     rates: dict[str, list[float]] = {}
-    srcs = [k for k in ("private", "public") if pool[k]]
+    srcs = [sector] if pool.get(sector) else []
     for k in srcs:
         tot: dict[str, float] = {}
         for p in pool[k]:
@@ -97,18 +114,18 @@ def pooled_requirements(pool: dict) -> tuple[dict, dict]:
     return reqs, y
 
 
-@lru_cache(maxsize=8)
-def _pooled(job_family: str):
+@lru_cache(maxsize=16)
+def _pooled(job_family: str, sector: str = "private"):
     pool = posting_pool(job_family)
-    return pool, *pooled_requirements(pool)
+    return pool, *pooled_requirements(pool, sector)
 
 
-def infer_family(status_map: dict) -> tuple[str, dict]:
+def infer_family(status_map: dict, sector: str = "private") -> tuple[str, dict]:
     """이력서 스킬이 각 직군 공고 기준과 얼마나 겹치는지(보유·부분·검증 필요를 가중치로 셈) → 가장 높은 직군.
     점수 = Σ(기준 가중치 × 상태값) / Σ기준 가중치 (준비도와 같은 식). 동점이면 백엔드 → AI·ML → 데이터 순."""
     scores = {}
     for f in FAMILIES:
-        _, reqs, _ = _pooled(f)
+        _, reqs, _ = _pooled(f, sector)
         scores[f] = readiness(reqs, status_map) if reqs else 0
     best = max(FAMILIES, key=lambda f: scores[f])
     return best, scores
@@ -129,7 +146,9 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
     progress = [{"agent": a, "status": "queued", "ms": None} for a in AGENTS]
     cites = Cites()
     sd = get_dict()
-    state: dict = {"resume": payload.get("resume", ""), "family": payload["job_family"], "posting": payload.get("posting") or ""}
+    state: dict = {"resume": payload.get("resume", ""), "family": payload["job_family"], "posting": payload.get("posting") or "",
+                   "sector": payload.get("sector") if payload.get("sector") in SECTORS else "private"}
+    out_sector = {"id": state["sector"], "label": SECTORS[state["sector"]]}
     out: dict = {"result": {"strengths": [], "gaps": [], "recommendations": [], "readiness": {"apply": None, "practice": None}},
                  "notes": []}
 
@@ -233,7 +252,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
 
     with stage("retriever", llm=_optional("retriever") is not None) as row:
         status_map = state.get("status", {})
-        best, fam_scores = infer_family(status_map)  # 직군마다 공고 기준 준비도 → 강점 직군 순위
+        best, fam_scores = infer_family(status_map, state["sector"])  # 직군마다 공고 기준 준비도 → 강점 직군 순위
         inferred = state["family"] in (None, "", "auto")
         if inferred:
             state["family"] = best
@@ -241,14 +260,16 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
                    for f in sorted(FAMILIES, key=lambda f: -fam_scores[f])]
         out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]],
                                        "inferred": inferred, "scores": fam_scores, "ranking": ranking}
+        out["result"]["sector"] = out_sector
         pool = None
         if state["posting"]:
             reqs = posting_requirements(state["posting"])
             src = "붙여 넣은 공고"
         else:
-            pool, reqs, demand = _pooled(state["family"])
-            src = (f"{FAMILY_LABEL[state['family']]} 공개 공고: 민간 {len(pool['private'])}건 + "
-                   f"잡알리오 {pool['public_scope']} {len(pool['public'])}건 (출처별 평균 반반)")
+            pool, reqs, demand = _pooled(state["family"], state["sector"])
+            sec = state["sector"]
+            src = (f"{FAMILY_LABEL[state['family']]} 민간 IT 기업 공개 채용 공고 {len(pool['private'])}건" if sec == "private" else
+                   f"잡알리오 공공기관 정보통신 공고({pool['public_scope']}) {len(pool['public'])}건")
         state["reqs"] = reqs
         retr = _optional("retriever")
         practice = None
@@ -266,17 +287,16 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
                 ns = [n]
             else:
                 ns = []
-                for k in ("private", "public"):  # 출처마다 실제 공고 문장 1개씩 인용
-                    for p in pool[k]:
-                        if sid in p["req"]:
-                            q = _quote_in(p["text"], sd.name(sid), aliases)
-                            if q:
-                                ns.append(cites.add("posting", p["title"], q, p["url"], doc_id=p["url"] or p["title"]))
-                                break
-                hit = {k: sum(1 for p in pool[k] if sid in p["req"]) for k in ("private", "public")}
+                for p in pool[sec]:  # 실제 공고 문장 1개 인용
+                    if sid in p["req"]:
+                        q = _quote_in(p["text"], sd.name(sid), aliases)
+                        if q:
+                            ns.append(cites.add("posting", p["title"], q, p["url"], doc_id=p["url"] or p["title"]))
+                            break
+                hit = sum(1 for p in pool[sec] if sid in p["req"])
                 ns.append(cites.add("posting_stats", "공고 집계",
-                                    f"민간 {len(pool['private'])}건 중 {hit['private']}건, 잡알리오 {len(pool['public'])}건 중 "
-                                    f"{hit['public']}건이 '{sd.name(sid)}'를 요구 (수요 {demand[sid]:.2f})", doc_id=f"stats:{sid}"))
+                                    f"{SECTORS[sec]} 공고 {len(pool[sec])}건 중 {hit}건이 '{sd.name(sid)}'를 요구 "
+                                    f"(수요 {demand[sid]:.2f})", doc_id=f"stats:{sec}:{sid}"))
             gl.append({"id": sid, "name": sd.name(sid), "status": st, "status_label": STATUS_LABEL[st],
                        "weight": w, "cites": ns})
         out["result"]["gaps"] = gl

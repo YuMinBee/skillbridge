@@ -238,3 +238,13 @@ def test_rag_keyword_search_finds_future_courses():
     assert hits and all(h["kind"] == "course" for h in hits)
     assert all(not h["meta"].get("start") or h["meta"]["start"] >= date.today().isoformat() for h in hits)  # 이미 개강한 과정 제외
     assert R.tokens("쿠버네티스 Docker") == ["쿠버", "버네", "네티", "티스", "쿠버네", "버네티", "네티스", "docker"]
+
+
+def test_sector_changes_requirements_and_is_validated(client, monkeypatch):
+    from app.agents import supervisor as S
+    pool = {"private": [{"req": {"kubernetes": 2}}], "public": [{"req": {"cert_info_processing": 2}}]}
+    assert set(S.pooled_requirements(pool, "private")[0]) == {"kubernetes"}
+    assert set(S.pooled_requirements(pool, "public")[0]) == {"cert_info_processing"}  # 섞지 않는다
+    s = _run(client, monkeypatch, sector="public")
+    assert s["result"]["sector"]["id"] == "public"
+    assert client.post("/api/analyze", json={"resume": RESUME, "sector": "both"}).status_code == 400

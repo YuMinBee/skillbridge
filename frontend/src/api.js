@@ -65,11 +65,12 @@ export const api = {
   reset: () => req("POST", "/api/reset"),
   families: () => req("GET", "/api/families"),
   analyze: (body) => req("POST", "/api/analyze", body),
-  analyzeDocs: (files, github, family, posting) => {
+  analyzeDocs: (files, github, family, posting, sector) => {
     const f = new FormData();
     files.forEach((x) => f.append("files", x));
     if (github) f.append("github", github.trim());
     f.append("job_family", family || "auto");
+    f.append("sector", sector || "private");
     if (posting) f.append("posting", posting);
     return req("POST", "/api/analyze/docs", f, true);
   },

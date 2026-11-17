@@ -24,6 +24,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--mock", action="store_true", help="Bedrock 없이 규칙 엔진으로")
     ap.add_argument("--family", default="auto", choices=["auto", "backend", "ai_ml", "data"])
+    ap.add_argument("--sector", default="private", choices=["private", "public"], help="민간 기업 | 공공기관")
     a = ap.parse_args()
     if a.mock:
         os.environ["BEDROCK_MOCK"] = "1"
@@ -49,7 +50,7 @@ def main():
         print(f"· GitHub: {gh}")
 
     t0 = time.time()
-    out = supervisor.run({"resume": pii.mask("\n\n".join(parts))[0], "github": gh, "job_family": a.family})
+    out = supervisor.run({"resume": pii.mask("\n\n".join(parts))[0], "github": gh, "job_family": a.family, "sector": a.sector})
     sec = time.time() - t0
     r = out["result"]
 
@@ -57,7 +58,8 @@ def main():
     fails = [f"{p['agent']}: {p.get('note')}" for p in out["progress"] if p["status"] == "failed" or p.get("note")]
     if fails:
         print("주의:", " / ".join(fails))
-    print("\n강점 직군:", " > ".join(f"{x['label']} {x['score']}" for x in r["job_family"]["ranking"]))
+    print(f"\n지원 분야: {r['sector']['label']}")
+    print("강점 직군:", " > ".join(f"{x['label']} {x['score']}" for x in r["job_family"]["ranking"]))
     print("\n① 경험 (STAR)")
     for e in r["strengths"]:
         slots = "".join(k if v["present"] else "·" for k, v in e["slots"].items())

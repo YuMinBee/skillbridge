@@ -42,6 +42,7 @@ function DocPick({ files, onPick }) {
 export default function Analyze({ active }) {
   const [families, setFamilies] = useState([["backend", "백엔드"], ["ai_ml", "AI·ML"], ["data", "데이터"]]);
   const [family, setFamily] = useState("auto");
+  const [sector, setSector] = useState("");  // 처음에 반드시 고른다: 민간과 공공은 요구가 달라 섞지 않는다
   const [files, setFiles] = useState([]);
   const [github, setGithub] = useState("");
   const [posting, setPosting] = useState("");
@@ -74,7 +75,7 @@ export default function Analyze({ active }) {
   const submit = async () => {
     setErr(""); setJob(null); setSel(null);
     try {
-      const { job_id } = await api.analyzeDocs(files, github, family, posting);
+      const { job_id } = await api.analyzeDocs(files, github, family, posting, sector);
       save(job_id); setJobId(job_id);
     } catch (e) { setErr(e.message); }
   };
@@ -87,6 +88,8 @@ export default function Analyze({ active }) {
     <section className="view">
       <div className="grid-side">
         <div className="panel no-print">
+          <h2>어디에 지원하나요?</h2>
+          <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} />
           <h2>내 경험 넣기</h2>
           <DocPick files={files} onPick={setFiles} />
           <label className="fld">GitHub (선택)
@@ -101,7 +104,7 @@ export default function Analyze({ active }) {
             <summary className="hint">지원할 공고 (선택)</summary>
             <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
           </details>
-          <button className="btn" disabled={!(files.length || github.trim()) || running} onClick={submit}>
+          <button className="btn" disabled={!sector || !(files.length || github.trim()) || running} onClick={submit}>
             {running ? "분석 중…" : "분석 시작"}
           </button>
           {err && <p className="err">{err}</p>}
@@ -163,7 +166,7 @@ function Summary({ job }) {
         {r.job_family?.ranking && (
           <ol className="rank">{r.job_family.ranking.map((x) => <li key={x.id}><span>{x.label}</span><span className="num">{x.score}</span></li>)}</ol>
         )}</div>
-      <div className="panel"><h3>준비도{r.job_family ? ` · ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
+      <div className="panel"><h3>준비도{r.job_family ? ` · ${r.sector?.label ?? ""} ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
         <p className="hint">공개 공고 기준</p></div>
       <div className="panel"><h3>이번 분석 비용</h3><div className="big num">{usd(job.cost?.usd)}</div>
         </div>
