@@ -31,7 +31,7 @@
 - 채점: 문제해결력, 현장 적용성, 창의성, 전달력, AWS 활용도·팀워크 (각 20점). 항목별 목표와 진행 상황은 [docs/SCORECARD.md](docs/SCORECARD.md)에 있다.
 - 명세: [docs/역량다리_구현명세.md](docs/역량다리_구현명세.md). 설계 결정과 이유: [DECISIONS.md](DECISIONS.md). 역할: [docs/TEAM.md](docs/TEAM.md).
 - 시연 흐름(5분): [docs/DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)
-- 문제 근거(공고 vs 실제 기술, 공개 사례 5건): [docs/EVIDENCE_POSTING_GAP.md](docs/EVIDENCE_POSTING_GAP.md). 기업 A·B·C는 가상, D는 공개 자료 재구성, **E~H는 멘토(김민관 대표)를 통한 현업 청취 기준**([docs/INTERVIEWS.md](docs/INTERVIEWS.md))
+- 문제 근거(공고 vs 실제 기술, 공개 사례 5건): [docs/EVIDENCE_POSTING_GAP.md](docs/EVIDENCE_POSTING_GAP.md). 기업 A·B·C는 가상, D는 공개 자료 재구성, **E~H는 현업 멘토를 통한 현업 청취 기준**([docs/INTERVIEWS.md](docs/INTERVIEWS.md))
 
 ## 반드시 지킬 규칙
 
