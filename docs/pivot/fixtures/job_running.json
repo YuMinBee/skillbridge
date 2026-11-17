@@ -1,0 +1,7 @@
+{"_example": "화면 개발용 예시. 실제 결과 아님",
+ "job_id": "j_example1", "status": "running", "case": "C2",
+ "progress": [{"agent": "supervisor", "status": "done", "ms": 640},
+              {"agent": "retriever", "status": "running", "ms": null},
+              {"agent": "verifier", "status": "queued", "ms": null},
+              {"agent": "cost", "status": "queued", "ms": null}],
+ "answer": null, "citations": [], "cost": null, "trace": []}

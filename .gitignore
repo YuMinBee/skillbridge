@@ -8,3 +8,6 @@ frontend/node_modules/
 frontend/dist/
 .DS_Store
 build/
+
+# RAG 실험 임베딩 캐시
+eval/rag/cache/
