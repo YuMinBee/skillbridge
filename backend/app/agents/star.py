@@ -171,15 +171,17 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
                                         log=log, kind="star", max_tokens=3000)
             res, dropped = [], 0
             for i, e in enumerate(out.get("experiences", [])[:12]):
-                text = locate(e.get("text"), resume) or e.get("text", "")
+                text = locate(e.get("text"), resume)
+                if text is None:  # 경험 구간 자체가 원문에 없으면 지어낸 경험 → 버림
+                    dropped += 1
+                    continue
                 slots = {}
                 for k in SLOTS:
                     q = locate(e.get(k), resume)
                     if e.get(k) and q is None:
                         dropped += 1  # 원문에 없는 인용 → 버림
                     slots[k] = q
-                if not any(slots.values()):
-                    continue
+                # 칸이 모두 비어도 남긴다: 약한 경험을 숨기지 않고 '약함'으로 보여 준다
                 res.append(_build({"exp_id": f"e{i + 1}", "title": e.get("title") or text[:24], "text": text}, slots))
             if res:
                 return res, {"mode": "bedrock", "dropped_quotes": dropped}
