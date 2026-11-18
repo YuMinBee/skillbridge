@@ -80,6 +80,9 @@ def recommend(gaps: list[dict], star: list[dict], job_family: str, *, log=None) 
  "trace": [{"agent": "...", "model": "...", "ms": 0, "in": 0, "out": 0}]}
 ```
 
+- `progress`의 단계는 `guard → star → skills → retriever → recommend → verifier → cost` (구현: `agents/supervisor.py`). 화면은 목록을 그대로 그리면 된다. 단계에 `note`가 있으면(예: "예산 초과 → 규칙 엔진") 같이 보여 준다.
+- `verify`: `{"removed": [...], "passed": bool, "checks": [...]}` 검증 에이전트가 지운 항목.
+- 지금 `readiness.practice`는 `null`이다(T2의 NCS 기준이 들어오면 채워짐). `gaps`는 같은 직군 공개 공고 또는 붙여 넣은 공고 기준.
 - 브라우저는 `job_id`를 localStorage에 두고 2초마다 조회한다. 이력서 원문은 job에 저장하지 않는다(규칙 7). 인용 문장만 남긴다.
 
 ## 6. 평가 (T3)

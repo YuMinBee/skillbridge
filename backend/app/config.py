@@ -59,3 +59,10 @@ if ON_LAMBDA and BUNDLED_CACHE.exists():
     for f in BUNDLED_CACHE.glob("*.json"):
         if not (DB_PATH.parent / f.name).exists():
             shutil.copy(f, DB_PATH.parent / f.name)
+
+# ── 비용 에이전트 (agents/cost.py) ────────────────────────────────
+# 모델별 단가(USD / 100만 토큰, 입력·출력). 출처: https://aws.amazon.com/bedrock/pricing/ (2026-11-17 기준 확인 필요)
+# CallLog의 모델 이름에 키가 들어 있으면 그 단가를 쓴다. 모르는 모델은 Sonnet 단가로 보수적으로 잡는다.
+PRICES = {"sonnet": (3.0, 15.0), "haiku": (1.0, 5.0), "titan-embed": (0.02, 0.0)}
+JOB_BUDGET_USD = float(os.getenv("JOB_BUDGET_USD", "0.10"))   # 요청 하나의 예산. 넘으면 남은 LLM 단계는 규칙으로
+JOB_TTL = 24 * 3600
