@@ -3,7 +3,13 @@
 비교의 핵심은 "모델은 같고 시스템만 다르다"이다. 그래서 여기서는
 - 우리 시스템과 같은 모델(MODEL_ID)을 쓴다.
 - 시스템 프롬프트·검색·규칙·검증·도구가 없다. 사용자 메시지 하나뿐이다.
-- temperature는 API 기본값 1.0(웹 채팅처럼 매번 조금씩 다른 답). 결과 파일에 값을 남긴다.
+- temperature는 기본 1.0(API 기본값, 웹 채팅처럼 매번 조금씩 다른 답). 0도 돌려서 둘 다 비교한다.
+
+프롬프트 두 가지 (--prompt)
+- plain: 사람이 웹 채팅에 그냥 치는 말. "STAR로 분석해 주세요", "역량 분석하고 과제 추천해 줘"
+- good : 잘 쓴 프롬프트. "STAR로 나누고 각 칸은 원문 문장 그대로 인용, 없으면 비움, 과정은 실제 있는 것만"
+  → "프롬프트만 잘 쓰면 웹으로도 되잖아"에 답하려면 good도 이겨야 한다(또는 진 만큼 그대로 보고한다).
+  good도 검색·카탈로그·검증은 없다. 사용자가 웹 채팅에서 할 수 있는 것은 프롬프트뿐이기 때문이다.
 
 과제
 - star: gold_star_{split}.jsonl의 경험 단락 → "STAR 기준으로 분석해 주세요"
@@ -15,12 +21,16 @@
 
 사용 (aws sso login --profile kosa 뒤)
   python eval/trust/baseline_web.py --task star --split dev --runs 5 --dry-run   # 호출 수·대략 비용만
-  python eval/trust/baseline_web.py --task star --split dev --runs 5
+  python eval/trust/baseline_web.py --task star --split dev --runs 5                       # plain, t=1
+  python eval/trust/baseline_web.py --task star --split dev --runs 5 --temperature 0
+  python eval/trust/baseline_web.py --task star --split dev --runs 5 --prompt good
+  python eval/trust/baseline_web.py --task star --split dev --runs 5 --prompt good --temperature 0
   python eval/trust/baseline_web.py --task reco --split dev --runs 5
   python eval/trust/baseline_web.py --task star --split test --runs 5 --final    # test는 마지막 한 번
   python eval/trust/baseline_web.py --task star --split dev --mock --limit 3      # AWS 없이 형식 확인
 
-출력: eval/trust/predictions/web_{task}_{split}.jsonl, 한 줄 = (id, run).
+출력: eval/trust/predictions/web_{task}_{split}_{prompt}_t{temperature}.jsonl, 한 줄 = (id, run).
+  예) web_star_dev_plain_t1.jsonl, web_star_dev_good_t0.jsonl
 이미 저장된 (id, run)은 건너뛴다. 중간에 끊겨도 같은 명령으로 이어서 돌리면 된다.
 """
 import argparse
@@ -41,10 +51,32 @@ OUT_DIR = HERE / "predictions"
 JOB_LABEL = {"backend": "백엔드 개발자", "ai_ml": "AI·머신러닝 엔지니어", "data": "데이터 분석가"}
 
 # 사람이 웹 Claude 채팅창에 칠 법한 문장. 시스템 프롬프트 없음.
+# plain = 그냥 묻기, good = 잘 쓴 프롬프트(인용·비움·지어내지 않기를 직접 요구). 둘 다 사용자 메시지 하나.
 STAR_PROMPT = ("아래는 제 이력서에 쓴 경험이에요. STAR(상황·과제·행동·결과) 기준으로 분석해 주세요. "
                "각 항목이 드러나는지, 이 경험이 강점으로 얼마나 설득력 있는지도 알려 주세요.\n\n{text}")
 RECO_PROMPT = ("제 이력서예요. {job} 직무로 취업하려고 해요. 내 역량 분석하고, 부족한 부분을 채울 과제랑 "
                "들을 만한 교육과정 추천해 줘.\n\n{resume}")
+
+STAR_PROMPT_GOOD = (
+    "아래는 제 이력서에 쓴 경험이에요. STAR(상황·과제·행동·결과)로 나눠 주세요.\n"
+    "규칙:\n"
+    "1. 각 칸(S·T·A·R)에는 아래 원문에 있는 문장을 고치지 말고 그대로 인용하세요. 요약하거나 바꿔 쓰지 마세요.\n"
+    "2. 원문에 그 칸에 해당하는 내용이 없으면 칸을 비우고 '없음'이라고만 쓰세요. 예시를 지어내지 마세요.\n"
+    "3. 결과(R)에 원문에 적힌 수치 성과가 있는지, 글쓴이 본인이 한 역할이 분명한지 각각 예/아니오로 답하세요.\n"
+    "4. 마지막에 이 경험이 강점으로 얼마나 설득력 있는지 한 줄로 평가하세요.\n\n"
+    "원문:\n{text}")
+RECO_PROMPT_GOOD = (
+    "제 이력서예요. {job} 직무로 취업하려고 해요.\n"
+    "규칙:\n"
+    "1. 강점과 부족한 역량을 나눠서 쓰고, 각각 이력서 원문 문장을 그대로 인용해 근거로 붙이세요. "
+    "원문에 없는 경험은 지어내지 마세요.\n"
+    "2. 부족한 역량을 채울 과제를 우선순위대로 추천하세요.\n"
+    "3. 교육과정은 실제로 있는 과정만, 정확한 과정명과 운영 기관을 써서 추천하세요. "
+    "실제로 있는지 확실하지 않으면 추천하지 마세요.\n\n"
+    "이력서:\n{resume}")
+
+PROMPTS = {"plain": {"star": STAR_PROMPT, "reco": RECO_PROMPT},
+           "good": {"star": STAR_PROMPT_GOOD, "reco": RECO_PROMPT_GOOD}}
 
 # ── 파서: 답변 글 → JSON (답변에 적힌 판단만 옮긴다) ──────────────────────────
 PARSE_SYSTEM = (
@@ -54,7 +86,7 @@ PARSE_SYSTEM = (
 
 STAR_PARSE_RULES = """규칙
 - status: 답변이 그 항목이 경험에 드러난다고 했으면 "present", 있긴 하지만 부족·모호하다고 했으면 "weak",
-  없다·드러나지 않는다·빠졌다고 했으면 "absent", 답변이 그 항목을 언급하지 않았으면 "unmentioned".
+  없다·드러나지 않는다·빠졌다고 했거나 칸을 비우고 "없음"이라 적었으면 "absent", 답변이 그 항목을 언급하지 않았으면 "unmentioned".
 - 답변이 예시를 지어 "이렇게 쓰면 좋다"고 제안만 한 내용은 그 항목이 있다는 근거가 아니다.
 - claim: 답변이 그 항목의 내용으로 제시한 문장을 답변에 쓰인 그대로 옮긴다(150자 이내). 없으면 null.
 - quantified: 답변이 결과에 수치·정량 성과가 있다고 했으면 true, 없다고 했으면 false, 언급 없으면 null.
@@ -110,10 +142,11 @@ def load_inputs(task: str, split: str) -> list[dict]:
     return rows
 
 
-def make_prompt(task: str, row: dict) -> str:
+def make_prompt(task: str, row: dict, style: str = "plain") -> str:
+    tpl = PROMPTS[style][task]
     if task == "star":
-        return STAR_PROMPT.format(text=row["text"])
-    return RECO_PROMPT.format(job=JOB_LABEL.get(row["job_family"], row["job_family"]), resume=row["resume"])
+        return tpl.format(text=row["text"])
+    return tpl.format(job=JOB_LABEL.get(row["job_family"], row["job_family"]), resume=row["resume"])
 
 
 def done_keys(path: Path) -> set[tuple[str, int]]:
@@ -175,7 +208,9 @@ def main():
     ap.add_argument("--task", choices=["star", "reco"], required=True)
     ap.add_argument("--split", choices=["dev", "test"], default="dev")
     ap.add_argument("--runs", type=int, default=5, help="같은 입력 반복 횟수(일관성 측정용)")
-    ap.add_argument("--temperature", type=float, default=1.0, help="기본 1.0 = API 기본값(웹 채팅처럼)")
+    ap.add_argument("--prompt", choices=["plain", "good"], default="plain",
+                    help="plain = 그냥 묻기, good = 잘 쓴 프롬프트(원문 인용·없으면 비움·실제 과정만)")
+    ap.add_argument("--temperature", type=float, default=1.0, help="기본 1.0 = API 기본값(웹 채팅처럼). 0도 돌린다")
     ap.add_argument("--max-tokens", type=int, default=3000)
     ap.add_argument("--model", default=None, help="기본 MODEL_ID(.env) = 우리 시스템과 같은 모델")
     ap.add_argument("--parse-model", default=None, help="기본 FAST_MODEL_ID(.env)")
@@ -200,7 +235,7 @@ def main():
     if a.limit:
         rows = rows[:a.limit]
     OUT_DIR.mkdir(exist_ok=True)
-    out = OUT_DIR / f"web_{a.task}_{a.split}{'_mock' if a.mock else ''}.jsonl"
+    out = OUT_DIR / f"web_{a.task}_{a.split}_{a.prompt}_t{a.temperature:g}{'_mock' if a.mock else ''}.jsonl"
 
     if a.reparse:
         return reparse(out, a.task, parse_model)
@@ -208,7 +243,7 @@ def main():
     have = done_keys(out)
     todo = [(r, k) for r in rows for k in range(1, a.runs + 1) if (r["id"], k) not in have]
     print(f"입력 {len(rows)}개 × {a.runs}회 = {len(rows) * a.runs}, 이미 있음 {len(have)}, 이번에 {len(todo)}회 호출")
-    print(f"모델 {model or '(MODEL_ID 없음)'} · temperature {a.temperature} · 파서 {parse_model} → {out.relative_to(ROOT)}")
+    print(f"모델 {model or '(MODEL_ID 없음)'} · 프롬프트 {a.prompt} · temperature {a.temperature} · 파서 {parse_model} → {out.relative_to(ROOT)}")
 
     if a.dry_run:
         usd = 0.0
@@ -222,8 +257,8 @@ def main():
     lock = threading.Lock()
 
     def one(row: dict, run: int) -> dict:
-        prompt = make_prompt(a.task, row)
-        rec = {"id": row["id"], "run": run, "task": a.task, "split": a.split,
+        prompt = make_prompt(a.task, row, a.prompt)
+        rec = {"id": row["id"], "run": run, "task": a.task, "split": a.split, "prompt_style": a.prompt,
                "model": "mock" if a.mock else model, "temperature": a.temperature,
                "prompt": prompt, "at": datetime.now(timezone.utc).isoformat(timespec="seconds")}
         if a.task == "reco":
