@@ -1,0 +1,99 @@
+{
+ "n": 30,
+ "sampling": "Sonnet 0/1/2 층화 각 10쌍, seed 20261118",
+ "exact_agreement": [
+  0.767,
+  0.6,
+  0.9
+ ],
+ "kappa": [
+  0.65,
+  0.4,
+  0.849
+ ],
+ "kappa_linear_weighted": [
+  0.707,
+  0.474,
+  0.89
+ ],
+ "binary_agreement(관련>=1)": [
+  0.867,
+  0.733,
+  0.967
+ ],
+ "confusion[사람][Sonnet]": [
+  [
+   8,
+   2,
+   0
+  ],
+  [
+   1,
+   6,
+   1
+  ],
+  [
+   1,
+   2,
+   9
+  ]
+ ],
+ "disagreements": [
+  {
+   "no": "7",
+   "query": "컴퓨터 비전",
+   "title": "비전공자를 위한 IT 부트캠프, IT의 정석",
+   "human": 1,
+   "sonnet": 0,
+   "memo": ""
+  },
+  {
+   "no": "10",
+   "query": "코드 변경을 자동으로 테스트하고 배포하는 파이프라인",
+   "title": "[AI Shift Track] AI 데이터 엔지니어 과정_Module 2. 벡터 DB 파이프라인",
+   "human": 2,
+   "sonnet": 0,
+   "memo": ""
+  },
+  {
+   "no": "11",
+   "query": "컨테이너로 서비스를 배포하고 여러 서버에서 자동으로 운영하는 법",
+   "title": "IT 엔지니어를 위한 AWS 운영의 기본과 노하우",
+   "human": 2,
+   "sonnet": 1,
+   "memo": ""
+  },
+  {
+   "no": "23",
+   "query": "자바로 웹 서버 API를 만드는 법",
+   "title": "[자바(JAVA)]UI/UX 스프링프레임워크 활용 웹 애플리케이션 개발(SQL)",
+   "human": 1,
+   "sonnet": 2,
+   "memo": ""
+  },
+  {
+   "no": "24",
+   "query": "웹 화면을 컴포넌트로 만드는 프런트엔드 개발",
+   "title": "『자바스크립트』UI/UX웹퍼블리셔 프론트엔드(JS,JQ,반응형)",
+   "human": 2,
+   "sonnet": 1,
+   "memo": ""
+  },
+  {
+   "no": "25",
+   "query": "네트워크",
+   "title": "탈중앙화 글로벌 금융 네트워크(비트코인)의 이해",
+   "human": 0,
+   "sonnet": 1,
+   "memo": ""
+  },
+  {
+   "no": "28",
+   "query": "네트워크",
+   "title": "탈중앙화 글로벌 금융 네트워크(비트코인)의 이해",
+   "human": 0,
+   "sonnet": 1,
+   "memo": ""
+  }
+ ]
+}
