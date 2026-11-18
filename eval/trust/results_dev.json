@@ -1,0 +1,151 @@
+{
+  "_meta": {
+    "at": "2026-11-18T02:44:56+00:00",
+    "split": "dev",
+    "n": {
+      "star": 30
+    },
+    "n_gold": 30,
+    "n_boot": 2000,
+    "seed": 20261118,
+    "cases": {
+      "full": 5,
+      "no_R": 5,
+      "no_T": 5,
+      "inflated": 5,
+      "team_vague": 5,
+      "short": 5
+    },
+    "n_reviewed": 30,
+    "base_web": "web_plain_t1",
+    "mock": false,
+    "systems": {
+      "web_good_t0": {
+        "file": "web_star_dev_good_t0.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "good",
+        "temperature": 0.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "web_plain_t1": {
+        "file": "web_star_dev_plain_t1.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "plain",
+        "temperature": 1.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      }
+    }
+  },
+  "metrics": {
+    "star_slot_acc": {
+      "web_good_t0": [
+        0.765,
+        0.66,
+        0.8633
+      ],
+      "web_plain_t1": [
+        0.7583,
+        0.6933,
+        0.8234
+      ],
+      "web": [
+        0.7583,
+        0.6933,
+        0.8234
+      ]
+    },
+    "star_slot_kappa": {
+      "web_good_t0": [
+        0.5093,
+        0.3349,
+        0.6853
+      ],
+      "web_plain_t1": [
+        0.4939,
+        0.3861,
+        0.5904
+      ],
+      "web": [
+        0.4939,
+        0.3861,
+        0.5904
+      ]
+    },
+    "fake_evidence_rate": {
+      "web_good_t0": [
+        0.3622,
+        0.2471,
+        0.4697
+      ],
+      "web_plain_t1": [
+        0.3865,
+        0.3157,
+        0.4757
+      ],
+      "web": [
+        0.3865,
+        0.3157,
+        0.4757
+      ]
+    },
+    "consistency_5runs": {
+      "web_good_t0": [
+        0.9333,
+        0.8333,
+        1.0
+      ],
+      "web_plain_t1": [
+        0.5333,
+        0.3667,
+        0.7333
+      ],
+      "web": [
+        0.5333,
+        0.3667,
+        0.7333
+      ]
+    },
+    "inflated_false_strong": {
+      "web_good_t0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web_plain_t1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "quote_verbatim_rate": {
+      "web_good_t0": [
+        0.9735,
+        0.9297,
+        1.0
+      ],
+      "web_plain_t1": [
+        0.2266,
+        0.1561,
+        0.3014
+      ],
+      "web": [
+        0.2266,
+        0.1561,
+        0.3014
+      ]
+    }
+  },
+  "diffs": {},
+  "human_ab": null
+}
