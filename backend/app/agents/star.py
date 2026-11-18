@@ -6,9 +6,14 @@ STAR(상황·과제·행동·결과)는 기업 역량면접(행동사건면접, 
 - 점수·수준은 아래 규칙 상수로만 계산한다(AGENTS 규칙 8). 같은 칸이면 같은 점수다.
 - BEDROCK_MOCK=1이거나 호출이 실패하면 같은 형식을 문장 패턴 규칙으로 낸다.
 """
+import hashlib
 import json
+import os
 import re
+import time
+from pathlib import Path
 
+from .. import config
 from ..adapters import bedrock
 from ..skills import sentences
 
@@ -24,6 +29,7 @@ SLOTS = ("S", "T", "A", "R")
 MAX_EXP = 8               # 화면에 보여 줄 경험 수 상한
 MAX_LLM_CHARS = 16_000   # 자소서+포트폴리오를 함께 넣을 수 있게 (이전 8,000)
 SLOT_LABEL = {"S": "상황", "T": "과제", "A": "행동", "R": "결과"}
+CACHE_TTL = 24 * 3600     # 같은 문서 → 같은 결과를 이 시간 동안 재사용
 
 # ── 문장 패턴 (MOCK 판정 + 수치·역할·꾸밈 판정은 Bedrock 모드에서도 이 규칙을 쓴다) ──
 _S = re.compile(r"문제|불편|어려움|어려웠|느려|느리|잦|부족|비효율|오류가|장애|병목|요청|필요했|상황|당시|때문에|한계|번거")
@@ -173,9 +179,60 @@ _SCHEMA = {"type": "object", "properties": {"experiences": {"type": "array", "it
     "required": ["title", "anchor", "S", "T", "A", "R"]}, "maxItems": MAX_EXP}}, "required": ["experiences"]}
 
 
-def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool | None = None) -> tuple[list[dict], dict]:
-    """→ (강점 목록, 메타 {mode, dropped_quotes}). resume는 이미 개인정보를 가린 텍스트."""
+def _cache_dir() -> Path:
+    d = os.getenv("STAR_CACHE_DIR") or ("/tmp/star_cache" if os.getenv("AWS_LAMBDA_FUNCTION_NAME")
+                                        else str(Path(__file__).resolve().parents[2] / ".data" / "star_cache"))
+    return Path(d)
+
+
+def _cache_key(resume: str) -> str:
+    """같은 문서 + 같은 모델 + 같은 지시문이면 같은 키. 지시문·스키마를 고치면 키가 바뀌어 예전 결과를 쓰지 않는다."""
+    h = hashlib.sha256()
+    for part in (config.MODEL_ID, _SYS, json.dumps(_SCHEMA, sort_keys=True), str(MAX_LLM_CHARS), resume):
+        h.update(part.encode("utf-8")); h.update(b"\0")
+    return h.hexdigest()
+
+
+def _cache_get(key: str):
+    p = _cache_dir() / f"{key}.json"
+    try:
+        if time.time() - p.stat().st_mtime > CACHE_TTL:
+            p.unlink(missing_ok=True)
+            return None
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def _cache_put(key: str, res: list, meta: dict) -> None:
+    try:
+        d = _cache_dir(); d.mkdir(parents=True, exist_ok=True)
+        tmp = d / f"{key}.{os.getpid()}.tmp"
+        tmp.write_text(json.dumps({"res": res, "meta": meta}, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, d / f"{key}.json")
+    except OSError:
+        pass  # 캐시는 있으면 좋은 것. 못 써도 분석은 계속한다.
+
+
+def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool | None = None,
+             cache: bool | None = None) -> tuple[list[dict], dict]:
+    """→ (강점 목록, 메타 {mode, dropped_quotes, cached}). resume는 이미 개인정보를 가린 텍스트.
+
+    같은 문서는 24시간 동안 같은 결과를 돌려준다(캐시). 키는 문서의 해시이고 원문은 저장하지 않는다.
+    저장되는 것은 결과(원문에서 확인된 인용 문장 포함)뿐이며 24시간 뒤 지운다(DECISIONS 2026-11-17 '인용 24시간').
+    평가에서 반복 일치율을 잴 때는 cache=False로 끈다(eval/trust/run_ours.py).
+    """
     use_llm = (bedrock.mode() == "bedrock") if use_llm is None else use_llm
+    cache = (os.getenv("STAR_CACHE", "1") != "0") if cache is None else cache
+    if use_llm and cache:
+        key = _cache_key(resume)
+        hit = _cache_get(key)
+        if hit:
+            return hit["res"], {**hit["meta"], "cached": True}
+        res, meta = diagnose(resume, log=log, use_llm=True, cache=False)
+        if meta.get("mode") == "bedrock":  # 규칙 폴백 결과는 캐시하지 않는다(다음에 Bedrock으로 다시 시도)
+            _cache_put(key, res, meta)
+        return res, {**meta, "cached": False}
     if use_llm:
         try:
             out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:MAX_LLM_CHARS]}\n</이력서>", "submit_star", _SCHEMA,

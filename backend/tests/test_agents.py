@@ -56,6 +56,35 @@ def test_star_llm_failure_falls_back_to_rules(monkeypatch):
     assert meta["mode"] == "rule" and res[0]["level"] == "strong"
 
 
+def test_star_cache_same_document_same_result(monkeypatch, tmp_path):
+    monkeypatch.setenv("STAR_CACHE_DIR", str(tmp_path))
+    calls = []
+
+    def fake(system, user, tool, schema, **kw):
+        calls.append(1)
+        a = "Spring Boot로 예약 API를 만들고 동시성 문제를 락으로 막았습니다." if len(calls) == 1 else None
+        return {"experiences": [{"title": "예약 API", "anchor": None,
+                                 "S": "동아리 행사 예약을 엑셀로 받다 보니 중복 예약이 잦았습니다.", "T": None, "A": a, "R": None}]}
+    monkeypatch.setattr(bedrock, "converse_tool", fake)
+    r1, m1 = star.diagnose(FULL, use_llm=True, cache=True)
+    r2, m2 = star.diagnose(FULL, use_llm=True, cache=True)
+    assert len(calls) == 1 and m1["cached"] is False and m2["cached"] is True
+    assert r1 == r2  # 모델이 두 번째에 다르게 답했어도 같은 문서면 같은 결과
+    assert FULL not in "".join(p.read_text(encoding="utf-8") for p in tmp_path.iterdir())  # 원문 전체는 저장 안 함
+    r3, _ = star.diagnose(FULL, use_llm=True, cache=False)  # 평가(반복 일치율)는 캐시를 끈다
+    assert len(calls) == 2 and not r3[0]["slots"]["A"]["present"]
+
+
+def test_star_cache_skips_rule_fallback(monkeypatch, tmp_path):
+    monkeypatch.setenv("STAR_CACHE_DIR", str(tmp_path))
+
+    def boom(*a, **k):
+        raise bedrock.BedrockError("x")
+    monkeypatch.setattr(bedrock, "converse_tool", boom)
+    _, meta = star.diagnose(FULL, use_llm=True, cache=True)
+    assert meta["mode"] == "rule" and not list(tmp_path.iterdir())
+
+
 def test_verifier_drops_fake_course_and_unquoted_evidence():
     result = {"strengths": [], "gaps": [],
               "recommendations": [{"rank": 1, "target": "docker", "course": {"id": "NOPE-1", "name": "없는 과정"},
