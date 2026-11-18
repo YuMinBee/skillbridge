@@ -631,3 +631,59 @@ details.rest summary{cursor:pointer;font-size:13px;color:var(--muted)}
 .chip.bridge{font-size:11.5px;font-weight:600;padding:1px 8px;border-radius:999px;color:var(--hi);
   background:color-mix(in srgb,var(--hi) 8%,transparent);border:1px dashed color-mix(in srgb,var(--hi) 55%,transparent)}
 .concl .cl-tip .tip-why{display:block;color:var(--fg);margin-bottom:2px}
+
+/* ── 역량 분석 (tabs/Analyze.jsx) ───────────────────────────── */
+.an-prog{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:13px}
+.an-prog li{display:grid;grid-template-columns:12px 1fr auto;gap:2px 8px;align-items:center}
+.an-prog li small{grid-column:2 / -1}
+.an-prog .dot{width:10px;height:10px;border-radius:50%;background:var(--idle-soft);border:2px solid var(--idle)}
+.an-prog .s-running .dot{border-color:var(--accent);background:var(--accent-soft);animation:an-pulse 1s infinite alternate}
+.an-prog .s-done .dot{border-color:var(--ok);background:var(--ok)}
+.an-prog .s-failed .dot{border-color:var(--bad);background:var(--bad)}
+.an-prog .s-queued{color:var(--muted)}
+@keyframes an-pulse{to{opacity:.4}}
+@media (prefers-reduced-motion:reduce){.an-prog .s-running .dot{animation:none}}
+.an-sum{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.an-sum .panel{padding:14px 16px;gap:4px}
+.an-sum .big{font-size:28px;font-weight:700;line-height:1.1}
+.an-sum .big small{font-size:14px;color:var(--muted);font-weight:500}
+@media (max-width:820px){.an-sum{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.an-main{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,300px);gap:20px;align-items:start}
+@media (max-width:1100px){.an-main{grid-template-columns:minmax(0,1fr)}}
+.an-ev{position:sticky;top:120px}
+.an-ev blockquote{margin:0;padding:8px 12px;border-left:3px solid var(--accent);background:var(--surface-2);border-radius:4px;font-size:13.5px}
+.card.star{border:1px solid var(--line);border-radius:10px;padding:12px 14px;display:grid;gap:8px}
+.slots{display:grid;gap:4px}
+.slot{display:grid;grid-template-columns:52px 1fr;gap:8px;font-size:13.5px;padding:4px 6px;border-radius:6px}
+.slot.on{background:var(--ok-soft)}
+.slot.off{background:var(--surface-2)}
+.slot .sk{font-family:var(--font-data);font-weight:700;display:flex;gap:4px;align-items:baseline}
+.slot .sk small{font-family:var(--font-body);font-weight:500;color:var(--muted);font-size:11.5px}
+.cite{font:inherit;font-family:var(--font-data);font-size:11.5px;border:0;background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:0 4px;cursor:pointer;margin-left:2px}
+.an-gaps{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:14px}
+.an-gaps li{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.an-recos{margin:0;padding-left:20px;display:grid;gap:12px}
+.an-recos p{margin:0}
+.an-recos li.abst b{color:var(--muted)}
+.print-only{display:none}
+@media print{
+  header.top,.no-print,.an-ev,.err{display:none !important}
+  .print-only{display:grid}
+  body{background:#fff;color:#000;padding:0;font-size:12px}
+  .grid-side,.an-main{grid-template-columns:minmax(0,1fr) !important}
+  .panel{box-shadow:none;break-inside:avoid;border-color:#ccc}
+  .card.star{break-inside:avoid}
+  .cite{background:none;color:#000;padding:0}
+}
+.tpl{display:grid;gap:10px}
+.tpl-exp{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:8px;margin:0;min-width:0}
+.tpl-exp legend{font-size:12.5px;font-weight:700;color:var(--muted);padding:0 4px}
+.tpl-exp textarea{min-height:52px}
+.linkbtn{font:inherit;border:0;background:none;color:var(--accent);padding:0;cursor:pointer;text-decoration:underline}
+.hint.foot{text-align:center;margin-top:8px}
+.pdfpick input[type=file]{margin-top:2px}
+.doclist{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:4px;font-size:13px}
+.doclist li{display:flex;gap:8px;align-items:center}
+.doclist li span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rank{list-style:none;margin:2px 0 0;padding:0;font-size:12.5px;color:var(--muted)}
+.rank li{display:flex;justify-content:space-between}
