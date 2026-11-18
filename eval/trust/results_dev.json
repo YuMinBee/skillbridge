@@ -1,6 +1,6 @@
 {
   "_meta": {
-    "at": "2026-11-18T02:44:56+00:00",
+    "at": "2026-11-18T13:16:26+00:00",
     "split": "dev",
     "n": {
       "star": 30
@@ -39,6 +39,13 @@
         "prompt_style": "plain",
         "temperature": 1.0,
         "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "ours": {
+        "file": "ours_star_dev.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "note": "캐시 끔(시스템 자체 일치율), Sonnet 4.6 temperature 0, 인용은 코드로 원문 대조"
       }
     }
   },
@@ -53,6 +60,11 @@
         0.7583,
         0.6933,
         0.8234
+      ],
+      "ours": [
+        0.91,
+        0.855,
+        0.9617
       ],
       "web": [
         0.7583,
@@ -71,6 +83,11 @@
         0.3861,
         0.5904
       ],
+      "ours": [
+        0.8173,
+        0.6998,
+        0.9168
+      ],
       "web": [
         0.4939,
         0.3861,
@@ -87,6 +104,11 @@
         0.3865,
         0.3157,
         0.4757
+      ],
+      "ours": [
+        0.1108,
+        0.0415,
+        0.1877
       ],
       "web": [
         0.3865,
@@ -105,6 +127,11 @@
         0.3667,
         0.7333
       ],
+      "ours": [
+        0.8667,
+        0.7333,
+        0.9667
+      ],
       "web": [
         0.5333,
         0.3667,
@@ -118,6 +145,11 @@
         0.0
       ],
       "web_plain_t1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ours": [
         0.0,
         0.0,
         0.0
@@ -139,6 +171,11 @@
         0.1561,
         0.3014
       ],
+      "ours": [
+        1.0,
+        1.0,
+        1.0
+      ],
       "web": [
         0.2266,
         0.1561,
@@ -146,6 +183,115 @@
       ]
     }
   },
-  "diffs": {},
+  "diffs": {
+    "star_slot_acc": {
+      "web_plain_t1": {
+        "ci": [
+          0.1517,
+          0.0967,
+          0.2117
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.145,
+          0.055,
+          0.2417
+        ],
+        "significant": true
+      }
+    },
+    "star_slot_kappa": {
+      "web_plain_t1": {
+        "ci": [
+          0.3234,
+          0.2094,
+          0.44
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.308,
+          0.1306,
+          0.4735
+        ],
+        "significant": true
+      }
+    },
+    "fake_evidence_rate": {
+      "web_plain_t1": {
+        "ci": [
+          -0.2757,
+          -0.3778,
+          -0.1914
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          -0.2514,
+          -0.3494,
+          -0.1477
+        ],
+        "significant": true
+      }
+    },
+    "consistency_5runs": {
+      "web_plain_t1": {
+        "ci": [
+          0.3333,
+          0.1333,
+          0.5333
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          -0.0667,
+          -0.2333,
+          0.1
+        ],
+        "significant": false
+      }
+    },
+    "inflated_false_strong": {
+      "web_plain_t1": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      }
+    },
+    "quote_verbatim_rate": {
+      "web_plain_t1": {
+        "ci": [
+          0.7734,
+          0.6986,
+          0.8439
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0265,
+          0.0,
+          0.0703
+        ],
+        "significant": false
+      }
+    }
+  },
   "human_ab": null
 }
