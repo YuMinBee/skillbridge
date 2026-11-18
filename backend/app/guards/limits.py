@@ -15,12 +15,13 @@ from collections import defaultdict, deque
 from .. import config
 from ..adapters import bedrock, storage
 
-# Bedrock을 부를 수 있는 경로: POST /api/diagnose*, POST /api/coach, 기업 /docs·/evidence
+# Bedrock을 부를 수 있는 경로: POST /api/diagnose*, POST /api/coach, POST /api/analyze, 기업 /docs·/evidence
 _COSTLY_SUFFIX = ("/docs", "/evidence")
 
 
 def costly(method: str, path: str) -> bool:
-    if method == "POST" and (path.startswith("/api/diagnose") or path.startswith("/api/coach")):
+    if method == "POST" and (path.startswith("/api/diagnose") or path.startswith("/api/coach")
+                              or path.startswith("/api/analyze")):
         return True
     return path.startswith("/api/companies/") and path.endswith(_COSTLY_SUFFIX)
 

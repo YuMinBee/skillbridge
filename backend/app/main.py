@@ -8,7 +8,7 @@ from fastapi.responses import JSONResponse
 from . import config
 from .adapters import bedrock, storage
 from .guards.limits import GuardMiddleware
-from .routers import coach, corp, diagnose, market
+from .routers import analyze, coach, corp, diagnose, market
 
 
 @asynccontextmanager
@@ -25,6 +25,7 @@ app.include_router(market.router)
 app.include_router(diagnose.router)
 app.include_router(corp.router)
 app.include_router(coach.router)
+app.include_router(analyze.router)
 
 
 @app.exception_handler(storage.BaseWriteForbidden)
@@ -59,6 +60,15 @@ if _DIST.exists():
 try:
     from mangum import Mangum
 
-    handler = Mangum(app)
+    _mangum = Mangum(app)
+
+    def handler(event, context):
+        # Lambda 자기 비동기 호출(adapters/jobs.submit)로 들어온 작업은 HTTP가 아니라 여기서 바로 실행한다
+        if isinstance(event, dict) and "skillbridge_job" in event:
+            from .adapters import jobs
+            storage.init()
+            jobs.run(event["skillbridge_job"], event["payload"])
+            return {"ok": True}
+        return _mangum(event, context)
 except ImportError:  # 로컬 실행에는 필요 없음
     handler = None

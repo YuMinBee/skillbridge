@@ -3,13 +3,12 @@ import { api } from "./api.js";
 import Market from "./tabs/Market.jsx";
 import Seeker from "./tabs/Seeker.jsx";
 import Corp from "./tabs/Corp.jsx";
+import Analyze from "./tabs/Analyze.jsx";
 
-const TABS = [
-  ["seeker", "내 준비도 진단", "취준생"],
-  ["corp", "기업 기준 등록", "기업"],
-  ["market", "시장·교육 현황", "지역·기관"],
-];
-const hashTab = () => { const h = location.hash.slice(1); return TABS.some(([k]) => k === h) ? h : "seeker"; };
+// 2026-11-17 전면 수정: 탭은 '역량 분석' 하나. 예전 화면은 주소(#seeker·#corp·#market)로만 열린다(코드 유지, 발표에서 안 씀)
+const TABS = [["analyze", "역량 분석", "취준생"]];
+const OLD = ["seeker", "corp", "market"];
+const hashTab = () => { const h = location.hash.slice(1); return TABS.some(([k]) => k === h) || OLD.includes(h) ? h : "analyze"; };
 
 export default function App() {
   const [tab, setTab] = useState(hashTab);
@@ -52,7 +51,7 @@ export default function App() {
       <header className="top">
         <div className="brand">
           <h1>역량다리</h1>
-          <p>공고만으로는 모르는 <b>입사 후 실무 역량</b>까지, 내가 뭘 먼저 준비하면 되는지 알려드려요.</p>
+          
           <div className="tools">
             {meta && (
               <>
@@ -76,7 +75,8 @@ export default function App() {
         </nav>
       </header>
       {err && <p className="err" style={{ marginTop: 16 }}>{err}</p>}
-      <div hidden={tab !== "market"}><Market /></div>
+      <div hidden={tab !== "analyze"}><Analyze active={tab === "analyze"} /></div>
+      <div hidden={tab !== "market"}>{tab === "market" && <Market />}</div>
       <div hidden={tab !== "seeker"}><Seeker companies={companies.filter((c) => c.listed !== false)} corpVersion={corpVersion} active={tab === "seeker"} mode={meta?.bedrock} /></div>
       <div hidden={tab !== "corp"}>
         <Corp companies={companies} corpVersion={corpVersion} active={tab === "corp"}
