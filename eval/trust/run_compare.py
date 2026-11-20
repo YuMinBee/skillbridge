@@ -28,6 +28,8 @@ import metrics as M  # noqa: E402
 
 PRED = HERE / "predictions"
 BASE_WEB = "web_plain_t1"   # 결과의 "web" = 사람이 웹에 그냥 묻는 방식(기본 temperature)
+# 우리 방식 예측 파일에는 실행 조건이 없어 설정 표에 직접 적는다(backend/app/agents/star.py · adapters/bedrock.py temperature 0)
+OURS_SETUP = {"model": "Sonnet 4.6", "prompt_style": "STAR v2(칸 기준 명시) · 캐시 끔", "temperature": 0, "parse_model": "— (JSON 직접 출력)"}
 
 NAMES = {
     "star_slot_acc": "STAR 칸 정확도",
@@ -94,9 +96,28 @@ def human_ab(n_boot: int) -> dict | None:
     ids = sorted(i for i in b if i in gold_a)
     if not ids:
         return None
-    return {"n": len(ids),
+    test_ids = set(load_gold("test"))
+    raw_b = {r["id"]: r for r in read_jsonl(path) if r["id"] in b}
+    fields = {k: (lambda g, k=k: g["slots"].get(k)) for k in M.SLOTS}
+    fields["quantified"] = lambda g: g.get("quantified")
+    fields["my_role_clear"] = lambda g: g.get("my_role_clear")
+    return {"n": len(ids), "n_test": sum(1 for i in ids if i in test_ids),
             "star_slot_acc": M.boot(M.slot_acc, gold_a, b, ids, n=n_boot),
-            "star_slot_kappa": M.boot(M.slot_kappa, gold_a, b, ids, n=n_boot)}
+            "star_slot_kappa": M.boot(M.slot_kappa, gold_a, b, ids, n=n_boot),
+            "field_kappa": {k: field_kappa([f(gold_a[i]) for i in ids], [f(raw_b[i]) for i in ids])
+                            for k, f in fields.items()}}
+
+
+def field_kappa(a: list, b: list) -> float | None:
+    """있음/없음 두 값 Cohen κ (점추정). 둘 중 하나라도 None이면 그 단락은 뺀다."""
+    pairs = [(bool(x), bool(y)) for x, y in zip(a, b) if x is not None and y is not None]
+    if not pairs:
+        return None
+    n = len(pairs)
+    po = sum(x == y for x, y in pairs) / n
+    pa, pb = sum(x for x, _ in pairs) / n, sum(y for _, y in pairs) / n
+    pe = pa * pb + (1 - pa) * (1 - pb)
+    return round((po - pe) / (1 - pe), 4) if pe < 1 else None
 
 
 def pct(v):
@@ -163,8 +184,9 @@ def setup_lines(res: dict, systems: list) -> list:
          "- **같은 모델로 비교한다.** 차이는 모델이 아니라 시스템(검색·규칙·검증)에서 나온다.", ""]
     L += ["| 방식 | 답한 모델 | 프롬프트 | temperature | 반복 | 웹 답변을 JSON으로 옮긴 모델 |", "|---|---|---|---|---|---|"]
     for s in systems:
-        info = meta["systems"][s]
-        rep = f"{info['n_runs'] / info['n_ids']:.1f}회" if info["n_ids"] else "—"
+        info = {**(OURS_SETUP if s == "ours" else {}), **meta["systems"][s]}
+        r = info["n_runs"] / info["n_ids"] if info["n_ids"] else None
+        rep = "—" if r is None else (f"{r:.0f}회" if r == int(r) else f"{r:.1f}회")
         L.append(f"| {SYS_NAMES.get(s, s)} | {info.get('model') or '—'} | {info.get('prompt_style') or '—'} | "
                  f"{info.get('temperature', '—') if info.get('temperature') is not None else '—'} | {rep} | {info.get('parse_model') or '—'} |")
     L += ["",
@@ -179,15 +201,39 @@ def setup_lines(res: dict, systems: list) -> list:
 def limit_lines(res: dict) -> list:
     meta = res["_meta"]
     L = ["## 한계", "",
+         "- **정답 초안을 Claude가 만들었다.** 단락 문장과 라벨 초안을 Claude가 쓰고, 1차 라벨러가 초안 라벨과 근거를 보면서 검토했다"
+         "(`LABELING.md`). 검토가 초안 쪽으로 끌렸을 수 있고, 평가 대상(우리·웹 모두 Sonnet 4.6)과 같은 계열 모델이 만든 문장·라벨이라 "
+         "Claude가 판단하기 쉬운 쪽으로 치우쳤을 수 있다. 그래서 점수가 실제보다 높게, 특히 같은 기준을 지시문에 담은 우리 방식에 유리하게 나왔을 수 있다.",
+         "- **우리 지시문의 칸 기준은 라벨 규칙에서 왔고 dev로 조정했다.** v2 지시문은 `LABELING.md`와 같은 일반 원칙을 담고(정답 문장은 넣지 않음), "
+         "dev 결과를 보며 고쳤다. 정답과 같은 기준을 아는 만큼 우리에게 유리하다."
+         + (" 그래서 같은 칸 기준을 프롬프트에 그대로 준 웹 ③도 비교했다." if any(s.startswith("web_strict") for s in meta["systems"]) else "")
+         + " test는 조정에 쓰지 않았다.",
          "- **합성 데이터다.** 단락은 유형별로 만든 합성 문장이라 실제 이력서보다 정돈돼 있다. 실제 이력서에서의 정확도는 이보다 낮을 수 있다.",
          "- **웹 답변 채점은 LLM이 옮긴 것이다.** 자유 글 답변을 FAST 모델이 JSON으로 옮긴다(답변만 보고, 이력서·정답은 보지 않음). 옮기는 과정의 오류가 웹 점수에 섞일 수 있다. 원문 답변은 예측 파일에 그대로 남겨 다시 옮길 수 있다(`baseline_web.py --reparse`).",
          "- 웹 답변의 '부족하지만 있음'은 있음, '언급 안 함'은 없음으로 본다. 해석을 바꾸면 웹 점수가 달라진다.",
          "- 실제 claude.ai 웹이 아니라 Bedrock의 같은 모델에 같은 문장을 보낸 것이다(웹 화면은 발표 슬라이드 1의 캡처로 따로 보여 준다).",
          "- 정답은 1차 라벨러 1명 기준이다. 사람끼리 얼마나 일치하는지는 2차 라벨(사람 A–B)로 따로 본다."]
-    if not res.get("human_ab"):
+    hab = res.get("human_ab")
+    if not hab:
         L.append("  - 이번 실행에는 2차 라벨(`gold_star_b.jsonl`)이 없어 사람 A–B 일치도가 빠졌다.")
     else:
-        L.append(f"  - 2차 라벨 {res['human_ab']['n']}개로 사람 A–B 일치도를 함께 적었다.")
+        n_test = hab.get("n_test")
+        rest = (f" test {meta['n_gold']}개 중 {n_test}개에만 2차 라벨이 있고, 나머지 {meta['n_gold'] - n_test}개는 1명 라벨뿐이다."
+                if meta["split"] == "test" and n_test is not None and n_test < meta["n_gold"] else "")
+        L.append(f"  - 2차 라벨 {hab['n']}개로 사람 A–B 일치도를 함께 적었다.{rest}")
+        L.append("  - 1차·2차가 다른 단락 16개(`disagreements_ab.md`)는 우리 방식을 만든 팀장이 판정했고, 전부 1차를 유지해 정답은 바뀌지 않았다. "
+                 "판정 뒤 `LABELING.md` A 기준에 '팀이 주어인 행동도 A로 인정' 한 줄을 추가했다(사후 규칙 보완). 표의 사람 A–B 값은 판정 전 값이다.")
+        fk = hab.get("field_kappa") or {}
+        if fk:
+            names = {"S": "S", "T": "T", "A": "A", "R": "R", "quantified": "수치 성과", "my_role_clear": "본인 역할"}
+            txt = " · ".join(f"{names[k]} {v:.2f}" for k, v in fk.items() if v is not None)
+            L.append(f"- **칸마다 사람끼리 일치하는 정도가 다르다.** 칸별 κ: {txt} (전체 STAR κ {hab['star_slot_kappa'][0]:.2f}). "
+                     "'없는 근거' 지표는 R 칸과 수치 성과 판정에 크게 기대는데 R은 다른 칸보다 낮아, 이 지표의 정답은 상대적으로 덜 확실하다. "
+                     "본인 역할은 사람끼리도 많이 갈려서 어떤 지표에도 쓰지 않았다.")
+    cases = meta.get("cases") or {}
+    if len(set(cases.values())) == 1 and len(cases) > 1:
+        L.append(f"- **유형이 {len(cases)}종 × {next(iter(cases.values()))}개로 균등하다.** 실제 자소서의 유형 비율과 다르다. "
+                 "전체 정확도·없는 근거 비율은 이 비율에 따라 달라지므로 실제 분포에서의 값으로 읽으면 안 된다.")
     if meta["split"] == "test":
         L.append("- test는 마지막에 한 번만 열었다(`--final`). 개발 중 확인은 dev로만 했다(과적합 방지, AGENTS 규칙 9).")
     miss = {s: i["missing"] for s, i in meta["systems"].items() if i.get("missing")}
@@ -313,6 +359,10 @@ def main():
     if out_json.exists():
         # 다른 트랙이 넣은 칸(retrieval 등)은 지우지 않는다
         old = json.loads(out_json.read_text(encoding="utf-8"))
+        # 같은 예측으로 보고서만 다시 만들 때, 지난번 --ours-note를 그대로 쓴다
+        old_note = (((old.get("_meta") or {}).get("systems") or {}).get("ours") or {}).get("note")
+        if "ours" in meta_sys and not a.ours_note and old_note:
+            meta_sys["ours"]["note"] = old_note
         for k, v in old.items():
             res.setdefault(k, v)
         for k, v in (old.get("metrics") or {}).items():
