@@ -299,3 +299,18 @@ def test_family_with_few_postings_not_ranked_first(monkeypatch):
     monkeypatch.setattr(sv, "_pooled", lambda f, sector="private": ({}, {"_f": f}, {}))
     best, scores = sv.infer_family({}, "private")
     assert scores["data"] == 26 and best == "backend"  # 공고 7건 직군은 점수가 높아도 1위로 뽑지 않는다
+
+
+def test_course_abstains_below_similarity_threshold(monkeypatch):
+    from app.agents import supervisor as sv
+    from app.rag import retrieve as R
+    monkeypatch.setattr(bedrock, "mode", lambda: "bedrock")
+    hit = lambda s: [{"doc_id": "W24-X", "title": "누구나 쉽게 접근하는 파이썬", "url": "u", "score": s, "meta": {"start": "2026-12-01"}}]
+    monkeypatch.setattr(R, "search", lambda *a, **k: hit(0.343))
+    low = sv.find_course("Redis")
+    assert low["abstained"] and low["score"] == 0.343
+    result = {"gaps": [{"id": "redis", "name": "Redis", "status": "missing", "status_label": "없음", "cites": [1]}], "strengths": []}
+    reco = sv._fallback_recommend(result, sv.Cites())[0]
+    assert reco["course"] is None and "맞는 과정 없음" in reco["course_note"]  # 옛 카탈로그로 채우지 않는다
+    monkeypatch.setattr(R, "search", lambda *a, **k: hit(0.47))
+    assert sv.find_course("Docker")["id"] == "W24-X"

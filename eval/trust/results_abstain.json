@@ -1,0 +1,412 @@
+{
+ "_meta": {
+  "pairs": 1191,
+  "queries": 40,
+  "model": "cohere-v4",
+  "note": "판정은 Sonnet(사람 재판정 일치 77%). 질의 40개라 기준값은 참고치"
+ },
+ "pair": [
+  {
+   "t": 0.2,
+   "kept": 1063,
+   "irrelevant": 0.3301975540921919
+  },
+  {
+   "t": 0.22,
+   "kept": 1012,
+   "irrelevant": 0.30237154150197626
+  },
+  {
+   "t": 0.24,
+   "kept": 948,
+   "irrelevant": 0.270042194092827
+  },
+  {
+   "t": 0.26,
+   "kept": 882,
+   "irrelevant": 0.2290249433106576
+  },
+  {
+   "t": 0.28,
+   "kept": 816,
+   "irrelevant": 0.20465686274509803
+  },
+  {
+   "t": 0.3,
+   "kept": 747,
+   "irrelevant": 0.16198125836680052
+  },
+  {
+   "t": 0.32,
+   "kept": 644,
+   "irrelevant": 0.11024844720496894
+  },
+  {
+   "t": 0.34,
+   "kept": 564,
+   "irrelevant": 0.09042553191489362
+  },
+  {
+   "t": 0.36,
+   "kept": 489,
+   "irrelevant": 0.08384458077709611
+  },
+  {
+   "t": 0.38,
+   "kept": 429,
+   "irrelevant": 0.08857808857808858
+  },
+  {
+   "t": 0.4,
+   "kept": 372,
+   "irrelevant": 0.08333333333333333
+  },
+  {
+   "t": 0.42,
+   "kept": 315,
+   "irrelevant": 0.07301587301587302
+  },
+  {
+   "t": 0.44,
+   "kept": 245,
+   "irrelevant": 0.07755102040816327
+  },
+  {
+   "t": 0.46,
+   "kept": 184,
+   "irrelevant": 0.06521739130434782
+  },
+  {
+   "t": 0.48,
+   "kept": 142,
+   "irrelevant": 0.02112676056338028
+  },
+  {
+   "t": 0.5,
+   "kept": 104,
+   "irrelevant": 0.009615384615384616
+  },
+  {
+   "t": 0.52,
+   "kept": 65,
+   "irrelevant": 0.015384615384615385
+  },
+  {
+   "t": 0.54,
+   "kept": 57,
+   "irrelevant": 0.017543859649122806
+  }
+ ],
+ "top1": [
+  {
+   "t": 0.2,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.22,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.24,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.26,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.28,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.3,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.32,
+   "recommend_rate": 1.0,
+   "irrelevant_in_recommended": 0.075,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.34,
+   "recommend_rate": 0.975,
+   "irrelevant_in_recommended": 0.05128205128205128,
+   "lost_relevant": 0
+  },
+  {
+   "t": 0.36,
+   "recommend_rate": 0.925,
+   "irrelevant_in_recommended": 0.05405405405405406,
+   "lost_relevant": 2
+  },
+  {
+   "t": 0.38,
+   "recommend_rate": 0.9,
+   "irrelevant_in_recommended": 0.05555555555555555,
+   "lost_relevant": 3
+  },
+  {
+   "t": 0.4,
+   "recommend_rate": 0.75,
+   "irrelevant_in_recommended": 0.06666666666666667,
+   "lost_relevant": 9
+  },
+  {
+   "t": 0.42,
+   "recommend_rate": 0.7,
+   "irrelevant_in_recommended": 0.07142857142857142,
+   "lost_relevant": 11
+  },
+  {
+   "t": 0.44,
+   "recommend_rate": 0.675,
+   "irrelevant_in_recommended": 0.07407407407407407,
+   "lost_relevant": 12
+  },
+  {
+   "t": 0.46,
+   "recommend_rate": 0.65,
+   "irrelevant_in_recommended": 0.07692307692307693,
+   "lost_relevant": 13
+  },
+  {
+   "t": 0.48,
+   "recommend_rate": 0.55,
+   "irrelevant_in_recommended": 0.045454545454545456,
+   "lost_relevant": 16
+  },
+  {
+   "t": 0.5,
+   "recommend_rate": 0.425,
+   "irrelevant_in_recommended": 0.0,
+   "lost_relevant": 20
+  },
+  {
+   "t": 0.52,
+   "recommend_rate": 0.225,
+   "irrelevant_in_recommended": 0.0,
+   "lost_relevant": 28
+  },
+  {
+   "t": 0.54,
+   "recommend_rate": 0.2,
+   "irrelevant_in_recommended": 0.0,
+   "lost_relevant": 29
+  }
+ ],
+ "top1_scores": [
+  {
+   "query": "코드 변경을 자동으로 테스트하고 배포하는 파이프라인",
+   "score": 0.336,
+   "label": 0
+  },
+  {
+   "query": "Linux",
+   "score": 0.353,
+   "label": 2
+  },
+  {
+   "query": "리눅스 서버를 명령어로 다루는 법",
+   "score": 0.354,
+   "label": 2
+  },
+  {
+   "query": "Kafka",
+   "score": 0.366,
+   "label": 1
+  },
+  {
+   "query": "컴퓨터 비전",
+   "score": 0.385,
+   "label": 2
+  },
+  {
+   "query": "사진 속 물체를 찾아내는 모델 만들기",
+   "score": 0.388,
+   "label": 2
+  },
+  {
+   "query": "대용량 데이터를 모아서 정제하고 저장하는 흐름 만들기",
+   "score": 0.391,
+   "label": 2
+  },
+  {
+   "query": "REST API",
+   "score": 0.396,
+   "label": 2
+  },
+  {
+   "query": "학습한 모델을 서비스로 배포하고 성능을 모니터링하는 법",
+   "score": 0.397,
+   "label": 2
+  },
+  {
+   "query": "클라우드에 서버를 올리고 비용과 권한을 관리하는 법",
+   "score": 0.4,
+   "label": 1
+  },
+  {
+   "query": "컨테이너로 서비스를 배포하고 여러 서버에서 자동으로 운영하는 법",
+   "score": 0.407,
+   "label": 2
+  },
+  {
+   "query": "네트워크",
+   "score": 0.417,
+   "label": 2
+  },
+  {
+   "query": "Kubernetes",
+   "score": 0.423,
+   "label": 2
+  },
+  {
+   "query": "해킹을 막기 위한 서버 보안 설정",
+   "score": 0.453,
+   "label": 2
+  },
+  {
+   "query": "머신러닝",
+   "score": 0.462,
+   "label": 2
+  },
+  {
+   "query": "Docker",
+   "score": 0.469,
+   "label": 2
+  },
+  {
+   "query": "엑셀 대신 코드로 데이터를 분석하고 그래프 그리기",
+   "score": 0.473,
+   "label": 0
+  },
+  {
+   "query": "Spring",
+   "score": 0.474,
+   "label": 2
+  },
+  {
+   "query": "딥러닝",
+   "score": 0.486,
+   "label": 2
+  },
+  {
+   "query": "자바로 웹 서버 API를 만드는 법",
+   "score": 0.488,
+   "label": 1
+  },
+  {
+   "query": "TypeScript",
+   "score": 0.49,
+   "label": 2
+  },
+  {
+   "query": "AWS",
+   "score": 0.494,
+   "label": 2
+  },
+  {
+   "query": "챗GPT 같은 언어모델에 우리 문서를 붙여서 답하게 하기",
+   "score": 0.5,
+   "label": 0
+  },
+  {
+   "query": "Git",
+   "score": 0.505,
+   "label": 2
+  },
+  {
+   "query": "문장을 이해하는 챗봇이나 텍스트 분류 모델 만들기",
+   "score": 0.506,
+   "label": 2
+  },
+  {
+   "query": "자연어처리",
+   "score": 0.507,
+   "label": 2
+  },
+  {
+   "query": "Python",
+   "score": 0.51,
+   "label": 2
+  },
+  {
+   "query": "데이터 분석",
+   "score": 0.515,
+   "label": 2
+  },
+  {
+   "query": "웹 화면을 컴포넌트로 만드는 프런트엔드 개발",
+   "score": 0.519,
+   "label": 2
+  },
+  {
+   "query": "정보보안",
+   "score": 0.52,
+   "label": 2
+  },
+  {
+   "query": "PyTorch",
+   "score": 0.52,
+   "label": 2
+  },
+  {
+   "query": "데이터베이스 설계와 쿼리 튜닝",
+   "score": 0.532,
+   "label": 1
+  },
+  {
+   "query": "Java",
+   "score": 0.544,
+   "label": 2
+  },
+  {
+   "query": "SQL",
+   "score": 0.55,
+   "label": 2
+  },
+  {
+   "query": "React",
+   "score": 0.55,
+   "label": 2
+  },
+  {
+   "query": "MLOps",
+   "score": 0.554,
+   "label": 2
+  },
+  {
+   "query": "LLM",
+   "score": 0.568,
+   "label": 2
+  },
+  {
+   "query": "데이터 파이프라인",
+   "score": 0.597,
+   "label": 2
+  },
+  {
+   "query": "정보처리기사 자격증 시험 준비",
+   "score": 0.623,
+   "label": 2
+  },
+  {
+   "query": "정보처리기사",
+   "score": 0.728,
+   "label": 2
+  }
+ ]
+}

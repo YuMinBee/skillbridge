@@ -360,20 +360,31 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
     return out
 
 
+# 벡터 검색 1위 유사도가 이보다 낮으면 '맞는 과정 없음'으로 추천하지 않는다(엉뚱한 과정보다 거부).
+# 근거: eval/trust/abstain_threshold.py — 판정된 질의 40개의 1위 과정 중, 0.34~0.353 사이 기준이면 무관 1위 1개만 빠지고
+# 관련 1위는 하나도 잃지 않는다(추천 중 무관 7.5% → 5.1%, 추천 비율 97.5%). 그 구간 안의 0.35를 쓴다. Cohere v4 점수 기준.
+MIN_COURSE_SCORE = 0.35
+
+
 def find_course(name: str, log=None) -> dict | None:
     """부족한 역량 → 고용24 과정 (RAG). Bedrock 모드는 실험으로 고른 조합(rag.retrieve.BEST), 아니면 키워드(BM25).
-    앞으로 개강하는 과정만. 검색 결과가 없으면 기존 카탈로그 규칙으로."""
+    앞으로 개강하는 과정만. 벡터 검색 1위가 MIN_COURSE_SCORE 미만이면 {"abstained": True, "score"}(추천하지 않음).
+    검색 결과가 없으면 None(기존 카탈로그 규칙으로)."""
     from ..rag import retrieve as R
+    vector = bedrock.mode() == "bedrock"
     try:
-        hits = R.search(name, 1, config="best" if bedrock.mode() == "bedrock" else "bm25", kinds=["course"], log=log)
+        hits = R.search(name, 1, config="best" if vector else "bm25", kinds=["course"], log=log)
     except bedrock.BedrockError:
+        vector = False
         hits = R.search(name, 1, config="bm25", kinds=["course"])
     if hits:
         h = hits[0]
+        if vector and R.BEST.startswith("vector:") and h["score"] < MIN_COURSE_SCORE:
+            return {"abstained": True, "score": round(h["score"], 3), "nearest": h["title"]}
         m = h.get("meta", {})
         return {"id": h["doc_id"], "title": h["title"], "provider": m.get("provider", ""), "url": h.get("url"),
                 "hours": m.get("hours"), "start": m.get("start"), "end": m.get("end"), "region": m.get("region", ""),
-                "via": "rag"}
+                "via": "rag", "score": round(h["score"], 3)}
     return None
 
 
@@ -385,7 +396,11 @@ def _fallback_recommend(result: dict, cites: Cites, log=None) -> list[dict]:
         # 엉뚱한 과정이 뽑힌다. 실측 2026-11-20: '커뮤니케이션' → 'C 프로그래밍'). 소프트 스킬은 STAR 다시 쓰기 과제만 낸다.
         no_course = g["status"] == "verify" or g["id"] in SOFT
         c = None if no_course else find_course(g["name"], log=log)
-        if c is None and not no_course:
+        course_note = None
+        if c and c.get("abstained"):  # 맞는 과정이 없다고 판단 → 옛 카탈로그로 채우지 않는다
+            course_note = f"고용24 정보기술 과정 중 맞는 과정 없음 (가장 가까운 과정 유사도 {c['score']} < 기준 {MIN_COURSE_SCORE})"
+            c = None
+        elif c is None and not no_course:
             course, alt = _pick_course(g["id"], "전국")
             c = course or alt
         cn = []
@@ -407,7 +422,7 @@ def _fallback_recommend(result: dict, cites: Cites, log=None) -> list[dict]:
         recos.append({"rank": len(recos) + 1, "target": g["id"],
                       "why": f"지원 기준에 '{g['name']}'이(가) 있으나 이력서 상태는 '{g['status_label']}'",
                       "task": task,
-                      "course": co, "cites": g["cites"] + cn, "abstained": False})
+                      "course": co, "course_note": course_note, "cites": g["cites"] + cn, "abstained": False})
     weak = [e for e in result["strengths"] if e["level"] != "strong" and e.get("missing_hint")
             and any(s.get("cite") for s in e["slots"].values())]  # 인용할 문장이 있는 경험만 (근거 없는 추천 방지)
     if weak:
