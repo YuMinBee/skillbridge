@@ -70,9 +70,20 @@ def _gongchae() -> tuple:
     return _jsonl("gongchae_it.jsonl")
 
 
+@lru_cache(maxsize=1)
 def _direct() -> tuple:
-    """기업 공식 채용 페이지 직접 수집(김승제, 규칙: seed/market/direct_it.md). 직군(family)이 사람이 붙인 값이라 그대로 쓴다."""
-    return _jsonl("direct_it.jsonl")
+    """기업 공식 채용 페이지 직접 수집(규칙: seed/market/direct_it.md). 직군(family)은 사람이 붙인 값이라 그대로 쓴다.
+    direct_it*.jsonl을 모두 읽는다(사람마다 파일을 따로 두어 충돌을 피함). 같은 링크는 한 번만."""
+    from ..config import SEED
+    seen, out = set(), []
+    for f in sorted((SEED / "market").glob("direct_it*.jsonl")):
+        for d in _jsonl(f.name):
+            key = (d.get("url") or d.get("id") or "").rstrip("/")
+            if key in seen:
+                continue
+            seen.add(key)
+            out.append(d)
+    return tuple(out)
 
 
 def posting_pool(job_family: str) -> dict:
