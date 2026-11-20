@@ -21,6 +21,7 @@ from ..pipeline.recommend import _pick_course
 from ..pipeline.score import gaps as score_gaps, readiness, resolve_any_of
 from ..skills import get_dict, sentences
 from . import cost, star, verifier
+from . import tasks as task_agent
 
 AGENTS = ["collect", "guard", "star", "skills", "retriever", "recommend", "verifier", "cost"]
 FAMILIES = {"backend": ("백엔드",), "ai_ml": ("AI·ML", "MLOps"), "data": ("데이터",)}
@@ -337,14 +338,21 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         out["result"]["gaps"] = gl
         row.update(source=src, n_requirements=len(reqs), practice="NCS 기준 대기(T2)" if practice is None else "NCS")
 
-    with stage("recommend", llm=_optional("recommend_task") is not None) as row:
+    with stage("recommend", llm=True) as row:
         rt = _optional("recommend_task")
         if rt and hasattr(rt, "recommend"):
             recos = rt.recommend(out["result"]["gaps"], out["result"]["strengths"], state["family"], log=log)
             row["impl"] = "T2"
         else:
             recos = _fallback_recommend(out["result"], cites, log=log)
-            row["impl"] = "임시(규칙)"
+            row["impl"] = "규칙 + 과제 구체화"
+            if bedrock.mode() == "bedrock":  # 예산 초과면 stage가 mock으로 돌려 여기를 건너뛴다 → 템플릿 과제
+                try:
+                    rep = task_agent.concretize(recos, out["result"]["gaps"], cites.items, state["resume"], cites, log=log)
+                    row.update(tasks_asked=rep["asked"], tasks_accepted=rep["accepted"],
+                               tasks_rejected=[f"{t}: {w}" for t, w in rep["rejected"]])
+                except bedrock.BedrockError as e:
+                    row["note"] = f"과제 구체화 실패 → 템플릿: {str(e)[:80]}"
         out["result"]["recommendations"] = recos
 
     with stage("verifier") as row:

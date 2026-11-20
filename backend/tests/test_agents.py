@@ -314,3 +314,32 @@ def test_course_abstains_below_similarity_threshold(monkeypatch):
     assert reco["course"] is None and "맞는 과정 없음" in reco["course_note"]  # 옛 카탈로그로 채우지 않는다
     monkeypatch.setattr(R, "search", lambda *a, **k: hit(0.47))
     assert sv.find_course("Docker")["id"] == "W24-X"
+
+
+def test_task_concretize_keeps_only_grounded_tasks(monkeypatch):
+    from app.agents import supervisor as sv, tasks
+    resume = "Spring Boot와 MySQL로 대여 API를 만들었습니다. 동아리원 60명이 지금도 씁니다."
+    cites = sv.Cites()
+    p1 = cites.add("posting", "A 공고", "Docker, CI/CD 등 현대적 개발 환경에 대한 이해 또는 경험")
+    p2 = cites.add("posting", "B 공고", "AWS 클라우드 환경에서 백엔드 서비스 설계")
+    p3 = cites.add("posting", "C 공고", "Redis 활용 경험")
+    gaps = [{"id": "docker", "name": "Docker", "status": "missing", "status_label": "없음", "cites": [p1]},
+            {"id": "aws", "name": "AWS", "status": "missing", "status_label": "없음", "cites": [p2]},
+            {"id": "redis", "name": "Redis", "status": "missing", "status_label": "없음", "cites": [p3]}]
+    recos = [{"rank": i + 1, "target": g["id"], "task": "템플릿", "course": None, "cites": list(g["cites"])} for i, g in enumerate(gaps)]
+    monkeypatch.setattr(bedrock, "converse_tool", lambda *a, **k: {"tasks": [
+        {"target": "docker", "task": "대여 API를 Docker 이미지로 만들고 실행 방법을 README에 남기기",
+         "posting_quote": "Docker, CI/CD 등 현대적 개발 환경", "resume_quote": "Spring Boot와 MySQL로 대여 API를 만들었습니다."},
+        {"target": "aws", "task": "응답 시간을 50% 줄이기", "posting_quote": "AWS 클라우드 환경에서 백엔드 서비스 설계", "resume_quote": None},
+        {"target": "redis", "task": "캐시 붙이기", "posting_quote": "Redis 대용량 트래픽 처리 경험", "resume_quote": None}]})
+    rep = tasks.concretize(recos, gaps, cites.items, resume, cites)
+    assert rep["accepted"] == 1 and recos[0]["task"].startswith("대여 API를 Docker") and len(recos[0]["cites"]) == 2
+    assert recos[1]["task"] == "템플릿" and recos[2]["task"] == "템플릿"  # 지어낸 숫자 · 공고에 없는 인용 → 템플릿 유지
+    assert dict(rep["rejected"]) == {"aws": "원문에 없는 숫자", "redis": "공고 인용이 공고에 없음"}
+
+
+def test_task_number_check_ignores_tool_names():
+    from app.agents.tasks import _numbers_ok
+    assert _numbers_ok("JUnit5로 테스트하고 EC2에 배포, k6로 측정해 기록", ["자소서"])
+    assert not _numbers_ok("응답 시간을 50% 줄이기", ["자소서"])
+    assert _numbers_ok("동아리원 60명이 쓰는 API에 캐시", ["동아리원 60명이 지금도"])
