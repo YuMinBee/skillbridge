@@ -238,7 +238,9 @@ function Recos({ list, onCite }) {
               <>
                 <p><b>{r.task}</b></p>
                 <p className="hint">왜: {r.why} <Cite ns={r.cites} onCite={onCite} /></p>
-                {r.course && <p className="hint">과정: {r.course.url ? <a href={r.course.url} target="_blank" rel="noreferrer">{r.course.name}</a> : r.course.name} · {r.course.hours}시간</p>}
+                {r.task_basis && <p className="hint">과제 근거: 공고 “{r.task_basis.posting}”{r.task_basis.resume ? <> · 내 자소서 “{r.task_basis.resume}”</> : null}</p>}
+                {r.course && <p className="hint">과정: {r.course.url ? <a href={r.course.url} target="_blank" rel="noreferrer">{r.course.name}</a> : r.course.name}{r.course.start ? ` · ${r.course.start} 개강` : r.course.hours ? ` · ${r.course.hours}시간` : ""}</p>}
+                {!r.course && r.course_note && <p className="hint">과정: {r.course_note}</p>}
               </>
             )}
           </li>

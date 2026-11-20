@@ -299,3 +299,78 @@ def test_family_with_few_postings_not_ranked_first(monkeypatch):
     monkeypatch.setattr(sv, "_pooled", lambda f, sector="private": ({}, {"_f": f}, {}))
     best, scores = sv.infer_family({}, "private")
     assert scores["data"] == 26 and best == "backend"  # 공고 7건 직군은 점수가 높아도 1위로 뽑지 않는다
+
+
+def test_course_abstains_below_similarity_threshold(monkeypatch):
+    from app.agents import supervisor as sv
+    from app.rag import retrieve as R
+    monkeypatch.setattr(bedrock, "mode", lambda: "bedrock")
+    hit = lambda s: [{"doc_id": "W24-X", "title": "누구나 쉽게 접근하는 파이썬", "url": "u", "score": s, "meta": {"start": "2026-12-01"}}]
+    monkeypatch.setattr(R, "search", lambda *a, **k: hit(0.343))
+    low = sv.find_course("Redis")
+    assert low["abstained"] and low["score"] == 0.343
+    result = {"gaps": [{"id": "redis", "name": "Redis", "status": "missing", "status_label": "없음", "cites": [1]}], "strengths": []}
+    reco = sv._fallback_recommend(result, sv.Cites())[0]
+    assert reco["course"] is None and "맞는 과정 없음" in reco["course_note"]  # 옛 카탈로그로 채우지 않는다
+    monkeypatch.setattr(R, "search", lambda *a, **k: hit(0.47))
+    assert sv.find_course("Docker")["id"] == "W24-X"
+
+
+def test_task_concretize_keeps_only_grounded_tasks(monkeypatch):
+    from app.agents import supervisor as sv, tasks
+    resume = "Spring Boot와 MySQL로 대여 API를 만들었습니다. 동아리원 60명이 지금도 씁니다."
+    cites = sv.Cites()
+    p1 = cites.add("posting", "A 공고", "Docker, CI/CD 등 현대적 개발 환경에 대한 이해 또는 경험")
+    p2 = cites.add("posting", "B 공고", "AWS 클라우드 환경에서 백엔드 서비스 설계")
+    p3 = cites.add("posting", "C 공고", "Redis 활용 경험")
+    gaps = [{"id": "docker", "name": "Docker", "status": "missing", "status_label": "없음", "cites": [p1]},
+            {"id": "aws", "name": "AWS", "status": "missing", "status_label": "없음", "cites": [p2]},
+            {"id": "redis", "name": "Redis", "status": "missing", "status_label": "없음", "cites": [p3]}]
+    recos = [{"rank": i + 1, "target": g["id"], "task": "템플릿", "course": None, "cites": list(g["cites"])} for i, g in enumerate(gaps)]
+    monkeypatch.setattr(bedrock, "converse_tool", lambda *a, **k: {"tasks": [
+        {"target": "docker", "task": "대여 API를 Docker 이미지로 만들고 실행 방법을 README에 남기기",
+         "posting_quote": "Docker, CI/CD 등 현대적 개발 환경", "resume_quote": "Spring Boot와 MySQL로 대여 API를 만들었습니다."},
+        {"target": "aws", "task": "응답 시간을 50% 줄이기", "posting_quote": "AWS 클라우드 환경에서 백엔드 서비스 설계", "resume_quote": None},
+        {"target": "redis", "task": "캐시 붙이기", "posting_quote": "Redis 대용량 트래픽 처리 경험", "resume_quote": None}]})
+    rep = tasks.concretize(recos, gaps, cites.items, resume, cites)
+    assert rep["accepted"] == 1 and recos[0]["task"].startswith("대여 API를 Docker") and len(recos[0]["cites"]) == 2
+    assert recos[1]["task"] == "템플릿" and recos[2]["task"] == "템플릿"  # 지어낸 숫자 · 공고에 없는 인용 → 템플릿 유지
+    assert dict(rep["rejected"]) == {"aws": "원문에 없는 숫자", "redis": "공고 인용이 공고에 없음"}
+
+
+def test_task_number_check_ignores_tool_names():
+    from app.agents.tasks import _numbers_ok
+    assert _numbers_ok("JUnit5로 테스트하고 EC2에 배포, k6로 측정해 기록", ["자소서"])
+    assert not _numbers_ok("응답 시간을 50% 줄이기", ["자소서"])
+    assert _numbers_ok("동아리원 60명이 쓰는 API에 캐시", ["동아리원 60명이 지금도"])
+
+
+def test_listed_certificate_counts_as_owned():
+    from app.agents.supervisor import _cert_status
+    m = {"cert_info_processing": {"status": "verify", "evidence": "[자격증] 정보처리기사"},
+         "cert_security": {"status": "verify", "evidence": "[자격증] 정보처리기사 필기 합격, 정보보안기사 필기"},
+         "java": {"status": "verify", "evidence": "[보유 기술] Java"}}
+    _cert_status(m)
+    assert m["cert_info_processing"]["status"] == "own" and m["cert_security"]["status"] == "part"
+    assert m["java"]["status"] == "verify"  # 기술은 그대로(이름만 있으면 검증 필요)
+
+
+def test_task_concretize_cached_same_input(monkeypatch, tmp_path):
+    from app.agents import supervisor as sv, tasks
+    monkeypatch.setenv("STAR_CACHE_DIR", str(tmp_path))
+    resume = "Spring Boot로 대여 API를 만들었습니다."
+    calls = []
+
+    def fake(*a, **k):
+        calls.append(1)
+        return {"tasks": [{"target": "docker", "task": f"대여 API를 Docker로 감싸기 {'A' if len(calls) == 1 else 'B'}",
+                           "posting_quote": "Docker 경험", "resume_quote": None}]}
+    monkeypatch.setattr(bedrock, "converse_tool", fake)
+
+    def once():
+        cites = sv.Cites(); n = cites.add("posting", "공고", "Docker 경험")
+        gaps = [{"id": "docker", "name": "Docker", "status": "missing", "status_label": "없음", "cites": [n]}]
+        recos = [{"rank": 1, "target": "docker", "task": "템플릿", "course": None, "cites": [n]}]
+        tasks.concretize(recos, gaps, cites.items, resume, cites, use_cache=True)
+        return recos[0]["task"]
+    assert once() == once() and len(calls) == 1  # 같은 입력 → 같은 과제

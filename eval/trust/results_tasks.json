@@ -1,0 +1,309 @@
+{
+ "total": {
+  "asked": 16,
+  "accepted": 16,
+  "course": 12,
+  "abstain": 1,
+  "no_course": 5,
+  "usd": 0.08
+ },
+ "runs": [
+  {
+   "id": "demo",
+   "note": "시연 자소서",
+   "family": "백엔드",
+   "sector": "private",
+   "tasks_asked": 3,
+   "tasks_accepted": 3,
+   "tasks_rejected": [],
+   "recos": [
+    {
+     "target": "java",
+     "task": "장비 대여 API 중 대여 가능 여부 조회 엔드포인트를 선택해 JUnit5로 단위 테스트를 작성하고, 핵심 비즈니스 로직(반납 예정일 계산, 중복 대여 방지 등)의 테스트 커버리지를 측정해 README에 결과를 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Java / Spring Framework",
+      "resume": "Spring Boot와 MySQL로 대여 API를 만들고, 반납 예정일 하루 전에 알림 메일을 보내는 스케줄러를 붙였습니다."
+     },
+     "course": null,
+     "course_note": null
+    },
+    {
+     "target": "aws",
+     "task": "학과 공지 챗봇 FastAPI 서버를 AWS EC2 프리티어에 직접 배포하고, 배포 전후 응답 속도를 측정해 README에 아키텍처 구성도와 함께 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분",
+      "resume": "배포까지는 하지 못했지만 이 과정에서 크롤링과 API 설계를 깊이 공부했습니다."
+     },
+     "course": "IT 엔지니어를 위한 AWS 운영의 기본과 노하우",
+     "course_note": null
+    },
+    {
+     "target": "cicd",
+     "task": "장비 대여 시스템 저장소에 GitHub Actions 워크플로를 추가해 main 브랜치 푸시 시 빌드·테스트가 자동 실행되도록 구성하고, 성공·실패 배지를 README에 표시한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "CI/CD 파이프라인 및 데이터 플로우 자동화 구축",
+      "resume": "Spring Boot와 MySQL로 대여 API를 만들고, 반납 예정일 하루 전에 알림 메일을 보내는 스케줄러를 붙였습니다."
+     },
+     "course": "AWS & CI/CD 기반 Java 클라우드 Full-Stack 개발자 양성과정",
+     "course_note": null
+    },
+    {
+     "target": "communication",
+     "task": "'커뮤니케이션'이(가) 드러난 경험 하나를 골라 STAR로 다시 쓰기(누구와, 무엇을 조율했고, 결과가 어땠는지)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    },
+    {
+     "target": "star:e2",
+     "task": "이 경험을 STAR로 다시 쓰기: 어떤 문제였고(S), 내가 맡은 것(T), 한 일(A), 바뀐 숫자(R)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    }
+   ],
+   "verify_passed": true,
+   "usd": 0.023411
+  },
+  {
+   "id": "e_ai",
+   "note": "AI·ML 지망, 강한 경험 1 + 결과 없는 경험 1",
+   "family": "AI·ML",
+   "sector": "private",
+   "tasks_asked": 4,
+   "tasks_accepted": 4,
+   "tasks_rejected": [],
+   "recos": [
+    {
+     "target": "llm",
+     "task": "기존 문장 임베딩 프로젝트에 오픈소스 LLM(예: Ollama로 로컬 실행)을 연결해, 유사 질문 검색 결과를 LLM이 답변 초안으로 생성하는 파이프라인을 추가 구현하고, 기존 평가셋 200개 기준 응답 품질(정확도 또는 BLEU/ROUGE)을 측정해 README에 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "LLM 또는 NLP 모델을 직접 만들고 운영해 본 경험이 있는 분을 찾아요.",
+      "resume": "한국어 문장 임베딩 모델을 PyTorch로 미세조정하고, 질문 200개로 평가셋을 만들어 Top-3 정확도를 비교했습니다."
+     },
+     "course": null,
+     "course_note": null
+    },
+    {
+     "target": "python",
+     "task": "기존 Q&A 프로젝트의 데이터 전처리 코드를 Pandas 중심에서 벗어나, 동일한 4,200건 데이터를 대상으로 Pandas와 대안 도구(예: Polars 또는 PySpark 로컬 모드) 처리 속도를 비교 측정하고 결과를 README 표로 정리한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Python 기반 데이터/ML 도구(PySpark, Pandas, Airflow, PyTorch 등) 숙련되신 분",
+      "resume": "지난 3년 치 질문과 답변 4,200건을 모아 문장 임베딩으로 비슷한 과거 질문을 찾아 주는 모델을 맡았습니다."
+     },
+     "course": null,
+     "course_note": null
+    },
+    {
+     "target": "ai_agent",
+     "task": "LangChain 또는 LlamaIndex의 Agent 기능을 활용해, Q&A 게시판 데이터를 벡터 DB에 저장하고 사용자 질문에 검색·답변 생성을 자동으로 수행하는 간단한 RAG 챗봇을 구현한 뒤, 샘플 질문 10개에 대한 응답 결과를 README에 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "RAG, AI 에이전트 기반 챗봇, 전화망 위에서 실시간으로 대화하는 콜봇, 티켓 시스템까지 옴니채널 풀 라인업을 자체 개발하고 있습니다.",
+      "resume": "지난 3년 치 질문과 답변 4,200건을 모아 문장 임베딩으로 비슷한 과거 질문을 찾아 주는 모델을 맡았습니다."
+     },
+     "course": "AI Agent를 활용한 디지털 미디어 콘텐츠 Innovator",
+     "course_note": null
+    },
+    {
+     "target": "ai_general",
+     "task": "Q&A 추천 프로젝트의 전 과정(데이터 수집·전처리 → 모델 학습 → 평가 → 배포 방안)을 데이터 수집부터 모델 평가까지 단계별로 정리한 1~2페이지 분량의 프로젝트 보고서를 작성해 GitHub README에 공개한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "데이터 수집/처리, 분석 모델링, 모델 평가 및 모델 전개 등 분석 기법을 적용하여 고객의 Digital 경쟁력 강화",
+      "resume": "한국어 문장 임베딩 모델을 PyTorch로 미세조정하고, 질문 200개로 평가셋을 만들어 Top-3 정확도를 비교했습니다. 기본 모델 61%에서 미세조정 후 78%가 되었고, 조교님이 한 학기 동안 답변 초안으로 사용하셨습니다."
+     },
+     "course": "처음배우는인공지능",
+     "course_note": null
+    },
+    {
+     "target": "star:e2",
+     "task": "이 경험을 STAR로 다시 쓰기: 어떤 문제였고(S), 내가 맡은 것(T), 한 일(A), 바뀐 숫자(R)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    }
+   ],
+   "verify_passed": true,
+   "usd": 0.017552
+  },
+  {
+   "id": "e_data",
+   "note": "데이터 지망, 결과 있는 분석 1 + 팀 작업 불분명 1",
+   "family": "데이터",
+   "sector": "private",
+   "tasks_asked": 4,
+   "tasks_accepted": 4,
+   "tasks_rejected": [],
+   "recos": [
+    {
+     "target": "data_pipeline",
+     "task": "잔반 분석에 쓴 엑셀·SQL 작업을 Python 스크립트로 재현하는 간단한 ETL 파이프라인을 만들고, 원본 CSV → 변환 → 집계 결과 저장까지 단계별 흐름을 README에 다이어그램과 함께 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "데이터 파이프라인(ETL/ELT) 설계 및 최적화 / 데이터 레이크 및 DW 설계·구축·운영",
+      "resume": "저는 한 학기 동안 메뉴별 배식량과 잔반 무게 기록을 엑셀에서 정리해 SQL로 집계하고"
+     },
+     "course": "[AI Shift Track] AI 데이터 엔지니어 과정 - 데이터 파이프라인 통합",
+     "course_note": null
+    },
+    {
+     "target": "python",
+     "task": "잔반 분석 때 SQL로 처리한 집계 쿼리를 Pandas로 동일하게 재작성하고, SQL 결과와 Pandas 결과가 일치하는지 assert로 검증한 뒤 노트북 파일로 GitHub에 올린다.",
+     "via": "llm",
+     "basis": {
+      "posting": "SQL과 Python을 활용해 복잡한 데이터를 손쉽게 추출 및 가공이 가능한 분을 찾아요.",
+      "resume": "저는 한 학기 동안 메뉴별 배식량과 잔반 무게 기록을 엑셀에서 정리해 SQL로 집계하고"
+     },
+     "course": null,
+     "course_note": null
+    },
+    {
+     "target": "airflow",
+     "task": "잔반 분석의 데이터 수집→정제→집계 단계를 Airflow DAG 세 개의 태스크로 구성해 로컬에서 실행하고, 각 태스크의 성공·실패 로그를 캡처해 README에 첨부한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Airflow, dbt 등 워크플로 관리 또는 데이터 변환 도구를 사용해 본 분",
+      "resume": "저는 한 학기 동안 메뉴별 배식량과 잔반 무게 기록을 엑셀에서 정리해 SQL로 집계하고"
+     },
+     "course": null,
+     "course_note": "고용24 정보기술 과정 중 맞는 과정 없음 (가장 가까운 과정 유사도 0.245 < 기준 0.35)"
+    },
+    {
+     "target": "aws",
+     "task": "잔반 분석용 CSV 파일을 AWS S3에 업로드하고 AWS Glue 크롤러로 스키마를 자동 감지한 뒤 Athena에서 집계 쿼리를 실행해 결과 스크린샷을 README에 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Work experience in AWS and/or GCP data pipeline ecosystem",
+      "resume": "저는 한 학기 동안 메뉴별 배식량과 잔반 무게 기록을 엑셀에서 정리해 SQL로 집계하고"
+     },
+     "course": "IT 엔지니어를 위한 AWS 운영의 기본과 노하우",
+     "course_note": null
+    },
+    {
+     "target": "star:e2",
+     "task": "이 경험을 STAR로 다시 쓰기: 어떤 문제였고(S), 내가 맡은 것(T), 한 일(A), 바뀐 숫자(R)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    }
+   ],
+   "verify_passed": true,
+   "usd": 0.015663
+  },
+  {
+   "id": "e_be_weak",
+   "note": "백엔드 지망, 꾸민 말 위주 + 짧은 경험",
+   "family": "백엔드",
+   "sector": "private",
+   "tasks_asked": 4,
+   "tasks_accepted": 4,
+   "tasks_rejected": [],
+   "recos": [
+    {
+     "target": "java",
+     "task": "게시판 프로젝트의 Node.js 로그인·글쓰기 API 중 하나를 Java로 동일하게 재구현하고, 두 버전의 코드 구조 차이를 README에 비교 정리한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Java / Spring Framework",
+      "resume": "Node.js와 Express로 로그인과 글쓰기가 되는 게시판을 만들었습니다."
+     },
+     "course": "가장 쉽게 배우는 JAVA(자바), 기초부터 실무까지",
+     "course_note": null
+    },
+    {
+     "target": "spring",
+     "task": "게시판의 로그인·글쓰기 기능을 Spring Boot로 재구현하고, Spring Security로 인증을 적용한 뒤 엔드포인트별 동작을 README에 기록한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "Java / Spring Framework",
+      "resume": "Node.js와 Express로 로그인과 글쓰기가 되는 게시판을 만들었습니다."
+     },
+     "course": "실전 개발자를 위한 Spring Framework",
+     "course_note": null
+    },
+    {
+     "target": "aws",
+     "task": "기존 게시판 백엔드를 AWS EC2에 직접 배포하고, 접속 URL과 배포 절차(인스턴스 설정·보안 그룹·실행 명령)를 README에 단계별로 남긴다.",
+     "via": "llm",
+     "basis": {
+      "posting": "MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분",
+      "resume": "Node.js와 Express로 로그인과 글쓰기가 되는 게시판을 만들었습니다."
+     },
+     "course": "IT 엔지니어를 위한 AWS 운영의 기본과 노하우",
+     "course_note": null
+    },
+    {
+     "target": "cicd",
+     "task": "게시판 저장소에 GitHub Actions 워크플로우를 추가해 main 브랜치 push 시 테스트 실행 → AWS EC2 자동 배포까지 이어지는 파이프라인을 구성하고, 성공 로그 캡처를 README에 첨부한다.",
+     "via": "llm",
+     "basis": {
+      "posting": "CI/CD 파이프라인 및 데이터 플로우 자동화 구축",
+      "resume": "Node.js와 Express로 로그인과 글쓰기가 되는 게시판을 만들었습니다."
+     },
+     "course": "AWS & CI/CD 기반 Java 클라우드 Full-Stack 개발자 양성과정",
+     "course_note": null
+    },
+    {
+     "target": "star:e2",
+     "task": "이 경험을 STAR로 다시 쓰기: 어떤 문제였고(S), 내가 맡은 것(T), 한 일(A), 바뀐 숫자(R)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    }
+   ],
+   "verify_passed": true,
+   "usd": 0.010659
+  },
+  {
+   "id": "e_public",
+   "note": "공공기관 전산직 지망",
+   "family": "백엔드",
+   "sector": "public",
+   "tasks_asked": 1,
+   "tasks_accepted": 1,
+   "tasks_rejected": [],
+   "recos": [
+    {
+     "target": "cert_security",
+     "task": "'정보보안 자격증' 시험 일정을 확인하고 취득 계획 세우기 (공고에서 요구하는 자격증)",
+     "via": "template",
+     "basis": null,
+     "course": "정보처리(기사/산업기사) 실기 자격증",
+     "course_note": null
+    },
+    {
+     "target": "security",
+     "task": "SQL 인젝션 실습 페이지에 XSS·CSRF 취약점 시나리오를 각각 1개씩 추가 구현하고, 각 취약점의 공격 방법과 방어 코드(입력값 검증·토큰 적용)를 README에 비교 정리해 GitHub에 올린다.",
+     "via": "llm",
+     "basis": {
+      "posting": "정보보호 및 정보보안, 정보통신공학, 시스템공학, 소프트웨어",
+      "resume": "SQL 인젝션 실습 페이지를 만들어 동아리원들에게 공유했습니다."
+     },
+     "course": "랜섬웨어 예방 및 사이버 보안의 첫 걸음-전사원을 교육하라!",
+     "course_note": null
+    },
+    {
+     "target": "star:e2",
+     "task": "이 경험을 STAR로 다시 쓰기: 어떤 문제였고(S), 내가 맡은 것(T), 한 일(A), 바뀐 숫자(R)",
+     "via": "template",
+     "basis": null,
+     "course": null,
+     "course_note": null
+    }
+   ],
+   "verify_passed": true,
+   "usd": 0.013002
+  }
+ ]
+}
