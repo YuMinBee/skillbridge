@@ -1,0 +1,407 @@
+{
+  "_meta": {
+    "at": "2026-11-20T05:06:58+00:00",
+    "split": "test",
+    "n": {
+      "star": 60
+    },
+    "n_gold": 60,
+    "n_boot": 2000,
+    "seed": 20261118,
+    "cases": {
+      "full": 10,
+      "no_R": 10,
+      "no_T": 10,
+      "inflated": 10,
+      "team_vague": 10,
+      "short": 10
+    },
+    "n_reviewed": 60,
+    "base_web": "web_plain_t1",
+    "mock": false,
+    "systems": {
+      "web_good_t0": {
+        "file": "web_star_test_good_t0.jsonl",
+        "n_ids": 60,
+        "n_runs": 300,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "good",
+        "temperature": 0.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "web_plain_t1": {
+        "file": "web_star_test_plain_t1.jsonl",
+        "n_ids": 60,
+        "n_runs": 300,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "plain",
+        "temperature": 1.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "web_strict_t0": {
+        "file": "web_star_test_strict_t0.jsonl",
+        "n_ids": 60,
+        "n_runs": 300,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "strict",
+        "temperature": 0.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "ours": {
+        "file": "ours_star_test.jsonl",
+        "n_ids": 60,
+        "n_runs": 300,
+        "missing": 0,
+        "note": "캐시 끔(시스템 자체 일치율), Sonnet 4.6 temperature 0, 인용은 코드로 원문 대조, 칸 기준 명시(v2, dev에서만 조정)"
+      }
+    }
+  },
+  "metrics": {
+    "star_slot_acc": {
+      "web_good_t0": [
+        0.8258,
+        0.7642,
+        0.8842
+      ],
+      "web_plain_t1": [
+        0.8092,
+        0.7616,
+        0.8525
+      ],
+      "web_strict_t0": [
+        0.9467,
+        0.9067,
+        0.9792
+      ],
+      "ours": [
+        0.9625,
+        0.9375,
+        0.9875
+      ],
+      "web": [
+        0.8092,
+        0.7616,
+        0.8525
+      ],
+      "human_ab": [
+        0.8917,
+        0.8333,
+        0.9417
+      ]
+    },
+    "star_slot_kappa": {
+      "web_good_t0": [
+        0.6324,
+        0.5231,
+        0.7396
+      ],
+      "web_plain_t1": [
+        0.5929,
+        0.5076,
+        0.6707
+      ],
+      "web_strict_t0": [
+        0.891,
+        0.8092,
+        0.9556
+      ],
+      "ours": [
+        0.9241,
+        0.8736,
+        0.9728
+      ],
+      "web": [
+        0.5929,
+        0.5076,
+        0.6707
+      ],
+      "human_ab": [
+        0.7799,
+        0.6655,
+        0.8793
+      ]
+    },
+    "fake_evidence_rate": {
+      "web_good_t0": [
+        0.2909,
+        0.2097,
+        0.38
+      ],
+      "web_plain_t1": [
+        0.3552,
+        0.2805,
+        0.4411
+      ],
+      "web_strict_t0": [
+        0.0671,
+        0.0224,
+        0.1192
+      ],
+      "ours": [
+        0.021,
+        0.0,
+        0.0452
+      ],
+      "web": [
+        0.3552,
+        0.2805,
+        0.4411
+      ]
+    },
+    "consistency_5runs": {
+      "web_good_t0": [
+        0.8667,
+        0.7667,
+        0.95
+      ],
+      "web_plain_t1": [
+        0.6167,
+        0.4833,
+        0.7337
+      ],
+      "web_strict_t0": [
+        0.8833,
+        0.8,
+        0.9667
+      ],
+      "ours": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "web": [
+        0.6167,
+        0.4833,
+        0.7337
+      ]
+    },
+    "inflated_false_strong": {
+      "web_good_t0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web_plain_t1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web_strict_t0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ours": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "quote_verbatim_rate": {
+      "web_good_t0": [
+        0.9765,
+        0.947,
+        0.9968
+      ],
+      "web_plain_t1": [
+        0.1601,
+        0.1203,
+        0.2058
+      ],
+      "web_strict_t0": [
+        0.9929,
+        0.9816,
+        1.0
+      ],
+      "ours": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "web": [
+        0.1601,
+        0.1203,
+        0.2058
+      ]
+    }
+  },
+  "diffs": {
+    "star_slot_acc": {
+      "web_plain_t1": {
+        "ci": [
+          0.1533,
+          0.1075,
+          0.2017
+        ],
+        "significant": true
+      },
+      "web_strict_t0": {
+        "ci": [
+          0.0158,
+          -0.0125,
+          0.0483
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.1367,
+          0.0758,
+          0.2
+        ],
+        "significant": true
+      }
+    },
+    "star_slot_kappa": {
+      "web_plain_t1": {
+        "ci": [
+          0.3312,
+          0.2423,
+          0.4248
+        ],
+        "significant": true
+      },
+      "web_strict_t0": {
+        "ci": [
+          0.033,
+          -0.0262,
+          0.101
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.2917,
+          0.1756,
+          0.4084
+        ],
+        "significant": true
+      }
+    },
+    "fake_evidence_rate": {
+      "web_plain_t1": {
+        "ci": [
+          -0.3343,
+          -0.4183,
+          -0.2579
+        ],
+        "significant": true
+      },
+      "web_strict_t0": {
+        "ci": [
+          -0.0462,
+          -0.0944,
+          -0.0066
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          -0.2699,
+          -0.3554,
+          -0.187
+        ],
+        "significant": true
+      }
+    },
+    "consistency_5runs": {
+      "web_plain_t1": {
+        "ci": [
+          0.3833,
+          0.2663,
+          0.5167
+        ],
+        "significant": true
+      },
+      "web_strict_t0": {
+        "ci": [
+          0.1167,
+          0.0333,
+          0.2
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.1333,
+          0.05,
+          0.2333
+        ],
+        "significant": true
+      }
+    },
+    "inflated_false_strong": {
+      "web_plain_t1": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      },
+      "web_strict_t0": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      }
+    },
+    "quote_verbatim_rate": {
+      "web_plain_t1": {
+        "ci": [
+          0.8399,
+          0.7942,
+          0.8797
+        ],
+        "significant": true
+      },
+      "web_strict_t0": {
+        "ci": [
+          0.0071,
+          0.0,
+          0.0184
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0235,
+          0.0032,
+          0.053
+        ],
+        "significant": true
+      }
+    }
+  },
+  "human_ab": {
+    "n": 30,
+    "star_slot_acc": [
+      0.8917,
+      0.8333,
+      0.9417
+    ],
+    "star_slot_kappa": [
+      0.7799,
+      0.6655,
+      0.8793
+    ]
+  }
+}

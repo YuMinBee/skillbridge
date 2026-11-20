@@ -10,6 +10,7 @@
 - 원본 쓰기는 ALLOW_BASE_WRITE일 때만 (로컬 기본 허용, Lambda 기본 금지).
 - 익명 진단 기록(갭 스킬 ID·상태 코드)은 공용 집계로 쌓는다.
 """
+import itertools
 import json
 import re
 import sqlite3
@@ -171,7 +172,8 @@ class _Dynamo:
         self._delete_all(f"SB#{sb}")
 
     def session_add(self, company, gaps, prof):
-        sk = f"{datetime.now(timezone.utc).isoformat()}#{uuid.uuid4().hex[:8]}"
+        # 같은 시각(윈도 시계는 약 15ms 단위)에 연달아 저장해도 넣은 순서대로 정렬되게 인스턴스 내 순번을 넣는다
+        sk = f"{datetime.now(timezone.utc).isoformat()}#{next(_SEQ):08d}#{uuid.uuid4().hex[:8]}"
         self._put(f"SESS#{company}", sk, gaps=json.dumps(gaps), profile=json.dumps(prof))
 
     def session_rows(self, company):
@@ -180,6 +182,7 @@ class _Dynamo:
 
 
 _backend = None
+_SEQ = itertools.count()
 
 
 def backend():
