@@ -1,101 +1,105 @@
-﻿# 역량다리 (SkillBridge) -06팀-
+# 역량다리 (SkillBridge) · 06팀
 
-공고는 **입사 문턱**만 알려줍니다. 역량다리는 기업이 **입사 후 실제로 쓰는 역량**(실무 기준)을 등록하게 하고, 취준생은 **지원 준비도(공고)와 실무 준비도(기업)** 두 가지로 진단받아 **지원 갭 → 실무 갭 순서의 학습경로**를 추천받습니다. 채용시장 분석과 지역 교육 공급 공백도 함께 보여주는 Amazon Bedrock 에이전트입니다. 문제 근거: [docs/EVIDENCE_POSTING_GAP.md](docs/EVIDENCE_POSTING_GAP.md)
+> 웹 Claude에 "내 역량 분석하고 과제 추천해 줘"라고 하면 답은 그럴듯합니다. 그런데 맞는지 확인하는 일은 취준생 몫입니다.
+> 역량다리는 **같은 Claude 모델을 AWS 안에서 시스템으로 돌려**, 모든 판정에 원문 근거를 붙이고, 근거가 없으면 추천하지 않습니다.
 
-- 대회: AI Bootcamp Innovation Challenger 2026 (영남대 첨단AI산업인재양성부트캠프사업단)
-- 주제: AWS 클라우드 기반 채용시장 기술역량 자동 분석 및 교육과정 추천 AI 에이전트 개발
-- 제출 마감: **2026-11-22**  ·  팀: 변유민(팀장)·김승제·김채희·이승연 — 역할은 [docs/TEAM.md](docs/TEAM.md)
-- 구현 명세: [docs/역량다리_구현명세.md](docs/역량다리_구현명세.md) · UI 기준: [docs/skillbridge-demo.html](docs/skillbridge-demo.html) · 결정 기록: [DECISIONS.md](DECISIONS.md)
+자기소개서·포트폴리오·CV·노션·GitHub를 올리면 **STAR 강점 진단 → 실제 채용 공고 기준 부족 역량 → 고용24 교육과정과 구체적인 과제**를 근거와 함께 보여 줍니다.
+
+- **시연 주소**: https://fazwtcf7omav34gdiahcgvds3m0zyafv.lambda-url.ap-northeast-2.on.aws/ (시연용 합성 자소서: [docs/pivot/captures/demo_resume.md](docs/pivot/captures/demo_resume.md))
+- 대회: KOSA × AWS AI 부트캠프 해커톤 · 주제: AWS 클라우드 기반 채용시장 기술역량 자동 분석 및 교육과정 추천 AI 에이전트
+- 팀: 변유민(팀장) · 김채희 · 김승제 · 이승연 · 제출 2026-11-22
+
+## 숫자로 본 결과
+
+같은 Claude Sonnet 4.6에 같은 경험 단락 60개를 5번씩 넣었습니다(평가용 test, 마지막에 한 번만 실행). 값은 사람 정답 대비, `[95% 신뢰구간]`. 전체: [eval/trust/report.md](eval/trust/report.md)
+
+| 지표 | **역량다리** | 웹 ① 그냥 묻기 | 웹 ② 잘 쓴 프롬프트 | 웹 ③ 우리 칸 기준까지 준 프롬프트 |
+|---|---|---|---|---|
+| STAR 칸 정확도 | **96.2%** [93.8, 98.8] | 80.9% | 82.6% | 94.7% (차이 유의하지 않음) |
+| 원문에 없는 근거를 '있다'고 한 비율 ↓ | **2.1%** [0.0, 4.5] | 35.5% | 29.1% | 6.7% |
+| 5번 넣어 모두 같은 판정 | **100%** | 61.7% | 86.7% | 88.3% |
+
+- 사람 평가자 두 명끼리의 일치도는 89.2%(κ 0.78)입니다. 위 차이 중 웹 ③과의 정확도 차이만 신뢰구간이 0을 포함합니다. 판정 자체는 프롬프트로 따라올 수 있지만, **원문에 없는 근거를 걸러 내고 매번 같은 결과를 내는 것은 시스템**에서 나옵니다.
+- 실제 claude.ai에 시연 자소서를 6번(팀원 2명 × 3번) 넣어 본 결과: 강점 판단은 6번 모두 우리와 같았고 지어낸 성과도 없었습니다. 대신 추천 교육과정이 매번 달랐고, 지금 신청할 수 있는 과정을 개강일까지 준 답은 1번이었습니다. [docs/pivot/captures/web_compare.md](docs/pivot/captures/web_compare.md)
+
+| 다른 검증 | 결과 | 근거 |
+|---|---|---|
+| 교육 검색: 임베딩 4종 비교 (질의 40개, nDCG@5) | 키워드 0.65 → **Cohere Embed v4 0.82** (차이 +0.18, 구간 0.08~0.28 유의) | [report_retrieval.md](eval/trust/report_retrieval.md) |
+| 검색 판정을 사람이 다시 판정 (30쌍) | Sonnet 판정과 일치 76.7%, κ 0.65 | [judge_human_result.json](eval/trust/judge_human_result.json) |
+| '맞는 과정 없음' 기준 | 유사도 0.35 미만이면 추천 안 함 (관련 과정을 잃지 않는 구간에서 결정) | [abstain_threshold.py](eval/trust/abstain_threshold.py) |
+| 과제 구체화 (자소서 5개) | 16개 중 16개 원문 대조 통과, 같은 입력 23/23 같은 과제 | [results_tasks.json](eval/trust/results_tasks.json) |
+| 배포 주소 점검 (입력 14종) | 정상 입력 분석, 이상한 입력은 이유와 함께 거절 | [eval/smoke_deploy.md](eval/smoke_deploy.md) |
+| 취준생 설문 29명 | 모르는 기술은 생성형 AI로 확인 86% · AI 추천을 믿으려면 '근거 공고 문장' 45%, '추천 이유' 45%, '불확실 표시' 28% | [eval/survey_needs.md](eval/survey_needs.md) |
+
+## 무엇을 하나
+
+1. **강점 진단 (STAR)**: 기업 역량면접(행동사건면접)의 표준인 상황·과제·행동·결과로 경험을 나눕니다. Claude는 칸마다 **자소서 원문 문장을 고르기만** 하고, 원문에 없는 문장은 코드가 버립니다. 점수와 수준(강함·보통·약함)은 공개된 규칙 상수로만 계산합니다.
+2. **강점 직군과 부족한 역량**: 지원 분야(민간 기업/공공기관)를 고르면 그쪽 실제 공고에서 자주 요구하는 역량과 비교합니다. 부족한 역량마다 공고 원문과 "민간 기업 공고 45건 중 6건이 AWS 요구" 같은 건수가 붙습니다.
+3. **교육과정과 과제**: 고용24 정보기술 과정 1,856개에서 벡터 검색으로 과정을 찾고(유사도가 낮으면 "맞는 과정 없음"), 과제는 Claude가 공고 문장과 내 자소서 문장을 인용해 씁니다. 인용과 숫자가 원문에 없으면 템플릿으로 돌아갑니다.
+4. **검증과 비용**: 내보내기 전에 인용 ⊂ 원문, 과정 ⊂ 고용24 목록, 추천마다 근거 1개 이상을 확인합니다. 단계마다 토큰과 금액을 계산하고 요청 예산($0.30)을 넘으면 남은 단계는 규칙으로 처리합니다. 분석 1건 약 $0.03~0.18.
+
+## 구조 (AWS)
+
+```
+브라우저 ─ Lambda 함수 URL ─ FastAPI ─ 작업 접수(DynamoDB, 24시간) ─ Lambda 자기 호출(비동기)
+                                                  │
+                     슈퍼바이저: collect(GitHub README) → guard → star → skills → retriever → recommend → verifier → cost
+                                    │         │        │          │            │            │
+                       Bedrock Guardrails  Claude    Claude     공고 기준      Cohere v4     규칙
+                         + 정규식          Sonnet 4.6 Sonnet ·   (민간/공공)    벡터 검색
+                                                     Haiku 4.5              + Claude 과제
+```
+
+- **Amazon Bedrock**: Claude Sonnet 4.6(STAR·역량 추출·과제), Claude Haiku 4.5(정규화), Titan Text Embeddings v2(스킬), Cohere Embed v4(교육 검색), Guardrails(개인정보 가림)
+- **AWS Lambda** 함수 URL + 자기 호출 비동기 작업(창을 닫아도 서버에서 끝까지), **DynamoDB**(작업·캐시·샌드박스, TTL), **S3·Glue·Athena**(공고 집계), CloudFormation(`infra/template.yaml`)
+- 상시 과금 리소스 없음(OpenSearch Serverless 대신 파일 벡터·S3 Vectors). 모든 리소스 `project=kosa06` 태그
+- 같은 문서는 24시간 같은 결과(입력 해시를 키로 DynamoDB 캐시, 원문은 저장하지 않음)
+
+## 데이터
+
+| 데이터 | 출처 | 규모 |
+|---|---|---|
+| 민간 기업 공고 | 고용24 공채속보 API + 기업 공식 채용 페이지 직접 수집([규칙](seed/market/direct_it.md)) + 공개 공고 재구성 | 백엔드 45 · AI 29 · 데이터 22건 이상 |
+| 공공기관 공고 | 잡알리오 공공기관 채용정보 API (정보통신) | 백엔드 174 · AI 29 · 데이터 60건 |
+| 교육과정 | 고용24 훈련과정 API, NCS 정보기술, 개강 예정만 | 1,856개 |
+| 평가 정답셋 | 합성 경험 단락(유형 6가지), 사람 1·2차 라벨 | 90개 (개발 30 · 평가 60) |
+
+## 한계 (먼저 밝힙니다)
+
+- 평가 단락과 과제 확인용 자소서는 **합성**입니다. 정답 초안은 Claude가 쓰고 사람이 검토했습니다(그래서 2차 라벨과 웹 ③을 함께 냈습니다). 실제 자소서에서는 숫자가 낮을 수 있습니다.
+- 숫자 비교는 claude.ai가 아니라 Bedrock의 같은 모델로 했습니다. 웹 답의 '부분적으로 있음'은 '있음'으로 셌습니다.
+- 민간 공고는 직군별 수십 건입니다(화면에 건수 표시, 15건 미만 직군은 강점 직군 순위에서 제외). 공고 요구 역량은 사전 기반으로 뽑습니다.
+- 교육과정 수준(입문/심화)은 맞추지 않습니다. 합격 여부는 예측하지 않으며, 채용 합불 판단에 쓰지 않습니다.
+
+## 지킨 것
+
+이력서 원문은 저장하지 않습니다(결과만 24시간) · 모델에 보내기 전 개인정보를 가립니다 · 점수는 규칙으로만, LLM은 근거 인용과 설명만 · 교육과정 이름을 지어내지 않습니다(고용24 목록만) · 모든 숫자에 95% 신뢰구간, 유의하지 않은 차이는 차이라고 말하지 않습니다 · 평가셋에 맞춰 튜닝하지 않습니다(개발/평가 분리, 평가는 한 번만).
 
 ## 실행
 
 필요: Python 3.10+, Node 18+
 
 ```powershell
-# Windows
-.\tasks.ps1 setup     # .venv, pip, npm install, .env 생성
-.\tasks.ps1 run       # API(8010) 새 창 + 웹(5173)
-.\tasks.ps1 test
+.\tasks.ps1 setup     # .venv, npm install, .env 생성 (.env.example 복사)
+.\tasks.ps1 run       # API :8010 + 웹 :5173
+.\tasks.ps1 test      # pytest (CI와 같음)
 ```
 
-```bash
-# Mac/Linux
-make setup && make run
-make test
-```
+- `BEDROCK_MOCK=1`(기본)이면 AWS 없이 규칙으로 동작합니다. `0`이면 Bedrock을 부르고, 실패한 단계만 규칙으로 돌아갑니다(`aws sso login --profile kosa`).
+- 평가 재현: `python eval/trust/run_ours.py --split dev` → `python eval/trust/run_compare.py --split dev`
+- 배포: `python infra/deploy.py --yes` · 배포 점검: `python scripts/smoke_deploy.py`
 
-브라우저에서 http://localhost:5173 을 엽니다. API 문서는 http://localhost:8010/docs 에 있어요.
+## 폴더
 
-| 환경변수 | 값 | 의미 |
-|---|---|---|
-| `BEDROCK_MOCK` | `1` (기본) / `0` | 1이면 AWS 호출 없이 규칙·템플릿으로 동작 (오프라인 시연 가능). 0이면 Bedrock 호출, 실패한 단계만 규칙으로 폴백 |
-| `MODEL_ID` / `FAST_MODEL_ID` / `EXPLAIN_MODEL_ID` | Sonnet 4.6 / Haiku 4.5 / (비우면 Haiku) | 추출 / 정규화 선택 / 설명 생성 |
-| `GUARDRAIL_ID` / `GUARDRAIL_VERSION` | `scripts/create_guardrail.py` 출력값 | 이력서 PII 익명화 (비우면 정규식만) |
-| `DATA_MODE` | `sample` (기본) / `live` | sample은 `seed/` 가상 데이터, live는 수집 결과(`seed/courses/live_courses.json`, 시장은 실공고+샘플 보충). 파일이 없으면 샘플로 동작 |
-| `WORK24_KEY_*` | 고용24 OPEN-API 인증키 5개 | 훈련과정 수집: `.\tasks.ps1 collect` (약 440회 호출, 2분) |
-| `AWS_PROFILE` / `AWS_REGION` | `kosa` / `ap-northeast-2` | 팀 SSO 프로필 (`aws sso login --profile kosa`) |
-
-Bedrock 모드는 먼저 `aws sso login --profile kosa` 후 `python scripts/smoke_bedrock.py`로 예시 지원자 3명이 끝까지 도는지 확인하세요 (규칙 결과와 나란히 출력). 로그인이 만료되면 각 단계가 규칙으로 폴백하고 화면에 노란 경고가 뜹니다.
-
-화면 오른쪽 위 배지에 현재 모드(MOCK/BEDROCK, SAMPLE/LIVE)가 표시됩니다. **초기화** 버튼은 기업 설정을 seed로 되돌립니다.
-
-## 진행 상황
-
-| 마일스톤 | 상태 |
+| 경로 | 내용 |
 |---|---|
-| M0 골격 (FastAPI·React, 세 탭, 목업 어댑터) | ✅ |
-| M1 규칙 엔진 (사전 151개, 점수, 갭, 학습경로, 공고 기준선, 기업 비교) | ✅ |
-| M2 Bedrock 연결 (구조화 추출, 사전→표준명→임베딩→LLM 정규화, Guardrail PII, 근거 인용 검증, 단계별 폴백) | ✅ 전체 테스트 67개 (가짜 Bedrock·가짜 DynamoDB 포함, CI에서 자동 실행) · 실계정 스모크 3/3 통과, 진단당 6~9초 |
-| M3 공공 데이터 수집 (훈련과정·공공 공고·NCS, S3, Athena) | 🟡 훈련과정 ✅ (고용24 실데이터 199개) · 공공기관 공고 ✅ (잡알리오 1년 11,637건) · S3 raw/curated·Glue·Athena 코드 ✅ (`infra/`), 배포 ⏳ |
-| ＋ 차별화 분석 (공급 공백 · 기준 시뮬레이터 · 시간당 효과 경로) | ✅ 아래 '분석 기능' 참고 · 테스트 37개 |
-| M4 기업 지식베이스 (S3 Vectors KB, tenant 필터) | 🟡 코드·테스트 ✅ (`adapters/kb.py`: tenantId 필터 서버 강제 + 응답 이중 검사, `infra/build_kb.py`: 생성·적재·격리 검증) · KB 생성 ⏳ (배포 후) |
-| M5 평가 (정답셋, P/R/F1, Hit@k, ablation, 95% 신뢰구간) | 🟡 `.\tasks.ps1 eval` → [eval/report.md](eval/report.md) · 이력서 오탐률 23.4% → **7.4%** (감소폭 95% 구간 +9.8~+22.5%p, 유의) · 실무 갭 커버 99.4% vs 공고만 51.3%(가상 기업 시나리오) (차이 +42.7~+53.4%p, 유의) · 공고 추출 F1 0.744 → 0.809 (30건으로는 구간이 0 포함, 방향만 일관) · 2차 라벨 ⏳ |
-| M6 배포·시연 준비 | 🟡 CloudFormation + 배포 스크립트 ✅ (`python infra/deploy.py --yes`) · [시연 대본](docs/DEMO_SCRIPT.md) ✅ · 배포 ⏳ · 채점표 목표: [docs/SCORECARD.md](docs/SCORECARD.md) |
+| `backend/app/agents/` | 슈퍼바이저, STAR, 과제 구체화, 검증, 비용 |
+| `backend/app/rag/` | 임베딩·벡터/BM25 검색 |
+| `backend/app/routers/analyze.py` | 분석 작업 API (`/api/analyze/docs`, `/api/jobs/{id}`) |
+| `frontend/src/tabs/Analyze.jsx` | 역량 분석 화면 |
+| `eval/trust/` | 정답셋, 웹 비교, 검색 실험, 판정, 보고서 |
+| `collectors/`, `seed/` | 공고·교육과정 수집기와 데이터 |
+| `infra/` | CloudFormation, 배포 스크립트 |
+| `docs/` | 발표 대본([DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md)), 계획, 웹 캡처 비교 · 설계 결정과 이유: [DECISIONS.md](DECISIONS.md) |
 
-## 분석 기능 (다른 사례에 없는 것 — [docs/RELATED_WORK.md](docs/RELATED_WORK.md))
-
-| 기능 | 화면 | 무엇을 계산하나 | 데이터 |
-|---|---|---|---|
-| 교육 공급 공백 | ① 시장 분석 | 수요 상위 스킬마다 지역 대면 교육 정원. 수요는 있는데 정원 0이면 '원격만'/'공백' | 고용24 대구·경북·서울·경기·인천 개강 예정 전 회차(4개월) 정원 합 |
-| 지역 IT·AI 교육 비중 | ① 시장 분석 | 지역 전체 훈련 정원 중 IT·AI 과정 비중 → 대경권 2.17% vs 수도권 7.93% (약 3.7배). 수요 상위 31개 AI 스킬 중 27개는 대경권 대면 과정 없음 | 같음. 외부 인구 데이터 없이 지역 내 비중으로 비교 |
-| 기준 시뮬레이터 | ③ 기업 콘솔 | 요구역량을 바꾸거나 트랙 이수를 가정하면 지원자 풀 중 준비도 70점 이상 비율이 어떻게 바뀌는지, 한 가지 변경별 효과 순위 | 익명 진단 기록의 스킬 상태 코드(텍스트 없음) |
-| 공공기관 디지털 역량 요구 | ① 시장 분석 (공공 전 직무) | 잡알리오 실공고 전 직무에서 사무 디지털·IT 자격·데이터·AI 역량 명시율, NCS 분야별, '자격증만으로 요구' 비율, 그 역량의 대경권 대면 정원 → 대경권 8.4% 명시, AI 0.9%, 명시 공고의 40%는 자격증만. 데이터 자격증 요구 0.9%→2.0%(반기)인데 대경권 대면 과정 0 | 잡알리오 11,637건(2025-11~2026-11) 자격요건·우대조건 문장 (첨부 공고문 제외 → 하한값) |
-| 학습 코치 에이전트 | ② 취준생 진단 하단 | 자유 질문에 Bedrock이 도구 5개(기업 기준·과정 검색·시장 통계·기업 문서 KB·준비도 계산) 중 골라 호출하고 답함. 과정은 도구 결과만 인용(지어낸 ID는 삭제), 점수는 규칙 도구값만, tenant는 요청에서 고정 | 진단 결과의 스킬 상태 코드만 (이력서 원문 없음) |
-| 시간당 효과 경로 | ② 취준생 진단 | 과정 순서를 (기업 준비도 상승 + 시장 공고 평균 적합도 상승) ÷ 시간이 큰 순으로 탐욕 배치. JCRec(arXiv 2404.10876) 보상 개념 차용 | 기업 기준 + 지역·직무 공고 집합 |
-
-## 데이터 출처 · 수집 범위 · 한계
-
-> 대회 공지에 따라 최종 결과물과 발표에 반드시 표기합니다. M3 이후 수집 메타데이터에서 자동 생성할 예정입니다.
-
-| 데이터 | 현재 출처 | 범위 | 한계 |
-|---|---|---|---|
-| 공공기관 공고 | **실데이터** · 잡알리오(재정경제부 공공기관 채용정보 오픈API, `collectors/alio_postings.py`) | 11,637건, 2025-11 ~ 2026-11, 전 직무(NCS 분야), 대경권 1,718건 | 자격요건·우대조건 필드만 (첨부 공고문 본문 없음) |
-| 시장 공고 (민간 AI·클라우드) | **가상 샘플** (`scripts/gen_market_sample.py`, 시드 고정) | 420건, 2025-11 ~ 2026-10, AI/클라우드, 대경권·수도권·기타 | 실제 공고가 아님. 추세는 시연용으로 설계한 값 |
-| 교육과정 | **고용24 국민내일배움카드 훈련과정 API** (`collectors/work24_courses.py`) | 2026-11-09 수집, 개강 4개월 이내 과정 중 과정명에 사전 스킬이 있는 567개 → 스킬별 최대 6개 = 199개 | 과정명으로만 스킬을 붙임(교육 내용 필드가 비어 있음). 원격 과정은 지역 '전국'. 대경권 대면 과정은 7개뿐. 160시간 넘는 장기 과정은 경로 시간에 넣지 않고 참고로만 표시 |
-| 교육과정 (DATA_MODE=sample) | 샘플 카탈로그 (`seed/courses/public_courses.json`) | 30개 | 과정명·기관 가상 |
-| 기업 3곳 | **가상** (`seed/companies/`) | 요구역량·트랙·공고 문구 | 실제 기업 아님 (이름에 "(가상)" 표기) |
-| 기업 D (토스증권 ML) | **공개 자료 재구성** (`seed/companies/D.json`) | 지원 기준 = 실제 채용 공고, 실무 기준 = 같은 회사 엔지니어 기술 블로그(2026-08-21). 스킬마다 출처 URL·원문 인용 | 기업이 직접 등록한 것 아님. 블로그 기술의 중요도를 몰라 모두 우대로 둠. 2026-11-10 확인 |
-| 기업 E~H (현업 청취) | **현업 기준, 익명** (`seed/companies/E~H.json`) | 현업 멘토가 업체 대표·인사 담당자에게 들은 부서별 필수·우대(군수 품질관리, 서비스 운영, 서비스 품질관리, 게임 클라이언트). 필수 = 지원 기준, 필수+우대 = 실무 기준 | 업체명 비공개, 스킬 대응은 팀 판단. 2026-11-13 수신. [docs/INTERVIEWS.md](docs/INTERVIEWS.md) |
-| 예시 지원자 3명 | **가상** (`seed/personas/`) | 이력서 텍스트 | 실제 인물 아님 |
-| 익명 집계 | **가상 진단 기록 200건** + 실제 진단 | 기업·갭 스킬 ID만 | 시연용 가상 기록 포함 |
-| 스킬 사전 | 직접 작성 (`data/skills.csv`) | 171개, 한·영 별칭 (공공 공고용 디지털 기초·자격증 10개 포함) | 검수 전 (`reviewed=0`). O*NET·NCS 매핑은 M3에서 |
-
-## 책임 있는 설계
-
-- 점수는 규칙으로만 계산합니다(공식 화면 노출). LLM은 근거를 인용해 설명만 합니다.
-- 이력서 원문은 저장하지 않습니다. 기업에는 갭 스킬의 익명 집계만 제공합니다.
-- 진단 결과를 채용 합불 판단에 쓰지 않는다는 안내를 진단 화면과 기업 콘솔에 표시합니다.
-- 공개 주소 대비: 기업 콘솔 수정은 방문자별 샌드박스(24시간)에만 저장되고 원본은 바뀌지 않습니다. Bedrock을 부르는 경로는 IP당 분당 8회, 인스턴스당 시간당 60회(넘으면 그 요청만 규칙 엔진), Lambda 동시 실행 3개로 비용 상한을 둡니다 (`guards/limits.py`, `infra/template.yaml`).
-
-## 아키텍처
-
-```
-브라우저 ──▶ Lambda 함수 URL (FastAPI + Mangum, 동시 실행 3) ── 정적 프런트도 같은 주소
-              ├─ guards: 방문자 샌드박스 · IP/시간당 상한 · PII 마스킹(정규식 + Bedrock Guardrails)
-              ├─ 진단 파이프라인 (단계 고정 + trace): Sonnet 추출 → 사전 → Titan 임베딩 → Haiku 선택 → 규칙 점수 → 경로 → Haiku 설명(인용 검증)
-              ├─ 학습 코치 에이전트: Haiku 도구 선택 루프 (최대 5턴) → 도구 5개
-              ├─ Bedrock Knowledge Base (S3 Vectors) ← 기업 문서, tenantId 필터 서버 강제
-              ├─ Athena (Glue 카탈로그) ← S3 curated/ 공고·스킬 집계, 쿼리당 1GB 상한
-              └─ DynamoDB ← 기업 설정 · 샌드박스(TTL) · 익명 진단 기록
-로컬 배치: 고용24·잡알리오 수집 → S3 raw/ → curated/   (수집 키는 Lambda에 두지 않음)
-```
+> 11-17 멘토링 이후 주제를 바꿨습니다(기업 등록 실무 기준 → 근거로 답하는 역량 진단). 이전 버전 설명은 [docs/README_v1_이전주제.md](docs/README_v1_이전주제.md)에 남겨 두었고, 이전 화면(시장 분석·기업 콘솔)은 주소 뒤 `#market`, `#corp`로만 열립니다.

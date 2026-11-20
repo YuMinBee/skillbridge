@@ -6,7 +6,9 @@
 
 준비
 - 주소: 배포 주소(AGENTS.md M6) 또는 로컬 `.\tasks.ps1 run` → http://localhost:5173
-- 시연 자소서: `docs/pivot/captures/demo_resume.md`(합성). 같은 글로 웹 Claude 캡처 3회(`docs/pivot/captures/`, 방법은 README).
+- 시연 자소서: **`docs/pivot/captures/demo_resume.docx`를 올린다**(합성. 글자가 하나라도 다르면 캐시가 안 맞는다).
+- **시연 10분 전**: `python scripts/prewarm.py` 두 번 → 두 번째가 8초 안팎이면 준비 끝(같은 결과가 24시간 유지).
+- 리허설 전 점검: `python scripts/smoke_deploy.py` → 14/14 통과 확인(`eval/smoke_deploy.md`).
 - 백업: `BEDROCK_MOCK=1`로 재시작, 녹화 영상 `docs/demo.mp4`.
 
 | 시간 | 슬라이드/화면 | 말할 것 (핵심만) |
