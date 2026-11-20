@@ -289,3 +289,13 @@ def test_soft_skill_gap_gets_task_not_course():
     recos = sv._fallback_recommend(result, sv.Cites())
     assert recos[0]["course"] is None and "STAR" in recos[0]["task"]  # IT 과정 코퍼스에서 엉뚱한 과정을 붙이지 않는다
     assert recos[1]["course"] is not None
+
+
+def test_family_with_few_postings_not_ranked_first(monkeypatch):
+    from app.agents import supervisor as sv
+    counts = {"backend": 33, "ai_ml": 17, "data": 7}
+    monkeypatch.setattr(sv, "family_postings", lambda f, sector="private": counts[f])
+    monkeypatch.setattr(sv, "readiness", lambda reqs, st: {"backend": 17, "ai_ml": 15, "data": 26}[reqs["_f"]])
+    monkeypatch.setattr(sv, "_pooled", lambda f, sector="private": ({}, {"_f": f}, {}))
+    best, scores = sv.infer_family({}, "private")
+    assert scores["data"] == 26 and best == "backend"  # 공고 7건 직군은 점수가 높아도 1위로 뽑지 않는다

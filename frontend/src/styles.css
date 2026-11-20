@@ -687,3 +687,4 @@ details.rest summary{cursor:pointer;font-size:13px;color:var(--muted)}
 .doclist li span:first-child{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .rank{list-style:none;margin:2px 0 0;padding:0;font-size:12.5px;color:var(--muted)}
 .rank li{display:flex;justify-content:space-between}
+.rank li.muted{color:var(--muted)}
