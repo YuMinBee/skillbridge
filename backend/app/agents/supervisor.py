@@ -166,6 +166,10 @@ def infer_family(status_map: dict, sector: str = "private") -> tuple[str, dict]:
     return best, scores
 
 
+class NoInput(ValueError):
+    """분석할 글이 없다(사용자에게 그대로 보여 줄 문장)."""
+
+
 def _cert_status(status_map: dict) -> None:
     """자격증은 이력서에 적혀 있으면 그 자체가 증거다(프로젝트로 쓴 흔적을 요구하지 않는다).
     '검증 필요'(이름만 있음) → 보유. 단 '필기'만 합격이면 부분(실기가 남음).
@@ -237,6 +241,9 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
                 row["note"] = str(e)
     else:
         progress[:] = [p for p in progress if p["agent"] != "collect"]
+    if not payload.get("template") and len((state.get("resume") or "").strip()) < 20:
+        # 문서 없이 GitHub만 넣었는데 README를 못 읽은 경우: 빈 글로 '부족한 역량'을 추천하지 않는다(점검 2026-11-20)
+        raise NoInput("읽을 내용이 없습니다. GitHub 아이디·레포 주소를 확인하거나 자소서·포트폴리오 문서를 함께 올려 주세요")
 
     # guard: 정규식은 접수 때 끝났다. 여기서는 Guardrail(Bedrock 모드)만
     with stage("guard", llm=True) as row:

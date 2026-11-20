@@ -80,6 +80,8 @@ def run(job_id: str, payload: dict):
         out = supervisor.run(payload, on_progress=on_progress)
         job.update(status="done", progress=out["progress"], result=out["result"], citations=out["citations"],
                    cost=out["cost"], trace=out["trace"], verify=out.get("verify"), mode=bedrock.mode())
+    except supervisor.NoInput as e:  # 사용자 입력 문제: 내부 예외 이름 없이 안내 문장만
+        job.update(status="failed", error=str(e))
     except Exception as e:  # noqa: BLE001
         job.update(status="failed", error=f"{type(e).__name__}: {str(e)[:200]}")
     finally:

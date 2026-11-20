@@ -374,3 +374,21 @@ def test_task_concretize_cached_same_input(monkeypatch, tmp_path):
         tasks.concretize(recos, gaps, cites.items, resume, cites, use_cache=True)
         return recos[0]["task"]
     assert once() == once() and len(calls) == 1  # 같은 입력 → 같은 과제
+
+
+def test_unreadable_pdf_gets_clear_reason(client):
+    import io
+    from pypdf import PdfWriter
+    w = PdfWriter(); w.add_blank_page(595, 842); b = io.BytesIO(); w.write(b)
+    r = client.post("/api/analyze/docs", files=[("files", ("scan.pdf", b.getvalue(), "application/pdf"))], data={"sector": "private"})
+    assert r.status_code == 400 and "스캔·이미지 PDF" in r.json()["detail"]
+
+
+def test_github_only_unreadable_fails_with_reason(monkeypatch):
+    from app.adapters import github as gh, jobs
+    from app.agents import supervisor as sv
+    def boom(*a, **k):
+        raise gh.GithubError("GitHub에서 레포를 읽지 못했습니다")
+    monkeypatch.setattr(gh, "readmes", boom)
+    with pytest.raises(sv.NoInput):
+        sv.run({"resume": "", "github": "nobody-zz", "job_family": "auto", "sector": "private"})
