@@ -8,8 +8,16 @@ from ..data import courses
 from . import star
 
 
+def course_catalog() -> dict[str, dict]:
+    """고용24 과정: 기존 카탈로그 + RAG 코퍼스(정보기술 전체). id → {title}"""
+    from ..rag.retrieve import corpus
+    cat = {c["id"]: {"title": c["title"]} for c in courses()}
+    cat.update({d["doc_id"]: {"title": d["title"]} for d in corpus() if d["kind"] == "course"})
+    return cat
+
+
 def verify(result: dict, citations: list[dict], resume: str) -> tuple[dict, list[dict], dict]:
-    catalog = {c["id"]: c for c in courses()}
+    catalog = course_catalog()
     removed: list[str] = []
 
     # 1. 강점

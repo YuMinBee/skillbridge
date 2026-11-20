@@ -1,0 +1,297 @@
+{
+  "_meta": {
+    "at": "2026-11-18T13:20:46+00:00",
+    "split": "dev",
+    "n": {
+      "star": 30
+    },
+    "n_gold": 30,
+    "n_boot": 2000,
+    "seed": 20261118,
+    "cases": {
+      "full": 5,
+      "no_R": 5,
+      "no_T": 5,
+      "inflated": 5,
+      "team_vague": 5,
+      "short": 5
+    },
+    "n_reviewed": 30,
+    "base_web": "web_plain_t1",
+    "mock": false,
+    "systems": {
+      "web_good_t0": {
+        "file": "web_star_dev_good_t0.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "good",
+        "temperature": 0.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "web_plain_t1": {
+        "file": "web_star_dev_plain_t1.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "model": "global.anthropic.claude-sonnet-4-6",
+        "prompt_style": "plain",
+        "temperature": 1.0,
+        "parse_model": "global.anthropic.claude-haiku-4-5-20251001-v1:0"
+      },
+      "ours": {
+        "file": "ours_star_dev.jsonl",
+        "n_ids": 30,
+        "n_runs": 150,
+        "missing": 0,
+        "note": "캐시 끔(시스템 자체 일치율), Sonnet 4.6 temperature 0, 인용은 코드로 원문 대조, 칸 기준을 지시문에 명시(v2)"
+      }
+    }
+  },
+  "metrics": {
+    "star_slot_acc": {
+      "web_good_t0": [
+        0.765,
+        0.66,
+        0.8633
+      ],
+      "web_plain_t1": [
+        0.7583,
+        0.6933,
+        0.8234
+      ],
+      "ours": [
+        0.9367,
+        0.8866,
+        0.98
+      ],
+      "web": [
+        0.7583,
+        0.6933,
+        0.8234
+      ]
+    },
+    "star_slot_kappa": {
+      "web_good_t0": [
+        0.5093,
+        0.3349,
+        0.6853
+      ],
+      "web_plain_t1": [
+        0.4939,
+        0.3861,
+        0.5904
+      ],
+      "ours": [
+        0.8731,
+        0.77,
+        0.9591
+      ],
+      "web": [
+        0.4939,
+        0.3861,
+        0.5904
+      ]
+    },
+    "fake_evidence_rate": {
+      "web_good_t0": [
+        0.3622,
+        0.2471,
+        0.4697
+      ],
+      "web_plain_t1": [
+        0.3865,
+        0.3157,
+        0.4757
+      ],
+      "ours": [
+        0.027,
+        0.0,
+        0.0704
+      ],
+      "web": [
+        0.3865,
+        0.3157,
+        0.4757
+      ]
+    },
+    "consistency_5runs": {
+      "web_good_t0": [
+        0.9333,
+        0.8333,
+        1.0
+      ],
+      "web_plain_t1": [
+        0.5333,
+        0.3667,
+        0.7333
+      ],
+      "ours": [
+        0.9333,
+        0.8333,
+        1.0
+      ],
+      "web": [
+        0.5333,
+        0.3667,
+        0.7333
+      ]
+    },
+    "inflated_false_strong": {
+      "web_good_t0": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web_plain_t1": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "ours": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "web": [
+        0.0,
+        0.0,
+        0.0
+      ]
+    },
+    "quote_verbatim_rate": {
+      "web_good_t0": [
+        0.9735,
+        0.9297,
+        1.0
+      ],
+      "web_plain_t1": [
+        0.2266,
+        0.1561,
+        0.3014
+      ],
+      "ours": [
+        1.0,
+        1.0,
+        1.0
+      ],
+      "web": [
+        0.2266,
+        0.1561,
+        0.3014
+      ]
+    }
+  },
+  "diffs": {
+    "star_slot_acc": {
+      "web_plain_t1": {
+        "ci": [
+          0.1783,
+          0.1166,
+          0.245
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.1717,
+          0.0617,
+          0.285
+        ],
+        "significant": true
+      }
+    },
+    "star_slot_kappa": {
+      "web_plain_t1": {
+        "ci": [
+          0.3792,
+          0.2714,
+          0.4969
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.3638,
+          0.1472,
+          0.5595
+        ],
+        "significant": true
+      }
+    },
+    "fake_evidence_rate": {
+      "web_plain_t1": {
+        "ci": [
+          -0.3595,
+          -0.4507,
+          -0.2916
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          -0.3351,
+          -0.439,
+          -0.2266
+        ],
+        "significant": true
+      }
+    },
+    "consistency_5runs": {
+      "web_plain_t1": {
+        "ci": [
+          0.4,
+          0.2,
+          0.6
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0,
+          -0.1333,
+          0.1333
+        ],
+        "significant": false
+      }
+    },
+    "inflated_false_strong": {
+      "web_plain_t1": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0,
+          0.0,
+          0.0
+        ],
+        "significant": false
+      }
+    },
+    "quote_verbatim_rate": {
+      "web_plain_t1": {
+        "ci": [
+          0.7734,
+          0.6986,
+          0.8439
+        ],
+        "significant": true
+      },
+      "web_good_t0": {
+        "ci": [
+          0.0265,
+          0.0,
+          0.0703
+        ],
+        "significant": false
+      }
+    }
+  },
+  "human_ab": null
+}

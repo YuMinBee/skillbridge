@@ -63,5 +63,25 @@ export const api = {
   simulate: (id, requirements, assumeTracks) => req("POST", `/api/companies/${id}/simulate`, { requirements, assume_tracks: assumeTracks }),
   insights: (id) => req("GET", `/api/companies/${id}/insights`),
   reset: () => req("POST", "/api/reset"),
+  families: () => req("GET", "/api/families"),
+  analyze: (body) => req("POST", "/api/analyze", body),
+  analyzeDocs: (files, github, family, posting, sector) => {
+    const f = new FormData();
+    files.forEach((x) => f.append("files", x));
+    if (github) f.append("github", github.trim());
+    f.append("job_family", family || "auto");
+    f.append("sector", sector || "private");
+    if (posting) f.append("posting", posting);
+    return req("POST", "/api/analyze/docs", f, true);
+  },
+  analyzePdf: (docs, family, posting) => {
+    const f = new FormData();
+    if (docs.essay) f.append("essay", docs.essay);
+    if (docs.portfolio) f.append("portfolio", docs.portfolio);
+    f.append("job_family", family || "auto");
+    if (posting) f.append("posting", posting);
+    return req("POST", "/api/analyze/pdf", f, true);
+  },
+  job: (id) => req("GET", `/api/jobs/${encodeURIComponent(id)}`),
   coach: (companyId, question, statuses) => req("POST", "/api/coach", { company_id: companyId, question, statuses }),
 };
