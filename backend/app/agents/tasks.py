@@ -6,9 +6,14 @@
   과제에 원문에 없는 숫자가 있으면(지어낸 목표·성과) 버린다. 하나라도 어기면 그 역량은 템플릿 과제 그대로.
 - 점수·순서는 바꾸지 않는다(규칙 8). 과제 문장만 바뀐다.
 """
+import hashlib
+import json
+import os
 import re
 
+from .. import config
 from ..adapters import bedrock
+from . import star
 from .star import locate
 
 MAX_TASK_CHARS = 180
@@ -20,7 +25,8 @@ _SYS = """너는 취업 준비생의 과제 코치다. 부족한 역량마다, �
 - 지원자의 기존 경험을 확장하는 과제를 우선한다. 그때 그 경험의 자소서 문장 하나를 resume_quote에 원문 그대로 복사한다. 맞는 경험이 없으면 resume_quote는 null.
 - posting_quote에는 그 역량에 주어진 공고 문장 중 하나를 원문 그대로 복사한다(긴 문장이면 연속된 일부를 그대로 잘라도 된다). 요약하거나 고치지 않는다.
 - 지원자가 하지 않은 일을 했다고 쓰지 않는다. 숫자(목표치·기간·성과)를 새로 만들지 않는다. 결과는 '측정해 기록'처럼 쓴다.
-- 교육과정·회사 이름을 쓰지 않는다(과정은 따로 붙는다)."""
+- 교육과정·회사 이름을 쓰지 않는다(과정은 따로 붙는다).
+- 과제마다 따로 읽어도 이해되게 쓴다. 다른 과제나 역량을 id(예: data_pipeline)로 부르지 않는다."""
 
 _SCHEMA = {"type": "object", "properties": {"tasks": {"type": "array", "items": {
     "type": "object", "properties": {
@@ -40,7 +46,8 @@ def _numbers_ok(task: str, sources: list[str]) -> bool:
     return all(n in src for n in _NUM.findall(task))
 
 
-def concretize(recos: list[dict], gaps: list[dict], cite_items: list[dict], resume: str, cites, log=None) -> dict:
+def concretize(recos: list[dict], gaps: list[dict], cite_items: list[dict], resume: str, cites, log=None,
+               use_cache: bool | None = None) -> dict:
     """recos를 제자리에서 고친다. → {"asked", "accepted", "rejected": [(target, 이유)]}"""
     by_gap = {g["id"]: g for g in gaps}
     quote_of = {c["n"]: c for c in cite_items}
@@ -53,6 +60,7 @@ def concretize(recos: list[dict], gaps: list[dict], cite_items: list[dict], resu
         if posts and not r["task"].startswith(f"'{g['name']}'이(가) 드러난") and not g["id"].startswith("cert_"):
             todo.append((r, g, posts))
     rep = {"asked": len(todo), "accepted": 0, "rejected": []}
+    use_cache = (os.getenv("STAR_CACHE", "1") != "0") if use_cache is None else use_cache
     if not todo:
         return rep
     lines = []
@@ -60,7 +68,15 @@ def concretize(recos: list[dict], gaps: list[dict], cite_items: list[dict], resu
         lines.append(f"- id: {g['id']} | 역량: {g['name']} | 이력서 상태: {g.get('status_label', '')}\n  공고 문장:\n" +
                      "\n".join(f"    · {p}" for p in posts[:3]))
     user = f"<자소서>\n{resume[:MAX_RESUME_CHARS]}\n</자소서>\n\n<부족한 역량>\n" + "\n".join(lines) + "\n</부족한 역량>"
-    out = bedrock.converse_tool(_SYS, user, "submit_tasks", _SCHEMA, log=log, kind="task", max_tokens=3000)
+    # 같은 입력(자소서·역량·공고 문장)이면 같은 과제: STAR와 같은 24시간 캐시(입력 해시가 키, 원문은 저장 안 함)
+    key = "task_" + hashlib.sha256("|".join([config.MODEL_ID, _SYS, json.dumps(_SCHEMA, sort_keys=True), user]).encode("utf-8")).hexdigest()
+    hit = star._cache_get(key) if use_cache else None
+    if hit:
+        out, rep["cached"] = hit["res"], True
+    else:
+        out = bedrock.converse_tool(_SYS, user, "submit_tasks", _SCHEMA, log=log, kind="task", max_tokens=3000)
+        if use_cache:
+            star._cache_put(key, out, {})
     got = {t.get("target"): t for t in out.get("tasks", []) if isinstance(t, dict)}
     for r, g, posts in todo:
         t = got.get(g["id"])

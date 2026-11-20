@@ -343,3 +343,34 @@ def test_task_number_check_ignores_tool_names():
     assert _numbers_ok("JUnit5로 테스트하고 EC2에 배포, k6로 측정해 기록", ["자소서"])
     assert not _numbers_ok("응답 시간을 50% 줄이기", ["자소서"])
     assert _numbers_ok("동아리원 60명이 쓰는 API에 캐시", ["동아리원 60명이 지금도"])
+
+
+def test_listed_certificate_counts_as_owned():
+    from app.agents.supervisor import _cert_status
+    m = {"cert_info_processing": {"status": "verify", "evidence": "[자격증] 정보처리기사"},
+         "cert_security": {"status": "verify", "evidence": "[자격증] 정보처리기사 필기 합격, 정보보안기사 필기"},
+         "java": {"status": "verify", "evidence": "[보유 기술] Java"}}
+    _cert_status(m)
+    assert m["cert_info_processing"]["status"] == "own" and m["cert_security"]["status"] == "part"
+    assert m["java"]["status"] == "verify"  # 기술은 그대로(이름만 있으면 검증 필요)
+
+
+def test_task_concretize_cached_same_input(monkeypatch, tmp_path):
+    from app.agents import supervisor as sv, tasks
+    monkeypatch.setenv("STAR_CACHE_DIR", str(tmp_path))
+    resume = "Spring Boot로 대여 API를 만들었습니다."
+    calls = []
+
+    def fake(*a, **k):
+        calls.append(1)
+        return {"tasks": [{"target": "docker", "task": f"대여 API를 Docker로 감싸기 {'A' if len(calls) == 1 else 'B'}",
+                           "posting_quote": "Docker 경험", "resume_quote": None}]}
+    monkeypatch.setattr(bedrock, "converse_tool", fake)
+
+    def once():
+        cites = sv.Cites(); n = cites.add("posting", "공고", "Docker 경험")
+        gaps = [{"id": "docker", "name": "Docker", "status": "missing", "status_label": "없음", "cites": [n]}]
+        recos = [{"rank": 1, "target": "docker", "task": "템플릿", "course": None, "cites": [n]}]
+        tasks.concretize(recos, gaps, cites.items, resume, cites, use_cache=True)
+        return recos[0]["task"]
+    assert once() == once() and len(calls) == 1  # 같은 입력 → 같은 과제

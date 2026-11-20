@@ -166,6 +166,16 @@ def infer_family(status_map: dict, sector: str = "private") -> tuple[str, dict]:
     return best, scores
 
 
+def _cert_status(status_map: dict) -> None:
+    """자격증은 이력서에 적혀 있으면 그 자체가 증거다(프로젝트로 쓴 흔적을 요구하지 않는다).
+    '검증 필요'(이름만 있음) → 보유. 단 '필기'만 합격이면 부분(실기가 남음).
+    실측 2026-11-20: '[자격증] 정보처리기사'가 있는데 '정보처리기사 취득 계획 세우기'를 추천했다."""
+    for sid, v in status_map.items():
+        if not sid.startswith("cert_") or not isinstance(v, dict) or v.get("status") != "verify":
+            continue
+        v["status"] = "part" if "필기" in (v.get("evidence") or "") else "own"
+
+
 def _quote_in(text: str, name: str, aliases: list[str]) -> str | None:
     keys = [k.lower() for k in [name, *aliases] if k]
     for s in sentences(text):
@@ -282,6 +292,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         else:
             status_map = extract_resume(state["resume"])
         status_map, _ = implies.expand(status_map)
+        _cert_status(status_map)
         state["status"] = status_map
         row["n_skills"] = len(status_map)
 
@@ -419,7 +430,9 @@ def _fallback_recommend(result: dict, cites: Cites, log=None) -> list[dict]:
                             c.get("url") or c.get("link"), c["id"])]
             co = {"id": c["id"], "name": c["title"], "hours": c.get("hours"), "start": c.get("start"),
                   "url": c.get("url") or c.get("link")}
-        if g["id"].startswith("cert_"):
+        if g["id"].startswith("cert_") and g["status"] == "part":
+            task = f"'{g['name']}' 실기 시험 일정을 확인하고 준비 계획 세우기 (필기만 합격, 공고에서 요구하는 자격증)"
+        elif g["id"].startswith("cert_"):
             task = f"'{g['name']}' 시험 일정을 확인하고 취득 계획 세우기 (공고에서 요구하는 자격증)"
         elif g["id"] in SOFT:
             task = f"'{g['name']}'이(가) 드러난 경험 하나를 골라 STAR로 다시 쓰기(누구와, 무엇을 조율했고, 결과가 어땠는지)"
