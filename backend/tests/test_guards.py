@@ -171,3 +171,35 @@ def test_demo_key_gates_bedrock(client, monkeypatch):
     m = client.get("/api/meta", headers={"X-Demo-Key": "demo-secret-123456"}).json()
     assert m["public_mock"] is False and m["bedrock"] == bedrock.configured_mode()
     assert client.get("/api/meta", headers={"X-Demo-Key": "wrong"}).json()["public_mock"] is True
+
+
+def test_star_cache_shared_across_instances_on_dynamo(monkeypatch):
+    """배포에서는 캐시가 DynamoDB에 있어 다른 Lambda 인스턴스에서도 같은 결과(같은 문서 → 같은 결과)."""
+    from app import config
+    from app.adapters import bedrock, storage
+    from app.agents import star
+
+    class Fake(FakeDynamo):
+        def get_item(self, TableName, Key, ConsistentRead=False):
+            it = self.items.get((Key["pk"]["S"], Key["sk"]["S"]))
+            return {"Item": it} if it else {}
+    fake = Fake()
+    old = storage.backend()
+    storage.use_backend(storage._Dynamo("t", client=fake))
+    monkeypatch.setattr(config, "STORAGE", "dynamodb")
+    calls = []
+
+    def llm(*a, **k):
+        calls.append(1)
+        return {"experiences": [{"title": "예약", "anchor": None, "S": None, "T": None,
+                                 "A": "Spring Boot로 예약 API를 만들었습니다." if len(calls) == 1 else None, "R": None}]}
+    monkeypatch.setattr(bedrock, "converse_tool", llm)
+    text = "Spring Boot로 예약 API를 만들었습니다."
+    try:
+        r1, _ = star.diagnose(text, use_llm=True, cache=True)
+        r2, m2 = star.diagnose(text, use_llm=True, cache=True)   # 다른 인스턴스라고 가정: 파일 캐시가 아니라 DynamoDB에서 읽음
+        assert len(calls) == 1 and m2["cached"] and r1 == r2
+        (pk, _), item = next(iter(fake.items.items()))
+        assert pk == "CACHE" and "ttl" in item and text not in item["data"]["S"].replace(r1[0]["slots"]["A"]["quote"], "")
+    finally:
+        storage.use_backend(old)
