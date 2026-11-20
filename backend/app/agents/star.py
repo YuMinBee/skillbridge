@@ -6,8 +6,14 @@ STAR(상황·과제·행동·결과)는 기업 역량면접(행동사건면접, 
 - 점수·수준은 아래 규칙 상수로만 계산한다(AGENTS 규칙 8). 같은 칸이면 같은 점수다.
 - BEDROCK_MOCK=1이거나 호출이 실패하면 같은 형식을 문장 패턴 규칙으로 낸다.
 """
+import hashlib
+import json
+import os
 import re
+import time
+from pathlib import Path
 
+from .. import config
 from ..adapters import bedrock
 from ..skills import sentences
 
@@ -20,7 +26,10 @@ STRONG_MIN, OK_MIN = 4.0, 2.5   # strong: 4점 이상 + A·R 있음 / ok: 2.5점
 MAX_SCORE = 4 * SLOT_POINT + QUANT_POINT + ROLE_POINT
 
 SLOTS = ("S", "T", "A", "R")
+MAX_EXP = 8               # 화면에 보여 줄 경험 수 상한
+MAX_LLM_CHARS = 16_000   # 자소서+포트폴리오를 함께 넣을 수 있게 (이전 8,000)
 SLOT_LABEL = {"S": "상황", "T": "과제", "A": "행동", "R": "결과"}
+CACHE_TTL = 24 * 3600     # 같은 문서 → 같은 결과를 이 시간 동안 재사용
 
 # ── 문장 패턴 (MOCK 판정 + 수치·역할·꾸밈 판정은 Bedrock 모드에서도 이 규칙을 쓴다) ──
 _S = re.compile(r"문제|불편|어려움|어려웠|느려|느리|잦|부족|비효율|오류가|장애|병목|요청|필요했|상황|당시|때문에|한계|번거")
@@ -28,7 +37,10 @@ _T = re.compile(r"맡아|맡았|맡은|담당|역할|목표|과제|책임|하기
 _A = re.compile(r"만들|만든|구현|개발|설계|적용|도입|해결|분석|작성|자동화|리팩터|최적화|구축|배포|수집|전처리|학습시|튜닝|테스트|측정|"
                 r"비교|정리|학습하|진행|실험|재현|집계|바꾸|바꿨|옮기|옮겼|연동|캐싱|구성|처리하|컨테이너화|시각화|모델링|크롤링|파인튜닝|운영")
 _R = re.compile(r"결과(?:적으로)?[,로 ]+[^.]*(?:되었|됐|했|함|냄)|개선|감소|증가|단축|향상|달성|줄였|줄어|늘었|늘렸|수상|선정|게재|포스터|출판|채택|합격|빨라|0건|%|배\b|→")
-_QUANT = re.compile(r"\d+(?:[.,]\d+)?\s*(?:%|퍼센트|배|건|초|ms|분|시간|일|주|명|회|원|만원|점|위|개|편|MB|GB|배속|x)|\d+\s*→\s*\d+")
+# 단위가 붙은 숫자, 'A → B', 'A에서 B로', 지표 이름 + 소수(F1 0.79, nDCG@10 0.41)
+_QUANT = re.compile(r"\d+(?:[.,]\d+)?\s*(?:%|퍼센트|%p|배|건|초|ms|분|시간|일|주|명|회|원|만원|점|위|개|편|MB|GB|배속|x)"
+                    r"|\d[\d.,]*\s*→\s*\d|\d[\d.,]*\s*에서\s*\d[\d.,]*\s*(?:으로|로)"
+                    r"|(?:F1|AUC|mAP|IoU|nDCG|Recall|Precision|정확도|정밀도|재현율|BLEU|ROUGE)[^\d]{0,12}\d+\.\d+")
 _ROLE = re.compile(r"제가|저는|내가|직접|혼자|단독|맡아|맡았|맡은|담당")
 _INFLATED = re.compile(r"혁신적|주도적|주도했|열정|적극적|최고의|탁월|성공적으로|완벽|뛰어난|이끌었|리더십을 발휘")
 _SKIP_HEAD = re.compile(r"^\[?(보유\s*기술|기술\s*스택|스킬|자격증?|학력|교육|수료|어학|연락처|인적\s*사항)\]?")
@@ -87,11 +99,14 @@ def split_experiences(text: str) -> list[dict]:
 
 
 def locate(quote: str | None, text: str) -> str | None:
-    """인용이 원문에 실제로 있는지. 공백 차이만 허용한다. 없으면 None."""
+    """인용이 원문에 실제로 있는지. 공백·줄바꿈 차이만 허용한다(PDF는 문장 중간에서 줄이 바뀜). 없으면 None."""
     q = _norm(quote or "")
     if len(q) < 4:
         return None
-    return q if q in _norm(text) else None
+    if q in _norm(text):
+        return q
+    tight = lambda s: re.sub(r"\s+", "", s)  # noqa: E731  글자는 하나도 다르면 안 된다
+    return q if tight(q) in tight(text) else None
 
 
 def _rule_slots(text: str) -> dict:
@@ -145,43 +160,108 @@ def _build(exp: dict, slots: dict) -> dict:
             "missing_hint": sc["missing_hint"]}
 
 
-_SYS = """너는 기업 역량면접(행동사건면접) 평가자다. 이력서의 각 경험을 STAR로 나눈다.
+_SYS = """너는 기업 역량면접(행동사건면접) 평가자다. 지원자의 자기소개서·포트폴리오·이력서에서 경험을 찾아 STAR로 나눈다.
 규칙:
 - 경험마다 S(상황·문제), T(맡은 과제·목표), A(내가 한 구체적 행동), R(결과) 칸을 채운다.
-- 각 칸에는 이력서 원문 문장을 **글자 그대로** 복사한다. 고치거나 요약하거나 합치지 않는다.
-- 원문에 그 칸에 해당하는 문장이 없으면 null. 추측해서 채우지 않는다.
+- 각 칸에는 이력서 원문에서 그 칸의 핵심 문장 **하나만 글자 그대로** 복사한다. 고치거나 요약하거나 여러 문장을 합치지 않는다.
+- 원문에 그 칸에 해당하는 문장이 없으면 null. 추측해서 채우지 않는다. 한 문장이 행동과 결과를 함께 담고 있으면 두 칸에 같은 문장을 넣어도 된다.
+- 칸 기준(면접관이 그 칸을 물었을 때 대답이 되는 문장만):
+  S: 왜 이 일을 했는지 알 수 있는 **구체적인** 문제·제약·배경(무엇이 어떻게 불편했는지). 대회·수업·프로젝트 이름, 기간, 인원, 막연한 문제 언급은 S가 아니다.
+  T: 이루려던 목표나 맡은 책임. 행동을 다시 쓴 것, '열심히 참여', '리더 역할'처럼 무엇을 책임졌는지 없는 말은 T가 아니다.
+  A: 동사 + 대상 + 방법(무엇을 어떻게). '운영했다', '개발했다'만 있고 무엇을 어떻게 했는지 없으면 A가 아니다.
+  R: 행동 뒤에 **무엇이 어떻게 바뀌었는지** 관찰 가능한 결과(지표 변화, 실제 사용·채택, 수상, 누가 무엇을 확인했는지 드러난 피드백).
+     누가 무엇에 대해 했는지 없는 평가·반응, 무엇이 바뀌었는지 없는 막연한 성과·의미 부여('큰 성과', '성공적으로 마무리'), 배운 점, 무엇을 잰 숫자인지 모르는 수치는 R이 아니다.
 - '혁신적으로 주도했다'처럼 꾸미는 말만 있고 무엇을 했는지 없으면 A는 null이다.
-- 기술 목록·학력·자격증 줄은 경험이 아니다."""
+- 기술 목록·학력·자격증·연락처 줄, README의 기능 목록·설치법·폴더 구조는 경험이 아니다.
+- 경험은 프로젝트·연구·활동 또는 자기소개서 문항 하나를 한 단위로 묶는다. 같은 프로젝트의 여러 줄은 하나로. 최대 8개.
+- 문서 머리말([자기소개서], [GitHub · 레포] 등)이 어느 문서의 경험인지 알려 준다."""
 
 _SCHEMA = {"type": "object", "properties": {"experiences": {"type": "array", "items": {
     "type": "object", "properties": {
         "title": {"type": "string", "description": "경험 이름(짧게)"},
-        "text": {"type": "string", "description": "이 경험에 해당하는 원문 구간(그대로)"},
+        "anchor": {"type": "string", "description": "이 경험의 첫 문장(원문 그대로, 짧게)"},
         "S": {"type": ["string", "null"]}, "T": {"type": ["string", "null"]},
         "A": {"type": ["string", "null"]}, "R": {"type": ["string", "null"]}},
-    "required": ["title", "text", "S", "T", "A", "R"]}}}, "required": ["experiences"]}
+    "required": ["title", "anchor", "S", "T", "A", "R"]}, "maxItems": MAX_EXP}}, "required": ["experiences"]}
 
 
-def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool | None = None) -> tuple[list[dict], dict]:
-    """→ (강점 목록, 메타 {mode, dropped_quotes}). resume는 이미 개인정보를 가린 텍스트."""
+def _cache_dir() -> Path:
+    d = os.getenv("STAR_CACHE_DIR") or ("/tmp/star_cache" if os.getenv("AWS_LAMBDA_FUNCTION_NAME")
+                                        else str(Path(__file__).resolve().parents[2] / ".data" / "star_cache"))
+    return Path(d)
+
+
+def _cache_key(resume: str) -> str:
+    """같은 문서 + 같은 모델 + 같은 지시문이면 같은 키. 지시문·스키마를 고치면 키가 바뀌어 예전 결과를 쓰지 않는다."""
+    h = hashlib.sha256()
+    for part in (config.MODEL_ID, _SYS, json.dumps(_SCHEMA, sort_keys=True), str(MAX_LLM_CHARS), resume):
+        h.update(part.encode("utf-8")); h.update(b"\0")
+    return h.hexdigest()
+
+
+def _cache_get(key: str):
+    p = _cache_dir() / f"{key}.json"
+    try:
+        if time.time() - p.stat().st_mtime > CACHE_TTL:
+            p.unlink(missing_ok=True)
+            return None
+        return json.loads(p.read_text(encoding="utf-8"))
+    except (OSError, ValueError):
+        return None
+
+
+def _cache_put(key: str, res: list, meta: dict) -> None:
+    try:
+        d = _cache_dir(); d.mkdir(parents=True, exist_ok=True)
+        tmp = d / f"{key}.{os.getpid()}.tmp"
+        tmp.write_text(json.dumps({"res": res, "meta": meta}, ensure_ascii=False), encoding="utf-8")
+        os.replace(tmp, d / f"{key}.json")
+    except OSError:
+        pass  # 캐시는 있으면 좋은 것. 못 써도 분석은 계속한다.
+
+
+def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool | None = None,
+             cache: bool | None = None) -> tuple[list[dict], dict]:
+    """→ (강점 목록, 메타 {mode, dropped_quotes, cached}). resume는 이미 개인정보를 가린 텍스트.
+
+    같은 문서는 24시간 동안 같은 결과를 돌려준다(캐시). 키는 문서의 해시이고 원문은 저장하지 않는다.
+    저장되는 것은 결과(원문에서 확인된 인용 문장 포함)뿐이며 24시간 뒤 지운다(DECISIONS 2026-11-17 '인용 24시간').
+    평가에서 반복 일치율을 잴 때는 cache=False로 끈다(eval/trust/run_ours.py).
+    """
     use_llm = (bedrock.mode() == "bedrock") if use_llm is None else use_llm
+    cache = (os.getenv("STAR_CACHE", "1") != "0") if cache is None else cache
+    if use_llm and cache:
+        key = _cache_key(resume)
+        hit = _cache_get(key)
+        if hit:
+            return hit["res"], {**hit["meta"], "cached": True}
+        res, meta = diagnose(resume, log=log, use_llm=True, cache=False)
+        if meta.get("mode") == "bedrock":  # 규칙 폴백 결과는 캐시하지 않는다(다음에 Bedrock으로 다시 시도)
+            _cache_put(key, res, meta)
+        return res, {**meta, "cached": False}
     if use_llm:
         try:
-            out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:8000]}\n</이력서>", "submit_star", _SCHEMA,
-                                        log=log, kind="star", max_tokens=3000)
+            out = bedrock.converse_tool(_SYS, f"<이력서>\n{resume[:MAX_LLM_CHARS]}\n</이력서>", "submit_star", _SCHEMA,
+                                        log=log, kind="star", max_tokens=8000)
             res, dropped = [], 0
-            for i, e in enumerate(out.get("experiences", [])[:12]):
-                text = locate(e.get("text"), resume)
-                if text is None:  # 경험 구간 자체가 원문에 없으면 지어낸 경험 → 버림
-                    dropped += 1
-                    continue
+            exps = out.get("experiences", [])
+            if isinstance(exps, str):  # 모델이 배열을 JSON 문자열로 주는 경우가 있다(길면 끝이 잘림)
+                exps = _salvage(exps)
+            if not isinstance(exps, list):
+                exps = []
+            for i, e in enumerate(x for x in exps[:MAX_EXP] if isinstance(x, dict)):
+                e = {k: (v if isinstance(v, str) or v is None else None) for k, v in e.items()}
                 slots = {}
                 for k in SLOTS:
                     q = locate(e.get(k), resume)
                     if e.get(k) and q is None:
                         dropped += 1  # 원문에 없는 인용 → 버림
                     slots[k] = q
-                # 칸이 모두 비어도 남긴다: 약한 경험을 숨기지 않고 '약함'으로 보여 준다
+                anchor = locate(e.get("anchor"), resume)
+                if anchor is None and not any(slots.values()):  # 원문에서 하나도 확인 안 되면 지어낸 경험 → 버림
+                    dropped += 1
+                    continue
+                text = " ".join(dict.fromkeys(v for v in [anchor, *slots.values()] if v))
                 res.append(_build({"exp_id": f"e{i + 1}", "title": e.get("title") or text[:24], "text": text}, slots))
             if res:
                 return res, {"mode": "bedrock", "dropped_quotes": dropped}
@@ -190,5 +270,67 @@ def diagnose(resume: str, *, log: "bedrock.CallLog | None" = None, use_llm: bool
     return _rule(resume), {"mode": "rule", "dropped_quotes": 0}
 
 
+def _salvage(s: str) -> list:
+    """JSON 배열 문자열 → 리스트. 끝이 잘렸으면 완성된 객체까지만 살린다."""
+    try:
+        v = json.loads(s)
+        return v if isinstance(v, list) else []
+    except ValueError:
+        pass
+    dec, out, i = json.JSONDecoder(), [], s.find("{")
+    while i != -1:
+        try:
+            obj, end = dec.raw_decode(s, i)
+        except ValueError:
+            break
+        out.append(obj)
+        i = s.find("{", end)
+    return out
+
+
 def _rule(resume: str) -> list[dict]:
-    return [_build(e, _rule_slots(e["text"])) for e in split_experiences(resume)]
+    out = [_build(e, _rule_slots(e["text"])) for e in split_experiences(resume)]
+    out = [e for e in out if any(s["present"] for s in e["slots"].values()) or e["inflated"]]
+    return out[:MAX_EXP]
+
+
+# ── 우리 STAR 템플릿으로 쓴 경우 ─────────────────────────────────
+# 사용자가 칸을 직접 나눠 썼으므로 '어느 칸인가'는 판정하지 않는다. 대신 각 칸의 **질**을 같은 규칙으로 본다:
+# 행동(A)에 구체적 행동 동사가 있는가, 결과(R)에 결과·숫자가 있는가, 꾸미는 말뿐인가. 너무 짧은 칸(5자 미만)은 없음으로 본다.
+MIN_SLOT = 5
+
+
+def compose(template: list[dict], skills: str = "") -> str:
+    """템플릿 → 이력서 본문(인용·검증용). 칸 문장이 그대로 들어간다."""
+    parts = []
+    for e in template:
+        body = " ".join(_end(e.get(k, "")) for k in SLOTS if (e.get(k) or "").strip())
+        parts.append(f"[{e.get('title') or '경험'}]\n{body}")
+    if skills.strip():
+        parts.append(f"[보유기술] {skills.strip()}")
+    return "\n\n".join(parts)
+
+
+def _end(s: str) -> str:
+    s = _norm(s)
+    return s if s.endswith((".", "!", "?", "다", "함", "음")) else s + "."
+
+
+def from_template(template: list[dict], resume: str) -> list[dict]:
+    out = []
+    for i, e in enumerate(template):
+        slots = {}
+        for k in SLOTS:
+            t = _norm(e.get(k) or "")
+            if len(t) < MIN_SLOT:
+                slots[k] = None
+                continue
+            if k == "A" and not _A.search(_INFLATED.sub("", t)):
+                slots[k] = t  # 칸은 채웠지만 구체적 행동이 없으면 score()의 꾸밈 규칙이 상한을 건다
+            elif k == "R" and not (_R.search(t) or _QUANT.search(t)):
+                slots[k] = None  # '열심히 했다'처럼 결과가 아닌 문장은 결과로 치지 않는다
+                continue
+            slots[k] = locate(t, resume) or locate(_end(t), resume)
+        text = " ".join(v for v in slots.values() if v) or (e.get("title") or "")
+        out.append(_build({"exp_id": f"e{i + 1}", "title": e.get("title") or f"경험 {i + 1}", "text": text}, slots))
+    return out

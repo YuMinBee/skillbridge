@@ -163,7 +163,34 @@ def guardrail_mask(text: str, log: CallLog | None = None) -> tuple[str, int]:
     masked = outs[0]["text"] if outs else text
     for k, v in _PII_LABEL.items():
         masked = masked.replace("{" + k + "}", v)
-    return masked, n
+    masked, undone = undo_midword_address(text, masked)
+    return masked, n - undone
+
+
+_HANGUL = re.compile(r"[가-힣]")
+# Guardrail이 주소로 잘못 가린 것이 확인된 일반 단어. 발견될 때마다 추가하고 DECISIONS에 적는다.
+NOT_ADDRESS = {"동아리"}
+
+
+def undo_midword_address(before: str, after: str) -> tuple[str, int]:
+    """Guardrail이 단어 중간을 주소로 가린 오탐을 되돌린다. 예: '동아리' → '[주소]리' → '동아리'.
+    되돌리는 조건: [주소] 라벨만이고, (가려진 원문이 NOT_ADDRESS 단어) 또는 (모두 만족: 바로 뒤에 한글이 붙어 있음, 가려진 원문에 공백·숫자가 없고 6자 이하).
+    번지가 있는 진짜 주소('대구 북구 침산로 12')는 공백·숫자가 있어 그대로 가린다. 이름은 되돌리지 않는다('[이름]님'은 진짜 이름)."""
+    from difflib import SequenceMatcher
+    label = _PII_LABEL["ADDRESS"]
+    if label not in after:
+        return after, 0
+    out, k = [], 0
+    for op, i1, i2, j1, j2 in SequenceMatcher(None, before, after, autojunk=False).get_opcodes():
+        seg_after, seg_before = after[j1:j2], before[i1:i2]
+        midword = (j2 < len(after) and _HANGUL.match(after[j2]) and seg_before and len(seg_before) <= 6
+                   and not re.search(r"[\s\d]", seg_before))
+        if op == "replace" and seg_after == label and (midword or seg_before.strip() in NOT_ADDRESS):
+            out.append(seg_before)
+            k += 1
+        else:
+            out.append(seg_after)
+    return "".join(out), k
 
 
 _PII_LABEL = {"NAME": "[이름]", "ADDRESS": "[주소]", "AGE": "[나이]", "URL": "[URL]", "EMAIL": "[이메일]",
