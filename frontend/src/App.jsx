@@ -16,7 +16,6 @@ export default function App() {
   const [companies, setCompanies] = useState([]);
   const [corpVersion, setCorpVersion] = useState(0);
   const [toast, setToast] = useState("");
-  const [err, setErr] = useState("");
   const tt = useRef(null);
 
   const notify = useCallback((msg) => {
@@ -24,7 +23,8 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    api.meta().then(setMeta).catch(() => setErr("API 서버에 연결하지 못했습니다. 백엔드(포트 8010)가 켜져 있는지 확인하세요."));
+    // 역량 분석 탭은 meta 없이 돈다. 연결 문제는 분석을 시작할 때 그 화면에서 알린다(시작 화면에 빨간 배너를 띄우지 않음)
+    api.meta().then(setMeta).catch(() => {});
     api.companies(true).then(setCompanies).catch(() => {});
     const onHash = () => setTab(hashTab());
     window.addEventListener("hashchange", onHash);
@@ -74,7 +74,6 @@ export default function App() {
           ))}
         </nav>
       </header>
-      {err && <p className="err" style={{ marginTop: 16 }}>{err}</p>}
       <div hidden={tab !== "analyze"}><Analyze active={tab === "analyze"} /></div>
       <div hidden={tab !== "market"}>{tab === "market" && <Market />}</div>
       <div hidden={tab !== "seeker"}><Seeker companies={companies.filter((c) => c.listed !== false)} corpVersion={corpVersion} active={tab === "seeker"} mode={meta?.bedrock} /></div>

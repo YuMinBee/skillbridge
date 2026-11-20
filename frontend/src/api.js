@@ -29,7 +29,9 @@ async function req(method, url, body, isForm = false) {
     if (isForm) opt.body = body;
     else { opt.headers["Content-Type"] = "application/json"; opt.body = JSON.stringify(body); }
   }
-  const r = await fetch(url, opt);
+  let r;
+  try { r = await fetch(url, opt); }
+  catch { throw new Error("서버에 연결하지 못했습니다. 잠시 후 다시 시도해 주세요."); }
   let data = null;
   try { data = await r.json(); } catch { /* 빈 응답 */ }
   if (!r.ok) {
