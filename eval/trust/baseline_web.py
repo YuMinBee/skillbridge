@@ -75,8 +75,29 @@ RECO_PROMPT_GOOD = (
     "실제로 있는지 확실하지 않으면 추천하지 마세요.\n\n"
     "이력서:\n{resume}")
 
+
+def _star_criteria() -> str:
+    """우리 시스템 지시문(star._SYS)의 '칸 기준' 문단을 그대로 가져온다. 우리와 같은 기준을 웹에도 준다(웹 ③)."""
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "backend"))
+    from app.agents import star  # noqa: E402
+    lines, on = [], False
+    for l in star._SYS.splitlines():
+        if l.startswith("- 칸 기준"):
+            on = True
+        elif on and l.startswith("- "):
+            break
+        if on:
+            lines.append(l.lstrip("- ").rstrip())
+    return "\n".join(lines)
+
+
+# strict = 웹 ③: good + 우리 시스템과 똑같은 칸 기준. "너희만 기준을 줬잖아"에 답하기 위한 것.
+# 이것과도 차이가 나면 차이는 프롬프트가 아니라 시스템(원문 대조·규칙 점수·검증)에서 나온 것이다.
+STAR_PROMPT_STRICT = STAR_PROMPT_GOOD.replace("\n\n원문:\n{text}", "\n5. " + _star_criteria().replace("{", "{{").replace("}", "}}") + "\n\n원문:\n{text}")
+
 PROMPTS = {"plain": {"star": STAR_PROMPT, "reco": RECO_PROMPT},
-           "good": {"star": STAR_PROMPT_GOOD, "reco": RECO_PROMPT_GOOD}}
+           "good": {"star": STAR_PROMPT_GOOD, "reco": RECO_PROMPT_GOOD},
+           "strict": {"star": STAR_PROMPT_STRICT, "reco": RECO_PROMPT_GOOD}}
 
 # ── 파서: 답변 글 → JSON (답변에 적힌 판단만 옮긴다) ──────────────────────────
 PARSE_SYSTEM = (
@@ -208,7 +229,7 @@ def main():
     ap.add_argument("--task", choices=["star", "reco"], required=True)
     ap.add_argument("--split", choices=["dev", "test"], default="dev")
     ap.add_argument("--runs", type=int, default=5, help="같은 입력 반복 횟수(일관성 측정용)")
-    ap.add_argument("--prompt", choices=["plain", "good"], default="plain",
+    ap.add_argument("--prompt", choices=["plain", "good", "strict"], default="plain",
                     help="plain = 그냥 묻기, good = 잘 쓴 프롬프트(원문 인용·없으면 비움·실제 과정만)")
     ap.add_argument("--temperature", type=float, default=1.0, help="기본 1.0 = API 기본값(웹 채팅처럼). 0도 돌린다")
     ap.add_argument("--max-tokens", type=int, default=3000)

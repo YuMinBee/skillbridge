@@ -15,9 +15,11 @@ from pathlib import Path
 import numpy as np
 
 from ..adapters import bedrock
-from ..config import ROOT
+from ..config import BUNDLED_CACHE, ON_LAMBDA, ROOT
 
-CACHE = ROOT / "backend" / ".data" / "emb"
+# Lambda는 /var/task가 읽기 전용 → 쓰기는 /tmp, 읽기는 /tmp → 배포 패키지에 미리 구운 벡터(cache_bundle/emb) 순서
+CACHE = Path("/tmp/.data/emb") if ON_LAMBDA else ROOT / "backend" / ".data" / "emb"
+BUNDLED = BUNDLED_CACHE / "emb"
 MODELS = {
     "titan-256": {"id": "amazon.titan-embed-text-v2:0", "dims": 256, "kind": "titan", "region": "서울", "usd_per_mtok": 0.02},
     "titan-512": {"id": "amazon.titan-embed-text-v2:0", "dims": 512, "kind": "titan", "region": "서울", "usd_per_mtok": 0.02},
@@ -35,14 +37,17 @@ def _key(text: str, purpose: str, model: str) -> str:
 
 def _load(model: str) -> dict[str, np.ndarray]:
     if model not in _mem:
-        f = CACHE / f"{model}.npz"
-        _mem[model] = dict(np.load(f)) if f.exists() else {}
+        f = next((c / f"{model}.npz" for c in (CACHE, BUNDLED) if (c / f"{model}.npz").exists()), None)
+        _mem[model] = dict(np.load(f)) if f else {}
     return _mem[model]
 
 
 def _save(model: str):
-    CACHE.mkdir(parents=True, exist_ok=True)
-    np.savez(CACHE / f"{model}.npz", **_mem[model])
+    try:
+        CACHE.mkdir(parents=True, exist_ok=True)
+        np.savez(CACHE / f"{model}.npz", **_mem[model])
+    except OSError:
+        pass  # 캐시는 있으면 좋은 것. 못 써도 검색은 메모리에 있는 벡터로 계속한다
 
 
 def _titan(texts: list[str], dims: int) -> list[list[float]]:

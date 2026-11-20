@@ -30,8 +30,8 @@ EXPECTED_ACCOUNT = os.getenv("EXPECTED_ACCOUNT", "955639821496")
 STACK = "kosa06-skillbridge"
 TAGS = [{"Key": "project", "Value": "kosa06"}]
 BUILD = ROOT / "build" / "lambda"
-DEPS = ["fastapi>=0.115", "mangum>=0.17", "python-multipart>=0.0.9", "pypdf>=4.0", "python-dotenv>=1.0"]
-SEED_PARTS = ["companies", "corp-docs", "courses", "market", "personas", "sessions"]
+DEPS = ["fastapi>=0.115", "mangum>=0.17", "python-multipart>=0.0.9", "pypdf>=4.0", "python-dotenv>=1.0", "numpy>=1.26", "python-docx>=1.1"]
+SEED_PARTS = ["companies", "corp-docs", "courses", "corpus", "market", "personas", "sessions"]
 
 
 def sh(cmd, **kw):
@@ -66,6 +66,14 @@ def build_package() -> Path:
     for pat in ("market_index_*.json", "skill_emb_*.json"):
         for f in (ROOT / "backend" / ".data").glob(pat):
             shutil.copy(f, cb / f.name)
+    # 교육과정 1,856개 임베딩(검색 최선 조합 하나만). 없으면 Lambda가 콜드스타트마다 전부 다시 임베딩한다
+    from app.rag import retrieve  # noqa: E402
+    best = retrieve.BEST.split(":")[-1]
+    src = ROOT / "backend" / ".data" / "emb" / f"{best}.npz"
+    if not src.exists():
+        raise SystemExit(f"{src} 없음: 로컬에서 BEDROCK_MOCK=0으로 검색을 한 번 돌려 벡터를 만든 뒤 배포")
+    (cb / "emb").mkdir()
+    shutil.copy(src, cb / "emb" / src.name)
     (BUILD / "lambda_function.py").write_text(
         "import sys, os\nsys.path.insert(0, os.path.join(os.path.dirname(__file__), 'backend'))\n"
         "from app.main import handler  # noqa: E402,F401\n", encoding="utf-8")

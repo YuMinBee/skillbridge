@@ -39,6 +39,7 @@ NAMES = {
 }
 SYS_NAMES = {"ours": "우리 방식", "web_plain_t1": "웹 ① 그냥 묻기 t=1", "web_plain_t0": "웹 ① 그냥 묻기 t=0",
              "web_good_t1": "웹 ② 잘 쓴 프롬프트 t=1", "web_good_t0": "웹 ② 잘 쓴 프롬프트 t=0",
+             "web_strict_t0": "웹 ③ 같은 칸 기준 t=0", "web_strict_t1": "웹 ③ 같은 칸 기준 t=1",
              "human_ab": "사람 A–B"}
 # 보고서 맨 위 요약에 올리는 숫자 3개 (팀장 일정 11-19: 칸 정확도 · 원문에 없는 근거 · 5번 반복 일치)
 SUMMARY_METRICS = ["star_slot_acc", "fake_evidence_rate", "consistency_5runs"]
@@ -72,7 +73,7 @@ def load_preds(path: Path, norm) -> tuple[dict, int]:
 def find_systems(split: str, mock: bool) -> dict:
     sfx = "_mock" if mock else ""
     out = {}
-    pat = re.compile(rf"^web_star_{split}_(plain|good)_t([0-9.]+){sfx}\.jsonl$")
+    pat = re.compile(rf"^web_star_{split}_(plain|good|strict)_t([0-9.]+){sfx}\.jsonl$")
     for f in sorted(PRED.glob(f"web_star_{split}_*.jsonl")) if PRED.exists() else []:
         m = pat.match(f.name)
         if m:
@@ -201,7 +202,7 @@ def limit_lines(res: dict) -> list:
 
 def write_report(path: Path, res: dict):
     meta, met, diffs = res["_meta"], res["metrics"], res["diffs"]
-    systems = [s for s in ["ours", "web_plain_t1", "web_plain_t0", "web_good_t1", "web_good_t0"] if s in meta["systems"]]
+    systems = [s for s in ["ours", "web_plain_t1", "web_plain_t0", "web_good_t1", "web_good_t0", "web_strict_t1", "web_strict_t0"] if s in meta["systems"]]
     systems += [s for s in meta["systems"] if s not in systems]
     L = [f"# STAR 비교: 웹 방식 vs 우리 방식 ({meta['split']})", "",
          f"생성 {meta['at']} · 정답 단락 {meta['n_gold']}개 · 부트스트랩 {meta['n_boot']}회(단락 단위) · 표기 `값 [95% 구간]`", ""]
