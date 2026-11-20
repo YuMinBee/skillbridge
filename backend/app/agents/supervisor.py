@@ -58,12 +58,21 @@ PUBLIC_MIN = 20                     # 직군에 맞는 잡알리오 공고가 �
 APPLY_MIN, APPLY_MUST = 0.10, 0.30  # 합친 수요(가중치/2의 평균)가 이 값 이상이면 기준, 이상이면 필수
 
 
-@lru_cache(maxsize=1)
-def _gongchae() -> tuple:
+@lru_cache(maxsize=4)
+def _jsonl(name: str) -> tuple:
     import json
     from ..config import SEED
-    f = SEED / "market" / "gongchae_it.jsonl"
+    f = SEED / "market" / name
     return tuple(json.loads(x) for x in f.read_text(encoding="utf-8").splitlines() if x.strip()) if f.exists() else ()
+
+
+def _gongchae() -> tuple:
+    return _jsonl("gongchae_it.jsonl")
+
+
+def _direct() -> tuple:
+    """기업 공식 채용 페이지 직접 수집(김승제, 규칙: seed/market/direct_it.md). 직군(family)이 사람이 붙인 값이라 그대로 쓴다."""
+    return _jsonl("direct_it.jsonl")
 
 
 def posting_pool(job_family: str) -> dict:
@@ -85,6 +94,10 @@ def posting_pool(job_family: str) -> dict:
         if pat.search(g["position"]):
             priv.append({"title": f"{g['company']} · {g['position']} (고용24 공채속보)", "text": g["text"], "url": g.get("url"),
                          "req": posting_requirements(g["text"])})
+    for d in _direct():
+        if d.get("family") == job_family:
+            priv.append({"title": f"{d['company']} · {d['position']} (공식 채용 페이지)", "text": d["text"], "url": d.get("url"),
+                         "req": posting_requirements(d["text"])})
     it = [p for p in market_postings() if p.get("job") == "public" and any("정보통신" in n for n in p.get("ncs", []))]
     pub = [p for p in it if pat.search(p["title"] + " " + p.get("text", "")[:400])]
     pub_scope = FAMILY_LABEL[job_family]
