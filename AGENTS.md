@@ -40,6 +40,10 @@
 | | 11-21 | 시연 영상 `docs/demo.mp4` |
 | **전원** | 11-21 | 리허설 2회 · 11-22 제출 |
 
+### 📌 과제 판정 16개 (11-20 지시, 11-21 오전, 30분) — 김채희 또는 이승연 한 명
+
+`eval/trust/task_judge.csv`를 엑셀로 열어 '판정' 칸에 **적절 / 애매 / 부적절**. 기준은 `eval/trust/task_judge.py` 맨 위(1~2주 안에 혼자 할 수 있고 결과물이 남는가, 자소서에 없는 일을 가정하지 않는가). 자소서 원문은 `eval/trust/task_essays/essays.jsonl`, 시연 자소서는 `docs/pivot/captures/demo_resume.md`. 다 하면 `python eval/trust/task_judge.py score` → 결과 파일과 함께 PR. 발표의 "과제가 쓸 만한가" 숫자가 된다.
+
 ### 📌 민간 공고 추가 수집 (11-20 지시, **11-21 정오까지**) — 민간 공고 API 승인이 안 나서 직접 모은다
 
 규칙은 김승제가 정한 [seed/market/direct_it.md](seed/market/direct_it.md) 그대로(기업 공식 채용 페이지만 · 신입/경력무관/채용연계 인턴 · 자격요건·우대사항 문장 원문 그대로 + 링크 · 한 회사·직군당 2건 · 마감 지난 공고 제외 · 기준을 낮춰 채우지 않는다).

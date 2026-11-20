@@ -74,6 +74,11 @@ export default function Analyze({ active }) {
 
   const submit = async () => {
     setErr(""); setJob(null); setSel(null);
+    const mb = files.reduce((s, f) => s + f.size, 0) / 1024 / 1024;
+    if (mb > 5) {  // 5MB를 넘으면 서버에 닿기 전에 막혀(함수 URL 상한) 아무 안내가 없으므로 여기서 먼저 알린다
+      setErr(`문서가 합쳐서 ${mb.toFixed(1)}MB예요. 5MB 이하로 줄여 주세요 (PDF는 '최소 크기'로 다시 저장하면 대개 줄어요).`);
+      return;
+    }
     try {
       const { job_id } = await api.analyzeDocs(files, github, family, posting, sector);
       save(job_id); setJobId(job_id);

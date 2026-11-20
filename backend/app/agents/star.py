@@ -199,7 +199,27 @@ def _cache_key(resume: str) -> str:
     return h.hexdigest()
 
 
+def _shared():
+    """배포(STORAGE=dynamodb)에서는 Lambda 인스턴스끼리 캐시를 나눠야 '같은 문서 → 같은 결과'가 지켜진다.
+    인스턴스마다 /tmp에 따로 두면 동시 실행 2~3개 중 다른 인스턴스로 갈 때 결과가 달라질 수 있다."""
+    if config.STORAGE != "dynamodb":
+        return None
+    from ..adapters import storage
+    b = storage.backend()
+    return b if hasattr(b, "c") and hasattr(b, "table") else None
+
+
 def _cache_get(key: str):
+    b = _shared()
+    if b is not None:
+        try:
+            r = b.c.get_item(TableName=b.table, Key={"pk": {"S": "CACHE"}, "sk": {"S": key}}, ConsistentRead=True)
+            it = r.get("Item")
+            if not it or float(it["ttl"]["N"]) < time.time():  # TTL 삭제는 늦을 수 있어 읽을 때도 거른다
+                return None
+            return json.loads(it["data"]["S"])
+        except Exception:  # noqa: BLE001  캐시 장애가 분석을 막지 않는다
+            return None
     p = _cache_dir() / f"{key}.json"
     try:
         if time.time() - p.stat().st_mtime > CACHE_TTL:
@@ -210,11 +230,19 @@ def _cache_get(key: str):
         return None
 
 
-def _cache_put(key: str, res: list, meta: dict) -> None:
+def _cache_put(key: str, res, meta: dict) -> None:
+    data = json.dumps({"res": res, "meta": meta}, ensure_ascii=False)
+    b = _shared()
+    if b is not None:
+        try:
+            b._put("CACHE", key, data=data, ttl=int(time.time()) + CACHE_TTL)
+        except Exception:  # noqa: BLE001
+            pass
+        return
     try:
         d = _cache_dir(); d.mkdir(parents=True, exist_ok=True)
         tmp = d / f"{key}.{os.getpid()}.tmp"
-        tmp.write_text(json.dumps({"res": res, "meta": meta}, ensure_ascii=False), encoding="utf-8")
+        tmp.write_text(data, encoding="utf-8")
         os.replace(tmp, d / f"{key}.json")
     except OSError:
         pass  # 캐시는 있으면 좋은 것. 못 써도 분석은 계속한다.

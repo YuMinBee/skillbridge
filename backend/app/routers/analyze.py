@@ -105,9 +105,14 @@ async def _read_docs(files: list[UploadFile]) -> list[str]:
             t = docs.text_of(f.filename or "", raw)
         except docs.DocError as e:
             raise HTTPException(400, str(e))
+        name = (f.filename or "문서").rsplit(".", 1)[0][:40]
         if len(t) >= 20:
-            name = (f.filename or "문서").rsplit(".", 1)[0][:40]
             parts.append(f"[{name}]\n{t}")
+        elif raw and (f.filename or "").lower().endswith(".pdf"):
+            # 스캔·이미지로만 된 PDF는 글자를 읽을 수 없다. 조용히 빼지 않고 이유를 알린다(점검 2026-11-20)
+            raise HTTPException(400, f"'{name}.pdf'에서 글자를 읽을 수 없습니다(스캔·이미지 PDF). 글자를 복사할 수 있는 PDF나 Word로 다시 저장해 주세요")
+        elif raw:
+            raise HTTPException(400, f"'{f.filename}'에 읽을 내용이 거의 없습니다(20자 미만)")
     return parts
 
 
