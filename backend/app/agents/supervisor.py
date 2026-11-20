@@ -346,8 +346,11 @@ def _fallback_recommend(result: dict, cites: Cites, log=None) -> list[dict]:
     """T2 과제 추천이 들어오기 전 임시: 갭 → 고용24 과정(RAG 검색) + 결과물 과제, 가장 약한 경험 → STAR 보완 과제."""
     recos = []
     for g in result["gaps"][:MAX_RECO - 1]:
-        c = find_course(g["name"], log=log) if g["status"] != "verify" else None  # 이름만 있는 역량은 입문 과정 대신 증거 남기기
-        if c is None and g["status"] != "verify":
+        # 과정을 붙이지 않는 경우: 이름만 있는 역량(입문 과정 대신 증거 남기기), 소프트 스킬(IT 과정 코퍼스에 맞는 과정이 없어
+        # 엉뚱한 과정이 뽑힌다. 실측 2026-11-20: '커뮤니케이션' → 'C 프로그래밍'). 소프트 스킬은 STAR 다시 쓰기 과제만 낸다.
+        no_course = g["status"] == "verify" or g["id"] in SOFT
+        c = None if no_course else find_course(g["name"], log=log)
+        if c is None and not no_course:
             course, alt = _pick_course(g["id"], "전국")
             c = course or alt
         cn = []

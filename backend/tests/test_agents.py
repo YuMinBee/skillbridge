@@ -277,3 +277,15 @@ def test_sector_changes_requirements_and_is_validated(client, monkeypatch):
     s = _run(client, monkeypatch, sector="public")
     assert s["result"]["sector"]["id"] == "public"
     assert client.post("/api/analyze", json={"resume": RESUME, "sector": "both"}).status_code == 400
+
+
+def test_soft_skill_gap_gets_task_not_course():
+    from app.agents import supervisor as sv
+    from app.pipeline.family import SOFT
+    soft = sorted(SOFT)[0]
+    result = {"gaps": [{"id": soft, "name": "커뮤니케이션", "status": "missing", "status_label": "없음", "cites": [1]},
+                       {"id": "docker", "name": "Docker", "status": "missing", "status_label": "없음", "cites": [2]}],
+              "strengths": []}
+    recos = sv._fallback_recommend(result, sv.Cites())
+    assert recos[0]["course"] is None and "STAR" in recos[0]["task"]  # IT 과정 코퍼스에서 엉뚱한 과정을 붙이지 않는다
+    assert recos[1]["course"] is not None
