@@ -164,7 +164,9 @@ function Summary({ job }) {
         </div>
       <div className="panel"><h3>강점 직군</h3><div className="big">{r.job_family?.ranking?.[0]?.label ?? "—"}</div>
         {r.job_family?.ranking && (
-          <ol className="rank">{r.job_family.ranking.map((x) => <li key={x.id}><span>{x.label}</span><span className="num">{x.score}</span></li>)}</ol>
+          <ol className="rank">{r.job_family.ranking.map((x) => (
+            <li key={x.id} className={x.few_postings ? "muted" : ""} title={x.n_postings != null ? `공고 ${x.n_postings}건 기준` : undefined}>
+              <span>{x.label}{x.few_postings ? ` · 공고 ${x.n_postings}건(부족, 순위 제외)` : ""}</span><span className="num">{x.score}</span></li>))}</ol>
         )}</div>
       <div className="panel"><h3>준비도{r.job_family ? ` · ${r.sector?.label ?? ""} ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
         <p className="hint">공개 공고 기준</p></div>

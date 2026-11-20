@@ -120,14 +120,24 @@ def _pooled(job_family: str, sector: str = "private"):
     return pool, *pooled_requirements(pool, sector)
 
 
+MIN_FAMILY_POSTINGS = 15  # 공고가 이보다 적은 직군은 기준이 몇 개뿐이라 준비도가 부풀려진다(실측 11-20: 민간 데이터 7건 → 백엔드 지원자가 데이터 1위)
+
+
+def family_postings(f: str, sector: str = "private") -> int:
+    pool, _, _ = _pooled(f, sector)
+    return len(pool.get(sector) or [])
+
+
 def infer_family(status_map: dict, sector: str = "private") -> tuple[str, dict]:
     """이력서 스킬이 각 직군 공고 기준과 얼마나 겹치는지(보유·부분·검증 필요를 가중치로 셈) → 가장 높은 직군.
-    점수 = Σ(기준 가중치 × 상태값) / Σ기준 가중치 (준비도와 같은 식). 동점이면 백엔드 → AI·ML → 데이터 순."""
+    점수 = Σ(기준 가중치 × 상태값) / Σ기준 가중치 (준비도와 같은 식). 동점이면 백엔드 → AI·ML → 데이터 순.
+    공고가 MIN_FAMILY_POSTINGS건 미만인 직군은 점수는 보여 주되 1위 후보에서 뺀다(모두 부족하면 전부 후보)."""
     scores = {}
     for f in FAMILIES:
         _, reqs, _ = _pooled(f, sector)
         scores[f] = readiness(reqs, status_map) if reqs else 0
-    best = max(FAMILIES, key=lambda f: scores[f])
+    enough = [f for f in FAMILIES if family_postings(f, sector) >= MIN_FAMILY_POSTINGS] or list(FAMILIES)
+    best = max(enough, key=lambda f: scores[f])
     return best, scores
 
 
@@ -256,8 +266,9 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         inferred = state["family"] in (None, "", "auto")
         if inferred:
             state["family"] = best
-        ranking = [{"id": f, "label": FAMILY_LABEL[f], "score": fam_scores[f]}
-                   for f in sorted(FAMILIES, key=lambda f: -fam_scores[f])]
+        ranking = [{"id": f, "label": FAMILY_LABEL[f], "score": fam_scores[f], "n_postings": family_postings(f, state["sector"]),
+                    "few_postings": family_postings(f, state["sector"]) < MIN_FAMILY_POSTINGS}
+                   for f in sorted(FAMILIES, key=lambda f: (family_postings(f, state["sector"]) < MIN_FAMILY_POSTINGS, -fam_scores[f]))]
         out["result"]["job_family"] = {"id": state["family"], "label": FAMILY_LABEL[state["family"]],
                                        "inferred": inferred, "scores": fam_scores, "ranking": ranking}
         out["result"]["sector"] = out_sector
