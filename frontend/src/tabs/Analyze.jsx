@@ -20,13 +20,33 @@ const usd = (v) => (v == null ? "—" : `$${v.toFixed(v < 0.01 ? 4 : 3)}`);
 
 const ACCEPT = ".pdf,.docx,.md,.txt,application/pdf";
 
+const EXTS = [".pdf", ".docx", ".md", ".txt"];
+
 function DocPick({ files, onPick }) {
-  const add = (list) => onPick([...files, ...Array.from(list || [])].slice(0, 4));
+  const [over, setOver] = useState(false);
+  const [skipped, setSkipped] = useState([]);
+  const add = (list) => {
+    const all = Array.from(list || []);
+    const ok = all.filter((f) => EXTS.some((e) => f.name.toLowerCase().endsWith(e)));
+    setSkipped(all.filter((f) => !ok.includes(f)).map((f) => f.name));
+    onPick([...files, ...ok].slice(0, 4));
+  };
+  const drop = {
+    onDragOver: (e) => { e.preventDefault(); setOver(true); },
+    onDragLeave: () => setOver(false),
+    onDrop: (e) => { e.preventDefault(); setOver(false); add(e.dataTransfer.files); },
+  };
   return (
     <div className="fld">
-      <label className="fld pdfpick">자소서 · 포트폴리오 · CV · 노션 내보내기
-        <input type="file" multiple accept={ACCEPT} onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+      <label className="fld q pdfpick"><span className="qt">자기소개서 · 포트폴리오 · 이력서 등 (필수)</span>
+        <span className={over ? "filepick over" : "filepick"} {...drop}>
+          <input type="file" multiple accept={ACCEPT} onChange={(e) => { add(e.target.files); e.target.value = ""; }} />
+          <span className="filebtn">파일 선택</span>
+          <span className="hint">{files.length ? `${files.length}개 선택됨` : "선택된 파일 없음"} (파일은 4개까지, 합쳐서 5MB)</span>
+        </span>
       </label>
+      <p className="hint">올릴 수 있는 파일: .pdf, .docx, .md, .txt</p>
+      {skipped.length > 0 && <p className="err">올릴 수 없는 형식이라 뺐어요: {skipped.join(", ")}</p>}
       {files.length > 0 && (
         <ul className="doclist">
           {files.map((f, i) => (
@@ -50,7 +70,9 @@ export default function Analyze({ active }) {
   const [job, setJob] = useState(null);
   const [err, setErr] = useState("");
   const [sel, setSel] = useState(null);
+  const [pane, setPane] = useState("strengths");
   const timer = useRef(null);
+  useEffect(() => setPane("strengths"), [jobId]);  // 새 분석이면 ① 강점부터
 
   useEffect(() => { api.families().then((f) => setFamilies(f.map((x) => [x.id, x.label]))).catch(() => {}); }, []);
 
@@ -94,21 +116,21 @@ export default function Analyze({ active }) {
       <div className="grid-side">
         <div className="panel no-print">
           <h2>어디에 지원하나요?</h2>
-          <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} />
+          <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} full />
           <h2>내 경험 넣기</h2>
           <DocPick files={files} onPick={setFiles} />
-          <label className="fld">GitHub (선택)
-            <input type="text" value={github} onChange={(e) => setGithub(e.target.value)} placeholder="아이디 또는 github.com/아이디/레포" maxLength={150} />
-          </label>
-          <p className="hint">PDF·Word·노션(md) 4개까지, 합쳐서 5MB · GitHub는 공개 레포 README만 읽습니다</p>
-          <details>
-            <summary className="hint">직군 (기본: 자동)</summary>
+          <div className="fld">
+            <label className="fld q"><span className="qt">GitHub (선택)</span>
+              <input type="text" value={github} onChange={(e) => setGithub(e.target.value)} placeholder="아이디 또는 github.com/아이디/레포" maxLength={150} />
+            </label>
+            <p className="hint">GitHub는 공개 레포 README만 읽습니다</p>
+          </div>
+          <label className="fld q"><span className="qt">직군 (기본: 자동)</span>
             <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
-          </details>
-          <details>
-            <summary className="hint">지원할 공고 (선택)</summary>
-            <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="자격요건·우대사항이 있는 공고 본문" />
-          </details>
+          </label>
+          <label className="fld q"><span className="qt">지원할 공고 (선택)</span>
+            <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={6} placeholder="공고에서 자격요건, 우대사항, 주요 업무 부분을 복사해서 넣어주세요" />
+          </label>
           <button className="btn" disabled={!sector || !(files.length || github.trim()) || running} onClick={submit}>
             {running ? "분석 중…" : "분석 시작"}
           </button>
@@ -126,11 +148,19 @@ export default function Analyze({ active }) {
               </div>
               <Summary job={job} />
               <div className="an-main">
-                <div className="stack">
-                  <Strengths list={res.strengths} onCite={setSel} />
-                  <Gaps list={res.gaps} onCite={setSel} />
-                  <Recos list={res.recommendations} onCite={setSel} />
-                  <Cost job={job} />
+                {/* 1줄: 탭 / 2줄: 결과 + 근거 → 근거 칸이 결과 칸과 같은 높이에서 시작 */}
+                <nav className="tabs an-tabs no-print" role="tablist" aria-label="분석 결과">
+                  {[["strengths", "① 강점", res.strengths.length], ["gaps", "② 부족한 역량", res.gaps.length], ["recos", "③ 추천 과제", res.recommendations.length]].map(([k, l, n]) => (
+                    <button key={k} role="tab" id={`tab-${k}`} aria-controls={`pane-${k}`} aria-selected={pane === k} onClick={() => setPane(k)}>{l}<span className="num">{n}</span></button>
+                  ))}
+                  {job.cost && <button role="tab" id="tab-cost" className="tab-side" aria-controls="pane-cost" aria-selected={pane === "cost"} onClick={() => setPane("cost")}>비용</button>}
+                </nav>
+                <div className="stack an-panes">
+                  <div className="an-pane" role="tabpanel" id="pane-strengths" aria-labelledby="tab-strengths" hidden={pane !== "strengths"}><Strengths list={res.strengths} onCite={setSel} /></div>
+                  <div className="an-pane" role="tabpanel" id="pane-gaps" aria-labelledby="tab-gaps" hidden={pane !== "gaps"}><Gaps list={res.gaps} onCite={setSel} /></div>
+                  <div className="an-pane" role="tabpanel" id="pane-recos" aria-labelledby="tab-recos" hidden={pane !== "recos"}><Recos list={res.recommendations} gaps={res.gaps} onCite={setSel} /></div>
+                  {/* 비용은 인쇄(PDF)에 넣지 않는다: an-pane이 아니라 인쇄 때 펼쳐지지 않음 */}
+                  <div className="no-print" role="tabpanel" id="pane-cost" aria-labelledby="tab-cost" hidden={pane !== "cost"}><Cost job={job} /></div>
                 </div>
                 <Evidence c={sel ? cites[sel] : null} total={job.citations.length} verify={job.verify} />
               </div>
@@ -171,9 +201,9 @@ function Summary({ job }) {
         {r.job_family?.ranking && (
           <ol className="rank">{r.job_family.ranking.map((x) => (
             <li key={x.id} className={x.few_postings ? "muted" : ""} title={x.n_postings != null ? `공고 ${x.n_postings}건 기준` : undefined}>
-              <span>{x.label}{x.few_postings ? ` · 공고 ${x.n_postings}건(부족, 순위 제외)` : ""}</span><span className="num">{x.score}</span></li>))}</ol>
+              <span>{x.label}{x.few_postings ? ` · 공고 ${x.n_postings}건(부족, 순위 제외)` : ""}</span><span className="num">{x.score}점</span></li>))}</ol>
         )}</div>
-      <div className="panel"><h3>준비도{r.job_family ? ` · ${r.sector?.label ?? ""} ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}</div>
+      <div className="panel"><h3>준비도{r.job_family ? ` · ${r.sector?.label ?? ""} ${r.job_family.label}` : ""}</h3><div className="big num">{r.readiness.apply ?? "—"}{r.readiness.apply != null && <small> / 100</small>}</div>
         <p className="hint">공개 공고 기준</p></div>
       <div className="panel"><h3>이번 분석 비용</h3><div className="big num">{usd(job.cost?.usd)}</div>
         </div>
@@ -187,8 +217,8 @@ const Cite = ({ ns, onCite }) => (ns || []).map((n) => (
 
 function Strengths({ list, onCite }) {
   return (
-    <div className="panel">
-      <h2>① 강점 (STAR)</h2>
+    <div className="panel an-sec sec-ok">
+      <SecHead n="1" title="강점 (STAR)" sub="내 문서의 경험을 상황·과제·행동·결과로 나눠 봤어요" count={list.length ? `${list.length}개 경험` : null} />
       {!list.length && <p className="empty">경험 단락을 찾지 못했습니다.</p>}
       {list.map((e) => {
         const [lab, cls] = LEVEL[e.level];
@@ -214,40 +244,65 @@ function Strengths({ list, onCite }) {
   );
 }
 
-function Gaps({ list, onCite }) {
+function SecHead({ n, title, sub, count }) {
   return (
-    <div className="panel">
-      <h2>② 부족한 역량</h2>
-      {!list.length ? <p className="hint">기준에 비어 있는 역량이 없습니다.</p> : (
-        <ul className="an-gaps">
-          {list.map((g) => (
-            <li key={g.id}><span>{g.name}</span> {g.weight === 2 ? <small className="hint">필수</small> : <small className="hint">우대</small>}
-              <StatusChip status={g.status}>{g.status_label}</StatusChip> <Cite ns={g.cites} onCite={onCite} /></li>
-          ))}
-        </ul>
-      )}
+    <div className="sec-head">
+      <span className="sec-n">{n}</span>
+      <div><h2>{title}{count && <small className="hint"> · {count}</small>}</h2><p className="hint">{sub}</p></div>
     </div>
   );
 }
 
-function Recos({ list, onCite }) {
+function Gaps({ list, onCite }) {
+  const groups = [["필수", list.filter((g) => g.weight === 2)], ["우대", list.filter((g) => g.weight !== 2)]];
   return (
-    <div className="panel">
-      <h2>③ 추천 과제</h2>
+    <div className="panel an-sec sec-bad">
+      <SecHead n="2" title="부족한 역량" sub="공고에서 요구하지만 내 문서에서는 잘 보이지 않는 역량이에요" count={list.length ? `${list.length}개` : null} />
+      {!list.length ? <p className="hint">기준에 비어 있는 역량이 없습니다.</p> : groups.map(([lab, gs]) => gs.length > 0 && (
+        <div key={lab} className="gap-grp">
+          <h3>{lab} <span className="num">{gs.length}</span></h3>
+          <ul className="an-gaps">
+            {gs.map((g) => (
+              <li key={g.id}><b>{g.name}</b>
+                <span className="row"><StatusChip status={g.status}>{g.status_label}</StatusChip><Cite ns={g.cites} onCite={onCite} /></span></li>
+            ))}
+          </ul>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function Recos({ list, gaps = [], onCite }) {
+  const forLabel = (t) => {
+    if (!t) return null;
+    if (t.startsWith("star:")) return "강점 경험 보완";
+    const g = gaps.find((x) => x.id === t);
+    return g ? `${g.name} 채우기` : null;
+  };
+  return (
+    <div className="panel an-sec sec-acc">
+      <SecHead n="3" title="추천 과제" sub="부족한 역량을 채우려고 혼자 해 볼 만한 과제와 교육과정이에요" count={list.length ? `${list.length}개` : null} />
       <ol className="an-recos">
         {list.map((r) => (
           <li key={r.rank} className={r.abstained ? "abst" : ""}>
-            {r.abstained ? (
-              <><b>추천하지 않음</b><p className="hint">{r.abstain_reason || "근거 없음"}</p></>
-            ) : (
-              <>
-                <p><b>{r.task}</b></p>
-                <p className="hint">왜: {r.why} <Cite ns={r.cites} onCite={onCite} /></p>
-                {r.task_basis && <p className="hint">과제 근거: 공고 “{r.task_basis.posting}”{r.task_basis.resume ? <> · 내 자소서 “{r.task_basis.resume}”</> : null}</p>}
-                {r.course && <p className="hint">과정: {r.course.url ? <a href={r.course.url} target="_blank" rel="noreferrer">{r.course.name}</a> : r.course.name}{r.course.start ? ` · ${r.course.start} 개강` : r.course.hours ? ` · ${r.course.hours}시간` : ""}</p>}
-                {!r.course && r.course_note && <p className="hint">과정: {r.course_note}</p>}
-              </>
-            )}
+            <span className="reco-n num">{r.rank}</span>
+            <div className="reco-body">
+              {r.abstained ? (
+                <><b>추천하지 않음</b><p className="hint">{r.abstain_reason || "근거 없음"}</p></>
+              ) : (
+                <>
+                  {forLabel(r.target) && <span className="chip tag-pub reco-for">{forLabel(r.target)}</span>}
+                  <b className="reco-task">{r.task}</b>
+                  <dl className="reco-meta">
+                    <dt>왜</dt><dd>{r.why} <Cite ns={r.cites} onCite={onCite} /></dd>
+                    {r.task_basis && <><dt>근거</dt><dd>공고 “{r.task_basis.posting}”{r.task_basis.resume ? <> · 내 자소서 “{r.task_basis.resume}”</> : null}</dd></>}
+                    {r.course && <><dt>교육과정</dt><dd>{r.course.url ? <a href={r.course.url} target="_blank" rel="noreferrer">{r.course.name}</a> : r.course.name}{r.course.start ? ` · ${r.course.start} 개강` : r.course.hours ? ` · ${r.course.hours}시간` : ""}</dd></>}
+                    {!r.course && r.course_note && <><dt>교육과정</dt><dd>{r.course_note}</dd></>}
+                  </dl>
+                </>
+              )}
+            </div>
           </li>
         ))}
       </ol>
@@ -262,7 +317,7 @@ function Cost({ job }) {
   const max = Math.max(...rows.map(([, v]) => v), 1e-9);
   return (
     <div className="panel">
-      <h2>비용</h2>
+      <h2>비용 <small className="hint num">{usd(c.usd)}</small></h2>
       <p className="hint num">입력 {c.input_tokens.toLocaleString()} · 출력 {c.output_tokens.toLocaleString()} 토큰 · Bedrock 호출 {c.calls}회 · {usd(c.usd)} (예산 {usd(c.budget_usd)})</p>
       {rows.length ? (
         <div className="bars">
