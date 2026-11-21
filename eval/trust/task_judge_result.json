@@ -1,0 +1,18 @@
+{
+ "n": 16,
+ "total": 16,
+ "적절": 11,
+ "애매": 5,
+ "부적절": 0,
+ "appropriate_rate": 0.688,
+ "appropriate_ci95": [
+  0.444,
+  0.858
+ ],
+ "inappropriate_rate": 0.0,
+ "inappropriate_ci95": [
+  0.0,
+  0.194
+ ],
+ "note": "Wilson 95% 구간. 표본이 작아 구간이 넓다."
+}
