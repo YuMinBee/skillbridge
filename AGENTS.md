@@ -172,5 +172,5 @@
 
 ## 협업
 
-- 레포: https://github.com/YuMinBee/skillbridge-kosa06 (비공개). 작업은 각자 브랜치에서 하고 PR로 합친다. 시작 전에는 `git pull`을 한다.
+- 레포: https://github.com/YuMinBee/skillbridge (공개, 11-21 skillbridge-kosa06에서 이름 변경 · 예전 주소는 자동으로 넘어감). 작업은 각자 브랜치에서 하고 PR로 합친다. 시작 전에는 `git pull`을 한다.
 - 결정을 바꾸면 `DECISIONS.md`에 날짜와 이유를 적는다.
