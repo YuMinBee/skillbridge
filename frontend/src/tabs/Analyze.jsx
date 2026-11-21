@@ -14,7 +14,14 @@ const LEVEL = { strong: ["강점", "st-own"], ok: ["보통", "st-part"], weak: [
 const KIND = { resume: "내 문서", posting: "공고", posting_stats: "공고 집계", course: "고용24 과정", ncs_unit: "NCS 능력단위", ncs_basic: "NCS 직업기초능력" };
 const KEY = "analyzeJob";
 
-const load = () => { try { return localStorage.getItem(KEY) || ""; } catch { return ""; } };
+// 주소의 ?job=j_xxxx 가 있으면 그 결과를 연다(결과 공유·발표 캡처용). 없으면 이 브라우저의 마지막 분석
+const load = () => {
+  try {
+    const q = new URLSearchParams(location.search).get("job");
+    if (q && /^j_[0-9a-f]{12}$/.test(q)) return q;
+    return localStorage.getItem(KEY) || "";
+  } catch { return ""; }
+};
 const save = (v) => { try { v ? localStorage.setItem(KEY, v) : localStorage.removeItem(KEY); } catch { /* noop */ } };
 const usd = (v) => (v == null ? "—" : `$${v.toFixed(v < 0.01 ? 4 : 3)}`);
 
