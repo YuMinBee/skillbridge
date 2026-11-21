@@ -5,6 +5,7 @@
 자기소개서·포트폴리오·CV·GitHub를 올리면 **STAR 강점 진단 → 실제 채용 공고 기준 부족 역량 → 고용24 교육과정과 과제**를, 모든 판정에 원문 근거를 붙여 보여 줍니다. 근거가 없으면 추천하지 않습니다.
 
 - **서비스**: https://fazwtcf7omav34gdiahcgvds3m0zyafv.lambda-url.ap-northeast-2.on.aws/ (시연용 합성 자소서: [demo_resume.md](docs/pivot/captures/demo_resume.md))
+- 주제: **AWS 클라우드 기반 채용시장 기술역량 자동 분석 및 교육과정 추천 AI 에이전트 개발**
 - KOSA × AWS AI 부트캠프 해커톤 06팀 · 변유민(팀장) · 김채희 · 김승제 · 이승연
 
 ## 결과
