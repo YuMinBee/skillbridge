@@ -24,9 +24,9 @@ export function StatusChip({ status, children }) {
   return <span className={`chip ${STATUS_CLS[status]}`}>{children ?? STATUS_LABEL[status]}</span>;
 }
 
-export function Seg({ label, value, options, onChange }) {
+export function Seg({ label, value, options, onChange, full = false }) {
   return (
-    <div className="seg" role="group" aria-label={label}>
+    <div className={full ? "seg full" : "seg"} role="group" aria-label={label}>
       {options.map(([v, l]) => (
         <button key={v} aria-pressed={value === v} onClick={() => onChange(v)}>{l}</button>
       ))}
