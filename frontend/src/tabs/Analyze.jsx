@@ -120,15 +120,21 @@ export default function Analyze({ active, sampleTick = 0 }) {
   useEffect(() => {
     clearTimeout(timer.current);
     if (!jobId || !active) return undefined;
-    let stop = false;
+    let stop = false, fails = 0;
     const tick = async () => {
       try {
         const j = await api.job(jobId);
         if (stop) return;
+        fails = 0;
         setJob(j);
         if (j.status === "queued" || j.status === "running") timer.current = setTimeout(tick, 1500);
       } catch (e) {
-        if (!stop) { setErr(e.message); setJobId(""); save(""); }
+        if (stop) return;
+        // 11-22: 진행 조회가 잠깐 실패해도(서버 혼잡·네트워크) 작업을 놓지 않고 다시 묻는다. 작업이 없거나(만료) 계속 실패할 때만 포기
+        fails += 1;
+        const gone = /없거나|만료|not found|404/i.test(e.message || "");
+        if (!gone && fails < 8) { timer.current = setTimeout(tick, Math.min(1500 * 2 ** fails, 12000)); return; }
+        setErr(e.message); setJobId(""); save("");
       }
     };
     tick();

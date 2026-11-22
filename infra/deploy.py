@@ -162,7 +162,7 @@ def main():
     if acct != EXPECTED_ACCOUNT:
         sys.exit(f"  ✗ 예상 계정 {EXPECTED_ACCOUNT}과 다릅니다. SSO 포털에서 계정을 확인하세요 (EXPECTED_ACCOUNT로 바꿀 수 있음)")
     bucket = f"kosa06-skillbridge-{acct}"
-    print(f"  만들 것: S3 {bucket} · Lambda kosa06-skillbridge-api(+함수 URL, 공개, 동시 실행 2) · "
+    print(f"  만들 것: S3 {bucket} · Lambda kosa06-skillbridge-api(+함수 URL, 공개, 동시 실행 10) · "
           f"DynamoDB kosa06-skillbridge(온디맨드) · Glue DB kosa06_skillbridge · "
           f"Athena 워크그룹 kosa06-skillbridge · IAM 역할 1개 · 태그 project=kosa06")
     print("  비용 보호: IP당 분당 8회 · 인스턴스당 시간당 Bedrock 20회(넘으면 규칙 엔진) · Athena 쿼리당 1GB")

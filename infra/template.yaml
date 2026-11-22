@@ -33,7 +33,7 @@ Parameters:
     AllowedValues: ["0", "1"]
   MaxConcurrency:
     Type: Number
-    Default: 2
+    Default: 10   # 11-22: 2면 화면 파일(CSS·JS)과 분석 작업·진행 조회가 겹쳐 요청이 거절(Throttle)됨 → 10. 비용은 IP·시간당 상한과 분석 예산이 막는다
     MinValue: 1
     MaxValue: 10
   DemoKey:
