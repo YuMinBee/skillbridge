@@ -343,10 +343,9 @@ function Overview({ job, go }) {
       </div>
       <div className="panel ov-stats">
         <button onClick={() => go("strengths")}><b className="num">{strong}<small>/{r.strengths.length}</small></b><span><i className="ov-dot ok" />강점 경험</span></button>
-        <button onClick={() => go("gaps")}><b className="num">{must}</b><span><i className="ov-dot bad" />부족 · 필수</span></button>
-        <button onClick={() => go("gaps")}><b className="num">{r.gaps.length - must}</b><span><i className="ov-dot pref" />부족 · 우대</span></button>
+        <button onClick={() => go("gaps")}><b className="num">{must}</b><span><i className="ov-dot bad" />부족한 필수 역량</span></button>
+        <button onClick={() => go("gaps")}><b className="num">{r.gaps.length - must}</b><span><i className="ov-dot pref" />부족한 우대 역량</span></button>
         <button onClick={() => go("courses")}><b className="num">{r.recommendations.filter((x) => x.course).length}</b><span><i className="ov-dot acc" />추천 과정</span></button>
-        <button onClick={() => go("log")}><b>{job.verify?.passed ? "통과" : `${job.verify?.removed?.length ?? 0}개 제거`}</b><span><i className="ov-dot ok" />근거 검증</span></button>
       </div>
       <div className="panel ov-road">
         <div className="ov-h"><h3>다음 할 일</h3><span className="hint num">{done.length} / {todo.length} 완료</span></div>

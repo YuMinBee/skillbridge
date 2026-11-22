@@ -1446,3 +1446,19 @@ div.fld.q .seg.full{justify-self:stretch}
 .ov .ov-stats{grid-template-columns:repeat(5,minmax(0,1fr))}
 @media (max-width:1100px){.ov .ov-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:720px){.ov .ov-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Overview 통계 4칸, 글자 키움 */
+.ov .ov-stats{grid-template-columns:repeat(4,minmax(0,1fr));padding:14px}
+.ov .ov-stats button{padding:18px 8px;gap:6px}
+.ov .ov-stats b{font-size:34px;font-weight:700;letter-spacing:-0.03em}
+.ov .ov-stats b small{font-size:16px}
+.ov .ov-stats span{font-size:15px;color:var(--ink-2);gap:8px}
+.ov .ov-dot{width:10px;height:10px}
+@media (max-width:1100px){.ov .ov-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Overview 통계 글자 더 크게 */
+.ov .ov-stats button{padding:24px 8px;gap:10px}
+.ov .ov-stats b{font-size:48px;font-weight:800;line-height:1}
+.ov .ov-stats b small{font-size:22px;font-weight:600}
+.ov .ov-stats span{font-size:18px;font-weight:600;color:var(--ink)}
+.ov .ov-dot{width:12px;height:12px}
