@@ -38,7 +38,11 @@ export default function App() {
     return () => window.removeEventListener("hashchange", onHash);
   }, []);
 
-  const go = (k) => { setTab(k); try { history.replaceState(null, "", "#" + k); } catch { /* noop */ } };
+  // 화면 이동은 기록에 남긴다(소개 → 분석 후 뒤로가기로 소개). 되돌아오면 hashchange가 화면을 다시 고른다
+  const go = (k) => {
+    setTab(k);
+    try { if (location.hash !== "#" + k) history.pushState(null, "", location.pathname + location.search + "#" + k); } catch { /* noop */ }
+  };
 
   return (
     <div className="wrap">

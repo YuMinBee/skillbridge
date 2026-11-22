@@ -109,6 +109,11 @@ export default function Analyze({ active, sampleTick = 0 }) {
   const [pane, setPane] = useState("overview");
   const timer = useRef(null);
   useEffect(() => setPane("overview"), [jobId]);  // 새 분석이면 Overview부터
+  useEffect(() => {
+    const onPop = (e) => setPane(e.state?.pane || "overview");
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   useEffect(() => { api.families().then((f) => setFamilies(f.map((x) => [x.id, x.label]))).catch(() => {}); }, []);
 
@@ -222,7 +227,11 @@ export default function Analyze({ active, sampleTick = 0 }) {
   }
 
   const nCourse = res.recommendations.filter((r) => r.course).length;
-  const go = (k) => { setPane(k); window.scrollTo(0, 0); };
+  // 탭을 바꿀 때 브라우저 기록을 남겨 뒤로가기·앞으로가기로 탭 사이를 오간다(주소는 그대로)
+  const go = (k) => {
+    if (k !== pane) { try { history.pushState({ ...(history.state || {}), pane: k }, ""); } catch { /* noop */ } }
+    setPane(k); window.scrollTo(0, 0);
+  };
   // 나가기: 로그인이 없으므로 '로그아웃' 대신, 이 브라우저에 저장된 결과를 닫고 소개 화면으로 (App이 hashchange를 듣는다)
   const exit = () => { again(); location.hash = "home"; };
   const navBtn = ([k, l, n]) => (
@@ -354,16 +363,17 @@ function Overview({ job, go }) {
         <button className="btn ghost sm ov-more" onClick={() => go("recos")}>추천 과제 전체 보기 →</button>
       </div>
       <div className="panel ov-list">
-        <div className="ov-h"><h3>내 경험 진단</h3><button className="linkbtn" onClick={() => go("strengths")}>STAR 자세히 →</button></div>
+        <div className="ov-h"><h3>내 경험 진단</h3></div>
         <table>
           <thead><tr><th>#</th><th>경험</th><th>판정</th><th>STAR 칸</th></tr></thead>
           <tbody>
             {r.strengths.map((e, i) => {
               const [lab, cls] = LEVEL[e.level];
-              return <tr key={e.exp_id}><td className="num">{i + 1}</td><td>{e.title}</td><td><span className={`chip ${cls}`}>{lab}</span></td><td className="num">{filled(e)} / 4</td></tr>;
+              return <tr key={e.exp_id} className="ov-row" tabIndex={0} onClick={() => go("strengths")} onKeyDown={(ev) => { if (ev.key === "Enter") go("strengths"); }}><td className="num">{i + 1}</td><td>{e.title}</td><td><span className={`chip ${cls}`}>{lab}</span></td><td className="num">{filled(e)} / 4</td></tr>;
             })}
           </tbody>
         </table>
+        <button className="btn ghost sm ov-more" onClick={() => go("strengths")}>강점 전체 보기 →</button>
       </div>
     </div>
   );

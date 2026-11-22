@@ -1,6 +1,7 @@
 // 첫 화면(소개). 숫자는 AGENTS.md '발표 숫자 확정'(eval/trust/report.md, test 60단락 × 5회)·report_retrieval.md·
 // task_judge_result.json과 같게 둔다. 바뀌면 여기도 고친다. 웹 방식이 "지어낸다"고 쓰지 않는다(팀 규칙).
 // 11-22 원칙: 히어로처럼 섹션마다 큰 문장 하나 + 큰 숫자/실제 화면 하나. 작은 글씨 카드를 늘리지 않는다.
+import { useEffect, useRef, useState } from "react";
 import bridgePhoto from "../assets/hero-bridge.jpg";  // Unsplash 무료 라이선스 https://unsplash.com/photos/_a33bgpBCdg
 
 const REPO = "https://github.com/YuMinBee/skillbridge/blob/main/eval/trust/";
@@ -77,9 +78,46 @@ const CROSS = [
 // 메뉴 바 링크: 주소(#)를 바꾸면 App이 화면을 다시 고르므로, 바꾸지 않고 그 섹션으로 부드럽게 스크롤
 const jump = (id) => (e) => { e.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }); };
 
+// 모션: 화면에 들어오면 한 번만. '애니메이션 줄이기'를 켠 사람에게는 바로 최종 상태
+const calm = () => typeof window !== "undefined" && window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+
+// [data-reveal] 요소가 화면에 들어오면 .in을 붙인다(한 번만)
+function useReveal(root) {
+  useEffect(() => {
+    const els = root.current ? [...root.current.querySelectorAll("[data-reveal]")] : [];
+    if (calm() || !("IntersectionObserver" in window)) { els.forEach((e) => e.classList.add("in")); return undefined; }
+    const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.2 });
+    els.forEach((e) => io.observe(e));
+    return () => io.disconnect();
+  }, [root]);
+}
+
+// 비교 숫자: 화면에 들어오면 웹 값에서 우리 값으로 세어 감 (예: 29.1 → 2.1)
+function CountTo({ from, to }) {
+  const ref = useRef(null);
+  const dec = String(to).includes(".") ? 1 : 0;
+  const [v, setV] = useState(calm() ? to : from);
+  useEffect(() => {
+    if (calm() || !ref.current || !("IntersectionObserver" in window)) { setV(to); return undefined; }
+    let raf = 0;
+    const io = new IntersectionObserver(([e]) => {
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      const t0 = performance.now(), D = 1100;
+      const step = (t) => { const k = Math.min(1, (t - t0) / D), ease = 1 - Math.pow(1 - k, 3); setV(from + (to - from) * ease); if (k < 1) raf = requestAnimationFrame(step); };
+      raf = requestAnimationFrame(step);
+    }, { threshold: 0.6 });
+    io.observe(ref.current);
+    return () => { io.disconnect(); cancelAnimationFrame(raf); };
+  }, [from, to]);
+  return <b ref={ref} className="num">{v.toFixed(dec)}%</b>;
+}
+
 export default function Landing({ onStart, onSample }) {
+  const root = useRef(null);
+  useReveal(root);
   return (
-    <div className="lp">
+    <div className="lp" ref={root}>
       {/* 히어로: 화면 전체 사진(물 위를 가로지르는 다리) + 유리 메뉴 바 + 왼쪽 아래 제목 */}
       <section className="lp-hero" style={{ "--hero-img": `url(${bridgePhoto})` }}>
         <nav className="lp-nav" aria-label="소개 메뉴">
@@ -106,7 +144,7 @@ export default function Landing({ onStart, onSample }) {
         <h3 className="lp-x-title">세 걸음이면<br />건너갑니다.</h3>
         <ol className="lp-cross">
           {CROSS.map((c) => (
-            <li key={c.n}>
+            <li key={c.n} data-reveal>
               <div className="lp-cross-l"><span className="lp-cross-n">{c.n}</span><b>{c.t}</b><p>{c.d}</p></div>
               <div className="lp-cross-r">{c.card}</div>
             </li>
@@ -122,7 +160,7 @@ export default function Landing({ onStart, onSample }) {
           {VS.map((v) => (
             <div className="lp-vs-i" key={v.k}>
               <p className="lp-vs-k">{v.k}</p>
-              <div className="lp-vs-n"><s className="num">{v.web}</s><span aria-hidden="true">→</span><b className="num">{v.us}</b></div>
+              <div className="lp-vs-n"><s className="num">{v.web}</s><span aria-hidden="true">→</span><CountTo from={parseFloat(v.web)} to={parseFloat(v.us)} /></div>
               <p className="lp-vs-note">{v.note}</p>
             </div>
           ))}
