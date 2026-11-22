@@ -1354,3 +1354,47 @@ header.an-top{padding:16px 0 4px}
 /* 경로 지도 메모: 노란 메모지 → 흰 카드 + 파란 선(남색 패널과 맞춤) */
 .pm-dark .pm-note{background:#fff;color:var(--ink);border-left:4px solid #6b8cff;box-shadow:0 20px 50px rgba(0,0,0,.3)}
 .pm-dark .pm-note dt{color:var(--muted);opacity:1}
+
+/* 왼쪽 바 길이 고정: 탭과 상관없이 화면 높이, 스크롤해도 따라옴 */
+.an-dash{align-items:start}
+.an-side{position:sticky;top:16px;height:calc(100vh - 120px);height:calc(100svh - 120px);min-height:560px;overflow-y:auto}
+@media (max-width:820px){.an-side{position:static;height:auto;min-height:0;overflow:visible}}
+
+/* ── 전체 점검(11-22) 후 보정 ── */
+/* 입력: label 대신 div가 된 칸도 같은 모양 */
+div.fld.q{display:grid;gap:6px;font-size:14px;font-weight:600}
+div.fld.q .qt{display:flex;align-items:center;gap:8px;color:var(--fg)}
+div.fld.q .qt::before{content:"";flex:none;width:4px;height:14px;border-radius:2px;background:var(--accent)}
+div.fld.q .seg{justify-self:start;font-weight:400}
+div.fld.q .seg.full{justify-self:stretch}
+/* 입력: 흰 카드 위 [분석 시작]은 파랑으로 */
+.an-intake .an-go-main{background:var(--accent);color:#fff;box-shadow:0 10px 24px rgba(39,71,208,.28)}
+.an-intake .an-go-main span{background:rgba(255,255,255,.2)}
+/* 입력: 파일 칸을 넓은 끌어다 놓기 영역으로 */
+.an-intake .filepick{margin:0;padding:18px;border:1.5px dashed #c5cce0;border-radius:16px;background:var(--surface-2);justify-content:center;text-align:center}
+.an-intake .filepick:hover,.an-intake .filepick.over{border-color:var(--accent);background:var(--accent-soft)}
+.an-intake .filebtn{border-radius:999px;padding:7px 16px;font-weight:600;color:var(--accent);border-color:color-mix(in srgb,var(--accent) 40%,transparent)}
+/* 부족한 역량: 이름이 잘리지 않게 칸을 넓힘 */
+.an-gaps{grid-template-columns:repeat(auto-fill,minmax(240px,1fr))}
+.an-gaps li b{white-space:normal;overflow:visible}
+/* 근거 시트: 종류별 색(내 문서 초록 · 공고 주황 · 과정 파랑), 칩은 글자 폭만큼 */
+.ev-kind{justify-self:start;font-weight:700;border-color:transparent}
+.ev-kind.k-resume{background:var(--ok-soft);color:var(--ok)}
+.ev-kind.k-posting,.ev-kind.k-posting_stats{background:var(--warn-soft);color:var(--warn)}
+.ev-kind.k-course{background:var(--accent-soft);color:var(--accent)}
+.ev-sheet blockquote{font-size:14.5px;line-height:1.7}
+.ev-open{justify-self:start;font-size:14px;font-weight:700;color:var(--accent);text-decoration:none;padding:9px 16px;border-radius:999px;background:var(--accent-soft)}
+/* 소개: 메뉴로 이동한 섹션이 화면 맨 위에 딱 붙지 않게 */
+.lp-x{scroll-margin-top:16px}
+
+/* 인쇄(PDF): 남색 패널 안 글자를 검게, 화면용 버튼은 숨김 */
+@media print{
+  .pm-dark .pm-dest button{background:#fff !important;color:#000 !important;border-color:#ccc !important}
+  .pm-dark .pm-ribbons path{stroke:#d5d9e3 !important}.pm-dark .pm-ribbons path.on{stroke:#6b8cff !important}
+  .pm-dark .pm-bar{background:#f2f3f7 !important;color:#000 !important}
+  .pm-dark .pm-head .hint,.ov-hero-l p{color:#555 !important}
+  .pm-bar .btn,.ov-more,.ov-list .linkbtn,.ov-stats button{box-shadow:none}
+  .pm-bar .btn,.ov-more,.ov-list .linkbtn{display:none !important}
+  .ov-pill{border-color:#ccc;color:#000}
+  .ov-chips span{border-color:#ccc !important;background:#fff !important}
+}

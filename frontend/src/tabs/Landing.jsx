@@ -74,6 +74,9 @@ const CROSS = [
   },
 ];
 
+// 메뉴 바 링크: 주소(#)를 바꾸면 App이 화면을 다시 고르므로, 바꾸지 않고 그 섹션으로 부드럽게 스크롤
+const jump = (id) => (e) => { e.preventDefault(); document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" }); };
+
 export default function Landing({ onStart, onSample }) {
   return (
     <div className="lp">
@@ -82,7 +85,7 @@ export default function Landing({ onStart, onSample }) {
         <nav className="lp-nav" aria-label="소개 메뉴">
           <a className="lp-nav-logo" href="#home">SkillBridge</a>
           <div className="lp-nav-links">
-            <a href="#cross">건너는 길</a><a href="#compare">비교</a><a href="#flow">동작 방식</a><a href="#verify">검증</a>
+            {[["cross", "건너는 길"], ["compare", "비교"], ["flow", "동작 방식"], ["verify", "검증"]].map(([id, t]) => <a key={id} href={`#${id}`} onClick={jump(id)}>{t}</a>)}
           </div>
           <div className="lp-nav-act">
             <button className="lp-pill line" onClick={onSample}>예시로 체험하기</button>

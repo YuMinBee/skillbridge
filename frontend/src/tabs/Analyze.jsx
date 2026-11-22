@@ -86,7 +86,7 @@ function DocPick({ files, onPick }) {
       {files.length > 0 && (
         <ul className="doclist">
           {files.map((f, i) => (
-            <li key={i}><span>{f.name}</span><span className="hint num">{(f.size / 1024 / 1024).toFixed(1)}MB</span>
+            <li key={i}><span>{f.name}</span><span className="hint num">{f.size < 102400 ? `${Math.max(1, Math.round(f.size / 1024))}KB` : `${(f.size / 1024 / 1024).toFixed(1)}MB`}</span>
               <button className="linkbtn" onClick={() => onPick(files.filter((_, j) => j !== i))} aria-label={`${f.name} 빼기`}>빼기</button></li>
           ))}
         </ul>
@@ -173,9 +173,9 @@ export default function Analyze({ active, sampleTick = 0 }) {
           <p>자소서·포트폴리오를 넣으면 강점, 부족한 역량, 추천 과제와 교육과정을 근거와 함께 보여 드려요.</p>
         </div>
         <div className="panel an-intake">
-          <label className="fld q"><span className="qt">어디에 지원하나요? (필수)</span>
+          <div className="fld q" role="group"><span className="qt">어디에 지원하나요? (필수)</span>
             <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} full />
-          </label>
+          </div>
           <DocPick files={files} onPick={setFiles} />
           <details className="an-more">
             <summary>더 정확하게 (선택) · 지원할 공고 · GitHub · 직군</summary>
@@ -188,9 +188,9 @@ export default function Analyze({ active, sampleTick = 0 }) {
               </label>
               <p className="hint">공개 레포 README만 읽습니다</p>
             </div>
-            <label className="fld q"><span className="qt">직군 (기본: 자동)</span>
+            <div className="fld q" role="group"><span className="qt">직군 (기본: 자동)</span>
               <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
-            </label>
+            </div>
           </details>
           <div className="an-go">
             <button className="lp-go an-go-main" disabled={!sector || !(files.length || github.trim())} onClick={submit}>분석 시작<span aria-hidden="true">↗</span></button>
@@ -651,10 +651,10 @@ function Evidence({ c, n, onClose }) {
       <div className="ev-scrim no-print" onClick={onClose} aria-hidden="true" />
       <aside className="panel an-ev ev-sheet no-print" role="dialog" aria-label={`근거 ${n}`}>
         <div className="ev-h"><h2>근거 <span className="num hint">[{n}]</span></h2><button className="ev-x" onClick={onClose} aria-label="근거 닫기">✕</button></div>
-        <span className="chip tag-pub">{KIND[c.kind] || c.kind}</span>
-        <b>{c.title}</b>
+        <span className={`chip ev-kind k-${c.kind}`}>{KIND[c.kind] || c.kind}</span>
+        <b>{c.kind === "resume" ? "내 문서 원문" : c.title}</b>
         {c.quote && <blockquote>{c.quote}</blockquote>}
-        {c.url && <a href={c.url} target="_blank" rel="noreferrer">원문 열기</a>}
+        {c.url && <a className="ev-open" href={c.url} target="_blank" rel="noreferrer">원문 열기 ↗</a>}
       </aside>
     </>
   );
