@@ -12,8 +12,8 @@ import { Award, FileDown, GraduationCap, LayoutDashboard, ListChecks, LogOut, Ro
 const ICON = { overview: LayoutDashboard, path: Route, strengths: Award, gaps: Target, recos: ListChecks, courses: GraduationCap, log: ShieldCheck };
 
 const STAGE = {
-  collect: "GitHub 읽기", guard: "개인정보 가리기", star: "① 강점 진단 (STAR)", skills: "스킬 추출", retriever: "② 역량 기준 찾기",
-  recommend: "③ 과제 추천", verifier: "근거 검증", cost: "비용 계산",
+  collect: "GitHub 읽기", guard: "개인정보 가리기", star: "강점 진단 (STAR)", skills: "스킬 추출", retriever: "역량 기준 찾기",
+  recommend: "과제 추천", verifier: "근거 검증", cost: "비용 계산",
 };
 const SLOT = [["S", "상황"], ["T", "과제"], ["A", "행동"], ["R", "결과"]];
 const LEVEL = { strong: ["강점", "st-own"], ok: ["보통", "st-part"], weak: ["약함", "st-miss"] };
@@ -441,7 +441,6 @@ function Strengths({ list, onCite }) {
                 );
               })}
             </div>
-            {e.missing_hint && <p className="hint">보완: {e.missing_hint}</p>}
           </div>
         );
       })}
@@ -453,7 +452,7 @@ function SecHead({ n, title, sub, count }) {
   return (
     <div className="sec-head">
       <span className="sec-n">{n}</span>
-      <div><h2>{title}{count && <small className="hint"> · {count}</small>}</h2><p className="hint">{sub}</p></div>
+      <div><h2>{title}</h2><p className="hint">{sub}</p></div>
     </div>
   );
 }
@@ -503,7 +502,6 @@ function PathMap({ res, onCite }) {
           })}
         </svg>
         <div className="pm-me">
-          <span className="pm-av" aria-hidden="true">나</span>
           <b>지금의 나</b>
           <small className="hint">목표</small>
           <span>{res.sector?.label} {fam} 지원</span>

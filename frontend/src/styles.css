@@ -1403,3 +1403,10 @@ div.fld.q .seg.full{justify-self:stretch}
 .reco-meta,.pm-note dl{grid-template-columns:5em minmax(0,1fr);column-gap:12px;row-gap:6px}
 .reco-meta dt,.pm-note dt{white-space:nowrap}
 .reco-meta dd .cite{margin-left:2px}
+
+/* 번호 아이콘 제거: 섹션 제목 동그라미 · 추천 과제 네모 배지 (순서는 왼쪽 바가 보여 줌) */
+.sec-n,.reco-n{display:none !important}
+.an-recos li{padding:16px 18px}
+
+/* 내 학습 경로: "지금의 나" 카드 왼쪽 파란 줄 제거 */
+.pm-me{border-left:0}
