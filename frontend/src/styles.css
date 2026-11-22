@@ -1463,3 +1463,10 @@ div.fld.q .seg.full{justify-self:stretch}
 .ov .ov-stats span{font-size:18px;font-weight:600;color:var(--ink)}
 .ov .ov-dot{width:12px;height:12px}
 .an-intake .seg.full button{white-space:nowrap;padding:10px 6px}
+
+/* ── 버튼·선택 버튼·칩도 각지게(4px) — 카드와 맞춤 ── */
+.btn,.lp-pill,.lp-go,.lp-btn,.ev-open,.ev-x,.side-act,.linkbtn,.filebtn,.an-intake .filebtn,
+.seg,.seg button,.seg.full button,.an-intake .seg.full button,
+.chip,.pm-t,.lp-chip,.ov-pill,.ov-chips span,.lp-aws li,.lp-panel .lp-eyebrow,.lp-dark .lp-eyebrow,.an-side nav .num,.an-tabs button .num,
+.cite,.reco-for{border-radius:4px !important}
+.lp-go span{border-radius:3px !important}
