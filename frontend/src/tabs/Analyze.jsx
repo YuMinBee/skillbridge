@@ -496,7 +496,7 @@ function PathMap({ res, onCite }) {
       </div>
       <div className="pm-map" style={{ "--rows": n }}>
         <svg className="pm-ribbons" viewBox={`0 0 100 ${H}`} preserveAspectRatio="none" aria-hidden="true">
-          <defs><linearGradient id="pm-g" x1="0" x2="1"><stop offset="0" stopColor="#7fb2ff" /><stop offset="1" stopColor="#5b4cf0" /></linearGradient></defs>
+          <defs><linearGradient id="pm-g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0"><stop offset="0" stopColor="#7fb2ff" /><stop offset="1" stopColor="#5b4cf0" /></linearGradient></defs>
           {items.map((r, i) => {
             const y = i * 100 + 50;
             return <path key={r.rank} d={`M0 ${mid} C 45 ${mid}, 55 ${y}, 100 ${y}`} className={i === pick ? "on" : ""} vectorEffect="non-scaling-stroke" />;
