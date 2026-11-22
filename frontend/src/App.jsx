@@ -4,11 +4,17 @@ import Market from "./tabs/Market.jsx";
 import Seeker from "./tabs/Seeker.jsx";
 import Corp from "./tabs/Corp.jsx";
 import Analyze from "./tabs/Analyze.jsx";
+import Landing from "./tabs/Landing.jsx";
 
 // 2026-11-17 전면 수정: 탭은 '역량 분석' 하나. 예전 화면은 주소(#seeker·#corp·#market)로만 열린다(코드 유지, 발표에서 안 씀)
-const TABS = [["analyze", "역량 분석", "취준생"]];
+// 11-21: 첫 화면은 소개(home). 공유 결과 주소(?job=)는 바로 분석 화면으로
+const TABS = [["home", "소개", ""], ["analyze", "역량 분석", "취준생"]];
 const OLD = ["seeker", "corp", "market"];
-const hashTab = () => { const h = location.hash.slice(1); return TABS.some(([k]) => k === h) || OLD.includes(h) ? h : "analyze"; };
+const hashTab = () => {
+  const h = location.hash.slice(1);
+  if (TABS.some(([k]) => k === h) || OLD.includes(h)) return h;
+  return new URLSearchParams(location.search).get("job") ? "analyze" : "home";
+};
 
 export default function App() {
   const [tab, setTab] = useState(hashTab);
@@ -16,6 +22,7 @@ export default function App() {
   const [companies, setCompanies] = useState([]);
   const [corpVersion, setCorpVersion] = useState(0);
   const [toast, setToast] = useState("");
+  const [sampleTick, setSampleTick] = useState(0);  // 소개 화면 '예시로 체험하기' → 분석 화면이 받아서 바로 시작
   const tt = useRef(null);
 
   const notify = useCallback((msg) => {
@@ -33,48 +40,17 @@ export default function App() {
 
   const go = (k) => { setTab(k); try { history.replaceState(null, "", "#" + k); } catch { /* noop */ } };
 
-  const toggleTheme = () => {
-    const root = document.documentElement;
-    const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
-    root.dataset.theme = dark ? "light" : "dark";
-    try { localStorage.setItem("theme", root.dataset.theme); } catch { /* noop */ }
-  };
-
-  const reset = async () => {
-    if (!confirm("내가 바꾼 기업 설정을 처음 상태로 되돌릴까요? (다른 방문자에게는 영향 없음)")) return;
-    try { await api.reset(); setCorpVersion((v) => v + 1); notify("기업 설정을 처음 상태로 되돌렸습니다."); }
-    catch (e) { notify(e.message); }
-  };
-
   return (
     <div className="wrap">
       <header className="top">
+        {/* 11-22: 탭(소개·역량 분석)을 내림. 로고 = 소개로, 소개의 버튼 = 분석으로 */}
         <div className="brand">
-          <h1>역량다리</h1>
-          
-          <div className="tools">
-            {meta && (
-              <>
-                <span className={`mode ${meta.bedrock === "bedrock" ? "live" : ""}`} title="Bedrock 호출 모드">
-                  {meta.bedrock === "bedrock" ? "AI 연결됨 · Bedrock" : meta.public_mock ? "규칙 엔진 · 공개" : "규칙 엔진(오프라인)"}
-                </span>
-                <span className={`mode ${meta.sources?.courses === "live" && meta.sources?.market === "live" ? "live" : ""}`}
-                  title="공고(잡알리오)·교육과정(고용24)은 실데이터 · 기업 A·B·C와 예시 지원자는 가상 · D는 공개 자료 재구성 · E~H는 현업 청취 기준">
-                  {meta.sources?.courses === "live" && meta.sources?.market === "live" ? "공고·과정 실데이터" : "샘플 데이터"}
-                </span>
-              </>
-            )}
-            <button className="btn ghost sm" onClick={toggleTheme} aria-label="라이트/다크 전환">테마</button>
-            <button className="btn ghost sm" onClick={reset}>초기화</button>
-          </div>
+          <h1><a href="#home" className="logo" onClick={(e) => { e.preventDefault(); go("home"); window.scrollTo(0, 0); }}>SkillBridge</a></h1>
         </div>
-        <nav className="tabs" role="tablist" aria-label="화면 전환">
-          {TABS.map(([k, l, who]) => (
-            <button key={k} role="tab" aria-selected={tab === k} onClick={() => go(k)}>{l} <small>{who}</small></button>
-          ))}
-        </nav>
       </header>
-      <div hidden={tab !== "analyze"}><Analyze active={tab === "analyze"} /></div>
+      {tab === "home" && <Landing onStart={() => { go("analyze"); window.scrollTo(0, 0); }}
+        onSample={() => { go("analyze"); window.scrollTo(0, 0); setSampleTick((n) => n + 1); }} />}
+      <div hidden={tab !== "analyze"}><Analyze active={tab === "analyze"} sampleTick={sampleTick} /></div>
       <div hidden={tab !== "market"}>{tab === "market" && <Market />}</div>
       <div hidden={tab !== "seeker"}><Seeker companies={companies.filter((c) => c.listed !== false)} corpVersion={corpVersion} active={tab === "seeker"} mode={meta?.bedrock} /></div>
       <div hidden={tab !== "corp"}>

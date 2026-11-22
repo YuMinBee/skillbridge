@@ -419,8 +419,8 @@ function CustomPanel({ r }) {
           <p className="hint">{pred.mode === "bedrock" ? "Claude(Bedrock)가 공고와 직군 통계 후보 안에서만 골랐어요." : "직군 통계로 고른 규칙 예측이에요."}</p>
         </div>
         <div className="platform-note">
-            <b>정확한 실무 기준은 기업만 알아요.</b> {r.company.name}이 역량다리에 실무 기준을 등록하면, 추정이 아니라 실제 기준으로 진단돼요.
-            그래서 역량다리는 취준생·기업·기관이 함께 쓰는 통합 플랫폼이에요.
+            <b>정확한 실무 기준은 기업만 알아요.</b> {r.company.name}이 SkillBridge에 실무 기준을 등록하면, 추정이 아니라 실제 기준으로 진단돼요.
+            그래서 SkillBridge는 취준생·기업·기관이 함께 쓰는 통합 플랫폼이에요.
         </div>
       </div>
     </div>

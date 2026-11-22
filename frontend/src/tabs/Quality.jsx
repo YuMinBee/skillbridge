@@ -65,7 +65,7 @@ export default function Quality({ q }) {
           <div className="tbl-wrap"><table>
             <thead><tr><th>순위</th><th>Hit@3</th><th>nDCG@5</th><th>1순위 적합</th></tr></thead>
             <tbody>
-              <tr><td>역량다리</td><td className="num">{pct(c.ours.hit3)}</td><td className="num">{f3(c.ours.ndcg5)}</td><td className="num">{pct(c.ours.p1)}</td></tr>
+              <tr><td>SkillBridge</td><td className="num">{pct(c.ours.hit3)}</td><td className="num">{f3(c.ours.ndcg5)}</td><td className="num">{pct(c.ours.p1)}</td></tr>
               <tr><td>카탈로그 순서</td><td className="num">{pct(c.catalog_order.hit3)}</td><td className="num">{f3(c.catalog_order.ndcg5)}</td><td className="num">{pct(c.catalog_order.p1)}</td></tr>
             </tbody>
           </table></div>
@@ -76,7 +76,7 @@ export default function Quality({ q }) {
           <div className="tbl-wrap"><table>
             <thead><tr><th>경로</th><th>지원 갭</th><th>실무 갭</th><th>시간</th></tr></thead>
             <tbody>
-              <tr><td>역량다리 (지원 → 실무)</td><td className="num">{pct(b.company.apply_cov)}</td><td className="num">{pct(b.company.gap_cov)}</td><td className="num">{Math.round(b.company.hours)}h</td></tr>
+              <tr><td>SkillBridge (지원 → 실무)</td><td className="num">{pct(b.company.apply_cov)}</td><td className="num">{pct(b.company.gap_cov)}</td><td className="num">{Math.round(b.company.hours)}h</td></tr>
               <tr><td>공고 문구만</td><td className="num">{pct(b.posting.apply_cov)}</td><td className="num">{pct(b.posting.gap_cov)}</td><td className="num">{Math.round(b.posting.hours)}h</td></tr>
             </tbody>
           </table></div>
