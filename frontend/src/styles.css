@@ -1470,3 +1470,24 @@ div.fld.q .seg.full{justify-self:stretch}
 .chip,.pm-t,.lp-chip,.ov-pill,.ov-chips span,.lp-aws li,.lp-panel .lp-eyebrow,.lp-dark .lp-eyebrow,.an-side nav .num,.an-tabs button .num,
 .cite,.reco-for{border-radius:4px !important}
 .lp-go span{border-radius:3px !important}
+
+/* ── 결과 글자 굵기 11-22: 본문이 가늘어 흐려 보여서 내용 글자를 한 단계씩 굵게 ── */
+.an-panes{color:var(--ink)}
+.slot.on > span:last-child{font-weight:600;color:var(--ink)}
+.slot .sk{font-weight:800}
+.card.star .ch b{font-size:17px;font-weight:800}
+.an-gaps li b{font-weight:700}
+.reco-task{font-size:16px;font-weight:800;color:var(--ink)}
+.reco-meta dt,.pm-note dt{font-weight:700;color:var(--ink-2)}
+.reco-meta dd,.pm-note dd{font-weight:500;color:var(--ink)}
+.an-courses li b{font-weight:800}
+.an-courses li{font-weight:500}
+.ov-tasks label b{font-weight:700}
+.ov-list td{font-weight:500;color:var(--ink)}
+.an-log > li > b{font-weight:800}
+.an-log > li > p{font-weight:500}
+.an-checks li{font-weight:600}
+.pm-dest button b{font-weight:800}
+.pm-me > b{font-weight:800}
+.gap-grp h3{font-weight:800;color:var(--ink)}
+.sec-head .hint,.pm-head .hint{font-weight:500}
