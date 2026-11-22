@@ -1,6 +1,15 @@
 // 첫 화면(소개). 숫자는 AGENTS.md '발표 숫자 확정'(eval/trust/report.md, test 60단락 × 5회)·report_retrieval.md·
 // task_judge_result.json과 같게 둔다. 바뀌면 여기도 고친다. 웹 방식이 "지어낸다"고 쓰지 않는다(팀 규칙).
+import bridgePhoto from "../assets/hero-bridge.jpg";  // Unsplash 무료 라이선스 https://unsplash.com/photos/p0LBN5rU7QA
+
 const REPO = "https://github.com/YuMinBee/skillbridge/blob/main/eval/trust/";
+
+// 누가 쓰나 (docs/DEMO_SCRIPT.md 대상: 대학 취업센터·부트캠프에서 상담 전에 돌리는 1차 진단)
+const USE = [
+  ["취업센터 · 부트캠프", "상담 전에 학생 자소서를 먼저 넣어 두면, 강점과 부족한 역량이 근거와 함께 정리돼 상담은 해석과 계획에 집중할 수 있습니다."],
+  ["취준생 혼자서", "지원 전에 내 문서가 공고 기준으로 어디가 비어 있는지 보고, 바로 할 과제와 개강하는 과정을 고릅니다."],
+  ["같은 기준으로", "같은 문서는 몇 번을 넣어도 같은 판정이 나옵니다. 학생마다, 상담사마다 기준이 흔들리지 않습니다."],
+];
 
 // 비교 막대: 같은 Sonnet 4.6, test 60단락 × 5회
 const COMPARE = [
@@ -32,12 +41,12 @@ const CHECKS = [
 const DATA = [["109", "민간 IT 공고", "기업 공식 채용 페이지 직접 수집 포함"], ["263", "공공기관 IT 공고", "잡알리오"], ["1,856", "고용24 교육과정", "앞으로 개강하는 과정만 추천"]];
 const AWS = ["Amazon Bedrock · Claude Sonnet 4.6", "Cohere Embed v4", "Bedrock Guardrails", "AWS Lambda", "Amazon DynamoDB"];
 
-// 히어로 오른쪽: 예시 자소서(docs/pivot/captures/demo_resume.md)를 실제로 분석한 결과에서 발췌. 공고·과정 문장도 실제 결과 그대로
+// 건너는 길 섹션: 예시 자소서(docs/pivot/captures/demo_resume.md)를 실제로 분석한 결과에서 발췌. 공고·과정 문장도 실제 결과 그대로
 function Preview() {
   return (
     <div className="lp-pv" aria-label="예시 자소서 분석 결과 발췌">
       <div className="lp-pv-card lp-pv-main">
-        <div className="lp-pv-h"><b>동아리 장비 대여 시스템</b><span className="lp-chip ok">STAR 4칸</span></div>
+        <div className="lp-pv-h"><b>동아리 장비 대여 시스템</b><span className="lp-chip ok">① 지금의 나 · 강점</span></div>
         <ul className="lp-star">
           <li><i>S</i><span>“한 학기에 장비 5개를 잃어버렸습니다”</span></li>
           <li><i>T</i><span>“대여·반납 기록을 남기는 백엔드를 맡았습니다”</span></li>
@@ -47,12 +56,12 @@ function Preview() {
         <p className="lp-pv-src"><span className="lp-dot ok" />네 칸 모두 내 자소서 원문 그대로</p>
       </div>
       <div className="lp-pv-card lp-pv-post">
-        <span className="lp-chip warn">부족한 역량 · AWS</span>
+        <span className="lp-chip warn">② 건너야 할 곳 · AWS</span>
         <p>“MSA 환경에서 서비스 설계 및 클라우드(AWS/GCP) 인프라 운영 경험이 있는 분”</p>
         <small>민간 백엔드 공고 45건 중 11건이 요구</small>
       </div>
       <div className="lp-pv-card lp-pv-course">
-        <span className="lp-chip acc">고용24 과정</span>
+        <span className="lp-chip acc">③ 건너는 방법 · 고용24 과정</span>
         <b>AWS 활용 Spring 백엔드 개발자 실무 부트캠프</b>
         <small>2026-12-29 개강</small>
       </div>
@@ -63,24 +72,39 @@ function Preview() {
 export default function Landing({ onStart, onSample }) {
   return (
     <div className="lp">
-      <section className="lp-hero">
-        <div className="lp-hero-l">
-          <p className="lp-eyebrow">KOSA × AWS AI 부트캠프 06팀 · Amazon Bedrock</p>
-          <h2>같은 Claude,<br />다른 신뢰도.</h2>
-          <p className="lp-lead">자소서를 넣으면 강점은 <mark className="hl-ok">내 문장</mark>으로, 부족한 역량은 <mark className="hl-warn">실제 공고 문장</mark>으로,
-            다음 할 일은 <mark className="hl-acc">고용24 실제 과정</mark>으로 근거를 붙여 보여 드립니다.</p>
-          <div className="lp-cta">
-            <button className="btn lp-btn" onClick={onStart}>내 역량 분석하기</button>
-            <button className="btn ghost lp-btn" onClick={onSample}>예시로 체험하기</button>
+      {/* 히어로: 화면 전체 사진(물 위를 가로지르는 다리) + 유리 메뉴 바 + 왼쪽 아래 제목 */}
+      <section className="lp-hero" style={{ "--hero-img": `url(${bridgePhoto})` }}>
+        <nav className="lp-nav" aria-label="소개 메뉴">
+          <a className="lp-nav-logo" href="#home">SkillBridge</a>
+          <div className="lp-nav-links">
+            <a href="#cross">건너는 길</a><a href="#compare">비교</a><a href="#flow">동작 방식</a><a href="#verify">검증</a>
           </div>
-          <p className="lp-trust">회원가입 없음 · 이력서 원문은 저장하지 않음 · 채용 합불 판단에 쓰지 않음</p>
+          <div className="lp-nav-act">
+            <button className="lp-pill line" onClick={onSample}>예시로 체험하기</button>
+            <button className="lp-pill" onClick={onStart}>분석 시작</button>
+          </div>
+        </nav>
+        <div className="lp-hero-l">
+          <h2>원하는 일까지,<br />다리가 되어 드릴게요.</h2>
+          <div className="lp-hero-row">
+            <p className="lp-lead">내 자소서 속 강점에서 출발해, 공고가 요구하는데 비어 있는 역량을 실제 공고 문장으로 짚고, 그 사이를 건널 과제와 고용24 과정까지 이어 드립니다.</p>
+            <button className="lp-go" onClick={onStart}>내 역량 분석하기<span aria-hidden="true">↗</span></button>
+          </div>
+        </div>
+      </section>
+
+      <section className="lp-sec" id="cross">
+        <div className="lp-sec-h">
+          <p className="lp-eyebrow">이렇게 건너갑니다</p>
+          <h3>지금의 나 → 건너야 할 곳 → 건너는 방법</h3>
+          <p className="lp-muted">예시 자소서를 실제로 분석한 결과입니다. 세 단계 모두 근거가 붙습니다.</p>
         </div>
         <Preview />
       </section>
 
-      <section className="lp-sec">
+      <section className="lp-sec" id="compare">
         <div className="lp-sec-h">
-          <p className="lp-eyebrow">웹 Claude와 비교</p>
+          <p className="lp-eyebrow">같은 Claude, 다른 신뢰도</p>
           <h3>프롬프트를 잘 써도 여기까지입니다</h3>
           <p className="lp-muted">같은 Claude Sonnet 4.6에 같은 자소서 60단락을 5번씩 넣었습니다. 웹 방식은 3가지로 물었습니다.</p>
         </div>
@@ -101,7 +125,7 @@ export default function Landing({ onStart, onSample }) {
         <p className="lp-foot">95% 신뢰구간으로 비교했고, 두 지표 모두 세 가지 웹 방식과 차이가 유의합니다 · <a href={REPO + "report.md"} target="_blank" rel="noreferrer">평가 기록</a></p>
       </section>
 
-      <section className="lp-sec">
+      <section className="lp-sec" id="flow">
         <div className="lp-sec-h">
           <p className="lp-eyebrow">어떻게 동작하나</p>
           <h3>다섯 단계가 순서대로, 매번 같은 방식으로</h3>
@@ -114,7 +138,7 @@ export default function Landing({ onStart, onSample }) {
         </ol>
       </section>
 
-      <section className="lp-sec">
+      <section className="lp-sec" id="verify">
         <div className="lp-sec-h">
           <p className="lp-eyebrow">검증</p>
           <h3>숫자는 사람이 확인했습니다</h3>
@@ -131,6 +155,16 @@ export default function Landing({ onStart, onSample }) {
         </div>
       </section>
 
+      <section className="lp-sec lp-use">
+        <div className="lp-use-t">
+          <p className="lp-eyebrow">이렇게 씁니다</p>
+          <h3>상담 전에 먼저 돌리는<br />1차 진단</h3>
+          <ul>
+            {USE.map(([t, d]) => <li key={t}><b>{t}</b><p>{d}</p></li>)}
+          </ul>
+        </div>
+      </section>
+
       <section className="lp-sec lp-data">
         <div className="lp-data-n">
           {DATA.map(([v, k, d]) => (
@@ -141,7 +175,7 @@ export default function Landing({ onStart, onSample }) {
       </section>
 
       <section className="lp-end">
-        <h3>내 자소서에는 어떤 근거가 있을까요?</h3>
+        <h3>어디서부터 건너야 할지, 지금 확인해 보세요</h3>
         <p>문서 하나면 됩니다. 결과는 학습 방향을 잡는 참고용입니다.</p>
         <div className="lp-cta">
           <button className="btn lp-btn lp-btn-inv" onClick={onStart}>지금 분석 시작</button>

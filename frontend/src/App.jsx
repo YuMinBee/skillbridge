@@ -42,12 +42,14 @@ export default function App() {
 
   return (
     <div className="wrap">
-      <header className="top">
-        {/* 11-22: 탭(소개·역량 분석)을 내림. 로고 = 소개로, 소개의 버튼 = 분석으로 */}
-        <div className="brand">
-          <h1><a href="#home" className="logo" onClick={(e) => { e.preventDefault(); go("home"); window.scrollTo(0, 0); }}>SkillBridge</a></h1>
-        </div>
-      </header>
+      {/* 11-22: 탭(소개·역량 분석)을 내림. 로고 = 소개로, 소개의 버튼 = 분석으로. 소개 화면은 히어로 안에 자체 메뉴 바가 있어 헤더를 숨긴다 */}
+      {tab !== "home" && (
+        <header className="top">
+          <div className="brand">
+            <h1><a href="#home" className="logo" onClick={(e) => { e.preventDefault(); go("home"); window.scrollTo(0, 0); }}>SkillBridge</a></h1>
+          </div>
+        </header>
+      )}
       {tab === "home" && <Landing onStart={() => { go("analyze"); window.scrollTo(0, 0); }}
         onSample={() => { go("analyze"); window.scrollTo(0, 0); setSampleTick((n) => n + 1); }} />}
       <div hidden={tab !== "analyze"}><Analyze active={tab === "analyze"} sampleTick={sampleTick} /></div>

@@ -1030,3 +1030,62 @@ header.top{position:static;padding-block:18px;border-bottom:0;background:none !i
   .lp-cta .lp-btn{flex:1}
   .lp-end{padding:44px 20px}
 }
+
+/* 이렇게 씁니다: 제목 왼쪽 · 쓰임새 3줄 오른쪽 */
+.lp-use-t{display:grid;grid-template-columns:minmax(0,0.9fr) minmax(0,1.1fr);grid-template-areas:"e u" "h u";grid-template-rows:auto 1fr;column-gap:56px;align-items:start}
+.lp-use-t > .lp-eyebrow{grid-area:e}
+.lp-use-t > h3{grid-area:h}
+.lp-use-t > ul{grid-area:u}
+.lp-use-t h3{font-size:clamp(26px,3.2vw,38px);font-weight:800;letter-spacing:-0.035em;line-height:1.2}
+.lp-use-t ul{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.lp-use-t li{padding-left:16px;border-left:3px solid var(--accent)}
+.lp-use-t li b{font-size:16px;color:var(--ink)}
+.lp-use-t li p{margin:4px 0 0;font-size:14.5px;line-height:1.65;color:var(--ink-2)}
+@media (max-width:1024px){.lp-use-t{grid-template-columns:minmax(0,1fr);grid-template-areas:"e" "h" "u";row-gap:0}.lp-use-t > ul{margin-top:24px}}
+
+/* 히어로 11-22: 화면 전체 사진 + 유리 메뉴 바 + 왼쪽 아래 흰 제목 (레퍼런스: 사진 히어로형 랜딩) */
+.lp{padding-top:0}
+.lp-hero{position:relative;isolation:isolate;display:flex;flex-direction:column;justify-content:space-between;min-height:calc(100vh - 32px);min-height:calc(100svh - 32px);padding:20px;margin:16px 0 0;border-radius:28px;overflow:hidden;color:#fff;grid-template-columns:none;gap:0}
+.lp-hero::before{content:"";position:absolute;inset:0;z-index:-2;background:var(--hero-img) center 42%/cover no-repeat}
+.lp-hero::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(6,14,34,.35) 0%,rgba(6,14,34,0) 28%,rgba(6,14,34,.15) 55%,rgba(6,14,34,.72) 100%)}
+.lp-nav{display:flex;align-items:center;gap:16px;padding:10px 12px 10px 22px;border-radius:999px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.lp-nav-logo{font-size:22px;font-weight:800;letter-spacing:-0.03em;color:#fff;text-decoration:none}
+.lp-nav-links{margin:0 auto;display:flex;gap:4px}
+.lp-nav-links a{color:rgba(255,255,255,.88);text-decoration:none;font-size:14.5px;font-weight:500;padding:8px 16px;border-radius:999px}
+.lp-nav-links a:hover{background:rgba(255,255,255,.16);color:#fff}
+.lp-nav-act{display:flex;gap:8px}
+.lp-pill{font:inherit;font-size:14px;font-weight:700;padding:10px 20px;border-radius:999px;border:0;background:#fff;color:var(--ink);cursor:pointer}
+.lp-pill.line{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.55)}
+.lp-hero-l{padding:0 28px 28px;max-width:1120px}
+.lp-hero .lp-hero-l h2{color:#fff;font-size:clamp(40px,6.4vw,92px);font-weight:700;line-height:1.08;letter-spacing:-0.04em;text-shadow:0 2px 24px rgba(0,0,0,.25)}
+.lp-hero-row{display:flex;flex-wrap:wrap;align-items:center;gap:20px 40px;margin-top:28px}
+.lp-hero .lp-lead{margin:0;color:rgba(255,255,255,.88);font-size:16px;line-height:1.7;max-width:34em}
+.lp-go{font:inherit;display:inline-flex;align-items:center;gap:14px;padding:8px 8px 8px 24px;border-radius:999px;border:0;background:#fff;color:var(--ink);font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 8px 24px rgba(0,0,0,.18)}
+.lp-go span{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff;font-size:18px}
+.lp-go:hover span{transform:rotate(45deg);transition:transform .2s}
+.lp-hero .lp-trust{color:rgba(255,255,255,.7);margin-top:20px}
+.lp-scroll{position:absolute;right:36px;bottom:36px;display:grid;justify-items:center;gap:8px;color:rgba(255,255,255,.85);text-decoration:none;font-size:11px;letter-spacing:.14em}
+.lp-scroll span{width:40px;height:40px;border-radius:50%;border:1px solid rgba(255,255,255,.6);display:grid;place-items:center;font-size:18px;line-height:1}
+.lp-hero-credit{position:absolute;left:50%;bottom:10px;transform:translateX(-50%);font-size:10.5px;color:rgba(255,255,255,.55)}
+/* 건너는 길: 카드 3장을 가로로 */
+#cross .lp-pv{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px;align-items:start;padding:0}
+#cross .lp-pv-card{width:auto;margin:0;transform:none}
+@media (max-width:1024px){
+  .lp-nav-links{display:none}
+  .lp-nav-act{margin-left:auto}
+  #cross .lp-pv{grid-template-columns:minmax(0,1fr)}
+}
+@media (max-width:720px){
+  .lp-hero{margin:8px 0 0;padding:12px;border-radius:22px;min-height:calc(100svh - 24px)}
+  .lp-nav{padding:8px 8px 8px 16px}
+  .lp-nav-logo{font-size:18px}
+  .lp-pill.line{display:none}
+  .lp-hero-l{padding:0 8px 24px}
+  .lp-scroll{display:none}
+  .lp-go{width:100%;justify-content:space-between}
+}
+
+/* 히어로 보정: 가로로 꽉 채우기, 모바일에서 다리를 제목 위로 */
+.lp-hero{align-items:stretch;background:#0a1b35}
+.lp-nav{width:100%}
+@media (max-width:720px){.lp-hero::before{inset:-24% 0 auto 0;height:100%}}
