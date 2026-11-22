@@ -1491,3 +1491,16 @@ div.fld.q .seg.full{justify-self:stretch}
 .pm-me > b{font-weight:800}
 .gap-grp h3{font-weight:800;color:var(--ink)}
 .sec-head .hint,.pm-head .hint{font-weight:500}
+
+/* 출처: 번호 대신 '출처' 버튼, 누르면 그 자리 아래로 근거 펼침 (11-22) */
+.cite{font:inherit;font-size:12px;font-weight:700;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:4px;padding:1px 6px;margin-left:4px;cursor:pointer;white-space:nowrap}
+.cite.on{background:var(--accent);color:#fff}
+.cite-box{display:block;flex-basis:100%;width:100%;margin-top:8px;padding:10px 12px;border-left:3px solid var(--accent);background:var(--surface-2,#f3f5fb);font-size:13.5px;line-height:1.6;font-weight:500}
+.cite-i{display:grid;gap:4px;justify-items:start}
+.cite-i + .cite-i{margin-top:10px;padding-top:10px;border-top:1px solid var(--line)}
+.cite-i b{font-weight:700}
+.cite-q{color:var(--ink-2,#3d4766)}
+.cite-i a{font-size:12.5px;font-weight:700;color:var(--accent)}
+.an-gaps{align-items:start}
+.an-gaps li{flex-wrap:wrap}
+@media print{.cite-box{border:0;background:none;padding:0}}

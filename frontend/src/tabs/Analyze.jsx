@@ -1,7 +1,7 @@
 // 역량 분석 (T4 · docs/pivot/T4_FRONTEND.md). 자기소개서·포트폴리오 PDF → job 접수 → 진행 상태 → ① 강점(STAR) ② 갭 ③ 추천 → 근거 → 비용.
 // job_id는 localStorage에 둔다: 탭을 닫았다 열어도 서버에서 끝난 결과를 이어서 본다.
 // (글 붙여 넣기·STAR 템플릿 입력은 2026-11-17 화면에서 내림. API(/api/analyze)는 남아 있음)
-import { useEffect, useMemo, useRef, useState } from "react";
+import { createContext, useContext, useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api.js";
 import { Seg, StatusChip } from "../ui.jsx";
 import { SAMPLE, SAMPLE_NAME } from "../sample.js";
@@ -269,6 +269,7 @@ export default function Analyze({ active, sampleTick = 0 }) {
             <button className="side-act out" onClick={exit} title="이 브라우저에 저장된 분석 결과를 닫고 소개 화면으로 갑니다"><LogOut size={17} strokeWidth={1.8} aria-hidden="true" />나가기</button>
           </div>
         </aside>
+        <CiteCtx.Provider value={cites}>
         <div className="stack an-panes">
           <div className="an-pane" role="tabpanel" id="pane-overview" aria-labelledby="tab-overview" hidden={pane !== "overview"}><Overview job={job} go={go} /></div>
           <div className="an-pane" role="tabpanel" id="pane-path" aria-labelledby="tab-path" hidden={pane !== "path"}><PathMap res={res} onCite={setSel} /></div>
@@ -279,8 +280,8 @@ export default function Analyze({ active, sampleTick = 0 }) {
           {/* 작업 기록·비용은 인쇄(PDF)에 넣지 않는다: an-pane이 아니라 인쇄 때 펼쳐지지 않음 */}
           <div className="no-print" role="tabpanel" id="pane-log" aria-labelledby="tab-log" hidden={pane !== "log"}><Log job={job} /></div>
         </div>
+        </CiteCtx.Provider>
       </div>
-      {sel != null && cites[sel] && <Evidence c={cites[sel]} n={sel} onClose={() => setSel(null)} />}
       <CiteList list={job.citations} />
       <p className="hint foot">채용 합불 판단에 쓰지 않습니다 · 파일과 이력서 원문은 저장하지 않습니다</p>
     </section>
@@ -432,9 +433,31 @@ function Progress({ job }) {
   );
 }
 
-const Cite = ({ ns, onCite }) => (ns || []).map((n) => (
-  <button key={n} className="cite" onClick={() => onCite(n)} aria-label={`근거 ${n} 보기`}>[{n}]</button>
-));
+// 출처: 번호 대신 '출처' 버튼 하나. 누르면 그 자리 아래에 근거(종류·제목·원문 문장·링크)를 펼친다 (11-22, 오른쪽 시트 대신)
+const CiteCtx = createContext({});
+function Cite({ ns }) {
+  const map = useContext(CiteCtx);
+  const [open, setOpen] = useState(false);
+  const list = (ns || []).map((n) => map[n]).filter(Boolean);
+  if (!list.length) return null;
+  return (
+    <>
+      <button className={`cite${open ? " on" : ""}`} aria-expanded={open} onClick={() => setOpen(!open)}>출처</button>
+      {open && (
+        <span className="cite-box">
+          {list.map((c) => (
+            <span key={c.n} className="cite-i">
+              <span className={`chip ev-kind k-${c.kind}`}>{KIND[c.kind] || c.kind}</span>
+              {c.kind !== "resume" && c.title !== KIND[c.kind] && <b>{c.title}</b>}
+              {c.quote && <span className="cite-q">“{c.quote.replace(/\s*\(수요 [\d.]+\)/, "")}”</span>}
+              {c.url && <a href={c.url} target="_blank" rel="noreferrer">원문 열기 ↗</a>}
+            </span>
+          ))}
+        </span>
+      )}
+    </>
+  );
+}
 
 function Strengths({ list, onCite }) {
   return (
@@ -452,7 +475,7 @@ function Strengths({ list, onCite }) {
                 return (
                   <div key={k} className={`slot ${s.present ? "on" : "off"}`}>
                     <span className="sk">{k}<small>{l}</small></span>
-                    {s.present ? <span>“{s.quote}” {s.cite && <Cite ns={[s.cite]} onCite={onCite} />}</span> : <span className="hint">없음</span>}
+                    {s.present ? <span>“{s.quote}” {s.cite && <Cite ns={[s.cite]} />}</span> : <span />}
                   </div>
                 );
               })}
@@ -484,7 +507,7 @@ function Gaps({ list, onCite }) {
           <ul className="an-gaps">
             {gs.map((g) => (
               <li key={g.id}><b>{g.name}</b>
-                <span className="row"><StatusChip status={g.status}>{g.status_label}</StatusChip><Cite ns={g.cites} onCite={onCite} /></span></li>
+                <span className="row">{g.status !== "miss" && <StatusChip status={g.status}>{g.status_label}</StatusChip>}</span><Cite ns={g.cites} /></li>
             ))}
           </ul>
         </div>
@@ -546,7 +569,6 @@ function PathMap({ res, onCite }) {
       </div>
       <div className="pm-bar">
         <span>나 → <b>{label(cur)}</b>{cur.course ? <> → {cur.course.name}</> : null} → {res.sector?.label} {fam} 지원</span>
-        {cur.cites?.[0] && <button className="btn sm" onClick={() => onCite(cur.cites[0])}>근거 보기</button>}
       </div>
     </div>
   );
@@ -649,27 +671,6 @@ function Cost({ job }) {
         </div>
       ) : <p className="hint">0원 (규칙 계산)</p>}
     </div>
-  );
-}
-
-// 근거: [번호]를 누를 때만 오른쪽에서 열리는 패널. Esc·바깥 클릭·닫기로 닫는다 (검증 결과는 '작업 기록 · 검증'에)
-function Evidence({ c, n, onClose }) {
-  useEffect(() => {
-    const k = (e) => { if (e.key === "Escape") onClose(); };
-    window.addEventListener("keydown", k);
-    return () => window.removeEventListener("keydown", k);
-  }, [onClose]);
-  return (
-    <>
-      <div className="ev-scrim no-print" onClick={onClose} aria-hidden="true" />
-      <aside className="panel an-ev ev-sheet no-print" role="dialog" aria-label={`근거 ${n}`}>
-        <div className="ev-h"><h2>근거 <span className="num hint">[{n}]</span></h2><button className="ev-x" onClick={onClose} aria-label="근거 닫기">✕</button></div>
-        <span className={`chip ev-kind k-${c.kind}`}>{KIND[c.kind] || c.kind}</span>
-        <b>{c.kind === "resume" ? "내 문서 원문" : c.title}</b>
-        {c.quote && <blockquote>{c.quote}</blockquote>}
-        {c.url && <a className="ev-open" href={c.url} target="_blank" rel="noreferrer">원문 열기 ↗</a>}
-      </aside>
-    </>
   );
 }
 
