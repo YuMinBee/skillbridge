@@ -105,18 +105,18 @@ def posting_pool(job_family: str) -> dict:
     for g in _gongchae():
         if pat.search(g["position"]):
             priv.append({"title": f"{g['company']} · {g['position']} (고용24 공채속보)", "text": g["text"], "url": g.get("url"),
-                         "req": posting_requirements(g["text"])})
+                         "req": posting_requirements(g["text"]), "end": g.get("end")})
     for d in _direct():
         if d.get("family") == job_family:
             priv.append({"title": f"{d['company']} · {d['position']} (공식 채용 페이지)", "text": d["text"], "url": d.get("url"),
-                         "req": posting_requirements(d["text"])})
+                         "req": posting_requirements(d["text"]), "end": d.get("end")})
     it = [p for p in market_postings() if p.get("job") == "public" and any("정보통신" in n for n in p.get("ncs", []))]
     pub = [p for p in it if pat.search(p["title"] + " " + p.get("text", "")[:400])]
     pub_scope = FAMILY_LABEL[job_family]
     if len(pub) < PUBLIC_MIN:
         pub, pub_scope = it, "정보통신 전체"
     pub = [{"title": f"{p['company']} · {p['title']}", "text": p.get("text", ""), "url": p.get("url"),
-            "req": posting_requirements(p.get("text", ""))} for p in pub]
+            "req": posting_requirements(p.get("text", "")), "end": p.get("end")} for p in pub]
     return {"private": priv, "public": pub, "public_scope": pub_scope}
 
 
@@ -205,6 +205,13 @@ def radar(reqs: dict, status_map: dict, family: str) -> list[dict]:
         rows.append({"axis": name, "me": readiness(sub, status_map) if sub else None, "w": sum(sub.values())})
     top = max((r["w"] for r in rows), default=0) or 1
     return [{"axis": r["axis"], "me": r["me"], "need": round(r["w"] / top * 100)} for r in rows]
+
+
+def _closed(p: dict, today: str) -> bool:
+    """마감일이 오늘(한국 시간)보다 앞이면 True. 마감일이 없거나(상시) 형식을 모르면 False."""
+    import re
+    e = re.sub(r"\D", "", str(p.get("end") or ""))[:8]
+    return len(e) == 8 and e < today
 
 
 def _quote_in(text: str, name: str, aliases: list[str]) -> str | None:
@@ -331,6 +338,8 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
         row["n_skills"] = len(status_map)
 
     with stage("retriever", llm=_optional("retriever") is not None) as row:
+        from datetime import datetime, timedelta, timezone
+        today = datetime.now(timezone(timedelta(hours=9))).strftime("%Y%m%d")  # 한국 시간(윈도우엔 tzdata가 없어 ZoneInfo 대신 +9 고정)
         status_map = state.get("status", {})
         best, fam_scores = infer_family(status_map, state["sector"])  # 직군마다 공고 기준 준비도 → 강점 직군 순위
         inferred = state["family"] in (None, "", "auto")
@@ -369,11 +378,14 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
                 ns = [n]
             else:
                 ns = []
-                for p in pool[sec]:  # 실제 공고 문장 1개 인용
+                # 실제 공고 문장 1개 인용. 마감되지 않은 공고를 먼저 고른다(마감 공고 링크는 닫힌 페이지일 수 있음).
+                # 집계(준비도·육각형·공고 수)에는 마감 공고도 그대로 둔다. 마감 공고밖에 없으면 제목에 표시
+                for p in sorted(pool[sec], key=lambda p: _closed(p, today)):
                     if sid in p["req"]:
                         q = _quote_in(p["text"], sd.name(sid), aliases)
                         if q:
-                            ns.append(cites.add("posting", p["title"], q, p["url"], doc_id=p["url"] or p["title"]))
+                            title = p["title"] + (" · 마감된 공고" if _closed(p, today) else "")
+                            ns.append(cites.add("posting", title, q, p["url"], doc_id=p["url"] or p["title"]))
                             break
                 hit = sum(1 for p in pool[sec] if sid in p["req"])
                 ns.append(cites.add("posting_stats", "공고 집계",

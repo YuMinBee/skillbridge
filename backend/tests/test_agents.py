@@ -403,3 +403,10 @@ def test_radar_six_axes_rule_based():
     assert len(none) == 6 and max(r["need"] for r in none.values()) == 100
     assert none["언어"]["me"] == 0 and have["언어"]["me"] == 100 and have["프레임워크·API"]["me"] == 100
     assert none["협업·자격"]["me"] is None and none["협업·자격"]["need"] == 0
+
+
+def test_closed_posting_rule():
+    """근거 인용: 마감일이 지난 공고만 마감으로 본다(상시·형식 모름은 열린 공고)."""
+    from app.agents.supervisor import _closed
+    assert _closed({"end": "2026-11-01"}, "20261122") and _closed({"end": "20261121"}, "20261122")
+    assert not _closed({"end": "20261122"}, "20261122") and not _closed({"end": "상시"}, "20261122") and not _closed({}, "20261122")

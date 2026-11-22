@@ -505,7 +505,6 @@ function PathMap({ res, onCite }) {
           <b>지금의 나</b>
           <small className="hint">목표</small>
           <span>{res.sector?.label} {fam} 지원</span>
-          <div className="pm-me-k"><span>준비도</span><b className="num">{res.readiness?.apply ?? "—"}</b></div>
         </div>
         <ol className="pm-dest">
           {items.map((r, i) => {
