@@ -38,8 +38,8 @@ const said = (p) => {
     case "collect": return p.repos ? `공개 레포 ${p.repos.length}개 README 읽음` : null;
     // 정규식 가림은 접수 때 끝나서 여기 수(masked)에 안 들어간다(supervisor guard 단계 주석)
     case "guard": return p.masked != null ? `접수 때 정규식으로 1차 가림 · 이 단계에서 ${p.masked}곳 더 가림` : null;
-    case "star": return p.mode === "bedrock" ? `Claude가 경험을 STAR로 나눔 · 원문에 없는 인용 ${p.dropped_quotes ?? 0}개 버림`
-      : p.mode ? "규칙 엔진으로 STAR 나눔" : null;
+    case "star": return p.mode === "bedrock" ? `Claude가 경험을 상황·과제·행동·결과로 나눔 · 원문에 없는 인용 ${p.dropped_quotes ?? 0}개 버림`
+      : p.mode ? "규칙으로 상황·과제·행동·결과를 나눔" : null;
     case "skills": return p.n_skills != null ? `내 문서에서 스킬 ${p.n_skills}개 인식` : null;
     case "retriever": return p.source ? `기준: ${p.source} · 요구 역량 ${p.n_requirements}개` : null;
     case "recommend": return p.tasks_asked != null
@@ -371,7 +371,7 @@ function Overview({ job, go }) {
       <div className="panel ov-list">
         <div className="ov-h"><h3>내 경험 진단</h3></div>
         <table>
-          <thead><tr><th>#</th><th>경험</th><th>판정</th><th>STAR 칸</th></tr></thead>
+          <thead><tr><th>#</th><th>경험</th><th>판정</th><th>채운 칸</th></tr></thead>
           <tbody>
             {r.strengths.map((e, i) => {
               const [lab, cls] = LEVEL[e.level];
@@ -501,7 +501,7 @@ function PathMap({ res, onCite }) {
   const cur = items[Math.min(pick, items.length - 1)];
   const gap = (t) => res.gaps.find((g) => g.id === t);
   const label = (r) => (r.target?.startsWith("star:") ? "강점 경험 보완" : gap(r.target)?.name || "과제");
-  const tag = (r) => (r.target?.startsWith("star:") ? ["STAR 보완", "t-star"] : gap(r.target)?.weight === 2 ? ["필수", "t-must"] : ["우대", "t-pref"]);
+  const tag = (r) => (r.target?.startsWith("star:") ? ["경험 보완", "t-star"] : gap(r.target)?.weight === 2 ? ["필수", "t-must"] : ["우대", "t-pref"]);
   const fam = res.job_family?.label || "";
   const n = items.length, H = n * 100, mid = H / 2;
   return (
@@ -624,7 +624,7 @@ function Log({ job }) {
           <ul className="an-trace num">
             {trace.map((t, i) => <li key={i}><span>{callName(t.agent)}</span><span className="hint">{t.model}</span><span>{(t.ms / 1000).toFixed(1)}s</span><span className="hint">{t.in || t.out ? `${t.in.toLocaleString()} → ${t.out.toLocaleString()} 토큰` : ""}</span></li>)}
           </ul>
-        ) : <p className="hint">이번 분석은 Bedrock을 부르지 않았습니다 (규칙 엔진 또는 저장된 결과)</p>}
+        ) : <p className="hint">이번 분석은 Bedrock을 부르지 않았습니다 (규칙 계산 또는 저장해 둔 결과)</p>}
       </div>
       <Cost job={job} />
     </div>
@@ -647,7 +647,7 @@ function Cost({ job }) {
               <div className="track"><div className="fill" style={{ width: `${(v / max) * 100}%` }} /></div><span className="v num">{usd(v)}</span></div>
           ))}
         </div>
-      ) : <p className="hint">0원 (규칙 엔진)</p>}
+      ) : <p className="hint">0원 (규칙 계산)</p>}
     </div>
   );
 }

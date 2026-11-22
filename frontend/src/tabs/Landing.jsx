@@ -15,23 +15,23 @@ const USE = [
 
 // 비교: 같은 Sonnet 4.6, test 60단락 × 5회. 웹 ②(잘 쓴 프롬프트)와 대비, 웹 ③은 각주로
 const VS = [
-  { k: "없는 근거를 있다고 한 비율", web: "29.1%", us: "2.1%", note: "웹 Claude에 잘 쓴 프롬프트로 물었을 때 → SkillBridge. 우리 기준까지 준 프롬프트도 6.7%" },
-  { k: "같은 자소서 5번, 5번 모두 같은 판정", web: "86.7%", us: "100%", note: "웹 Claude에 잘 쓴 프롬프트로 물었을 때 → SkillBridge. 우리 기준까지 준 프롬프트도 88.3%" },
+  { k: "자소서에 없는 내용을 있다고 한 비율", web: "29.1%", us: "2.1%", note: "Claude에 직접 물으면 프롬프트를 잘 써도 열 번에 세 번꼴 → SkillBridge는 백 번에 두 번꼴" },
+  { k: "같은 자소서를 5번 넣었을 때 매번 같은 답", web: "86.7%", us: "100%", note: "Claude에 직접 물으면 프롬프트를 잘 써도 열 개 중 한 개꼴로 답이 바뀜 → SkillBridge는 매번 같은 답" },
 ];
 
 // 에이전트 단계 (backend/app/agents/supervisor.py 순서) — 한 줄씩만
 const FLOW = [
-  ["개인정보 가리기", "Bedrock Guardrails"],
-  ["강점 진단", "원문 문장만 인용"],
-  ["공고 기준 비교", "실제 공고 요구 문장"],
+  ["개인정보 가리기", "이름·연락처부터 가림"],
+  ["강점 진단", "내 문장을 그대로 인용"],
+  ["공고 기준 비교", "실제 공고 문장과 비교"],
   ["과제 · 교육과정", "맞는 과정이 없으면 추천 안 함"],
   ["근거 검증", "어긋나면 코드가 지움"],
 ];
 
 const CHECKS = [
-  ["96.2%", "STAR 칸 정확도", "사람 2명이 따로 라벨링한 정답 기준 (κ 0.78)", "report.md"],
-  ["0.824", "교육과정 검색 nDCG@5", "검색 방식 7가지 중 최고 · BM25 0.648", "report_retrieval.md"],
-  ["0 / 16", "부적절한 추천 과제", "사람이 과제 16개를 직접 판정", "task_judge_result.json"],
+  ["96.2%", "경험 정리 정확도", "사람 2명이 따로 만든 정답과 비교 (두 사람끼리는 89% 일치)", "report.md"],
+  ["0.824", "교육과정 찾기 점수", "1점 만점 · 검색 방식 7가지 중 가장 높음 · 단순 단어 검색은 0.648", "report_retrieval.md"],
+  ["0 / 16", "엉뚱한 추천 과제", "사람이 추천 과제 16개를 하나씩 직접 판정", "task_judge_result.json"],
 ];
 
 const DATA = [["109", "민간 IT 공고", "기업 공식 채용 페이지 직접 수집 포함"], ["263", "공공기관 IT 공고", "잡알리오"], ["1,856", "고용24 교육과정", "앞으로 개강하는 과정만 추천"]];
@@ -40,7 +40,7 @@ const AWS = ["Amazon Bedrock · Claude Sonnet 4.6", "Cohere Embed v4", "Bedrock 
 // 건너는 길: 예시 자소서(docs/pivot/captures/demo_resume.md)를 실제로 분석한 결과에서 발췌. 공고·과정 문장도 실제 결과 그대로
 const CROSS = [
   {
-    n: "01", t: "지금의 나", d: "자소서 속 경험을 STAR로 나누고, 칸마다 내 문장을 그대로 인용합니다.",
+    n: "01", t: "지금의 나", d: "자소서 속 경험을 상황·과제·행동·결과(STAR) 네 칸으로 나누고, 칸마다 내 문장을 그대로 인용합니다.",
     card: (
       <div className="lp-pv-card">
         <div className="lp-pv-h"><b>동아리 장비 대여 시스템</b><span className="lp-chip ok">강점</span></div>
@@ -155,7 +155,7 @@ export default function Landing({ onStart, onSample }) {
 
       {/* 비교: 큰 숫자 대비 두 개 */}
       <section className="lp-x lp-x-light" id="compare">
-        <h3 className="lp-x-title">같은 Claude,<br />다른 신뢰도.</h3>
+        <h3 className="lp-x-title">Claude에게 그냥 묻는 것보다,<br />믿을 수 있습니다.</h3>
         <div className="lp-vs">
           {VS.map((v) => (
             <div className="lp-vs-i" key={v.k}>
@@ -165,7 +165,7 @@ export default function Landing({ onStart, onSample }) {
             </div>
           ))}
         </div>
-        <p className="lp-x-foot">같은 Claude Sonnet 4.6 · 자소서 60단락 × 5회 · 95% 신뢰구간으로 세 가지 웹 방식 모두와 차이가 유의 · <a href={REPO + "report.md"} target="_blank" rel="noreferrer">평가 기록</a></p>
+        <p className="lp-x-foot">같은 Claude Sonnet 4.6 모델로 자소서 60단락을 5번씩 비교 · 어떻게 물어도 차이가 우연이 아니었습니다(95% 신뢰구간) · <a href={REPO + "report.md"} target="_blank" rel="noreferrer">평가 기록</a></p>
       </section>
 
       {/* 동작 방식: 큰 단어 다섯 개를 한 줄로 */}
@@ -189,7 +189,7 @@ export default function Landing({ onStart, onSample }) {
             </a>
           ))}
         </div>
-        <p className="lp-x-foot">STAR 정확도는 '우리 기준까지 준 프롬프트'(94.7%)와는 차이가 유의하지 않습니다</p>
+        <p className="lp-x-foot">경험 정리 정확도는 우리 기준을 그대로 알려 준 프롬프트(94.7%)와 비슷한 수준입니다</p>
       </section>
 
       {/* 이렇게 씁니다: 큰 문장 + 세 칸 */}
