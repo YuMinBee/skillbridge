@@ -180,6 +180,33 @@ def _cert_status(status_map: dict) -> None:
         v["status"] = "part" if "필기" in (v.get("evidence") or "") else "own"
 
 
+# 육각형(역량 축 6개) — 직군마다 스킬 사전 분류(data/skills.csv category)를 6개로 묶는다. 축에 없는 분류는 빼고 계산.
+RADAR_AXES = {
+    "backend": [("언어", {"언어"}), ("프레임워크·API", {"백엔드", "아키텍처", "프론트엔드"}), ("데이터베이스", {"DB", "데이터"}),
+                ("클라우드", {"AWS", "클라우드"}), ("인프라·운영", {"DevOps", "인프라", "컨테이너", "IaC", "운영체제", "모니터링", "보안"}),
+                ("협업·자격", {"협업", "자격증", "도구", "디지털기초"})],
+    "ai_ml": [("언어", {"언어"}), ("머신러닝", {"머신러닝", "컴퓨터비전", "자연어처리", "음성", "연구"}), ("딥러닝", {"딥러닝"}),
+              ("생성형 AI", {"생성형AI", "AI활용"}), ("MLOps·클라우드", {"MLOps", "AWS", "클라우드", "컨테이너", "DevOps", "인프라", "IaC", "모니터링"}),
+              ("데이터·협업", {"데이터", "데이터엔지니어링", "DB", "협업", "자격증", "도구"})],
+    "data": [("언어", {"언어"}), ("데이터 분석", {"데이터"}), ("데이터 엔지니어링", {"데이터엔지니어링"}), ("데이터베이스", {"DB"}),
+             ("클라우드·인프라", {"AWS", "클라우드", "컨테이너", "DevOps", "인프라", "IaC", "모니터링", "운영체제"}),
+             ("ML·협업", {"머신러닝", "딥러닝", "생성형AI", "협업", "자격증", "도구"})],
+}
+
+
+def radar(reqs: dict, status_map: dict, family: str) -> list[dict]:
+    """축마다 me = 그 축 요구역량만으로 계산한 준비도(readiness와 같은 규칙, 0~100, 요구가 없으면 None),
+    need = 공고 요구에서 그 축이 차지하는 가중치 비중(가장 큰 축 = 100). LLM 없이 규칙으로만."""
+    sd = get_dict()
+    cat = lambda sid: (sd.skills.get(sid) or {}).get("category")  # noqa: E731
+    rows = []
+    for name, cats in RADAR_AXES.get(family, RADAR_AXES["backend"]):
+        sub = {sid: w for sid, w in reqs.items() if cat(sid) in cats}
+        rows.append({"axis": name, "me": readiness(sub, status_map) if sub else None, "w": sum(sub.values())})
+    top = max((r["w"] for r in rows), default=0) or 1
+    return [{"axis": r["axis"], "me": r["me"], "need": round(r["w"] / top * 100)} for r in rows]
+
+
 def _quote_in(text: str, name: str, aliases: list[str]) -> str | None:
     keys = [k.lower() for k in [name, *aliases] if k]
     for s in sentences(text):
@@ -331,6 +358,7 @@ def run(payload: dict, on_progress=None, log: "bedrock.CallLog | None" = None) -
             practice = retr.practice_requirements(state["family"], status_map, log=log)  # T2: NCS 기준 (아직 계약 초안)
         out["result"]["readiness"] = {"apply": readiness(reqs, status_map) if reqs else None,
                                       "practice": readiness(practice, status_map) if practice else None}
+        out["result"]["radar"] = radar(reqs, status_map, state["family"]) if reqs else []  # 육각형(화면 Overview)
         gl = []
         for sid, w, st in score_gaps(reqs, status_map):
             ent = sd.skills.get(sid)

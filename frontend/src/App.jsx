@@ -44,10 +44,14 @@ export default function App() {
     <div className="wrap">
       {/* 11-22: 탭(소개·역량 분석)을 내림. 로고 = 소개로, 소개의 버튼 = 분석으로. 소개 화면은 히어로 안에 자체 메뉴 바가 있어 헤더를 숨긴다 */}
       {tab !== "home" && (
-        <header className="top">
-          <div className="brand">
-            <h1><a href="#home" className="logo" onClick={(e) => { e.preventDefault(); go("home"); window.scrollTo(0, 0); }}>SkillBridge</a></h1>
-          </div>
+        <header className="top an-top">
+          <nav className="lp-nav an-nav" aria-label="메뉴">
+            <a href="#home" className="lp-nav-logo" onClick={(e) => { e.preventDefault(); go("home"); window.scrollTo(0, 0); }}>SkillBridge</a>
+            <div className="lp-nav-act">
+              <button className="lp-pill line" onClick={() => { go("analyze"); window.scrollTo(0, 0); setSampleTick((n) => n + 1); }}>예시로 체험하기</button>
+              <button className="lp-pill" onClick={() => { go("home"); window.scrollTo(0, 0); }}>소개</button>
+            </div>
+          </nav>
         </header>
       )}
       {tab === "home" && <Landing onStart={() => { go("analyze"); window.scrollTo(0, 0); }}

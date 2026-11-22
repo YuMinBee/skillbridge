@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../api.js";
 import { Seg, StatusChip } from "../ui.jsx";
 import { SAMPLE, SAMPLE_NAME } from "../sample.js";
+import bridgePhoto from "../assets/hero-bridge.jpg";
 import { Award, FileDown, GraduationCap, LayoutDashboard, ListChecks, LogOut, RotateCcw, Route, ShieldCheck, Target } from "lucide-react";
 
 // 왼쪽 바 메뉴 아이콘 (lucide-react)
@@ -166,8 +167,12 @@ export default function Analyze({ active, sampleTick = 0 }) {
   if (!job) {
     return (
       <section className="view">
+        <div className="an-stage" style={{ "--hero-img": `url(${bridgePhoto})` }}>
+        <div className="an-stage-l">
+          <h2>어디서부터 건너야 할지,<br />확인해 볼게요.</h2>
+          <p>자소서·포트폴리오를 넣으면 강점, 부족한 역량, 추천 과제와 교육과정을 근거와 함께 보여 드려요.</p>
+        </div>
         <div className="panel an-intake">
-          <div><h2>내 역량 분석하기</h2><p className="hint">문서 하나면 됩니다. 강점, 부족한 역량, 추천 과제와 교육과정을 근거와 함께 보여 드려요</p></div>
           <label className="fld q"><span className="qt">어디에 지원하나요? (필수)</span>
             <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} full />
           </label>
@@ -188,11 +193,12 @@ export default function Analyze({ active, sampleTick = 0 }) {
             </label>
           </details>
           <div className="an-go">
-            <button className="btn" disabled={!sector || !(files.length || github.trim())} onClick={submit}>분석 시작</button>
+            <button className="lp-go an-go-main" disabled={!sector || !(files.length || github.trim())} onClick={submit}>분석 시작<span aria-hidden="true">↗</span></button>
             <button className="btn ghost" onClick={trySample}>예시로 체험하기</button>
           </div>
           <p className="hint">{!sector ? "지원 분야를 먼저 골라 주세요 · " : ""}예시는 실존 인물이 아닌 합성 자소서(백엔드 지망, 경험 4개)입니다</p>
           {err && <p className="err">{err}</p>}
+        </div>
         </div>
         <p className="hint foot">채용 합불 판단에 쓰지 않습니다 · 파일과 이력서 원문은 저장하지 않습니다</p>
       </section>
@@ -202,11 +208,14 @@ export default function Analyze({ active, sampleTick = 0 }) {
   if (!res) {
     return (
       <section className="view">
-        <div className="panel an-intake an-running" aria-busy={running}>
-          <div><h2>{job.status === "failed" ? "분석하지 못했어요" : "에이전트가 분석하고 있어요"}</h2>
-            <p className="hint">{inputLine || "내 문서"} · 창을 닫아도 서버에서 계속 돌고, 다시 열면 이어서 보여 드려요</p></div>
+        <div className="an-stage an-run" style={{ "--hero-img": `url(${bridgePhoto})` }} aria-busy={running}>
+          <div className="an-stage-l">
+            <h2>{job.status === "failed" ? "분석하지 못했어요." : "다리를 놓고 있어요."}</h2>
+            <p>{inputLine || "내 문서"} · 창을 닫아도 서버에서 계속 돌고, 다시 열면 이어서 보여 드려요</p>
+            {(() => { const ps = job.progress || []; const d = ps.filter((p) => p.status === "done").length; return <div className="an-run-bar" role="progressbar" aria-valuenow={d} aria-valuemin={0} aria-valuemax={ps.length || 1}><i style={{ width: `${ps.length ? (d / ps.length) * 100 : 4}%` }} /></div>; })()}
+          </div>
           <Progress job={job} />
-          {job.status === "failed" && <><p className="err">{job.error}</p><button className="btn" onClick={again}>다시 시도</button></>}
+          {job.status === "failed" && <div className="an-run-fail"><p className="err">{job.error}</p><button className="lp-pill" onClick={again}>다시 시도</button></div>}
         </div>
       </section>
     );
@@ -262,16 +271,39 @@ export default function Analyze({ active, sampleTick = 0 }) {
 }
 
 // 준비도 게이지: 270° 호, 값만큼 색칠
-function Gauge({ v }) {
+function Gauge({ v, dark = false }) {
   const r = 70, c = 2 * Math.PI * r, arc = c * 0.75, val = v == null ? 0 : Math.max(0, Math.min(100, v));
-  const col = val >= 70 ? "var(--ok)" : val >= 40 ? "var(--warn)" : "var(--accent)";
+  const col = dark ? "#fff" : val >= 70 ? "var(--ok)" : val >= 40 ? "var(--warn)" : "var(--accent)";
   return (
-    <svg className="ov-gauge" viewBox="0 0 180 180" role="img" aria-label={`준비도 ${v ?? "없음"} / 100`}>
-      <circle cx="90" cy="90" r={r} fill="none" stroke="var(--surface-2)" strokeWidth="14" strokeLinecap="round" strokeDasharray={`${arc} ${c}`} transform="rotate(135 90 90)" />
+    <svg className={`ov-gauge${dark ? " dark" : ""}`} viewBox="0 0 180 180" role="img" aria-label={`준비도 ${v ?? "없음"} / 100`}>
+      <circle cx="90" cy="90" r={r} fill="none" stroke={dark ? "rgba(255,255,255,.14)" : "var(--surface-2)"} strokeWidth="14" strokeLinecap="round" strokeDasharray={`${arc} ${c}`} transform="rotate(135 90 90)" />
       <circle cx="90" cy="90" r={r} fill="none" stroke={col} strokeWidth="14" strokeLinecap="round" strokeDasharray={`${(arc * val) / 100} ${c}`} transform="rotate(135 90 90)" />
       <text x="90" y="92" textAnchor="middle" className="ov-g-v">{v ?? "—"}</text>
       <text x="90" y="116" textAnchor="middle" className="ov-g-l">준비도 / 100</text>
     </svg>
+  );
+}
+
+// 육각형: 축 6개(result.radar, supervisor.radar 규칙 계산). 파란 면 = 나(축별 준비도), 점선 = 공고 요구 비중(가장 큰 축 100)
+function Radar({ data }) {
+  const C = 160, R = 96, n = data.length;
+  const pt = (i, v) => { const a = (Math.PI * 2 * i) / n - Math.PI / 2; return [C + Math.cos(a) * R * (v / 100), 150 + Math.sin(a) * R * (v / 100)]; };
+  const poly = (f) => data.map((d, i) => pt(i, f(d)).join(",")).join(" ");
+  return (
+    <figure className="ov-radar">
+      <svg viewBox="-36 0 392 300" role="img" aria-label={"역량 육각형: " + data.map((d) => `${d.axis} ${d.me ?? "요구 없음"}`).join(", ")}>
+        {[25, 50, 75, 100].map((v) => <polygon key={v} points={poly(() => v)} className="rg" />)}
+        {data.map((d, i) => { const [x, y] = pt(i, 100); return <line key={d.axis} x1={C} y1={150} x2={x} y2={y} className="rg" />; })}
+        <polygon points={poly((d) => d.need)} className="rneed" />
+        <polygon points={poly((d) => d.me ?? 0)} className="rme" />
+        {data.map((d, i) => { const [x, y] = pt(i, d.me ?? 0); return <circle key={d.axis} cx={x} cy={y} r="3.5" className="rdot" />; })}
+        {data.map((d, i) => {
+          const [x, y] = pt(i, 128); const anchor = Math.abs(x - C) < 8 ? "middle" : x > C ? "start" : "end";
+          return <text key={d.axis} x={x} y={y} textAnchor={anchor} className="rl"><tspan x={x} dy="-0.2em">{d.axis}</tspan><tspan x={x} dy="1.25em" className="rv">{d.me == null ? "요구 없음" : d.me}</tspan></text>;
+        })}
+      </svg>
+      <figcaption><span><i className="lg-me" />나</span><span><i className="lg-need" />공고 요구 비중</span></figcaption>
+    </figure>
   );
 }
 
@@ -287,33 +319,26 @@ function Overview({ job, go }) {
   const filled = (e) => Object.values(e.slots).filter((s) => s.present).length;
   return (
     <div className="ov">
-      <div className="panel ov-goal">
-        <h3>목표</h3>
-        <p className="ov-big"><span className="hint">지원 준비 중</span> {r.sector?.label} {r.job_family?.label}</p>
-        <div className="row">
-          {r.job_family?.inferred && <span className="chip">직군 자동 판단</span>}
-          {src && <span className="chip">{src.replace(/^.*?(공고|공공기관)/, "$1")}</span>}
+      <div className="ov-hero">
+        <div className="ov-hero-l">
+          <span className="ov-pill">지원 준비 중</span>
+          <h2>{r.sector?.label} {r.job_family?.label}까지</h2>
+          <div className="ov-chips">
+            {(r.job_family?.ranking || []).map((x, i) => (
+              <span key={x.id} className={i === 0 ? "on" : ""}>{x.label} <b className="num">{x.score}</b></span>
+            ))}
+          </div>
+          <p>{[r.job_family?.inferred && "직군은 문서를 보고 자동 판단", src && `기준: ${src}`].filter(Boolean).join(" · ")}</p>
         </div>
+        {r.radar?.length ? <Radar data={r.radar} /> : <Gauge v={r.readiness?.apply} dark />}
       </div>
-      <div className="panel ov-fam">
-        <h3>강점 직군</h3>
-        <div className="row">
-          {(r.job_family?.ranking || []).map((x, i) => (
-            <span key={x.id} className={`chip ${i === 0 ? "tag-pub" : ""}`}>{x.label} <b className="num">{x.score}</b></span>
-          ))}
-        </div>
-      </div>
-      <div className="panel ov-ready">
-        <h3>준비도 <small className="hint">· 공개 공고 기준</small></h3>
-        <Gauge v={r.readiness?.apply} />
-        <div className="ov-stats">
-          <button onClick={() => go("strengths")}><b className="num">{strong}<small>/{r.strengths.length}</small></b><span><i className="ov-dot ok" />강점 경험</span></button>
-          <button onClick={() => go("gaps")}><b className="num">{must}</b><span><i className="ov-dot bad" />부족 · 필수</span></button>
-          <button onClick={() => go("gaps")}><b className="num">{r.gaps.length - must}</b><span><i className="ov-dot pref" />부족 · 우대</span></button>
-          <button onClick={() => go("courses")}><b className="num">{r.recommendations.filter((x) => x.course).length}</b><span><i className="ov-dot acc" />추천 과정</span></button>
-          <button onClick={() => go("log")}><b>{job.verify?.passed ? "통과" : `${job.verify?.removed?.length ?? 0}개 제거`}</b><span><i className="ov-dot ok" />근거 검증</span></button>
-          <button onClick={() => go("log")}><b className="num">{usd(job.cost?.usd)}</b><span><i className="ov-dot idle" />분석 비용</span></button>
-        </div>
+      <div className="panel ov-stats">
+        <button onClick={() => go("strengths")}><b className="num">{strong}<small>/{r.strengths.length}</small></b><span><i className="ov-dot ok" />강점 경험</span></button>
+        <button onClick={() => go("gaps")}><b className="num">{must}</b><span><i className="ov-dot bad" />부족 · 필수</span></button>
+        <button onClick={() => go("gaps")}><b className="num">{r.gaps.length - must}</b><span><i className="ov-dot pref" />부족 · 우대</span></button>
+        <button onClick={() => go("courses")}><b className="num">{r.recommendations.filter((x) => x.course).length}</b><span><i className="ov-dot acc" />추천 과정</span></button>
+        <button onClick={() => go("log")}><b>{job.verify?.passed ? "통과" : `${job.verify?.removed?.length ?? 0}개 제거`}</b><span><i className="ov-dot ok" />근거 검증</span></button>
+        <button onClick={() => go("log")}><b className="num">{usd(job.cost?.usd)}</b><span><i className="ov-dot idle" />분석 비용</span></button>
       </div>
       <div className="panel ov-road">
         <div className="ov-h"><h3>다음 할 일</h3><span className="hint num">{done.length} / {todo.length} 완료</span></div>
@@ -465,7 +490,7 @@ function PathMap({ res, onCite }) {
   const fam = res.job_family?.label || "";
   const n = items.length, H = n * 100, mid = H / 2;
   return (
-    <div className="panel pm">
+    <div className="panel pm pm-dark">
       <div className="pm-head">
         <div><h2>내 학습 경로</h2><p className="hint">지금의 나에서 {res.sector?.label ?? ""} {fam} 지원까지, 부족한 역량을 채우는 길이에요</p></div>
       </div>

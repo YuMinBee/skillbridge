@@ -392,3 +392,14 @@ def test_github_only_unreadable_fails_with_reason(monkeypatch):
     monkeypatch.setattr(gh, "readmes", boom)
     with pytest.raises(sv.NoInput):
         sv.run({"resume": "", "github": "nobody-zz", "job_family": "auto", "sector": "private"})
+
+
+def test_radar_six_axes_rule_based():
+    """육각형: 축 6개, 요구 비중 최대 축 = 100, 보유하면 그 축 준비도가 오른다(규칙 계산)."""
+    from app.agents.supervisor import radar
+    reqs = {"java": 2, "spring": 2, "mysql": 1, "aws": 1}
+    none = {r["axis"]: r for r in radar(reqs, {}, "backend")}
+    have = {r["axis"]: r for r in radar(reqs, {"java": {"status": "own"}, "spring": {"status": "own"}}, "backend")}
+    assert len(none) == 6 and max(r["need"] for r in none.values()) == 100
+    assert none["언어"]["me"] == 0 and have["언어"]["me"] == 100 and have["프레임워크·API"]["me"] == 100
+    assert none["협업·자격"]["me"] is None and none["협업·자격"]["need"] == 0
