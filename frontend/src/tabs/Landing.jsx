@@ -161,7 +161,6 @@ export default function Landing({ onStart, onSample }) {
             <div className="lp-vs-i" key={v.k}>
               <p className="lp-vs-k">{v.k}</p>
               <div className="lp-vs-n"><s className="num">{v.web}</s><span aria-hidden="true">→</span><CountTo from={parseFloat(v.web)} to={parseFloat(v.us)} /></div>
-              <p className="lp-vs-note">{v.note}</p>
             </div>
           ))}
         </div>
