@@ -1431,3 +1431,18 @@ div.fld.q .seg.full{justify-self:stretch}
 .ov-row:focus-visible{outline:2px solid var(--accent);outline-offset:-2px}
 .ov-list{align-content:start}
 @media print{.ov-list .ov-more{display:none !important}}
+
+/* ── 모서리 11-22: 둥근 카드가 'AI 템플릿' 같아서 각지게(4px). 버튼·칩은 그대로 ── */
+.panel,.card,.lp-hero,.lp-x,.lp-end,.lp-chart,.lp-vs-i,.lp-checks article,.lp-pv-card,.lp-nav,.an-nav,
+.an-stage,.an-intake,.an-side,.an-input,.an-more,.an-intake .filepick,.an-recos li,.an-courses li,.an-gaps li,
+.ov-hero,.ov-stats button,.pm,.pm-dark,.pm-me,.pm-dest button,.pm-note,.pm-bar,.ev-sheet,.slot,
+.an-run .an-prog,.an-side nav button,.side-act,.an-panes .panel,.lp-use3 li,.lp-steps5 li{border-radius:4px !important}
+.lp-hero::before,.an-stage::before{border-radius:0}
+
+/* ── 색 11-22: 장식용 그라데이션 제거(남색 패널의 파랑·초록 빛번짐, 경로 선의 파랑→보라). 사진 위 어둡게 덮는 막은 글자 대비용이라 유지 ── */
+.lp-x-dark::before,.lp-dark::before,.an-stage::after,.ov-hero::after{background:none !important}
+
+/* Overview 통계 5칸(분석 비용은 작업 기록 탭에만) */
+.ov .ov-stats{grid-template-columns:repeat(5,minmax(0,1fr))}
+@media (max-width:1100px){.ov .ov-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:720px){.ov .ov-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}

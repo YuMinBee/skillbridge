@@ -216,7 +216,7 @@ export default function Analyze({ active, sampleTick = 0 }) {
         <div className="an-stage an-run" style={{ "--hero-img": `url(${bridgePhoto})` }} aria-busy={running}>
           <div className="an-stage-l">
             <h2>{job.status === "failed" ? "분석하지 못했어요." : "다리를 놓고 있어요."}</h2>
-            <p>{inputLine || "내 문서"} · 창을 닫아도 서버에서 계속 돌고, 다시 열면 이어서 보여 드려요</p>
+            <p>창을 닫아도 계속 분석해요</p>
             {(() => { const ps = job.progress || []; const d = ps.filter((p) => p.status === "done").length; return <div className="an-run-bar" role="progressbar" aria-valuenow={d} aria-valuemin={0} aria-valuemax={ps.length || 1}><i style={{ width: `${ps.length ? (d / ps.length) * 100 : 4}%` }} /></div>; })()}
           </div>
           <Progress job={job} />
@@ -347,7 +347,6 @@ function Overview({ job, go }) {
         <button onClick={() => go("gaps")}><b className="num">{r.gaps.length - must}</b><span><i className="ov-dot pref" />부족 · 우대</span></button>
         <button onClick={() => go("courses")}><b className="num">{r.recommendations.filter((x) => x.course).length}</b><span><i className="ov-dot acc" />추천 과정</span></button>
         <button onClick={() => go("log")}><b>{job.verify?.passed ? "통과" : `${job.verify?.removed?.length ?? 0}개 제거`}</b><span><i className="ov-dot ok" />근거 검증</span></button>
-        <button onClick={() => go("log")}><b className="num">{usd(job.cost?.usd)}</b><span><i className="ov-dot idle" />분석 비용</span></button>
       </div>
       <div className="panel ov-road">
         <div className="ov-h"><h3>다음 할 일</h3><span className="hint num">{done.length} / {todo.length} 완료</span></div>
@@ -505,7 +504,7 @@ function PathMap({ res, onCite }) {
       </div>
       <div className="pm-map" style={{ "--rows": n }}>
         <svg className="pm-ribbons" viewBox={`0 0 100 ${H}`} preserveAspectRatio="none" aria-hidden="true">
-          <defs><linearGradient id="pm-g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0"><stop offset="0" stopColor="#7fb2ff" /><stop offset="1" stopColor="#5b4cf0" /></linearGradient></defs>
+          <defs><linearGradient id="pm-g" gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="100" y2="0"><stop offset="0" stopColor="#6b8cff" /><stop offset="1" stopColor="#6b8cff" /></linearGradient></defs>
           {items.map((r, i) => {
             const y = i * 100 + 50;
             return <path key={r.rank} d={`M0 ${mid} C 45 ${mid}, 55 ${y}, 100 ${y}`} className={i === pick ? "on" : ""} vectorEffect="non-scaling-stroke" />;
@@ -532,7 +531,7 @@ function PathMap({ res, onCite }) {
         <div className="pm-note">
           <dl>
             <dt>할 일</dt><dd>{cur.task}</dd>
-            <dt>왜</dt><dd>{cur.why} <Cite ns={cur.cites} onCite={onCite} /></dd>
+            <dt>추천 이유</dt><dd>{cur.why} <Cite ns={cur.cites} onCite={onCite} /></dd>
             {cur.task_basis && <><dt>근거</dt><dd>공고 “{cur.task_basis.posting}”</dd></>}
             <dt>교육과정</dt><dd>{cur.course ? <>{cur.course.url ? <a href={cur.course.url} target="_blank" rel="noreferrer">{cur.course.name}</a> : cur.course.name}{cur.course.start ? ` · ${cur.course.start} 개강` : ""}</> : (cur.course_note || "과정 대신 결과물 과제")}</dd>
           </dl>
@@ -568,7 +567,7 @@ function Recos({ list, gaps = [], onCite }) {
                   {forLabel(r.target) && <span className="chip tag-pub reco-for">{forLabel(r.target)}</span>}
                   <b className="reco-task">{r.task}</b>
                   <dl className="reco-meta">
-                    <dt>왜</dt><dd>{r.why} <Cite ns={r.cites} onCite={onCite} /></dd>
+                    <dt>추천 이유</dt><dd>{r.why} <Cite ns={r.cites} onCite={onCite} /></dd>
                     {r.task_basis && <><dt>근거</dt><dd>공고 “{r.task_basis.posting}”{r.task_basis.resume ? <> · 내 자소서 “{r.task_basis.resume}”</> : null}</dd></>}
                     {r.course && <><dt>교육과정</dt><dd>{r.course.url ? <a href={r.course.url} target="_blank" rel="noreferrer">{r.course.name}</a> : r.course.name}{r.course.start ? ` · ${r.course.start} 개강` : r.course.hours ? ` · ${r.course.hours}시간` : ""}</dd></>}
                     {!r.course && r.course_note && <><dt>교육과정</dt><dd>{r.course_note}</dd></>}
