@@ -181,9 +181,13 @@ export default function Analyze({ active, sampleTick = 0 }) {
           <div className="fld q" role="group"><span className="qt">어디에 지원하나요? (필수)</span>
             <Seg label="지원 분야" value={sector} options={[["private", "민간 기업"], ["public", "공공기관"]]} onChange={setSector} full />
           </div>
+          <div className="fld q" role="group"><span className="qt">직군</span>
+            <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} full />
+            <p className="hint">자동은 문서를 보고 가장 잘 맞는 직군을 골라요</p>
+          </div>
           <DocPick files={files} onPick={setFiles} />
           <details className="an-more">
-            <summary>더 정확하게 (선택) · 지원할 공고 · GitHub · 직군</summary>
+            <summary>더 정확하게 (선택) · 지원할 공고 · GitHub</summary>
             <label className="fld q"><span className="qt">지원할 공고</span>
               <textarea value={posting} onChange={(e) => setPosting(e.target.value)} rows={5} placeholder="공고에서 자격요건, 우대사항, 주요 업무 부분을 복사해서 넣어주세요. 넣지 않으면 수집한 공고 전체가 기준입니다" />
             </label>
@@ -193,9 +197,7 @@ export default function Analyze({ active, sampleTick = 0 }) {
               </label>
               <p className="hint">공개 레포 README만 읽습니다</p>
             </div>
-            <div className="fld q" role="group"><span className="qt">직군 (기본: 자동)</span>
-              <Seg label="직군" value={family} options={[["auto", "자동"], ...families]} onChange={setFamily} />
-            </div>
+
           </details>
           <div className="an-go">
             <button className="lp-go an-go-main" disabled={!sector || !(files.length || github.trim())} onClick={submit}>분석 시작<span aria-hidden="true">↗</span></button>

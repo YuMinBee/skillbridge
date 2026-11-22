@@ -1462,3 +1462,4 @@ div.fld.q .seg.full{justify-self:stretch}
 .ov .ov-stats b small{font-size:22px;font-weight:600}
 .ov .ov-stats span{font-size:18px;font-weight:600;color:var(--ink)}
 .ov .ov-dot{width:12px;height:12px}
+.an-intake .seg.full button{white-space:nowrap;padding:10px 6px}
