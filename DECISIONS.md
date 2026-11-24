@@ -131,3 +131,5 @@
 - 이유 ① 검색 방식을 숫자로 골라야 했다: 키워드·Titan 256/512/1024·Cohere v4·혼합 6가지를 같은 질의 40개로 비교하려면 점수와 조건을 직접 다뤄야 한다(`eval/trust/report_retrieval.md`). ② '맞는 과정 없음' 기준(유사도 0.35)을 원래 검색 점수로 정했다(위 11-20). ③ 과정 1,856개는 Lambda에 임베딩을 함께 배포해 메모리 검색으로 충분하고, 호출 한 번과 관리 대상이 줄어든다.
 - 옮길 수 있는 구조: 검색은 `rag/retrieve.py`의 `search(config=...)` 한 곳, KB 호출은 `adapters/kb.py`, KB 구축은 `infra/build_kb.py`. KB로 바꾸면 과정 1,856개를 적재하고 같은 평가(nDCG@5, 거부 기준)로 다시 재서 비교한다.
 - Bedrock Agents는 위 11-17 결정대로 쓰지 않는다: 모델이 순서를 정하면 같은 입력에 같은 판정을 보장하기 어렵고, 단계별 검증·비용을 그대로 보여 주기 어렵다.
+- 2026-11-22 · 같은 Titan v2 1024로 KB(S3 Vectors) vs 직접 구현: nDCG@5 0.715 vs 0.716, 상위 5개 겹침 94%, KB 검색 지연 약 0.33초 → 옮기기 어렵지 않음.
+- 2026-11-24 · KB + Cohere Embed v4는 KB 생성 단계에서 거부됨("Knowledge Base type does not support cohere.embed-v4:0"). 서비스의 Cohere v4(0.824)를 쓰려면 직접 구현이 필요. 결과·코드: `eval/trust/kb/report_kb.md`

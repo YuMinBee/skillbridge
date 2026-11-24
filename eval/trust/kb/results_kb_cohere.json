@@ -1,0 +1,11 @@
+{
+ "at": "2026-11-24",
+ "result": "KB 생성 거부",
+ "error": "ValidationException: Knowledge Base type does not support cohere.embed-v4:0 embedding model",
+ "region": "ap-northeast-2",
+ "model": "global.cohere.embed-v4:0 (서울은 추론 프로필로만 제공)",
+ "created": [
+  "s3vectors index kosa06-kbexp-vec-955639821496/courses-c4",
+  "IAM inline policy kosa06-kbexp-role/kbexp-cohere"
+ ]
+}
